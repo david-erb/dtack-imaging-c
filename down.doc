@@ -1,0 +1,12 @@
+/*..........................................................................
+| TITLE dtdown
+| Dtack Download Page
+dtinclude(prolog1.dx)
+dtinclude(legal1.dx)
+| 
+|!Dtack Download Page
+dxinclude(down.dx)
+| 
+| END
+ *..........................................................................*/
+

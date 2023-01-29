@@ -1,0 +1,57 @@
+define(TOP, UP2)
+define(DIR, source/keybd)
+__prolog
+
+__summary(prj_lib_summary(keybdq),
+  keybd.c, PRJ_LIB_SERIES_SHORT)
+
+__summary(prj_lib_summary(keympq),
+  keymap.c, PRJ_LIB_SERIES_SHORT)
+
+__example(keybd1, keybd.c)
+__shexe(prj_lib_samp(keybd, 1), 
+  dtkeybd1,    , 
+  prj_lib(dtkeybd)+
+  prj_lib(dtlow)+
+  prj_lib(dt1d)+
+  PRJ_SUPPORT_LIBS, 
+  PRJ_LOADS PRJ_INTER_LOADS)
+
+pushdef(`CCSHARABLE', `CCSHARABLE_ON')
+
+__src(keymapq, 
+  PRJ_INCLUDES+PRJ_QNXTERM_INCLUDE,
+  PRJ_DEFINES+PRJ_QNXTERM_DEFINE)
+
+__src(keymapt, 
+  PRJ_INCLUDES+$(MK_TERMCAP_INCLUDE),
+  PRJ_DEFINES+$(MK_TERMCAP_DEFINE))
+
+__src(keyunix, 
+  PRJ_INCLUDES+$(MK_TERMIOS_INCLUDE),
+  PRJ_DEFINES+$(MK_TERMIOS_DEFINE))
+
+__src(keyqnx, 
+  PRJ_INCLUDES+PRJ_QNXTERM_INCLUDE,
+  PRJ_DEFINES+PRJ_QNXTERM_DEFINE)
+
+__src(trmios, 
+  PRJ_INCLUDES+$(MK_TERMIOS_INCLUDE),
+  PRJ_DEFINES+$(MK_TERMIOS_DEFINE))
+
+__shlib(prj_lib(dtkeybd),
+  keybd+keyunix+keyqnx+keydos+
+  keymap+keymapt+keymapc+keymapq+
+  trmios+
+  libmain, , , prj_lib(dtlow))
+
+popdef(`CCSHARABLE')
+
+__finish
+
+
+
+
+
+
+

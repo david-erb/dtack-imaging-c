@@ -1,0 +1,26 @@
+define(TOP, UP2)
+define(DIR, test/fb)
+
+pushdef(`CCOPTIMIZE', `CCOPTIMIZE_HIGH')
+pushdef(`CCDEBUGGER', `CCDEBUGGER_OFF')
+
+__src(dttfb,
+  PRJ_INCLUDES+PRJ_ZLIB_INCLUDE,
+  PRJ_DEFINES+PRJ_ZLIB_DEFINE)
+
+popdef(`CCDEBUGGER')
+popdef(`CCOPTIMIZE')
+
+__shexe(prj_test_bin(dttfb),   dttfb, ,
+  prj_lib(dttaa)+
+  prj_lib(dtfb)+
+  prj_lib(dtcolor)+
+  PRJ_INTER_LIBS+
+  PRJ_LIBS+
+  prj_fourth_lib(xv310a)+
+  prj_fourth_lib(dtzlib),
+  PRJ_INTER_LOADS PRJ_LOADS)
+
+__finish
+
+

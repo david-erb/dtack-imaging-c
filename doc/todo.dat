@@ -1,0 +1,136 @@
+	Mon Apr 15 13:03:51 1996	enhance dtimage_cmp and dt1d_cmp to use arith as vehiclearithmetic constant could be deltawrite a test program for cmp
+	Mon Apr 15 12:30:00 1996	work on runf:coerce runf to deliver like runmake dttrun able to test run as well as runfverify runf is faster than runmake dtimage_adj able to use runf
+	Sun Apr 14 17:10:46 1996	write dtimage_clip(), especially for use in dttool/cooc.c
+	Thu Apr  4 10:24:05 1996	use promotion in comparing heterogeneous types in dtimage_cmp
+	Sat Mar 30 17:13:45 1996	clean up arith w.r.t. precision, use consistent promotion, write test
+	Sun Mar 24 14:14:18 1996	decide what to do if param->connect is not 4 or 8 in dtlev85_total
+	Mon Jan 22 08:20:42 1996	not doing isatty: dtesc94 fails in pipe with -dial none not set
+	Sun Jan 14 07:29:16 1996	look for a better way to display keyboard mapping in dialog help
+	Sun Jan 14 07:27:04 1996	END OF HELP line duplicated every time you hit F1 in dialog help
+	Sat Dec 30 06:28:55 1995	add user argument to arg_check
+	Wed Dec 20 20:34:37 1995	no ems if no paging
+compile-time disable big memory	Tue Dec 19 06:35:50 1995	
+optimized source/high/run.c for all but dv0	Tue Dec 19 06:35:21 1995	
+make 1d have its own test directory	Tue Dec 19 06:17:34 1995	
+move direct/dirent stuff out of os_futil and into dtconfig.h	Tue Dec 19 05:10:29 1995	
+take out memsource.name[128]	Tue Dec 19 00:36:59 1995	
+require whitespace between keyword and value	Mon Dec 18 10:42:49 1995	
+determine which is better: adj_runs or adj_filldocument this somewhere	Mon Dec 18 10:30:40 1995	
+	Tue Dec 26 05:44:01 1995	rectify DTIMAGE_ADJ_FLAG_8 with DTRUN_FLAG_CONNECT8
+	Mon Dec 25 17:24:23 1995	same DT_WIN does not work for dtview and client both
+	Mon Dec 25 17:23:42 1995	ctrl-C to client can call dtview with read error with socket read error
+	Mon Dec 25 17:04:37 1995	figure out why runf is slower than runs
+	Fri Nov 24 08:02:35 1995	increase table size in bpe to handle 256-byte data better
+	Tue Nov 21 13:53:53 1995	cmbx10.540pkcmtt10.540pk
+	Tue Nov 14 13:24:00 1995	
+	Tue Nov  7 16:45:47 1995	add lut export and import to dsk_c and dsk_s1
+	Tue Nov  7 16:45:22 1995	add compile-time selection whether xchg_scr is called from export
+	Tue Nov  7 16:44:53 1995	find a home for dsk_s1, it doesn't really belong in source/highor in server
+	Fri Nov  3 14:54:42 1995	subjugate rpc under ipc to get rid of yucky svc_run()
+	Fri Nov  3 14:54:22 1995	remove win_rs.c from source/win
+	Mon Oct 30 13:47:31 1995	put pid in dsk memory filenameswhat about two concurrent processes in DOS?
+	Sun Oct 29 21:28:13 1995	dtlatex.sh should not barf on makeindex if there is no index
+	Sun Oct 29 09:39:52 1995	dx does not get have_index if they are only in the functions
+	Sun Oct 29 09:30:58 1995	make screen structure smaller
+	Sun Oct 29 08:42:53 1995	reinstate ipc stuff in test/server
+	Sun Oct 29 08:41:39 1995	dttxchg to test against files stored in data directory, like tiff
+	Sun Oct 29 05:48:57 1995	put /Zl and explicit library into dv0
+	Thu Oct 26 07:27:52 1995	transfer buffer size MALLOC_MAX breaks dtdsk_srvr_scr over fastgraph
+	Sat Oct 28 04:54:17 1995	make subroutines out of the memory status reporting stuff in view_cmd
+	Tue Oct 24 07:08:06 1995	don't do dialog if not isatty
+	Tue Oct 17 16:23:58 1995	don't make dttviewf or dttviews or dtviewf or dtviews on unix or qnx
+	Sat Oct 14 17:22:27 1995	use dtstr_print not sprintf in scr_main
+	Sat Oct 14 17:20:56 1995	separate scr current lut from remapping luts for allocation purposes
+	Wed Oct 11 05:35:00 1995	in hwsx, hitting uparrow too fast tends to let cursor crawl out ofthe window
+	Mon Oct  9 08:12:13 1995	get rid of DTSCR_KEY use only DT_KEY,somehow have to resolve keystring concept
+	Tue Oct 10 04:52:36 1995	put dtsk_win_t structure in with window data so someday we candispense with list file and just use directory traversa
+	Tue Oct 10 04:54:41 1995	don't get upset when file appears in dsk window list but is not on disk
+	Tue Oct 10 04:52:06 1995	allow prefix in dsk ipc spec, e.g. dsk,/tmp/xxx so all files wouldbegin with xxx not DTDSK
+	Mon Oct  9 15:16:54 1995	what to do with dsk list is messed up wrt files on disk?
+	Mon Oct  9 09:22:33 1995	all uses of param in lev85 not checked for presence of value
+	Mon Oct  9 08:43:07 1995	somehow don't require that dsk window name be the same as the filenamein the dsk directory
+	Sun Oct  8 15:31:18 1995	dtview from disk not allowing deletion of images,perhaps all deletion from directory specified by DT_WIN butnot for individual images or for other dtdsk directories on on command line
+	Sun Oct  8 15:30:30 1995	confusion involving gravity and placement of images on canvas by dtview fromdisk
+	Sun Oct  8 14:59:40 1995	add who and why to malloc usage table in dtos.h
+	Sun Oct  8 14:19:22 1995	clear screen in canvas when adding new image in case it replaces old one
+	Sun Oct  8 07:42:13 1995	decide on strategy for resolution selection:1. use 320 (640?) unless specified2. search for best card can handle (possibly hurting monitor)
+	Sun Oct  8 06:27:03 1995	use cleanup in canfastg and cansvgac init
+	Sun Oct  8 06:26:31 1995	choose resolution based on memory size in canfastg and cansvgac
+	Tue Oct  3 07:21:36 1995	put in yield in DOS to catch control-C
+	Tue Oct  3 07:01:26 1995	while dragging cross cursor in canvas, do not allow cursor to go off screen
+	Tue Oct  3 06:56:33 1995	output of window to dsk could make directory hierarchy
+	Tue Oct  3 06:55:49 1995	dttool gen color256 is very slow on 386
+	Tue Oct  3 06:54:23 1995	control-P in scr_act.c already taken by up-arrow keybd mapping
+	Tue Oct  3 06:54:09 1995	implement control-V for hws
+	Thu Sep  7 14:18:48 1995	have -prefix with colon-separated directory names to search for imagefiles in, to keep command line lengths down in DOS batch files
+	Tue Aug  8 06:47:03 1995	callback_arg->label wrong, use dttool enclose -op stats to see it
+	Fri Aug  4 14:01:00 1995	control-l not redrawing in qnx
+	Fri Aug  4 14:00:19 1995	dtesc94 not working in 16 bit qnx
+	Fri Aug  4 13:26:50 1995	dtimage.h: give dtimage_convolve_bb an argument to tell if it did it or not
+	Wed Aug  2 05:34:49 1995	use shorter environment variables or somehow test to see if there isalready enough in dtinst.bat
+	Wed Aug  2 05:34:38 1995	absolute value of non-b08 image
+	Wed Aug  2 03:47:58 1995	convolving into a bit image will leave output shifted wrong in x
+	Wed Aug  2 03:32:21 1995	variance computation can somehow get floating exception
+	Wed Aug  2 03:32:01 1995	dt1d_cast has ntype argument in wrong place
+	Tue Aug  1 16:11:07 1995	need ntype_desc function which returns string for ntype,array is not good enough because of possible out-of-bounds values
+	Tue Aug  1 16:08:53 1995	use longs in dtwin_r.x so 16-bit client can talk to 32-bit server
+	Tue Aug  1 15:18:40 1995	when writing pgm, write a comment with the ntype for easier recognition
+	Tue Aug  1 07:09:34 1995	get proper MAX_VAL for F1 and F2
+	Sun Jul 23 13:08:17 1995	find a way to sort bib entries on citation not on first name of author
+	Fri Aug  4 16:34:08 1995	redrawing window wrong in response to expose in qw4,top or bottom of block above is drawn in succeeding blocks,most obvious in color256 image,only seems to happen when dtview is on //15 and clients on //1,running clients on //15 to dtview on //1 does not reproduce,//15 does same thing with gr.phi and gr.s3, did not try gr.mach32
+	Wed Oct 25 07:10:12 1995	register dtack/dtview in qnx
+	Fri Aug  4 15:31:28 1995	explain why qnx4 registering name as /dtview must have slash whensearching from another node, i.e. 15:/dtview
+	Tue Jul 18 07:10:44 1995	dtview on dtsg1x5  segmentation fault when sent:   dttool lut -op set -dial none :b 153 0 200 0trying to change color 153 to green
+	Tue Jul 18 06:43:14 1995	dtsez90 :a :b : histgives useless display when dialog is on
+	Tue Jul 18 05:41:27 1995	dtimage_write_bpe_fd() does not work for overlay images
+	Tue Jul 18 05:11:00 1995	dttool copy subimage (row by row) is much too slow
+	Tue Jul 18 05:04:50 1995	dtmemram_realloc: size 16384 * units 2 needs pagesize 32768 but old  pagesize is 16384dtmemram_realloc: free(0x000050c0) for page structuresdtstack_push: exhausted "ram", retrying realloc 32768 for stack realloc
+	Mon Jul 17 10:59:28 1995	can greatly simplify mem code if presume Unix-like virtual memory,that is, no segmented or paged memory
+	Mon Jul 17 10:55:15 1995	dttrun: dttrun_time: * dice128.bpe blobs 12487 (-1)dttrun: dttrun_time: * dice256/t080.bpe blobs 4 (-1)dttrun: dttrun_time: * dice256/t170.bpe blobs 44 (-1)dttrun: dttrun_time: * timer256/seg1.bpe blobs 393 (-1)
+	Mon Jul 17 10:53:40 1995	qw0/qw1 write *.err in wrong directory
+	Sun Jul 16 06:19:33 1995	keep track of page faults by memsource and print them out at end
+	Mon Jul 17 17:27:40 1995	add dttxchg to bat/dttest.bat (don't forget -screen dummy)
+	Sun Jul 16 06:05:46 1995	try running with no .sa.1.1
+	Fri Jul 14 12:47:54 1995	need following timings for adj_fill:ramram page size 16384 (rather like qw0, only more restrictive)xmsdisk
+	Thu Jul 13 14:55:34 1995	qw4 dtview redraws the window unnecessarily when simply movingthe window on the screenmoving the window on the screen does not require that the application redrawthe screen if no parts of the window bar become uncovered
+	Thu Jul 13 14:47:34 1995	putting server communications protocol in title bar of introductionwindow is inelegant
+	Sun Jul  9 06:57:50 1995	find a way to get dtview server error message back to client
+	Sat Jul  8 20:19:19 1995	make filename input to dtimage_export const
+	Sat Jul  8 17:58:06 1995	once dialog came up with top line off screen and cursor not on first line
+	Tue Jul  4 16:54:36 1995	reduce DT_CTL_MEMSOURCES in dt.h
+	Sun Jul  2 13:41:03 1995	shlib entries are not appearing in dependency list for static exes
+	Sun Jul  2 11:11:38 1995	dtlev85: need mechanism for subtracting region
+	Mon Jun 26 06:55:49 1995	adj_fill is unacceptably slow when paging is allowed
+	Mon Jun 26 06:52:47 1995	high/export.c now determines whether or not to write a LaserJet newpagebased on whether or not the output is to stdoutthere has to be a better way
+	Mon Jun 26 06:49:56 1995	enhance dttool_lut to be able to read lut entries from fileprobably means writing low/lut8_io.c
+	Mon Jun 26 06:48:30 1995	be able to handle X color remap events through export_color()
+	Mon Jun 26 06:46:30 1995	backspace and delete keys reversed on fg1 interactive dialogs
+	Fri Jul 14 17:19:52 1995	dttipc when berr is already running dtviewdttipc: dtipc_socket_register: error: Sorry, no entry "berr:" was found in /etc/services.dttipc: dtfd_read_all: error: only read 0 out of 16 from "socket"when DT_WIN=ipc,socket,berr:
+	Mon Jun 26 06:44:52 1995	too many down arrows too fast causes escaped which exits dialognoticed on fg1
+	Mon Jun 26 06:43:33 1995	interactive not reevaluating -win when you edit it in the dialog
+	Thu Jun 22 07:34:32 1995	separate dtimage_plot_line from other junk in high/plot.c
+	Tue Jun 20 15:32:04 1995	don't attempt to realloc ram to multiple pages if DT_PRJ_NOPAGING is on,or take the NOPAGING ifdef's out of dtstack.hrethink whether NOPAGING is imcompatible with multiple segments in a stacksomehow exclude image-type allocs from being realloc'edmake sure dttmem or dttstack is testing realloc one page to one page ofdifferent size
+	Mon Jun 19 11:51:53 1995	makeqw0 ACT= not workingjust do makeqw0 targetis this a bug?for qnx this is easier to remember,but it is not consistent with the DOS and Unix modelsperhaps it is possible to have it both ways on qnx
+	Mon Jun 19 11:48:05 1995	make the huge stuff in ems/xms faster
+	Sun Jun 18 11:30:49 1995	dtimage_create2: error: no memsource has 65536 bytes available for imagesilent message you get when doing -mem xms on system with no xms
+	Mon Jul 17 07:06:05 1995	alg/sez90/cmd.c ngray = maxval - minval must check for type float for double
+	Mon Jul 17 06:52:55 1995	take a,b debug out of dtbpe_lookup
+	Sat Jun 17 05:33:11 1995	dv0: "File not found" leaking out from del "tmp.lib" in dv0.mak
+	Sat Jun 17 04:51:13 1995	change -mem from 60K to 72K for DOS
+	Sat Jun 17 03:47:18 1995	dv0: cvpack /STRIP: abnormal program termination: page fault
+	Sat Jun 17 03:46:12 1995	dv0: library does not exist.  Create? (y/n)  /noignorecase
+	Fri Jun 16 12:13:31 1995	lev85 doc: show what can happen when gray level range is to high
+	Fri Jun 16 11:07:57 1995	rename dt_sez90 to dtsez90
+	Wed Jun 14 17:06:23 1995	turning off optimization on qw0 in source/high by just moving thedefine statements from around the __src statements did not enabledebugging, but taking the __src statements out did
+entered	Wed Jun 14 16:59:35 1995	dtcheck.sh on unix does not print out "scanning" message as it scans
+	Wed Jun 14 16:24:37 1995	need more checking of odd stack allocation/reallocation sizesalso make sure it works with dsk
+done	Wed Jun 14 16:24:08 1995	forms mode can't find /usr/erb/prj/dt in todo
+	Fri Jun  9 06:35:00 1995	qw0 dttxchg fails on dtscr_import_data if size is greater than 120x120 or so
+	Fri Jun  9 06:37:13 1995	dttxchg should do the screen server test with generated imagesso it doesn't have to rely on dtdsk
+	Fri Jun  9 06:33:19 1995	qw0 dtscr_export_data() fails when called from dttxchg with size greater than150x150 or so
+	Sun Jun 11 05:12:50 1995	alpha should realloc when full, up to some maximum
+	Sun Jun 11 05:13:49 1995	alpha doesn't do a very useful thing when just hitting enter
+	Sun Jun 11 05:12:27 1995	it would be nice to be able to search an alpha display
+done	Sun Jun 11 05:11:20 1995	dttcast dialog when gave invalid -D value, cursor jumped to yield field
+	Sat Jun 10 06:47:58 1995	dttxchg, dttalpha, dttstack and others write temp files to param->outputthis could cause a problem during multiple simultaneous invocations
+	Fri Jun  9 06:29:00 1995	need function to remove window, at same level as dtimage_export()would just remove files for pgm, would remove window for win serversright now dttxchg has hacks in it to remove temporary files when done

@@ -1,0 +1,22 @@
+define(TOP, UP2)
+define(DIR, app/reverb)
+
+__usage(reverb, reverb)
+__proto(reverb, client)
+
+pushdef(`CCSHARABLE', `CCSHARABLE_ON')
+
+__shlib(prj_lib(reverbx), client+libmain, , , prj_lib(dtlow))
+
+__shexe(prj_test_bin(reverb),
+  reverb, ,
+  prj_lib(reverbx)+
+  prj_lib(dtlow)+
+  prj_lib(dt1d)+
+  PRJ_LIBS)
+
+popdef(`CCSHARABLE')
+
+__finish
+
+

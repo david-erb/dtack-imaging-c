@@ -1,0 +1,260 @@
+/*..........................................................................
+| TITLE dtlev85s()
+dxinclude(algshort.dx)
+| 
+|!dtlev85: Segmentation Performance
+| This short document provides a quick reference
+| for programmers using this software.
+| 
+|.About the Algorithm
+| For each area in a segmented image,
+| the algorithm provides a single number called the uniformity.
+| Pixels from the original gray level image are used in the computation.
+| The uniformity may be considered a measure
+| of the goodness of the segmentation.
+| 
+| The uniformity measures may be used to evaluate a segmented image,
+| compare results of two segmentations, or
+| as feedback in an iterative segmentation process.
+| 
+| The uniformity measure returns high values
+| when the regions in the area are similar in gray level.
+| This means that if a region contains only pixels whose values
+| are close to the average value, it will have a uniformity close to 1.0.
+| In the limit, a region of constant value will have a uniformity of
+| exactly 1.0.
+| 
+| The uniformity measure takes into account the relative size of the regions.
+| The size of a region linearly affects how much that region's
+| uniformity contributes to the uniformity of the area.
+| The uniformity measure is weighted such that its range is between
+| 0.0 and 1.0.
+| The justification is that uniformity can be thought of as
+| being more noticeable in large regions.
+| 
+|.Terminology
+| area			One or more regions, uniformity is computed on and area basis.
+| blob			Same as region.
+| gray level	Value of pixels in the original image.
+| label			The value of a pixel in the segmented image.
+| region		Any group of 4-or 8-connected same-labeled pixels.
+| uniformity	Number between 0.0 and 1.0 given for an area.
+| 
+|.Basic Sequence of Steps
+| All four procedures for selecting and grouping regions
+| have in common that they use the same basic sequence of steps:
+| 1.	initialize housekeeping structure: dtlev85_init()
+| 2.	one or more calls to one or more of:
+| 2a.	add blob to area: dtlev85_blob()
+| 2b.	add histogram to area: dtlev85_hist()
+| 2c.	add area to area: dtlev85_combine()
+| 3.	compute final uniformity: dtlev85_compute()
+| The dtlev85_total() and dtlev85_label() functions
+| use the above steps internally.
+| This makes them easy to use.
+| To handle regions on a blob-by-blob basis,
+| your program will make use of the above steps explicitly.
+|
+| The two approaches 2a and 2b above may be freely intermixed.
+| Both achieve the same results, but using different means of input.
+| The histogram approach may be slightly faster especially when large blobs
+| are involved or if you have a hardware histogram generator.
+| 
+| However, the histogram approach has a serious drawback
+| for higher precision gray level images.
+| Namely, accuracy of the uniformity is reduced
+| when a range of gray level values must be lumped together
+| into the same histogram bin.
+| The blob approach does not suffer from this precision loss.
+| So unless you have a fast histogram generator and you have 8-bit data,
+| the blob approach is probably the best.
+| 
+|.Total Uniformity
+| Total uniformity is a concept whereby the segmented image
+| is considered as only two areas:
+| the foreground and the background.
+| The background is not necessarily 0,
+| but may be any selected value.
+| All pixels with the background value are ignored.
+| All other pixels are grouped into a single area
+| without regard to their connectivity to one another.
+|
+| Total uniformity is computed by a single function call to dtlev85_total().
+| This is the simplest and fastest function of the implementation.
+|
+|.Label Uniformity
+| Used when label values in segmented image already specify areas.
+| Makes internal list of lev85's end passes them out at end.
+| In this type of calculation, there is no concept of background.
+| All blobs are treated equally.
+|
+|.Direct-blob Uniformity
+| Bound closely with connected components engine.
+| Must have blob structure.
+| 
+| May be used conveniently with other blob statistics routines.
+| 
+| No background.
+| 
+| No binning.
+|
+| Most comprehensive.
+|
+|.Histogram Uniformity
+| Used when convenient means for histogram computation is already available.
+| Perhaps hardware.
+| Cannot be used with perfect accuracy for binned histograms.
+| Care must be taken so that precision lost
+| due to the intrinsic binning associated
+| with the histogram creation is not significant.
+| 
+|.Data Types
+| Gray level images may be any data type 
+| from single bit to double precision.
+| In the :total:, :label: and :blob: methods,
+| the pixel values are obtained directly with no loss of precision.
+| In the :hist: method, as described above,
+| the accuracy of the resultant uniformity is limited by the
+| precision of the histogram.
+|
+| The segmented images may be any data type
+| from single byte to double precision.
+| 
+|.Implementation Interface
+| :dtlev85:					main program parses command line arguments
+|							and calls the functions
+| :dtlev85a:				sample program showing total uniformity
+| :dtlev85b:				sample program showing label-by-label uniformity
+| :dtlev85c:				sample program showing basic uniformity procedure
+| :dtlev85d:				sample program showing direct blob-by-blob uniformity
+| :dtlev85e:				sample program showing histogram uniformity
+| dtlev85_total()			produces total uniformity for an area which consists
+|							of all non-background pixels
+| dtlev85_label()			produces a separate uniformity for each area
+|							distinguished by a unique label in the segmented
+|							image
+| dtlev85_init()			initializes an array of dtlev85 structures
+| dtlev85_blob()			adds a region's gray levels to the uniformity
+|							being accumulated for an area
+| dtlev85_hist()			adds a region's histogram to the uniformity
+|							being accumulated for an area
+| dtlev85_compute()			computes the uniformity measure for an area 
+| dtlev85_combine()			combine two areas
+| 
+| The principal data structure used in computing and returning
+| the uniformity includes the following members:
+| 
+|:typedef struct {
+|:  double u;							// computed uniformity 		  
+|:  long n;								// number of regions		  
+|:  double fmax, fmin;					// max data range found		  
+|:  long Aa;							// total area accumulator	  
+|:} dtlev85_t;
+|
+|.Files
+| To use the software after installation, only the following are required:
+| :dtlev85.h:		algorithm header file
+| :dt.h:	 		Dtack Base Image Processing Library header file
+| :dtlev85.lib: 	algorithm library
+| :dthigh.lib:	 	high level Base Library
+| :dtlow.lib:	 	low level Base Library
+| :dtlev85:			main program executable
+|
+|.Program
+| A uniformity number for each area is printed to the console.
+| Can be used to produce an output image where each pixel value is
+| proportional to the uniformity of the pixel's blob.
+| 
+| #USAGE#
+|: dtlev85 [parameters] gray segmented [output]
+| 
+| #ARGUMENTS#
+| :gray:	   	name of the original gray-level image (required)
+| :segmented:	name of the image which has been segmented (required)
+| :output:		name of output image (optional, ignored if not :-op blob:)
+|
+| #PARAMETERS#
+| :-op total:			all non-background pixels are one area
+|						(this is the default if :-op: is omitted)
+| :-op label:			each label is a separate area
+| :-op blob:			each blob is a separate area
+| :-op test:			self-tests, prints nothing if all pass
+| :-op time:			benchmark and display execution times
+| :-background: ~bv~	segmented pixels to be considered background 
+|						(default 0, ignored if not :-op total:)
+| :-min: ~min~			minimum area for blob to be considered
+|						(default 0, ignored if not :-op blob:)
+| :-max: ~max~			maximum area for blob to be considered
+|						(default unlimited, ignored if not :-op blob:)
+| :-precision: ~type~	precision of :output: image
+|						(default :float:, ignored if not :-op blob:)
+| :-connect: ~4 or 8~	4-connectivity or 8-connectivity (default 4)
+|
+|.Functions
+|://----in total.c:----
+|:
+|:dt_rc_e
+|:dtlev85_total(						// total non-background uniformity	
+|:  dtparam_t *param,					// control parameter structure 		
+|:  dtimage_t *gray,					// input gray gray-level image		
+|:  dtimage_t *segmented,				// input segmented image			
+|:  double background,					// background in segmented image    
+|:  dtlev85_t *lev85)					// returned structure 				
+|:
+|://----in label.c:----
+|:
+|:dt_rc_e
+|:dtlev85_label(						// compute by-label uniformity	    
+|:  dtparam_t *param,					// control parameter structure 		
+|:  dtimage_t *gray,					// input gray-level image			
+|:  dtimage_t *segmented,				// input segmented image			
+|:  dtlev85_label_callback_f callback,	// function called for each label 	
+|:  void *callback_arg)					// arg passed through to callback 	
+|:
+|://----in blob.c:----
+|:
+|:dt_rc_e
+|:dtlev85_blob(							// contribute blob to uniformity
+|:  dtparam_t *param,					// control parameter structure
+|:  dtlev85_t *lev85,					// structure to add uniformity to
+|:  dtimage_t *gray,					// input gray-level image			
+|:  dtrun_t *run,						// run-length encoded segmented image
+|:  dtrun_blob_t *blob,					// blob description
+|:  dt_stats_t *stats)					// statistics on the blob
+|:
+|://----in hist.c:----
+|:
+|:dt_rc_e
+|:dtlev85_hist(							// contribute region to uniformity	
+|:  dtparam_t *param,					// control parameter structure 		
+|:  dtlev85_t *lev85,					// algorithm housekeeping 			
+|:  dthist_t *hist)						// pre-computed histogram 			
+|:
+|://----in init.c:----
+|:										
+|:dt_rc_e
+|:dtlev85_init(							// init structure					
+|:  dtparam_t *param,					// control parameter structure 		
+|:  dtlev85_t *lev85)					// array of structures to init 		
+|:
+|://----in compute.c:----
+|:
+|:dt_rc_e
+|:dtlev85_compute(						// compute uniformity of area		
+|:  dtparam_t *param,					// control parameter structure 		
+|:  dtlev85_t *lev85)					// algorithm housekeeping			
+|:
+|://----in combine.c:----
+|:
+|:dt_rc_e
+|:dtlev85_combine(						// combine uniformity of two areas	
+|:  dtparam_t *param,					// control parameter structure 		
+|:  dtlev85_t *lev85_in1,				// first area 						
+|:  dtlev85_t *lev85_in2,				// second area 						
+|:  dtlev85_t *lev85_out)				// output combined area
+|
+dtinclude(epilog2.dx) 
+| 
+| END
+ *..........................................................................*/
+

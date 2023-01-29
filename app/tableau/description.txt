@@ -1,0 +1,384 @@
+EXHIBIT A.
+1. Tableau Software
+
+Tableau is a software system designed to distribute live camera images freely to a wide Internet audience.
+The operation of the system, once installed and configured, 
+is automatic and requires no operator intervention under normal circumstances.
+The transmission medium	is video only.
+It uses a Motion JPEG codec.
+The system does not transmit audio or textual information.
+The transmission is one-way only, with no possible feedback from audience to source.
+The system is meant for free video and thus has no authentication or ecommerce possibilities.
+
+The software is composed of the following modules.
+The software is distributed, meaning the different modules normally run on different computers.
+
+Module 1. capture and transmission
+There will typically be only one capture and transmission module running on any given machine.
+On Win98, WinNT or Win2000 platform with appropriate hardware and drivers,
+this module performs the following steps:
+a. make TCP/IP connection with receiver on the server
+b. capture single image
+c. compress into JPEG
+d. send small header plus JPEG data to receiver on the server
+e. go to step b
+
+Module 2. receipt and caching
+Practicality limits the number of receipt and caching modules to 10 on any given server.
+On Win2000 or Linux server, this module performs the following steps:
+a. wait for a TCP/IP connection from the capture module
+b. way for the arrival of the header and JPEG data
+c. save single image to the disk file with a unique filename
+d. delete oldest image
+e. go to step b
+
+Module 3. distribution
+The web server's capability alone limits how many distribution modules may run simultaneously.
+On Win2000 or Linux server, this is a CGI module which performs the following steps:
+a. gets invoked by web server
+b. sends small header plus JPEG data for the most recent available image
+c. waits for another image to arrive
+d. go to step b
+
+Module 4. display
+A browser can run from 1 to 16 display modules at the same time depending on CPU and bandwidth.
+In any standard browser, this module is a Java applet which performs the following steps:
+a. make TCP/IP connection to the CGI and server
+b. receive small header plus JPEG data
+c. render JPEG data as an image
+d. go to step b
+
+Module 5. remote administrative control
+One instance of this optional module runs a capture computer.
+It interfaces with standard browsers, giving administrative control over the capture process.
+
+Module 6. autoroam
+One instance of this optional module runs per computer with a PTZ (pan/tilt/zoom) attached.
+It sends periodic preprogrammed movement commands to the PTZ at specified intervals.
+
+Module 7. ptz coordinator
+One instance of this optional module runs per computer with a PTZ.
+It ensures that only one browser can gain exclusive control of the PTZ at any given time.
+
+Module 8. ptz serial port controller
+One instance of this optional module runs per computer with a appropriate PTZ (pan/tilt/zoom) hardware attached.
+It receives generic PTZ commands and translates them to low level serial port bytes.
+
+Module 9. watchdog
+One instance of this optional module runs per capture computer and one per IIS server computer.
+Its job is to restart any other modules which stop unexpectedly.how I
+
+
+
+EXHIBIT B. The Libraries
+Subroutines within following libraries owned by Dtack, Inc. are used by Tableau:
+
+- Library dtxchg: image file format conversion
+bmp.c		Microsoft Windows bitmap files
+dib.c		Microsoft Windows device independent bitmap s
+dtexim1.c	image import and export example program
+export.c	image export
+import.c	image import
+lut8xchg.c	8-bit lut import and export
+parse.c		external name parsing
+read.c		image reading
+readtif.c	tif file reading
+wmf.c		Microsoft Windows metafile with Adobe placeable header
+write.c		image writing
+writebmp.c	write a Microsoft Windows Bitmap File
+writewmf.c	write a Microsoft Windows metafile
+xchg_dat.c	program constants
+xchg_dsk.c	import and export from windowing server disk files
+xchg_dtm.c	import and export from an NCSA Collage server
+xchg_jpg.c	import and export jpeg files
+xchg_scr.c	import and export from the screen interface
+xchg_win.c	import and export from a windowing server
+xchg_wxm.c	import and export Windows metafiles from Visual Basic
+xchg_wxx.c	import and export Windows files from Visual Basic
+
+- Library dtwinc: distributed image display 
+dsk.c		windows stored on disk files
+dsk_c.c		Windows stored on disk files, client
+svc.c		server support functions
+svc_dsk.c	windowing server on disk
+svc_ipc.c	windowing server on interprocess communication
+winc.c		client umbrella to windowing server
+winc_dsk.c	client to disk windowing server
+winc_ipc.c	client to interprocess communication windowing server
+wins.c		windowing server umbrella
+wins_dsk.c	windowing server implemented on disk
+wins_ipc.c	windowing server implemented on interprocess communication
+
+- Library dtfb: image capture from framegrabber
+fb.c		fb API
+fbbt.c		BTTV driver for Bt848 on Linux
+fbcortex.c	Cortex I board on QNX
+fbdir.c		read files from directory
+fbgen.c		generate synthetic images
+fbmeteor.c	meteor board on linux
+fbpsi.c		VMC2
+fbsnap.c	Sanppy
+fbutil.c	fast utility functions
+fbvbmci.c	MCI interface to Video Blaster
+fbvfw.c		Video for Windows
+fbvidmux.c	vidmux utility functions
+fbvmc.c		raw access to VMC2
+meteor_ioctl.h	include for meteor
+psi.h		include for fbpsi
+bttv.h		include for BTTV driver
+bt848.h		include for BTTV driver
+
+- Library dthigh: image processing
+adj.c		connected components
+adj_run.c	connected components from runs
+arith.c		image arithmetic
+assign.c	assign pixel values
+blob.c		functions operating on blob lists
+cdecl.c		non-DLL functions
+cast.c		image type conversion
+check.c		image type checking
+cmp.c		image comparison
+col.c		column extraction/replacement
+constant.c	set image to constant
+conv_d.c	image convolution for double-precision
+conv_l.c	image convolution for unsigned integer
+conv_s.c	image convolution for signed integer
+convolve.i	image convolution included template
+convolve.c	image convolution interface
+cooc.c		coocurrence matrices
+cooc2.c		coocurrence matrices, optimized
+cumul.c		cumulative probability
+dbg.c		debug image values
+diff.c		image attention
+err.c		handle image operational errors
+fft.c		FFT API
+fftw.c		FFT API implementation using fftw package
+gen1.c		generate synthetic images
+gen2.c		generate synthetic images
+gen3.c		generate synthetic images
+gen_dat.c	data for synthetic image generation
+gen_kern.c	generate kernels
+hist1.c		image histogram functions
+hist2.c		image histogram plotting functions
+image.c		image creation and deleting
+joint.c		joint probability
+joint2.c	joint probability, optimized
+label1.c	connected components labeling
+label2.c	connected components labeling
+log.c		image pixel logarithm
+logical.c	image logical operations
+lookup.c	image pixel lookup
+matrix.c	treat image as matrix
+mean.c		compute image mean
+median.c	median filtering
+median.i	template median filtering
+morph.c		morphological operations
+morph3x3.i	template morphological operations
+noise.c		noise addition
+pixel.c		pixel utility
+plot1.c		plot into image
+plot2.c		plot into image
+plot_txt.c	plot text into image
+range.c		compute range of image values
+resample.c	image interpolated scaling
+rotate.c	90 degree rotation
+run.c		image horizontal runs
+run_dat.c	constant data for image runs
+run_len.c	run length statistics
+runf.c		fast image horizontal runs
+scan.c		scan for horizontal runs
+stats.c		compute statistics on image
+sum.c		image sums
+sum_cols.c	column sums
+sum_rows.c	row sums	
+sumsq.c		sum of squares
+sumsqd.c	sum of squared image differences
+sumsqs.c	sum of squared scalar interface
+thresh.c	image thresholding
+transpos.c	image transpose
+
+- Library dtcolor: image color space conversion
+convert.c	color space conversion routines
+org.c		color organization object support routines
+r_g_b.c		convert from band-interleaved RGB
+rgb.c		convert from 16-bit RGB
+rgb888.c	convert from byte-interleaved RGB
+y_cb_cr.c	convert from band-interleaved YCbCr
+ycbycr.c	convert from 16-bit 4:2:2 YCbCr
+yuyv.c		convert from YUV
+
+- Library dtscr: image display on console or window
+candum.c	dummy canvas implementation
+canfastd.c	dummy canvas implementation on Fastgraph for DOS
+canfastg.c	canvas implementation on Fastgraph for DOS
+canhws.c	canvas implementation on hierarchical window systems
+canhwsd.c	canvas implementation on dummy hws
+canpoll.c	canvas keyboard/mouse poll function
+cansvgac.c	canvas implementation for SVGACC for DOS
+cansvgad.c	dummy canvas implementation for SVGACC for DOS
+canvas.c	canvas screen interface
+hws.c		hierarchical windows screen interface
+hwsfgw.c	hierarchical windows screen implemented on Fastgraph for Windows
+hwsmsw.c	hierarchical windows screen implemented on Windows API
+hwsqw4.c	hierarchical windows screen implemented on QNX Windows
+hwsx.c		hierarchical windows screen implemented on X Window (xlib)
+scr_act.c	screen action handling
+scr_cur.c	screen cursor drawing
+scr_dbg.c	screen debug
+scr_main.c	screen interface functions
+scrcan.c	screen on canvas
+scrcand.c	dummy screen on canvas
+scrdum.c	screen on dummy
+scrhws.c	screen on hierarchical windows system
+scrhwsd.c	dummy screen on hierarchical windows system
+vga.c		VGA utility functions
+
+- Library dtbigmem: segmented memory management
+font.c		font generation functions
+mem.c		big memory umbrella
+mem_disk.c	big memory on disk implementation
+mem_ems.c	big memory on EMS for DOS implementation
+mem_ram.c	big memory on simple RAM implementation
+mem_std.c	common big memory functions
+memclip.c	rectangular region clipper
+memcmp.c	big memory region comparison
+memconf.c	big memory configuration management
+memcopy.c	big memory region copying
+memgetp.c	big memory subregion extraction
+memio.c		big memory file reading and writing 
+memparse.c	big memory spec parsing
+memputp.c	big memory subregion insertion
+memset.c	set big memory to constant
+memsourc.c	big memory source poll handling
+memtxms.c	big memory on XMS for DOS implementation
+memxmsif.c	another big memory on XMS for DOS implementation
+memxmslb.c	another big memory on XMS for DOS implementation
+stack.c		stack implemented on top of big memory
+stack_io.c	stack file reading an writing
+
+- Library dtdg: virtual circuit http interprocess communication
+delay.c		standard delay command
+dgclient.c	http client
+dgserver.c	http server
+exit.c		standard exit command
+header.c	header processing
+line.c		line input
+request.c	handle client request
+response.c	response routines
+rev.c		library revision
+
+- Library dtlow: low level timing, logging, sockets, etc
+assert.c	test runtime truth assertions
+cdecl.c		non-vararg front end to functions with variable arg lists
+cipher.c	cipher routines
+conf_dat.c	configuration constants
+cons.c		virtual console implementation
+cstack.c	C stack
+dbg.c		runtime debug routines
+dbg2.c		more runtime debug routines
+dbg_dat.c	debug routine constants
+dbtable.c	database tables
+dtenv1.c	environment functions example program
+dtenv2.c	environment functions example program
+dtenv3.c	environment functions example program
+dtenv4.c	environment functions example program
+dthist1.c	histogram functions example program
+dthist2.c	histogram functions example program
+dtparam1.c	parameter functions example program
+dtport1.c	I/O port example program
+enter.c		program environment creation functions
+err.c		error handling functions
+err2.c		more error handling functions
+eventw.c	event signals
+f.c		fopen simulator
+fd.c		file interface implementation
+ftp.c		interface to Internet FTP protocol
+heap2.c		C runtime heap checking functions
+heap3.c		C runtime heap checking functions
+heapmon.c	C runtime heap monitoring functions
+hist.c		histogram functions
+hist2.c		histogram functions, optimized
+hist_da.c	histogram functions static data
+ipc.c		interprocess communication umbrella
+ipcdde.c	Microsoft Windows DDE ipc implementation
+ipcqbaby.c	qbaby ipc implementation
+ipcqnx4.c	QNX ipc implementation
+ipcrock.c	socket ipc implementation
+leave.c		program environment destruction functions
+license.c	license manager interface
+liner.c		line input from text files
+list.c		keyed list implementation
+list_io.c	keyed list input/output functions
+lut8.c		8-bit lookup table functions
+lut8_dat.c	data for 8-bit lookup table functions
+lut8_mat.c	8-bit lookup table matching functions
+matrix.c	matrix operations
+matrix2d.c	matrix operations for 2d coordinate transmissions
+matrix3d.c	matrix operations for 3d coordinate transmissions
+msgu.c		message queues for unix
+msw.c		Microsoft Windows low level interface
+ntype.c		data type functions
+ntype_da.c	static data for type functions
+points.c	point operations
+poly.c		polynomial coordinate transformations
+os_delay.c	delay functions
+os_env.c	environment variable functions
+os_futil.c	file utility functions
+os_heap.c	heap monitoring functions	
+os_heap2.c	more heap monitoring functions
+os_mem.c	heap allocation
+os_time.c	real time functions
+param.c		command line keyword parameter functions
+phys.c		physical memory functions
+pnm.c		Portable Anymap header functions
+portio.c	direct I/O port access
+prj.c		project constant access functions
+prj_dat.c	project constant data
+qnx4.c		QNX low level functions
+rev.c		revision reporting
+say.c		functions to output to console
+serial.c	serial comms
+serialu.c	serial comms for Unix
+serialw.c	serial comms for Windows
+semu.c		semaphores for unix
+semw.c		semaphores for Windows
+shmu.c		shared memory for Unix
+shmw.c		shared memory for Windows
+str.c		string handling utilities
+threads.c	thread manager
+thread.c	thread object common routines
+threadu.c	thread object for Unix
+threadw.c	thread object for Windows
+usage.c		emit program usage
+yield.c		runtime yield functions
+
+- Library dt1d: 1 dimensional mathematics
+1d.c
+1d_abs.c
+1d_arith.c
+1d_cast.c
+1d_clip.c
+1d_cmp.c
+1d_conv.c
+1d_cumf.c
+1d_cumr.c
+1d_dat.c
+1d_diff.c
+1d_fft.c
+1d_fftw.c
+1d_logic.c
+1d_look.c
+1d_noise.c
+1d_ntype.c
+1d_ran.c
+1d_range.c
+1d_set.c
+1d_sort1.c
+1d_sort5.c
+1d_stats.c
+1d_sum.c
+1d_sumsd.c
+1d_sumsq.c
+1d_sumss.c
+1d_thres.c
+1d_vari.c

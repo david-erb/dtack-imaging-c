@@ -1,0 +1,22 @@
+# -connect address to listen at
+# -path    executable drone
+# -config  drone's arg file template
+# -ident   used in http replies only
+# -datadir prepend before document files requested in "docs?" URLs
+# -min     min port to assign a drone
+# -max     max port to assign a drone
+# -parent  only computer to accept requests from
+# -dt      server loop poll time
+
+-connect rocket,0:5718
+-path  /f/3/obj/dt.lg1/bin/tabdrona
+-config ../tabdrone/tabdrone.template
+
+-ident wrangler
+-datadir .
+-min 10000
+-max 20000
+-parent rocket,0.0.0.0:0
+-dt 500
+
+-D usr1+usr2+command

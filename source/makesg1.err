@@ -1,0 +1,18 @@
+[?1l>++ make SRC=/usr/erb/prj/dt OUT=/usr/erb/prj/dtsg1 MK_TARGET=sg1 bsd1 ACT=libs
+ar: creating /usr/erb/prj/dtsg1/lib/libdtinter.a
+ar: creating /usr/erb/prj/dtsg1/lib/libdtscr.a
+ar: creating /usr/erb/prj/dtsg1/lib/libdtcan.a
+ar: creating /usr/erb/prj/dtsg1/lib/libdtcand.a
+ar: creating /usr/erb/prj/dtsg1/lib/libdtfastg.a
+ar: creating /usr/erb/prj/dtsg1/lib/libdtfastgd.a
+ar: creating /usr/erb/prj/dtsg1/lib/libdtsvgac.a
+ar: creating /usr/erb/prj/dtsg1/lib/libdtsvgacd.a
+ar: creating /usr/erb/prj/dtsg1/lib/libdthws.a
+ar: creating /usr/erb/prj/dtsg1/lib/libdthwsd.a
+ar: creating /usr/erb/prj/dtsg1/lib/libdtwinc.a
+ar: creating /usr/erb/prj/dtsg1/lib/libdtwins.a
+ar: creating /usr/erb/prj/dtsg1/lib/libdtfb.a
+ar: creating /usr/erb/prj/dtsg1/lib/libdtcolor.a
+ar: creating /usr/erb/prj/dtsg1/lib/libdthigh.a
+ar: creating /usr/erb/prj/dtsg1/lib/libdtxchg.a
+ar: creating /usr/erb/prj/dtsg1/lib/libdtxchgs.a

@@ -1,0 +1,35 @@
+define(TOP, UP2)
+define(DIR, test/lib)
+
+pushdef(`CCSHARABLE', `CCSHARABLE_ON')
+pushdef(`CCOPTIMIZE', `CCOPTIMIZE_HIGH')
+pushdef(`CCDEBUGGER', `CCDEBUGGER_OFF')
+__src(gen256)
+popdef(`CCDEBUGGER')
+popdef(`CCOPTIMIZE')
+
+__shlib(prj_lib(dttzz), 
+  check+
+  time+
+  libmain, , ,
+  prj_lib(dtlow)+
+  prj_lib(dt1d))
+
+__shlib(prj_lib(dttaa), 
+  check+
+  gen256+
+  util1+
+  time+
+  raw+
+  blob_dat+
+  libmain, , blob_dat,
+  prj_lib(dtxchg)+
+  prj_lib(dthigh)+
+  prj_lib(dtlow)+
+  prj_lib(dt1d))
+
+popdef(`CCSHARABLE')
+
+__finish
+
+

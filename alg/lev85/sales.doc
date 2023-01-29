@@ -1,0 +1,76 @@
+/*..........................................................................
+| TITLE dtlev85p
+| Algorithm dtlev85: Segmentation Performance
+| 
+|!Algorithm dtlev85: Segmentation Performance
+|_link dthome,inline [Dtack Home Page]
+| 
+| \<img src="../gif/dtlev85/gray5.gif"\>
+| +
+| \<img src="../gif/dtlev85/seg5c.gif"\>
+| =
+|:         uniformity measurements: 
+|:         blob1: 0.90363
+|:         blob2: 0.88037
+|:         blob3: 0.98693
+|:         blob4: 0.94564
+|:         combined: 0.96507
+| 
+|.Goals
+| Given a gray level image and its segmentation,
+| the algorithm attempts to provide a single number called the uniformity.
+| The uniformity may be considered a measure
+| of the goodness of the segmentation.
+| 
+|.Applications
+| Evaluate a segmented image.
+| Compare results of two segmentations.
+| Use as feedback in an iterative segmentation process.
+| 
+|.Functions
+| dtlev85			interactive main program
+| dtlev85_total()	produces total uniformity for an area which consists
+| 					of all non-background pixels
+| dtlev85_label()	produces a separate uniformity for each area
+| 					distinguished by a unique label in the segmented
+| 					image
+| dtlev85_blob()	adds a region's gray levels to the uniformity
+| 					being accumulated for an area
+| dtlev85_hist()	adds a region's histogram to the uniformity
+| 					being accumulated for an area
+| dtlev85_compute()	computes the uniformity measure for an area
+| 
+|.References
+| Martin D. Levine and Ahmed M. Nazif. 
+| Dynamic measurement of computer generated image segmentations.
+| ~IEEE Transactions on Pattern Analysis and Machine Intelligence~,
+| 7(2):155-164, 1985
+| 
+|.Documentation
+| 50 page Postscript, Unix man pages, GNU Info, WWW HTML, MS Windows Help,
+| ASCII text.
+| 
+|.Performance
+| Under 2 seconds for 2000 blobs in a 512x512 8-bit image on Intel 486/66.
+| 
+|.Platforms
+| SunOS, FreeBSD, Linux, 16- and 32-bit MS-DOS, and MS-Windows
+| 
+|.Cost
+| License $100, 
+| Internet distribution free, 
+| Magnetic media $20, 
+| Printed manual $20,
+| Article reprints $5.
+| 
+|.Support
+| Free E-mail and telephone support.  Free updates and bug fixes.
+| 
+|.Guarantee
+| 30 days money back, no questions asked.
+| 
+|.To Order
+| Please ask for Product A100 when you E-mail, phone, fax, or write.
+| 
+| END
+ *..........................................................................*/

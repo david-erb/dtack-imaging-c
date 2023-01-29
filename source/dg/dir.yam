@@ -1,0 +1,27 @@
+define(TOP, UP2)
+define(DIR, source/dg)
+
+__summary(prj_lib_summary(dgserver), 
+  dgserver.c, NCI)
+__summary(prj_lib_summary(dgclient), 
+  dgclient.c, NCI)
+
+pushdef(`CCSHARABLE', `CCSHARABLE_ON')
+
+__shlib(prj_lib(dtdg),
+  line+
+  header+
+  dgserver+
+  request+
+  response+
+  rev+
+  exit+
+  delay+
+  dgclient+
+  libmain, , ,
+  prj_lib(dtlow)+prj_lib(dt1d), 
+  PRJ_LOADS)
+
+__finish
+
+

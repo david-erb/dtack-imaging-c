@@ -1,0 +1,15 @@
+-config /f/1/usr/erb/prj/dt/app/tableau/config
+
+-input bt,/dev/bttv,320,240
+ 
+# D use default colormap
+# R remap pixels to display
+# S use shared memory interface to X server
+
+-screen hws,x,:0.0
+
+-D usr1
+-variant passthrough
+
+# -background is how many frames between lut recalculation
+-background 20

@@ -1,0 +1,40 @@
+define(TOP, UP2)
+define(DIR, fourth/mpegssg)
+__prolog
+
+ifdef(`CCWARNINGS_MEDIUM', 
+`pushdef(`CCWARNINGS', `CCWARNINGS_MEDIUM')')
+
+pushdef(`CCSHARABLE', `CCSHARABLE_ON')
+
+pushdef(`CCOPTIMIZE', `CCOPTIMIZE_HIGH')
+pushdef(`CCDEBUGGER', `CCDEBUGGER_OFF')
+
+__shlib(prj_fourth_lib(mpegssg), 
+  ssg+
+  getpic+motion+getvlc+
+  gethdr+getblk+getbits+store+recon+
+  spatscal+idct+idctref+display+
+  systems+subspic+verify+
+  libmain, , , 
+  prj_lib(dtlow)+
+  prj_lib(dt1d))
+
+popdef(`CCDEBUGGER')
+popdef(`CCOPTIMIZE')
+
+popdef(`CCSHARABLE')
+popdef(`CCWARNINGS')
+
+dnl __shexe(prj_app_bin(mpeg2dec, 1), 
+dnl   mpeg2dec, ,
+dnl  prj_fourth_lib(mpegssg), PRJ_LOADS)
+
+__finish
+
+
+
+
+
+
+

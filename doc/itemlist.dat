@@ -1,0 +1,6 @@
+L`'dtdoclist(dtlev85, partno)	dtdoclist(dtlev85, title)	license	100	_	_	_	dtlev85	dtlev85	_	_	_	_	
+D`'dtdoclist(dtlev85, partno)	dtdoclist(dtlev85, title)	printed	20	dtlev85p/all	dtlev85/sect000	dtlev85s/all	_	dtlev85	_	_	_	_	
+L`'dtdoclist(dtsez90, partno)	dtdoclist(dtsez90, title)	license	100	_	_	_	dtsez90	dtsez90	_	_	_	_	
+D`'dtdoclist(dtsez90, partno)	dtdoclist(dtsez90, title)	printed	20	_	dtlev85/sect000	_	_	dtsez90	_	_	_	_	
+D100	Dtack Base Library	printed	40	dtbasep/all	dtbase/sect000	dtbases/all	_	dtbase	_	_	_	_	
+L100	Dtack Base Library	license	free	_	_	_	dtbase	dtbase	_	_	_	_	

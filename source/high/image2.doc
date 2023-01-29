@@ -1,0 +1,10 @@
+/*..........................................................................
+| TITLE
+| Point Operations
+|
+|!Summary
+| These functions operate on one pixel position at a time.
+| Some operations require more than one input image.
+| 
+| END
+ *..........................................................................*/

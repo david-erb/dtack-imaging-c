@@ -1,0 +1,9 @@
+[?1l>++ make SRC=/usr/erb/prj/dt OUT=/usr/erb/prj/dtsg1 MK_TARGET=sg1 bsd1 ACT=libs
+cc1: warnings being treated as errors
+/usr/erb/prj/dt/app/tableau/tableau.c: In function `tableau_stamp':
+/usr/erb/prj/dt/app/tableau/tableau.c:60: warning: implicit declaration of function `strftime'
+*** Error code 1
+make: Fatal error: Command failed for target `/usr/erb/prj/dtsg1/app/tableau/tableau.o'
+Current working directory /d/2/prj/dt/app/tableau
+*** Error code 1
+make: Fatal error: Command failed for target `bsd1'

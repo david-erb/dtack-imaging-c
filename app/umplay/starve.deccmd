@@ -1,0 +1,11 @@
+
+nop:	300
+starve:	4000
+delay:	4100
+nop: 	300
+starve:	4000
+delay:	4100
+nop: 	300
+starve:	4000
+delay:	4100
+exit

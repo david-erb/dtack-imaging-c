@@ -1,0 +1,100 @@
+
+app/tabrobot/wv5.mak,22
+OPTIMIZE_HIGH 12,443
+
+app/uclient/wv5.mak,22
+OPTIMIZE_HIGH 12,443
+
+dtutil/wv5.mak,22
+OPTIMIZE_HIGH 12,443
+
+include/dtack/wv5.mak,22
+OPTIMIZE_HIGH 12,443
+
+include/wv5.mak,22
+OPTIMIZE_HIGH 12,443
+
+server/wv5.mak,22
+OPTIMIZE_HIGH 12,443
+
+source/1d/wv5.mak,22
+OPTIMIZE_HIGH 12,443
+
+source/bigmem/wv5.mak,22
+OPTIMIZE_HIGH 12,443
+
+source/color/wv5.mak,22
+OPTIMIZE_HIGH 12,443
+
+source/dg/wv5.mak,22
+OPTIMIZE_HIGH 12,443
+
+source/fb/wv5.mak,22
+OPTIMIZE_HIGH 12,443
+
+source/high/wv5.mak,22
+OPTIMIZE_HIGH 12,443
+
+source/inter/wv5.mak,22
+OPTIMIZE_HIGH 12,443
+
+source/keybd/wv5.mak,22
+OPTIMIZE_HIGH 12,443
+
+source/low/wv5.mak,22
+OPTIMIZE_HIGH 12,443
+
+source/screen/wv5.mak,22
+OPTIMIZE_HIGH 12,443
+
+source/win/wv5.mak,22
+OPTIMIZE_HIGH 12,443
+
+source/wv5.mak,22
+OPTIMIZE_HIGH 12,443
+
+source/xchg/wv5.mak,22
+OPTIMIZE_HIGH 12,443
+
+test/1d/wv5.mak,22
+OPTIMIZE_HIGH 12,443
+
+test/bigmem/wv5.mak,22
+OPTIMIZE_HIGH 12,443
+
+test/ftp/wv5.mak,22
+OPTIMIZE_HIGH 12,443
+
+test/high/wv5.mak,22
+OPTIMIZE_HIGH 12,443
+
+test/inter/wv5.mak,22
+OPTIMIZE_HIGH 12,443
+
+test/lib/wv5.mak,22
+OPTIMIZE_HIGH 12,443
+
+test/low/wv5.mak,22
+OPTIMIZE_HIGH 12,443
+
+test/screen/wv5.mak,22
+OPTIMIZE_HIGH 12,443
+
+test/view/wv5.mak,22
+OPTIMIZE_HIGH 12,443
+
+test/win/wv5.mak,22
+OPTIMIZE_HIGH 12,443
+
+test/wv5.mak,22
+OPTIMIZE_HIGH 12,443
+
+test/xchg/wv5.mak,22
+OPTIMIZE_HIGH 12,443
+
+tool/wv5.mak,22
+OPTIMIZE_HIGH 12,443
+
+wv5.mak,57
+OPTIMIZE_HIGH 12,443
+	cd dtutil; $(MAKE) -f $(430,9492

@@ -1,0 +1,15 @@
+-config c:/tableau/config
+-input gen,sweep,256,256
+-path c:\jpeg
+-yield normal
+-D async
+-screen roll,test1
+-op "stamp,%d %b %y %H:%M:%S"
+-t 25
+-errto c:\tableau\logs\tableau.log
+-dbgto c:\tableau\logs\tableau.log
+-sayto c:\tableau\logs\tableau.log
+-n 10
+
+
+

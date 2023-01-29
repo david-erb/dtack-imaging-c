@@ -1,0 +1,16 @@
+define(TOP, UP2)
+define(DIR, test/xchg)
+
+__shexe(prj_test_bin(dttxchg),   
+  dttxchg+dttxchg2, ,
+  prj_lib(dttaa)+
+  prj_lib(dthigh)+
+  prj_lib(dtxchg)+
+  prj_lib(dtcolor)+
+  prj_lib(dtwinc)+
+  PRJ_LIBS,
+  PRJ_LOADS)
+
+__finish
+
+

@@ -1,0 +1,6 @@
+readme.txt	description of the directory
+t5.pgm
+t5ave3.pgm
+t5ave5.pgm
+t5ave7.pgm
+t5high3.pgm

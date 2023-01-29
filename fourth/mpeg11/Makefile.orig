@@ -1,0 +1,153 @@
+# Makefile for the MPEG Library (based on the Berkeley decoder/player for X11).
+
+
+# Step 1:
+#	Set CC to the C compiler you want to use.  To compile the library
+#	itself, this must be an ANSI-compliant compiler such as gcc.
+#       (However, if you already have the library compiled and just need
+#       to use it in another program, an ANSI compiler is not required.)
+
+#CC            = gcc
+CC            = cc
+AR            = wlib
+ARFLAGS       = -b -c -n
+
+#
+# Step 2:
+#	Set CFLAGS.  Below are def's for some machines.  Uncomment the
+#	appropriate one or make one of your own.  Note that some compilers
+#       (in particular the MIPS cc, in its default "ANSI + extensions" mode)
+#       may not define __STDC__ even if they accept prototypes.  Hence, you
+#       might want to explicitly define __STDC__ as is done here.
+#
+#       One #define that needs some explanation is FULL_COLOR_ONLY.  If 
+#       this is defined, then movies will be decoded to 24-bit RGB only.
+#       (In this case, the you should make sure that $(DITHER_SRC) is
+#       not included in $(SRC) below; this is the default.)  Without 
+#       FULL_COLOR_ONLY defined, any of a large number of dithering
+#       options is available at the cost of increased code size.
+#       
+
+# SGI C Flags
+CFLAGS        = -O2 -DFULL_COLOR_ONLY
+
+# GCC flags
+#CFLAGS       = -O2 -DFULL_COLOR_ONLY
+
+# Note that the rest of these flags are inherited from the original
+# Berkeley player's Makefile; I have no idea if they'll work on these
+# various platforms.  Please let me (greg@pet.mni.mcgill.ca) know of
+# your luck compiling the library with them!
+
+#HP C Flags 
+#CFLAGS        = -Aa +O3 -DNDEBUG
+
+#DEC C Flags
+#CFLAGS        = -O -DNDEBUG
+
+#RS6000 C Flags
+#CFLAGS        = -O
+
+#MIPGS RISC/os 4.5{1,2} C Flags
+#CFLAGS        = -O -systype sysv -DNONANSI_INCLUDES -DMIPS
+
+#PTX Flags (Dynix)
+#CFLAGS        = -O -DNDEBUG
+
+#NEWS C Flags
+#CFLAGS	       = -O2 -DNO_LRAND48 -DNDEBUG -DBSD -DNONANSI_INCUDES
+
+
+#NeXT C Flags
+#CFLAGS	       = -O -DNO_LRAND48 -DNDEBUG
+
+#CETIA Unigraph/X C Flags
+#CFLAGS	       = -O -DNDEBUGS -DBSDCOMPAT -DBSD_LARGE -DCETIA -DX_NOT_STDC_ENV
+
+#
+# Step 3:
+#	Set DEST to pathname of final destination of library...
+#
+DEST	      = .
+
+#
+# Step 4: 
+#        Decide which source files you want to build the library from.
+#        If you only want movies decoded to 24-bit RGB (well, it's
+#        really 32-bit but one byte is unused), then compile with
+#        -DFULL_COLOR_ONLY and do NOT include $(DITHER_SRC) in SRC =.
+#        If you want the full range of dithering options, then take
+#        out -DFULL_COLOR_ONLY and uncomment $(DITHER_SRC).
+#
+
+DECODER_SRC   = util.c video.c parseblock.c motionvector.c decoders.c \
+		jrevdct.c wrapper.c globals.c 24bit.c gdith.c
+DITHER_SRC    = fs2.c fs2fast.c fs4.c hybrid.c hybriderr.c 2x2.c gray.c \
+		mono.c ordered.c ordered2.c mb_ordered.c
+
+SRC           = $(DECODER_SRC) # $(DITHER_SRC)
+
+
+#
+# That's it!  The rest of this shouldn't need any modifications...
+#
+HDRS	      = util.h video.h decoders.h dither.h fs2.h fs4.h \
+                proto.h globals.h mpeg.h
+
+INSTALL	      = /etc/install
+SHELL	      = /bin/sh
+MAKEFILE      = Makefile
+
+OBJ	      = $(SRC:.c=.o)
+
+LIBRARY       = mpeg.lib
+
+# Targets...
+
+all:		$(LIBRARY)
+
+$(LIBRARY):     $(OBJ)
+		$(AR) $(ARFLAGS) $(LIBRARY) $(OBJ)
+
+clean:;		rm -f *.o $(LIBRARY) core
+ 
+install:	$(LIBRARY)
+		@echo Installing $(LIBRARY) in $(DEST)
+		@if [ $(DEST) != . ]; then \
+		(rm -f $(DEST)/$(LIBRARY); $(INSTALL) -f $(DEST) $(LIBRARY)); fi
+
+# easympeg is a short 'n simple MPEG player that requires the SGI Graphics
+# LIbrary; this won't work on non-SGI platforms
+
+easympeg:       easympeg.c mpeg.h $(LIBRARY)
+		cc -O2 easympeg.c -L. -lmpeg -lgl_s -o easympeg
+
+# Dependencies between source and header files
+
+24bit.o: video.h dither.h proto.h 
+2x2.o: video.h dither.h proto.h 
+decoders.o: decoders.h util.h video.h proto.h 
+decoders.h: util.h 
+fs2.o: video.h dither.h fs2.h proto.h 
+fs2fast.o: video.h proto.h dither.h 
+fs4.o: fs4.h video.h proto.h dither.h 
+gdith.o: dither.h globals.h 
+globals.o: video.h globals.h 
+globals.h: mpeg.h 
+gray.o: video.h proto.h dither.h 
+hybrid.o: video.h proto.h dither.h 
+hybriderr.o: video.h proto.h dither.h 
+jrevdct.o: video.h proto.h 
+mb_ordered.o: video.h proto.h dither.h 
+mono.o: video.h proto.h dither.h 
+motionvector.o: video.h proto.h util.h 
+ordered.o: video.h proto.h dither.h 
+ordered2.o: video.h proto.h dither.h 
+parseblock.o: video.h proto.h decoders.h 
+proto.h: globals.h 
+util.o: video.h proto.h util.h 
+video.o: globals.h decoders.h video.h util.h proto.h 
+video.h: mpeg.h 
+wrapper.o: video.h proto.h util.h dither.h globals.h 
+
+

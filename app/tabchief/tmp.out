@@ -1,0 +1,171 @@
+dt_enter_standard_param: malloc(30) = 0x00006640-0x0000665d for default windowing server
+dt_enter_standard_param: malloc(4) = 0x00014000-0x00014003 for big memory source specs
+dtos_strdup: malloc(28) = 0x00008080-0x0000809b for /tableau/config/tableau.pid
+dtos_free: free(0x00008080)
+dtos_strdup: malloc(28) = 0x00008080-0x0000809b for /tableau/config/tableau.win
+dtos_free: free(0x00008080)
+19961129.1325.32 [12075] dtipc_register: called with name "rocket,192.9.200.4:5711"
+19961129.1325.32 [12075] dtipc_rocket_register: called with name "192.9.200.4:5711"
+19961129.1325.32 [12075] dtipc_rocket_register: network address of "192.9.200.4" is 192.9.200.4 (0x04c809c0)
+19961129.1325.32 [12075] dtipc_rocket_register: 192.9.200.4:5711 sockhandle 3 bound to listen on host 192.9.200.4 port 5711
+19961129.1325.33 [12075] dtipc_rocket_poll: waiting for connection from a client on sockhandle 3
+19961129.1325.34 [12075] dtipc_rocket_wait: 192.9.200.4:5711 accepted connection from host 192.9.200.11 port 1041
+19961129.1325.34 [12076] dtipc_rocket_wait: 192.9.200.4:5711 closing listen socket 3
+19961129.1325.34 [12076] dtipc_rocket_recv: malloc(40) = 0x00006680-0x000066a7 for received data
+19961129.1325.34 [12076] tableau_setup: command: get tmp.x version=0105 frame=0
+19961129.1325.34 [12076] dtos_strdup: malloc(11) = 0x00005770-0x0000577a for roll
+19961129.1325.34 [12076] tableau_setup: get from ipc, put to "roll,tmp.x"
+19961129.1325.34 [12076] tableau_setup: free(0x00005770) for strdup3
+19961129.1325.34 [12076] tableau_setup: free(0x00006680) for command
+19961129.1325.34 [12076] tableau_shovel: malloc(14052) = 0x0001a000-0x0001d6e3 for mess
+19961129.1325.35 [12076] dtipc_rocket_recv: malloc(56) = 0x00006680-0x000066b7 for received data
+19961129.1325.35 [12076] dtipc_rocket_recv: malloc(4109) = 0x00015000-0x0001600c for received data
+19961129.1325.35 [12075] dtipc_rocket_wait: forked child 12076
+19961129.1325.35 [12075] dtipc_rocket_wait: 192.9.200.4:5711 closing data socket 4
+19961129.1325.35 [12076] dtos_strdup: malloc(30) = 0x000066c0-0x000066dd for /img/tableau/tmp.x/inside.ro...
+19961129.1325.35 [12076] dtos_free: free(0x000066c0)
+19961129.1325.35 [12076] dtos_strdup: malloc(46) = 0x000066c0-0x000066ed for /img/tableau/tmp.x/inside.00...
+19961129.1325.35 [12076] dtos_free: free(0x000066c0)
+19961129.1325.35 [12076] dtos_strdup: malloc(30) = 0x000066c0-0x000066dd for /img/tableau/tmp.x/inside.ro...
+19961129.1325.35 [12076] dtos_free: free(0x000066c0)
+19961129.1325.35 [12076]:      0.   4109  1.1 sec
+19961129.1325.35 [12076] dtipc_rocket_recv: malloc(56) = 0x000066c0-0x000066f7 for received data
+19961129.1325.35 [12076] dtipc_rocket_recv: malloc(4137) = 0x0001f000-0x00020028 for received data
+19961129.1325.35 [12076] dtos_strdup: malloc(30) = 0x00006600-0x0000661d for /img/tableau/tmp.x/inside.ro...
+19961129.1325.35 [12076] dtos_free: free(0x00006600)
+19961129.1325.35 [12076] dtos_strdup: malloc(46) = 0x00006600-0x0000662d for /img/tableau/tmp.x/inside.00...
+19961129.1325.35 [12076] dtos_free: free(0x00006600)
+19961129.1325.35 [12076] dtos_strdup: malloc(30) = 0x00006600-0x0000661d for /img/tableau/tmp.x/inside.ro...
+19961129.1325.35 [12076] dtos_free: free(0x00006600)
+19961129.1325.35 [12076]:      1.   4137  0.2 sec
+19961129.1325.36 [12076] dtipc_rocket_recv: malloc(56) = 0x00006600-0x00006637 for received data
+19961129.1325.36 [12076] dtipc_rocket_recv: malloc(4133) = 0x00021000-0x00022024 for received data
+19961129.1325.36 [12076] dtos_strdup: malloc(30) = 0x00006700-0x0000671d for /img/tableau/tmp.x/inside.ro...
+19961129.1325.36 [12076] dtos_free: free(0x00006700)
+19961129.1325.36 [12076] dtos_strdup: malloc(46) = 0x00006700-0x0000672d for /img/tableau/tmp.x/inside.00...
+19961129.1325.36 [12076] dtos_free: free(0x00006700)
+19961129.1325.36 [12076] dtos_strdup: malloc(30) = 0x00006700-0x0000671d for /img/tableau/tmp.x/inside.ro...
+19961129.1325.36 [12076] dtos_free: free(0x00006700)
+19961129.1325.36 [12076]:      2.   4133  0.4 sec
+19961129.1325.36 [12075] dtipc_rocket_poll: waiting for connection from a client on sockhandle 3
+19961129.1325.36 [12076] dtipc_rocket_recv: malloc(56) = 0x00006700-0x00006737 for received data
+19961129.1325.36 [12076] dtipc_rocket_recv: malloc(4126) = 0x00023000-0x0002401d for received data
+19961129.1325.36 [12076] dtos_strdup: malloc(30) = 0x00006480-0x0000649d for /img/tableau/tmp.x/inside.ro...
+19961129.1325.36 [12076] dtos_free: free(0x00006480)
+19961129.1325.36 [12076] dtos_strdup: malloc(46) = 0x00006480-0x000064ad for /img/tableau/tmp.x/inside.00...
+19961129.1325.36 [12076] dtos_free: free(0x00006480)
+19961129.1325.36 [12076] dtos_strdup: malloc(30) = 0x00006480-0x0000649d for /img/tableau/tmp.x/inside.ro...
+19961129.1325.36 [12076] dtos_free: free(0x00006480)
+19961129.1325.36 [12076]:      3.   4126  0.4 sec
+19961129.1325.37 [12076] dtipc_rocket_recv: malloc(56) = 0x00006480-0x000064b7 for received data
+19961129.1325.37 [12076] dtipc_rocket_recv: malloc(4130) = 0x00025000-0x00026021 for received data
+19961129.1325.37 [12076] dtos_strdup: malloc(30) = 0x00006440-0x0000645d for /img/tableau/tmp.x/inside.ro...
+19961129.1325.37 [12076] dtos_free: free(0x00006440)
+19961129.1325.37 [12076] dtos_strdup: malloc(46) = 0x00006440-0x0000646d for /img/tableau/tmp.x/inside.00...
+19961129.1325.37 [12076] dtos_free: free(0x00006440)
+19961129.1325.37 [12076] dtos_strdup: malloc(30) = 0x00006440-0x0000645d for /img/tableau/tmp.x/inside.ro...
+19961129.1325.37 [12076] dtos_free: free(0x00006440)
+19961129.1325.37 [12076]:      4.   4130  0.4 sec
+19961129.1325.37 [12076] dtipc_rocket_recv: malloc(56) = 0x00006440-0x00006477 for received data
+19961129.1325.37 [12076] dtipc_rocket_recv: malloc(4109) = 0x00027000-0x0002800c for received data
+19961129.1325.37 [12076] dtos_strdup: malloc(30) = 0x00006740-0x0000675d for /img/tableau/tmp.x/inside.ro...
+19961129.1325.37 [12076] dtos_free: free(0x00006740)
+19961129.1325.37 [12076] dtos_strdup: malloc(46) = 0x00006740-0x0000676d for /img/tableau/tmp.x/inside.00...
+19961129.1325.37 [12076] dtos_free: free(0x00006740)
+19961129.1325.37 [12076] dtos_strdup: malloc(30) = 0x00006740-0x0000675d for /img/tableau/tmp.x/inside.ro...
+19961129.1325.37 [12076] dtos_free: free(0x00006740)
+19961129.1325.37 [12076]:      5.   4109  0.4 sec
+19961129.1325.37 [12076] dtipc_rocket_recv: malloc(56) = 0x00006740-0x00006777 for received data
+19961129.1325.37 [12076] dtipc_rocket_recv: malloc(4141) = 0x00029000-0x0002a02c for received data
+19961129.1325.37 [12076] dtos_strdup: malloc(30) = 0x000065c0-0x000065dd for /img/tableau/tmp.x/inside.ro...
+19961129.1325.37 [12076] dtos_free: free(0x000065c0)
+19961129.1325.37 [12076] dtos_strdup: malloc(46) = 0x000065c0-0x000065ed for /img/tableau/tmp.x/inside.00...
+19961129.1325.37 [12076] dtos_free: free(0x000065c0)
+19961129.1325.37 [12076] dtos_strdup: malloc(30) = 0x000065c0-0x000065dd for /img/tableau/tmp.x/inside.ro...
+19961129.1325.37 [12076] dtos_free: free(0x000065c0)
+19961129.1325.37 [12076]:      6.   4141  0.4 sec
+19961129.1325.38 [12076] dtipc_rocket_recv: malloc(56) = 0x000065c0-0x000065f7 for received data
+19961129.1325.38 [12076] dtipc_rocket_recv: malloc(4128) = 0x0002b000-0x0002c01f for received data
+19961129.1325.38 [12076] dtos_strdup: malloc(30) = 0x00006580-0x0000659d for /img/tableau/tmp.x/inside.ro...
+19961129.1325.38 [12076] dtos_free: free(0x00006580)
+19961129.1325.38 [12076] dtos_strdup: malloc(46) = 0x00006580-0x000065ad for /img/tableau/tmp.x/inside.00...
+19961129.1325.38 [12076] dtos_free: free(0x00006580)
+19961129.1325.38 [12076] dtos_strdup: malloc(30) = 0x00006580-0x0000659d for /img/tableau/tmp.x/inside.ro...
+19961129.1325.38 [12076] dtos_free: free(0x00006580)
+19961129.1325.38 [12076]:      7.   4128  0.4 sec
+19961129.1325.38 [12076] dtipc_rocket_recv: malloc(56) = 0x00006580-0x000065b7 for received data
+19961129.1325.38 [12076] dtipc_rocket_recv: malloc(4121) = 0x0002d000-0x0002e018 for received data
+19961129.1325.38 [12076] dtos_strdup: malloc(30) = 0x00006540-0x0000655d for /img/tableau/tmp.x/inside.ro...
+19961129.1325.38 [12076] dtos_free: free(0x00006540)
+19961129.1325.38 [12076] dtos_strdup: malloc(46) = 0x00006540-0x0000656d for /img/tableau/tmp.x/inside.00...
+19961129.1325.38 [12076] dtos_free: free(0x00006540)
+19961129.1325.38 [12076] dtos_strdup: malloc(30) = 0x00006540-0x0000655d for /img/tableau/tmp.x/inside.ro...
+19961129.1325.38 [12076] dtos_free: free(0x00006540)
+19961129.1325.38 [12076]:      8.   4121  0.4 sec
+19961129.1325.38 [12076] dtipc_rocket_recv: malloc(56) = 0x00006540-0x00006577 for received data
+19961129.1325.38 [12076] dtipc_rocket_recv: malloc(4127) = 0x0002f000-0x0003001e for received data
+19961129.1325.38 [12076] dtos_strdup: malloc(30) = 0x00006500-0x0000651d for /img/tableau/tmp.x/inside.ro...
+19961129.1325.38 [12076] dtos_free: free(0x00006500)
+19961129.1325.38 [12076] dtos_strdup: malloc(46) = 0x00006500-0x0000652d for /img/tableau/tmp.x/inside.00...
+19961129.1325.38 [12076] dtos_free: free(0x00006500)
+19961129.1325.38 [12076] dtos_strdup: malloc(30) = 0x00006500-0x0000651d for /img/tableau/tmp.x/inside.ro...
+19961129.1325.38 [12076] dtos_free: free(0x00006500)
+19961129.1325.38 [12076]:      9.   4127  0.4 sec
+19961129.1325.38 [12076] dtipc_rocket_recv: malloc(56) = 0x00006500-0x00006537 for received data
+19961129.1325.38 [12076] tableau_shovel: (encode) 0x00000000
+19961129.1325.38 [12076] tableau_shovel: (cook) 0x08020000
+19961129.1325.38 [12076] tableau_shovel: (decode) 0x08021404
+19961129.1325.38 [12076] tableau_shovel: (encode) 0x00000000
+19961129.1325.38 [12076] tableau_shovel: (cook) 0x08020000
+19961129.1325.38 [12076] tableau_shovel: (decode) 0x08021404
+19961129.1325.38 [12076] tableau_shovel: (encode) 0x00000000
+19961129.1325.38 [12076] tableau_shovel: (cook) 0x08020000
+19961129.1325.38 [12076] tableau_shovel: (decode) 0x08021404
+19961129.1325.38 [12076] tableau_shovel: free(0x0001a000) for mess
+19961129.1325.38 [12076] tableau_get_common_free: free(0x0002f000) for buffer data
+19961129.1325.38 [12076] tableau_get_common_free: free(0x00006500) for header
+19961129.1325.38 [12076] dtipc_rocket_done: 192.9.200.4:5711 server data socket 4 closing
+19961129.1325.39 [12076] dt_leave: free(0x00014000) for big memory source specs
+19961129.1325.39 [12076] dt_leave: free(0x00006640) for default windowing server name
+19961129.1325.39 [12076] dtparam_free: free(0x000064c0) for -D
+19961129.1325.39 [12076] dtparam_free: free(0x00008020) for -config
+19961129.1325.39 [12076] dtparam_free: free(0x00008040) for -connect
+19961129.1325.39 [12076] dtparam_free: free(0x00005590) for -input
+19961129.1325.39 [12076] dtparam_free: free(0x00005690) for -screen
+19961129.1325.39 [12076] dtparam_free: free(0x000057b0) for -variant
+dt_heapmon_uninit:                          -----bytes------  ------blocks------
+dt_heapmon_uninit: up to       now  at most allocated  freed  allocated    freed
+dt_heapmon_uninit: total     37694    56059     57226  19532         64       45
+dt_heapmon_uninit: tiny          0       14        14     14          3        3
+dt_heapmon_uninit: small       560      732      1899   1339         50       40
+dt_heapmon_uninit: medium        0        0         0      0          0        0
+dt_heapmon_uninit: large     37134    41261     41261   4127         10        1
+dt_heapmon_uninit: giant         0    14052     14052  14052          1        1
+dt_heapmon_uninit: outstanding mallocs:
+dt_heapmon_uninit:      start  - inclusive     size   gap after
+dt_heapmon_uninit:   0x00006440-0x00006477       56          8
+dt_heapmon_uninit:   0x00006480-0x000064b7       56        136
+dt_heapmon_uninit:   0x00006540-0x00006577       56          8
+dt_heapmon_uninit:   0x00006580-0x000065b7       56          8
+dt_heapmon_uninit:   0x000065c0-0x000065f7       56          8
+dt_heapmon_uninit:   0x00006600-0x00006637       56         72
+dt_heapmon_uninit:   0x00006680-0x000066b7       56          8
+dt_heapmon_uninit:   0x000066c0-0x000066f7       56          8
+dt_heapmon_uninit:   0x00006700-0x00006737       56          8
+dt_heapmon_uninit:   0x00006740-0x00006777       56      59528
+dt_heapmon_uninit:   0x00015000-0x0001600c     4109      36851
+dt_heapmon_uninit:   0x0001f000-0x00020028     4137       4055
+dt_heapmon_uninit:   0x00021000-0x00022024     4133       4059
+dt_heapmon_uninit:   0x00023000-0x0002401d     4126       4066
+dt_heapmon_uninit:   0x00025000-0x00026021     4130       4062
+dt_heapmon_uninit:   0x00027000-0x0002800c     4109       4083
+dt_heapmon_uninit:   0x00029000-0x0002a02c     4141       4051
+dt_heapmon_uninit:   0x0002b000-0x0002c01f     4128       4064
+dt_heapmon_uninit:   0x0002d000-0x0002e018     4121 4294778854
+dt_heapmon_uninit: outstanding mallocs total 37694 in 19 chunks
+dt_heapmon_uninit: stack usage base 0xefbfd848 use 364 old highwater 7304
+: * unfreed memory (19 blocks, 37694 bytes)
+dtheap_uninit: free(0x00012000) for heap table
+dtheap_uninit: free(0x00009200) for heap structure
+tableau_main: `Program Exit'
+19961129.1325.39 [12075] dtipc_rocket_child: 192.9.200.4:5711 noticed [12076] exited normally with code 0

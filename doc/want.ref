@@ -1,0 +1,86 @@
+
+%L zuc78
+%K zuc78
+%A Zucker and Krishnamurthy and Haar
+%T Relaxation Processes for Scene Labeling: Convergence, Speed, and Stability
+%J t-smc
+%D 1978
+%V 8
+
+%L zuc81
+%K zuc81
+%A S.W. Zucker and Y.G. Leclere and J.L. Mohammed
+%T Continuous Relaxation and Local Maxima Selection: Conditions for Equivalence
+%J t-pami
+%D mar1981
+%V 3
+
+%L pel78
+%K pel78
+%A S. Peleg and Azriel Rosenfeld
+%T Determining Compatibility Coefficients for Curve Enhancement Relaxation Processes
+%J t-smc
+%D 1978
+%V 8
+
+%L ros78
+%K ros78
+%A Azriel Rosenfeld
+%T Iterative Methods in Image Analysis
+%J pr
+%D 1978
+%V 10
+
+%L pel80
+%K pel80
+%A S. Peleg
+%T A New Probabilistic Relaxation Scheme
+%J t-pami
+%D 1980
+%V 2
+
+%L bha87
+%K bha87
+%A Bir Bhanu and Bahram A. Parvin
+%T Segmentation of Natural Scenes
+%J pr
+%D 1987
+%V 20
+%N 5
+
+%L bha82
+%K bha82
+%A Bir Bhanu and Olivier D. Faugeras
+%T Segmentation of Images Having Unimodal Distributions
+%J t-pami
+%D jul1982
+%V 4
+%N 4
+
+%L nag82
+%K nag82
+%A Paul A. Nagin and Allen R. Hanson and Edward M. Riseman
+%T Studies in Global and Local Histogram-Guided Relaxation Algorithms
+%J t-pami
+%D may1982
+%V 4
+%N 3
+
+%L ros76
+%K ros76
+%A Azriel Rosenfeld and Robert A. Hummel and Steven W. Zucker
+%T Scene Labeling by Relaxation Operations
+%J t-smc
+%D jun1976
+%V 6
+%N 6
+
+%L dan81a
+%K dan81a
+%A Alan J. Danker and Azriel Rosenfeld
+%T Blob Detection by Relaxation
+%J t-pami
+%D jan1981
+%V 3
+%N 1
+

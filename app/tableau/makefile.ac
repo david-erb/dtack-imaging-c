@@ -1,0 +1,156 @@
+	  | sh $(SRC)/sh/dtyamf.sh qw6 > $(OUT)/app/tableau/qw6.mak"
+qw6.maks: qw6.mak
+	
+dw0.mak: dir.yam \
+         $(SRC)/config/def.yam \
+         $(SRC)/config/prj.yam \
+         $(SRC)/config/dw0.yam
+	sh $(SRC)/sh/dtm4.sh " -DTARGET_dw0 \
+	  -I$(SRC)/config prj.yam dir.yam \
+	  | sh $(SRC)/sh/dtyamf.sh dw0 > $(OUT)/app/tableau/dw0.mak"
+dw0.maks: dw0.mak
+	
+ww0.mak: dir.yam \
+         $(SRC)/config/def.yam \
+         $(SRC)/config/prj.yam \
+         $(SRC)/config/ww0.yam
+	sh $(SRC)/sh/dtm4.sh " -DTARGET_ww0 \
+	  -I$(SRC)/config prj.yam dir.yam \
+	  | sh $(SRC)/sh/dtyamf.sh ww0 > $(OUT)/app/tableau/ww0.mak"
+ww0.maks: ww0.mak
+	
+dw1.mak: dir.yam \
+         $(SRC)/config/def.yam \
+         $(SRC)/config/prj.yam \
+         $(SRC)/config/dw1.yam
+	sh $(SRC)/sh/dtm4.sh " -DTARGET_dw1 \
+	  -I$(SRC)/config prj.yam dir.yam \
+	  | sh $(SRC)/sh/dtyamf.sh dw1 > $(OUT)/app/tableau/dw1.mak"
+dw1.maks: dw1.mak
+	
+dt0.mak: dir.yam \
+         $(SRC)/config/def.yam \
+         $(SRC)/config/prj.yam \
+         $(SRC)/config/dt0.yam
+	sh $(SRC)/sh/dtm4.sh " -DTARGET_dt0 \
+	  -I$(SRC)/config prj.yam dir.yam \
+	  | sh $(SRC)/sh/dtyamf.sh dt0 > $(OUT)/app/tableau/dt0.mak"
+dt0.maks: dt0.mak
+	
+db0.mak: dir.yam \
+         $(SRC)/config/def.yam \
+         $(SRC)/config/prj.yam \
+         $(SRC)/config/db0.yam
+	sh $(SRC)/sh/dtm4.sh " -DTARGET_db0 \
+	  -I$(SRC)/config prj.yam dir.yam \
+	  | sh $(SRC)/sh/dtyamf.sh db0 > $(OUT)/app/tableau/db0.mak"
+db0.maks: db0.mak
+	
+wb0.mak: dir.yam \
+         $(SRC)/config/def.yam \
+         $(SRC)/config/prj.yam \
+         $(SRC)/config/wb0.yam
+	sh $(SRC)/sh/dtm4.sh " -DTARGET_wb0 \
+	  -I$(SRC)/config prj.yam dir.yam \
+	  | sh $(SRC)/sh/dtyamf.sh wb0 > $(OUT)/app/tableau/wb0.mak"
+wb0.maks: wb0.mak
+	
+wb3.mak: dir.yam \
+         $(SRC)/config/def.yam \
+         $(SRC)/config/prj.yam \
+         $(SRC)/config/wb3.yam
+	sh $(SRC)/sh/dtm4.sh " -DTARGET_wb3 \
+	  -I$(SRC)/config prj.yam dir.yam \
+	  | sh $(SRC)/sh/dtyamf.sh wb3 > $(OUT)/app/tableau/wb3.mak"
+wb3.maks: wb3.mak
+	
+wv4.mak: dir.yam \
+         $(SRC)/config/def.yam \
+         $(SRC)/config/prj.yam \
+         $(SRC)/config/wv4.yam
+	sh $(SRC)/sh/dtm4.sh " -DTARGET_wv4 \
+	  -I$(SRC)/config prj.yam dir.yam \
+	  | sh $(SRC)/sh/dtyamf.sh wv4 > $(OUT)/app/tableau/wv4.mak"
+wv4.maks: wv4.mak
+	
+dv0.mak: dir.yam \
+         $(SRC)/config/def.yam \
+         $(SRC)/config/prj.yam \
+         $(SRC)/config/dv0.yam
+	sh $(SRC)/sh/dtm4.sh " -DTARGET_dv0 \
+	  -I$(SRC)/config prj.yam dir.yam \
+	  | sh $(SRC)/sh/dtyamf.sh dv0 > $(OUT)/app/tableau/dv0.mak"
+dv0.maks: dv0.mak
+	
+bsd1.mak: dir.yam \
+         $(SRC)/config/def.yam \
+         $(SRC)/config/prj.yam \
+         $(SRC)/config/bsd1.yam
+	sh $(SRC)/sh/dtm4.sh " -DTARGET_bsd1 \
+	  -I$(SRC)/config prj.yam dir.yam \
+	  | sh $(SRC)/sh/dtyamf.sh bsd1 > $(OUT)/app/tableau/bsd1.mak"
+bsd1.maks: bsd1.mak
+
+#-------------------------------------------------------------------------
+yam:
+	sh $(SRC)/sh/dtm4.sh "-DDTNODEPEND -DTARGET_default \
+	  -I$(SRC)/config prj.yam dir.yam \
+	  > $(OUT)/app/tableau/makefile"
+	make yamsubs
+yamsubs:
+
+
+#--------------------------------------------------------------------------
+scratch:
+	yam default_host -DDTNODEPEND
+	make yam
+	make veryclean
+	make protos
+	make others
+	make makefiles
+	make
+#-------------------------------------------------------------------------
+
+qw0:
+	$(MAKE) $(MAKEFLAGS) \
+	  -f $(SRC)/app/tableau/qw0.mak  \
+	  $(ACT) \
+	  SRC=$(SRC) \
+	  OUT=$(OUT) \
+	  MK_TARGET=qw0
+qw1:
+	$(MAKE) $(MAKEFLAGS) \
+	  -f $(SRC)/app/tableau/qw1.mak  \
+	  $(ACT) \
+	  SRC=$(SRC) \
+	  OUT=$(OUT) \
+	  MK_TARGET=qw1
+qw6:
+	$(MAKE) -f $(SRC)/app/tableau/qw6.mak SRC=$(SRC) OUT=$(OUT) 
+dw0:
+	wmake $(__MAKEOPTS__) -h \
+	  SRC=$(SRC) \
+	  OUT=$(OUT) \
+	  -f $(SRC)/app/tableau/dw0.mak 
+ww0:
+	wmake $(__MAKEOPTS__) -h -f $(SRC)/app/tableau ww0.mak
+dw1:
+	wmake $(__MAKEOPTS__) -h \
+	  SRC=$(SRC) \
+	  OUT=$(OUT) \
+	  -f $(SRC)/app/tableau/dw1.mak 
+dt0:
+	$(MAKE) -$(MAKEFLAGS) \
+	  SRC=$(SRC) \
+	  OUT=$(OUT) \
+	  -f $(SRC)/app/tableau/dt0.mak 
+db0:
+	$(MAKE) -$(MAKEFLAGS) \
+	  SRC=$(SRC) \
+	  OUT=$(OUT) \
+	  -f $(SRC)/app/tableau/db0.mak 
+wb0:
+	$(MAKE) -$(MAKEFLAGS) \
+	  SRC=$(SRC) \
+	  OUT=$(OUT) \
+	  -f $(SRC)/app/tableau/wb0.mak 

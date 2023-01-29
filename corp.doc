@@ -1,0 +1,78 @@
+/*..........................................................................
+| TITLE dtcorp
+| Dtack Corporate Profile
+| 
+|!Dtack Corporate Profile
+| Welcome to Dtack!
+|
+|.Founding
+| Dtack Imaging Software Company was founded in 1996
+| after several years of intense software development.
+|
+|.Goals
+| Our company exists to create the highest quality
+| image processing library software
+| and to make it available to the widest variety of
+| scientific programmers at the lowest possible cost.
+| We:
+| - create software that is preeminently usable
+| - ensure superior reliability in the product
+| - provide outstanding customer service
+| - do business with the highest standards of honesty and integrity
+| - donate some of our efforts to the scientific community at no charge
+| - generate a revenue stream to ensure continuing development
+|
+|.Products
+| We offer a base image processing library licensed at no charge.
+| In addition, we maintain a product line of individual
+| image processing algorithm libraries.
+| Each of these is licensed separately.
+| Although we provide usable programs with our libraries,
+| our customers benefit most by integrating the libraries directly into
+| their application programs.
+|
+|.Minds
+| We currently employ only the principal, David Erb.
+| Mr. Erb is a 1984 graduate of the University of Illinois Urbana/Champaign.
+| He holds a B.S. in Computer Science.
+| He has worked as a professional programmer in the areas
+| of graphics and image processing at such organizations as
+| University of Illinois, IBM, Max Planck Institut (Germany), 
+| and AT&T Bell Labs.
+| His professional expertise includes real-time imaging,
+| systems programming,
+| hardware programming,
+| library API design, optimization techniques,
+| and multiplatform software development.
+|
+| On an as-needed basis,
+| we collaborate with a number of excellent
+| legal, financial, and technical professionals.
+|
+|.Location
+| The Corporate office is located near Madison, Wisconsin.
+| This is in the upper Midwestern United States,
+| an area of gently rolling hills and temperate four-season climate.
+| Madison is about two hours driving time from Chicago.
+|
+| We are fortunate to have
+| University of Wisconsin-Madison nearby.
+| It is one of the largest
+| educational institutions in the country.
+| Through it, we have
+| access to extensive library, research, and intellectual resources.
+|
+| In cyberspace, we have a direct Internet connection at dtack.com.
+|
+|.Policies
+| - we always provide source code
+| - we include all our documentation on line
+| - we always fix existing bugs before developing new software
+| - we advertise and sell no vaporware, only completed products
+| - we put no hype in our advertising
+| - we have a 100\% money-back guarantee
+| - we never divulge our customer list
+| - we use no pirated software
+|
+| END
+ *..........................................................................*/

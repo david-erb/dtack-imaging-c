@@ -1,0 +1,108 @@
+define(TOP, UP2)
+define(DIR, source/high)
+__prolog
+
+__summary(prj_lib_summary(imageq),  
+  image.doc+
+  image1.doc+image.c+
+  pixel.c+
+  image2.doc+arith.c+logical.c+cumul.c+cast.c+cmp.c+diff.c+log.c+ 
+dnl +lookup.c+thresh.c+
+  adj.c+adj_run.c+scan.c+label1.c+blob.c+
+  check.c+dbg.c+err.c)
+
+pushdef(`CCSHARABLE', `CCSHARABLE_ON')
+
+__src(fftw, PRJ_INCLUDES+$(MK_FFTW_INCLUDE), PRJ_DEFINES+$(MK_FFTW_DEFINE))
+__src(fft, PRJ_INCLUDES, PRJ_DEFINES+$(MK_FFTW_DEFINE))
+
+pushdef(`CCOPTIMIZE', `CCOPTIMIZE_HIGH')
+pushdef(`CCDEBUGGER', `CCDEBUGGER_OFF')
+__src(adj_run)
+__src(blob)
+__src(cast)
+__src(col)
+__src(cooc2)
+__src(conv_d)
+__src(conv_l)
+__src(conv_s)
+__src(joint2)
+ifdef(`TARGET_dv0', , `__src(label1)')
+__src(label2)
+__src(log)
+__src(lookup)
+__src(morph)
+__src(median)
+__src(plot1)
+__src(resample)
+__src(rotate)
+__src(run_len)
+__src(run)
+__src(scan)
+__src(sum_rows)
+__src(sum_cols)
+__src(transpos)
+popdef(`CCDEBUGGER')
+popdef(`CCOPTIMIZE')
+
+__shlib(prj_lib(dthigh), 
+  matrix+
+  assign+
+  col+
+  rotate+
+  transpos+
+  adj+adj_run+
+  arith+
+  blob+
+  cast+
+  check+
+  cmp+
+  constant+
+  convolve+conv_d+conv_l+conv_s+
+  cooc+cooc2+
+  cumul+
+  dbg+
+  diff+
+  err+
+  fft+fftw+
+  gen1+gen2+gen3+gen_kern+gen_dat+
+  hist1+
+  hist2+
+  image+
+  joint+joint2+
+  label1+label2+
+  lookup+
+  logical+
+  log+
+  median+
+  morph+
+  mean+
+  noise+
+  pixel+
+  plot1+plot2+plot_txt+
+  range+
+  resample+
+  run+
+  run_dat+
+  run_len+
+  runf+
+  scan+
+  stats+
+  sum+sum_rows+sum_cols+sumsq+sumsqd+sumsqs+
+  thresh+
+  libmain, , cdecl+gen_dat+run_dat, 
+  prj_lib(dtbigmem)+
+  prj_lib(dtlow)+
+  prj_lib(dt1d))
+
+
+popdef(`CCSHARABLE')
+
+__finish
+
+
+
+
+
+
+

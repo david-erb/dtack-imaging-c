@@ -1,0 +1,119 @@
+d940201.tim:dttime: 01 Feb 95 05:15 dv0 
+d940201.tim:dttcast: | 950201 | b08->b01 (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  2.91 |  2.91 |  2.91
+d940201.tim:dttcast: | 950201 | b01->b08 (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  3.79 |  3.79 |  3.79
+d940201.tim:dttcast: | 950201 | b08->b08 (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  1.15 |  1.15 |  1.15
+d940201.tim:dttcast: | 950201 | b08->b08 (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  1.10 |  1.10 |  1.10
+d940201.tim:dttcast: | 950201 | b08->b16 (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 14.83 | 14.83 | 14.83
+d940201.tim:dttcast: | 950201 | b16->b08 (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 15.00 | 15.00 | 15.00
+d940201.tim:dttcast: | 950201 | b08->b32 (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 19.99 | 19.99 | 19.99
+d940201.tim:dttcast: | 950201 | b32->b08 (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 16.86 | 16.86 | 16.86
+d940201.tim:dttcast: | 950201 | b08->s1  (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  9.28 |  9.28 |  9.28
+d940201.tim:dttcast: | 950201 | s1 ->b08 (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 10.49 | 10.49 | 10.49
+d940201.tim:dttcast: | 950201 | b08->s2  (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 16.26 | 16.26 | 16.26
+d940201.tim:dttcast: | 950201 | s2 ->b08 (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 14.66 | 14.66 | 14.66
+d940201.tim:dttcast: | 950201 | b08->s4  (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 20.65 | 20.65 | 20.65
+d940201.tim:dttcast: | 950201 | s4 ->b08 (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 17.19 | 17.19 | 17.19
+d940201.tim:dttcast: | 950201 | b08->f1  (10) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  6.32 |  6.32 |  6.32
+d940201.tim:dttcast: | 950201 | f1 ->b08 (10) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  9.77 |  9.77 |  9.77
+d940201.tim:dttcast: | 950201 | b08->f2  (10) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  8.30 |  8.30 |  8.30
+d940201.tim:dttcast: | 950201 | f2 ->b08 (10) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 10.87 | 10.87 | 10.87
+d940201.tim:dttconv: | 950201 | dttconv_h1d | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  9.89 |  9.89 |  9.89
+d940201.tim:dttconv: | 950201 | dttconv_ave | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  1.65 |  1.65 |  1.65
+d940201.tim:dttconv: | 950201 | dttconv_laplace | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  1.70 |  1.70 |  1.70
+d940201.tim:dttconv: | 950201 | dttconv_cross | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  5.98 |  5.98 |  5.98
+d940201.tim:dttcan: | 950201 | canvas put (200) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  7.03 |  7.03 |  7.03
+d940201.tim:dttcan: | 950201 | canvas get (200) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  8.46 |  8.46 |  8.46
+d940201.tim:dttcan: | 950201 | canvas put (200) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 11.15 | 11.15 | 11.15
+d940201.tim:dttcan: | 950201 | canvas get (200) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 13.46 | 13.46 | 13.46
+d940201.tim:dttfastg: | 950201 | fastgraph buffer put (200) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  6.97 |  6.97 |  6.97
+d940201.tim:dttfastg: | 950201 | fastgraph buffer get (200) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  8.41 |  8.41 |  8.41
+d940201.tim:dttsvgacc: | 950201 | svgacc block put (200) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 10.54 | 10.54 | 10.54
+d940201.tim:dttsvgacc: | 950201 | svgacc block get (200) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 12.91 | 12.91 | 12.91
+d940201.tim:dtt1d: | 950201 | random uniform (  7500) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  0.66 |  0.66 |  0.66
+d940201.tim:dtt1d: | 950201 | random gauss (  7500) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  1.26 |  1.26 |  1.26
+d940201.tim:dtt1d: | 950201 | inverted sort (  7500) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  1.54 |  1.54 |  1.54
+d940201.tim:dtt1d: | 950201 | random sort (  7500) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  1.54 |  1.54 |  1.54
+d940201.tim:dttlog: | 950201 | log10 unscaled (5@128x120) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  0.44 |  0.44 |  0.44
+d940201.tim:dttlog: | 950201 | log10 scaled (5@128x120) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  4.83 |  4.83 |  4.83
+d940201.tim:dttlog: | 950201 | log unscaled (5@128x120) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  0.39 |  0.39 |  0.39
+d940201.tim:dttlog: | 950201 | log scaled (5@128x120) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  4.83 |  4.83 |  4.83
+d950204.tim:dttime: 04 Feb 95 09:29 dv0 
+d950204.tim:dttcast: | 950204 | b08->b01 (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  2.86 |  2.86 |  2.86
+d950204.tim:dttcast: | 950204 | b01->b08 (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  3.84 |  3.84 |  3.84
+d950204.tim:dttcast: | 950204 | b08->b08 (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  1.10 |  1.10 |  1.10
+d950204.tim:dttcast: | 950204 | b08->b08 (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  1.15 |  1.15 |  1.15
+d950204.tim:dttcast: | 950204 | b08->b16 (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 14.83 | 14.83 | 14.83
+d950204.tim:dttcast: | 950204 | b16->b08 (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 15.05 | 15.05 | 15.05
+d950204.tim:dttcast: | 950204 | b08->b32 (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 20.05 | 20.05 | 20.05
+d950204.tim:dttcast: | 950204 | b32->b08 (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 16.91 | 16.91 | 16.91
+d950204.tim:dttcast: | 950204 | b08->s1  (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  9.23 |  9.23 |  9.23
+d950204.tim:dttcast: | 950204 | s1 ->b08 (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 10.44 | 10.44 | 10.44
+d950204.tim:dttcast: | 950204 | b08->s2  (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 16.20 | 16.20 | 16.20
+d950204.tim:dttcast: | 950204 | s2 ->b08 (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 14.72 | 14.72 | 14.72
+d950204.tim:dttcast: | 950204 | b08->s4  (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 20.66 | 20.66 | 20.66
+d950204.tim:dttcast: | 950204 | s4 ->b08 (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 17.19 | 17.19 | 17.19
+d950204.tim:dttcast: | 950204 | b08->f1  (10) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  6.26 |  6.26 |  6.26
+d950204.tim:dttcast: | 950204 | f1 ->b08 (10) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  9.78 |  9.78 |  9.78
+d950204.tim:dttcast: | 950204 | b08->f2  (10) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  8.24 |  8.24 |  8.24
+d950204.tim:dttcast: | 950204 | f2 ->b08 (10) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 10.88 | 10.88 | 10.88
+d950204.tim:dttconv: | 950204 | dttconv_h1d | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  9.94 |  9.94 |  9.94
+d950204.tim:dttconv: | 950204 | dttconv_ave | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  1.65 |  1.65 |  1.65
+d950204.tim:dttconv: | 950204 | dttconv_laplace | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  1.75 |  1.75 |  1.75
+d950204.tim:dttconv: | 950204 | dttconv_cross | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  5.99 |  5.99 |  5.99
+d950204.tim:dttcan: | 950204 | canvas fastg,,640 put (200) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  6.98 |  6.98 |  6.98
+d950204.tim:dttcan: | 950204 | canvas fastg,,640 get (200) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  8.46 |  8.46 |  8.46
+d950204.tim:dttcan: | 950204 | canvas svgac,,640 put (200) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 11.15 | 11.15 | 11.15
+d950204.tim:dttcan: | 950204 | canvas svgac,,640 get (200) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 13.46 | 13.46 | 13.46
+d950204.tim:dttfastg: | 950204 | fastgraph buffer put (200) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  6.92 |  6.92 |  6.92
+d950204.tim:dttfastg: | 950204 | fastgraph buffer get (200) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  8.46 |  8.46 |  8.46
+d950204.tim:dttsvgacc: | 950204 | svgacc block put (200) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 10.54 | 10.54 | 10.54
+d950204.tim:dttsvgacc: | 950204 | svgacc block get (200) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 12.91 | 12.91 | 12.91
+d950204.tim:dtt1d: | 950204 | random uniform (  7500) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  0.66 |  0.66 |  0.66
+d950204.tim:dtt1d: | 950204 | random gauss (  7500) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  1.26 |  1.26 |  1.26
+d950204.tim:dtt1d: | 950204 | inverted sort (  7500) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  1.54 |  1.54 |  1.54
+d950204.tim:dtt1d: | 950204 | random sort (  7500) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  1.54 |  1.54 |  1.54
+d950204.tim:dttlog: | 950204 | log10 unscaled (5@128x120) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  0.44 |  0.44 |  0.44
+d950204.tim:dttlog: | 950204 | log10 scaled (5@128x120) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  4.83 |  4.83 |  4.83
+d950204.tim:dttlog: | 950204 | log unscaled (5@128x120) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  0.44 |  0.44 |  0.44
+d950204.tim:dttlog: | 950204 | log scaled (5@128x120) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  4.78 |  4.78 |  4.78
+d950204.tim:dtinst: 04 Feb 95 09:34 dv0 complete 
+d950205.tim:dttime: 04 Feb 95 12:53 dv0 
+d950205.tim:dttcast: | 950205 | b08->b01 (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  2.86 |  2.86 |  2.86
+d950205.tim:dttcast: | 950205 | b01->b08 (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  3.79 |  3.79 |  3.79
+d950205.tim:dttcast: | 950205 | b08->b08 (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  1.16 |  1.16 |  1.16
+d950205.tim:dttcast: | 950205 | b08->b08 (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  1.10 |  1.10 |  1.10
+d950205.tim:dttcast: | 950205 | b08->b16 (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 10.55 | 10.55 | 10.55
+d950205.tim:dttcast: | 950205 | b16->b08 (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  8.62 |  8.62 |  8.62
+d950205.tim:dttcast: | 950205 | b08->b32 (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 15.66 | 15.66 | 15.66
+d950205.tim:dttcast: | 950205 | b32->b08 (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 10.71 | 10.71 | 10.71
+d950205.tim:dttcast: | 950205 | b08->s1  (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  5.00 |  5.00 |  5.00
+d950205.tim:dttcast: | 950205 | s1 ->b08 (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  5.00 |  5.00 |  5.00
+d950205.tim:dttcast: | 950205 | b08->s2  (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 10.27 | 10.27 | 10.27
+d950205.tim:dttcast: | 950205 | s2 ->b08 (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  8.51 |  8.51 |  8.51
+d950205.tim:dttcast: | 950205 | b08->s4  (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 15.71 | 15.71 | 15.71
+d950205.tim:dttcast: | 950205 | s4 ->b08 (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 10.60 | 10.60 | 10.60
+d950205.tim:dttcast: | 950205 | b08->f1  (10) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  5.27 |  5.27 |  5.27
+d950205.tim:dttcast: | 950205 | f1 ->b08 (10) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  9.06 |  9.06 |  9.06
+d950205.tim:dttcast: | 950205 | b08->f2  (10) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  7.14 |  7.14 |  7.14
+d950205.tim:dttcast: | 950205 | f2 ->b08 (10) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 10.16 | 10.16 | 10.16
+d950205.tim:dttconv: | 950205 | dttconv_h1d | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  9.89 |  9.89 |  9.89
+d950205.tim:dttconv: | 950205 | dttconv_ave | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  1.65 |  1.65 |  1.65
+d950205.tim:dttconv: | 950205 | dttconv_laplace | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  1.70 |  1.70 |  1.70
+d950205.tim:dttconv: | 950205 | dttconv_cross | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  5.99 |  5.99 |  5.99
+d950205.tim:dttcan: | 950205 | canvas fastg,,640 put (200) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  6.97 |  6.97 |  6.97
+d950205.tim:dttcan: | 950205 | canvas fastg,,640 get (200) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  8.46 |  8.46 |  8.46
+d950205.tim:dttcan: | 950205 | canvas svgac,,640 put (200) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 11.15 | 11.15 | 11.15
+d950205.tim:dttcan: | 950205 | canvas svgac,,640 get (200) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 13.45 | 13.45 | 13.45
+d950205.tim:dttfastg: | 950205 | fastgraph buffer put (200) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  6.92 |  6.92 |  6.92
+d950205.tim:dttfastg: | 950205 | fastgraph buffer get (200) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  8.46 |  8.46 |  8.46
+d950205.tim:dttsvgacc: | 950205 | svgacc block put (200) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 10.60 | 10.60 | 10.60
+d950205.tim:dttsvgacc: | 950205 | svgacc block get (200) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 12.85 | 12.85 | 12.85
+d950205.tim:dtt1d: | 950205 | random uniform (  7500) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  0.66 |  0.66 |  0.66
+d950205.tim:dtt1d: | 950205 | random gauss (  7500) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  1.21 |  1.21 |  1.21
+d950205.tim:dtt1d: | 950205 | inverted sort (  7500) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  1.48 |  1.48 |  1.48
+d950205.tim:dtt1d: | 950205 | random sort (  7500) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  1.48 |  1.48 |  1.48
+d950205.tim:dttlog: | 950205 | log10 unscaled (5@128x120) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  0.44 |  0.44 |  0.44
+d950205.tim:dttlog: | 950205 | log10 scaled (5@128x120) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  4.88 |  4.88 |  4.88
+d950205.tim:dttlog: | 950205 | log unscaled (5@128x120) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  0.44 |  0.44 |  0.44
+d950205.tim:dttlog: | 950205 | log scaled (5@128x120) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  4.83 |  4.83 |  4.83
+d950205.tim:dtinst: 04 Feb 95 12:58 dv0 complete 

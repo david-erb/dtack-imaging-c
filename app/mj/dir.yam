@@ -1,0 +1,23 @@
+define(TOP, UP0)
+define(DIR, .)
+
+__usage(mj, mj)
+
+__proto(mj, play)
+
+define(`PRJ_INCLUDES', 
+  PRJ_SRCDIR+
+  d:/amovie/classes/base+
+  d:/amovie/include+
+  PRJ_INCLUDES)
+
+__shexe(prj_test_bin(mj),   
+  mj+play, ,
+  prj_lib(mjx)+
+  prj_lib(dtdg)+
+  PRJ_LIBS,
+  PRJ_LOADS msvcrtd.lib d:/amovie/lib/strmbasd.lib ole32.lib)
+
+__finish
+
+

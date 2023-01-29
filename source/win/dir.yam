@@ -1,0 +1,38 @@
+define(TOP, UP2)
+define(DIR, source/win)
+__prolog
+
+pushdef(`CCSHARABLE', `CCSHARABLE_ON')
+
+__shlib(prj_lib(dtwinc),
+  dsk+dsk_c+
+  winc+
+  winc_ipc+
+  winc_dsk+
+  libmain, , , prj_lib(dtlow)+prj_lib(dt1d))
+
+ifelse(len(PRJ_NOSCREEN_DEFINE), 0, `
+__shlib(prj_lib(dtwins),                    dnl IPC server support
+  dsk+
+  svc+
+  svc_ipc+
+  svc_dsk+
+  wins_ipc+                                 dnl   encode/decode ipc args
+  wins_dsk+
+  wins+                                     dnl   common server meat
+  libmain, , , 
+  prj_lib(dtscr)+
+  prj_lib(dtlow)+
+  prj_lib(dt1d))
+')
+
+popdef(`CCSHARABLE')
+
+__finish
+
+
+
+
+
+
+

@@ -1,0 +1,74 @@
+#!/bin/sh
+
+script="yamit.sh"
+
+# example: 
+#   cd /usr/erb/prj/imagedt/source 
+#   make2 /usr/erb/prj/imagedt makefile
+
+# -----------------------------------------------------------------------------
+_say()
+{
+  echo "$script: $@" 1>&2
+}
+# -----------------------------------------------------------------------------
+_sayq()
+{
+  if [ -n "$DT_SH" ]
+  then
+    echo "$script: $@" 
+  fi
+}
+# -----------------------------------------------------------------------------
+_error()
+{
+  _say "ERROR $@"
+  exit
+}
+# -----------------------------------------------------------------------------
+_usage()
+{
+  _say "usage: $@"
+  exit
+}
+# -----------------------------------------------------------------------------
+_argcheck()
+{
+  __have=$1
+  __minwant=$2
+  __maxwant=$3
+  __usage=$4
+  if [ $__have -lt $__minwant ]
+  then
+    _usage "$__usage"
+  fi
+  if [ $__have -gt $__maxwant ]
+  then
+    _usage "$__usage"
+  fi
+}
+# -----------------------------------------------------------------------------
+_runfg()
+{
+  _sayq "$@"
+  eval "$@"
+  rc=$?
+  if [ $rc -ne 0 ]
+  then
+    _error "($rc) doing \"$@\""
+  fi
+}
+# -----------------------------------------------------------------------------
+
+_argcheck $# 1 99 "yamdir prjdir [target [makeargs]]"
+
+tree=$1
+shift
+if [ ! -d "$tree" ]
+then
+  _error "$tree is not a directory"
+fi
+_runfg "make \
+  SRC=$tree \
+  OUT=$tree.lg1 \
+  MK_TARGET=linux bsd1 $@"

@@ -1,0 +1,59 @@
+STRATOSWARE MEMCHECK
+  let the .LIB file go into the compiler's lib directory (only choice)
+  then move the files back to Memcheck's directory c:\sw\mc30\borlandc\lib
+    MC*.LIB
+    *.LST
+    MROCKET.LIB
+    DROCKET.LIB
+  copy MEMCHECK.H to c:\sw\mc30\borlandc\include
+
+QNX4 - terminal type
+- dtkeybd_qnxterm_init: error: errno 2 in term_load()
+- vanilla QNX does not come with many terminal descriptions
+- default keyboard for QNX is qnxterm
+- default dialog for QNX is text,qnxterm
+- anything using qnxterm will do term_load(getenv(TERM)) 
+- term_load() goes to /usr/lib/terminfo to look for the terminal description
+- terminfo entries are standard and may be copied from another unix system
+- for example, to get an xterm terminal description:
+    su
+    mkdir /usr/lib/terminfo/x
+    rcp unix:/usr/lib/terminfo/x/x* /usr/lib/terminfo
+
+Linux - tiff library
+- vanilla Slackware installation did not install tiff
+- Walnut Creek cdrom had what is needed on its March 95 Ready-To-Run cd,
+    the first CD in the two-CD set of that distribution
+- to get the files needed from this CD:
+    su
+    cp /cdrom/live/usr/include/tiff.h /usr/local/include
+    cp /cdrom/live/usr/include/tiffio.h /usr/local/include
+    cp /cdrom/live/usr/lib/libtiff.a /usr/local/lib
+
+QNX - xterm terminal description
+- industry standard /usr/lib/terminfo/x/xterm does not have entries for the
+  PageUp and PageDown keys
+- these are simply added as follows:
+    su
+    vi /usr/lib/terminfo/terminfo.src
+
+
+
+SunOS4.1.3 gcc2.5.8 libtiff
+MASTER_SITES=	ftp://ftp.sgi.com/graphics/tiff/
+zcat < v3.3beta021.src.tar.gz | tar xvf -
+cd libtiff
+export CC=gcc
+make -f Makefile.sun
+su
+make -f Makefile.sun install DESTDIR=/usr/local INSTALL=install
+
+
+SunOS4.1.3 termcap
+gnu sources 
+zcat < termcap-1.2.tar.gz | tar xvf -
+./configure
+make
+su
+make install
+

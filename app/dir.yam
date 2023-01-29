@@ -1,0 +1,20 @@
+define(TOP, UP1)
+define(DIR, app)
+__prolog
+
+__sub(reverb)
+__sub(uclient)
+__sub(tabchief)
+__sub(tableau)
+__sub(tabgrab)
+__sub(tabrobot)
+__sub(tabdrone)
+__sub(wrangler)
+
+dnl __sub(uclient)
+dnl __sub(ustate)
+dnl __sub(umplay)
+dnl __sub(ustream)
+dnl __sub(netchat)
+
+__finish

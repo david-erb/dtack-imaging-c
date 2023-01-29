@@ -1,0 +1,191 @@
+/*..........................................................................
+| TITLE turnon
+| Video Caesar Startup Instructions
+| 
+|!Video Caesar Startup Instructions
+| Thanks for buying from Tableau!
+|
+| It is our sincere wish that your experience with the Video Caesar
+| web cam system is pleasant and rewarding.
+| This sheet should help by giving simple step-by-step instructions
+| for setting up and configuring the unit.
+|
+| Please call us at 1.800.221.7583 with any questions.
+| 
+|.Gather information
+| In the sections below, you will be asked to enter certain specific
+| pieces of information relating to your computer, network, and server.
+| Take a moment now to gather these pieces of information.
+|
+| Most of these pieces of information are supplied by your network manager.
+| 
+| #COMPUTER IDENTITY#
+| 
+| _____________________________	Computer's IP address.
+| 				The number is in the form 123.234.156.239.
+| 				This number is uniquely assigned to your computer
+| 				within your intranet or the Internet.
+| _____________________________	Subnet mask.
+| 				The number is usually 255.255.255.0.
+| _____________________________	Gateway computer's IP address.
+| 				The number is in the form 123.234.156.239.
+| 				This is usually the number of a central 
+| 				computer or router.
+| 
+| #DNS (DOMAIN NAME SERVICE)#
+| 
+| This information is optional.
+| Your Video Caesar will function properly without using DNS.
+| You will simply have to use IP addresses instead of names 
+| to refer to other computers.
+| 
+| _____________________________	IP address of DNS server.
+| 				This is the computer who maintains 
+| 				name-to-IP address mappings on your network.
+| _____________________________	Computer's name.
+| 				This should correspond to the name 
+| 				by which the DNS server knows your computer.
+| _____________________________	Computer's domain.
+| 				This should correspond to the domain into 
+| 				which the DNS server has put your computer
+| 
+| #FTP SERVER AND LOGIN#
+| 
+| Your Video Caesar software will try to send video images to
+| an FTP server on your network or the Internet.
+| 
+| _____________________________	FTP server's name or IP address.
+| 				This is the computer to which images go.
+| _____________________________	FTP server's port.
+| 				This is almost always 21,
+| 				but may be different in some circumstances.
+| _____________________________	FTP login.
+| 				This is the user name by which you log in 
+| 				to your FTP server.
+| _____________________________	FTP password.
+| 				This is the password you use when logging in.
+| _____________________________	FTP directory.
+| 				This is the directory on the FTP server
+| 				to which video files are uploaded.
+| 
+|.Hardware setup
+| All connections to the computer are clearly labeled
+|_aside Stickers are on the computer.
+| on back of the computer and also on the accompanying diagram.
+| 
+| 1.	Unbox the unit and place it on a table.
+| 2.	Plug in the included A/C power cord, mouse, and keyboard.
+| 3.	Plug the short VGA shunt cable between the #TO VIDEO IN# 
+|       and the #VIDEO IN# 15-pin ports on back of the computer.  
+|	Make sure the end with the two dangling wires goes into #VIDEO IN#.
+| 4.	Plug in your VGA monitor (not included).
+| 5.	If your unit is to operate via modem, plug in a standard phone line.
+| 6.	If your unit is equipped with an ethernet adapter,
+| 	plug in either the RJ-11 (square) or the 10BaseT (BNC) cable.
+| 7.	Plug in your video feed to the dangling RCA female wire 
+|	labelled #VIDEO 0#.
+|
+| Now turn your Video Caesar computer on.
+| After a few moments, some text will appear on the screen.
+| After even more moments, Windows95 will start.
+| 
+| At this time, your computer is idle.
+|_aside Not pumping video yet.
+| Please follow the configuration instructions below.
+| We will assume you have some familiarity with Windows95.
+| We will say "click" when we mean to click with the left mouse button
+| and "right-click" when we mean to use the right button.
+| "Double-click" means click twice quickly with the left mouse button.
+| 
+|.Ethernet setup
+| This sequence of steps will allow Windows95 to communicate on your
+| corporate internet or the Internet.
+|_aside Ethernet-equipped units only.
+| Skip these steps if you will be using a modem in your Video Caesar.
+| 
+| 1.	Right-click on the #Network Neighborhood# icon
+| 	then click on #Properties#.
+| 2.	Click on #TCP/IP#, then click on #Properties#.
+| 3.	Click on the #IP Address# tab at the top,
+| 	then click in the #IP Address# text field.
+| 	Change this number to your computer's assigned IP address.
+| 	Also click on the #Subnet Mask# field and change as appropriate.
+| 4.	Click on the #Gateway# tab at the top,
+| 	then click on the #New gateway# text field and enter the number.
+| 	Click on #Add# and verify the number appears in the box below.
+| 5.	If your Network has a DNS server, click on the #DNS Configuration#
+| 	tab at the top. Click on the #Enable DNS# button.
+| 	In turn, click in each text box and enter the appropriate information.
+| 	After entering the IP address of the DNS server, click on the #Add#
+| 	button.
+| 6.	Click on #OK# at the bottom.  
+| 7.	Accept Windows95's suggestion that you reboot your computer.
+| 
+|.Video Caesar software configuration
+| This sequence of steps will tell the Video Caesar software where to
+|_aside Image destination.
+| send your images.
+| 
+| 1.	Double-click on the #Tableau# folder icon near the lower left
+|	of the screen.
+| 2.	Double-click on the #Shortcut to Ftp.cfg# icon.
+| 	Using the arrow, backspace and delete keys, change
+|	#192.9.200.4# to your FTP server's host name or IP address.
+| 	Make sure to leave the #:21# after it with no spaces.
+| 	Change #user# to your FTP login name and #password# to your password.
+| 	Click on the small #X# in the upper right of the window and #Yes#
+| 	to save the changes.
+| 3.	Double-click on the #Shortcut to Tableau.arg# icon.
+| 	Using the arrow, backspace and delete keys, change
+| 	#/img/tableau/cam0# on the #-screen# line to the
+| 	directory on your FTP server where the images are to go.
+| 	Make sure to leave the #/%s.%08ld.jpg# after it with no spaces!
+| 	Click on the small #X# in the upper right of the window and #Yes#
+| 	to save the changes.
+|
+|.Starting video
+|_Aside Ready to start.
+| Finally you are ready to start pumping video.
+| 
+| 1.	Click on #Start# in the lower left of your screen.
+| 	Then click successively on #Programs# and #Tableau XX-YY# and
+|	#Tabstart#.
+| 2.	A black-and-white text window will appear with words to the effect:
+|
+|:             monitoring tabchief
+|_aside Normal messages.
+|:             monitoring tableau
+|:             tabchief is not running, restarting it
+|:             tableau is not running, restarting it
+|
+| 3.	A live video window will also shortly appear.
+| 4.	Double-click on #The Internet# on the left side of your screen.
+| 	Be patient while the browser starts up, 
+| 	Then use the #Page Down# keyboard key until you see the Logs section.
+| 	Click #Tableau log#.
+| 	You should see lines like:
+| 
+|:             19961210.1700.24 [ 2012]:   30.  cam0  2581  2.1 sec
+|:             19961210.1700.26 [ 2012]:   31.  cam0  2234  2.0 sec
+|:             19961210.1700.28 [ 2012]:   32.  cam0  2642  2.3 sec
+|:             19961210.1700.30 [ 2012]:   33.  cam0  2988  2.2 sec
+| 
+|.Troubleshooting
+| We urge you to call us at 1.800.221.7583 if you experience problems.
+|_aside Voice mail standing by.
+| However, if you are the type of person to figure things out yourself,
+| we recommend:
+|
+| 1.	Double-click on the #Tableau# folder icon near the lower left of
+|	of the screen.
+| 2.	If the live video window does not appear,
+| 	or appears but shortly disappears,
+| 	double-click on the #Shortcut to tableau.log#.
+| 3.	If you never get the Video Caesar Main page when clicking the
+| 	the Internet icon,      
+| 	double-click on the #Shortcut to tabchief.log#.
+|
+| #Good luck!#
+| 
+| END
+ *..........................................................................*/

@@ -1,0 +1,52 @@
+/*..........................................................................
+ * http://133.14.50.41/power/Shigeru/maked/sortd/heap.html
+ *..........................................................................*/
+
+#include <dtntype.h>
+#include <dt1d.h>
+
+/*..........................................................................
+ * double precision heap sort
+ *..........................................................................*/
+
+#define SWAP(A, B) tmp = *(A); *(A) = *(B); *(B) = tmp;
+
+static
+void 
+_shift(
+  double *rox, 
+  int parent, 
+  int num)
+{
+  int son = 2 * parent;
+  double tmp;
+  while (son <= num) 
+  {
+	if (son < num && rox[son-1] < rox[son])
+	  son++;
+	if (rox[parent-1] >= rox[son-1])
+	  break;
+	SWAP(&rox[parent-1], &rox[son-1]);
+	parent = son;
+	son = 2 * parent;
+  }
+}
+
+dt1d_rc_e
+DT1D_API
+dt1d_sort_double(
+  double *v,
+  dt1d_i_t nv)
+{
+  double tmp;
+  int j;
+printf(" * http://133.14.50.41/power/Shigeru/maked/sortd/heap.html\n");
+  for (j=(nv/2); j>=1; j--)
+    _shift(v, j, nv);
+  while (nv > 1)
+  {
+	SWAP(&v[0], &v[nv-1]);
+	_shift(v, 1, --nv);
+  }
+  return DT1D_RC_GOOD;
+}

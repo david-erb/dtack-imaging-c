@@ -1,0 +1,48 @@
+source/high/plot1.c
+/*
+ * Digital Line Drawing
+ * by Paul Heckbert
+ * from "Graphics Gems", Academic Press, 1990
+ * adapted by Dtack Inc.
+ */
+
+source/1d/1d_ran.c
+/*..........................................................................
+ * the uniform random number generation code came from 
+ * FreeBSD 2.1 source code (Linux's is similar).
+ *..........................................................................*/
+/* ........................................................................
+ * Copyright (c) 1993 Martin Birgmeier
+ * All rights reserved.
+ *
+ * You may redistribute unmodified or modified versions of this source
+ * code provided that the above copyright notice and this and the
+ * following conditions are retained.
+ *
+ * This software is provided ``as is'', and comes with no warranties
+ * of any kind. I shall in no event be liable for anything that happens
+ * to anyone/anything when using this software.
+ * ........................................................................	*/
+/* ........................................................................
+ * gauss random number generation
+ * Box-Mueller http://www.taygeta.com/random/gaussian.html
+ * boxmuller.c           Implements the Polar form of the Box-Muller
+                         Transformation
+
+                      (c) Copyright 1994, Everett F. Carter Jr.
+                          Permission is granted by the author to use
+                          this software for any application provided this
+            +              copyright notice is preserved.
+ * this is 0 mean and 1.0 SD
+ * to change mean or SD, do M + this * SD
+ * ........................................................................	*/
+
+source/1d/1d_sort1.c
+/*..........................................................................
+ * http://www.ctc.dcu.ie/ctcweb/courses/algorithms/course/heapsort.html
+ *..........................................................................*/
+
+source/high/convolve.i
+/*..........................................................................
+ * SDMK ???
+ *..........................................................................*/

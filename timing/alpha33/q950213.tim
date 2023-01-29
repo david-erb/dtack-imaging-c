@@ -1,0 +1,90 @@
+===========================================
+dttiming: 13 Feb 95 21:23 QW0
+dttmem: | 950213 | disk 63000 (20) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  0.35 |  0.09 | 32.37
+dttmem: | 950213 | disk 16384 (20) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  0.77 |  0.25 | 12.85
+dttmem: | 950213 | disk 4000 (10) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  1.74 |  0.64 | 10.96
+dttmem: | 950213 | disk 512 (2) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  2.87 |  0.97 | 10.67
+dttmem: | 950213 | ram 63000 (100000) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 | 38.33 |  0.00 | 38.65
+dttmem: | 950213 | ram 16384 (20000) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 | 25.48 |  0.00 | 25.48
+dttmem: | 950213 | ram 4000 (5000) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 | 25.46 |  0.00 | 25.46
+dttmem: | 950213 | ram 512 (500) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 | 25.41 |  0.00 | 25.41
+dttcast: | 950213 | b08->b01 (50) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  4.03 |  0.00 |  4.03
+dttcast: | 950213 | b01->b08 (50) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  4.41 |  0.00 |  4.41
+dttcast: | 950213 | b08->b08 (50) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  1.19 |  0.00 |  1.19
+dttcast: | 950213 | b08->b08 (50) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  1.33 |  0.00 |  1.33
+dttcast: | 950213 | b08->b16 (50) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  4.47 |  0.01 |  4.48
+dttcast: | 950213 | b16->b08 (50) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  3.81 |  0.00 |  3.82
+dttcast: | 950213 | b08->b32 (50) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  4.94 |  0.00 |  4.94
+dttcast: | 950213 | b32->b08 (50) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  3.83 |  0.00 |  3.83
+dttcast: | 950213 | b08->s1  (50) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  3.86 |  0.00 |  3.86
+dttcast: | 950213 | s1 ->b08 (50) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  3.89 |  0.00 |  3.89
+dttcast: | 950213 | b08->s2  (50) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  4.50 |  0.00 |  4.50
+dttcast: | 950213 | s2 ->b08 (50) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  4.03 |  0.00 |  4.03
+dttcast: | 950213 | b08->s4  (50) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  4.86 |  0.00 |  4.86
+dttcast: | 950213 | s4 ->b08 (50) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  4.03 |  0.00 |  4.03
+dttcast: | 950213 | b08->f1  (10) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  2.95 |  0.00 |  2.95
+dttcast: | 950213 | f1 ->b08 (10) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  8.33 |  0.00 |  8.33
+dttcast: | 950213 | b08->f2  (10) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  3.30 |  0.00 |  3.30
+dttcast: | 950213 | f2 ->b08 (10) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  8.55 |  0.00 |  8.55
+dttconv: | 950213 | dttconv_h1d | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  8.70 |  0.00 |  8.70
+dttconv: | 950213 | dttconv_ave | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  1.98 |  0.00 |  1.98
+dttconv: | 950213 | dttconv_laplace | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  2.44 |  0.00 |  2.44
+dttconv: | 950213 | dttconv_cross | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  6.48 |  0.00 |  6.48
+dtt1d: | 950213 | random uniform (  7500) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  1.05 |  0.00 |  1.05
+dtt1d: | 950213 | random gauss (  7500) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  1.68 |  0.00 |  1.68
+dtt1d: | 950213 | inverted sort (  7500) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  1.52 |  0.00 |  1.52
+dtt1d: | 950213 | random sort (  7500) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  1.58 |  0.00 |  1.58
+dttlog: | 950213 | log10 unscaled (5@128x120) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  0.48 |  0.00 |  0.48
+dttlog: | 950213 | log10 scaled (5@128x120) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  3.81 |  0.00 |  3.81
+dttlog: | 950213 | log unscaled (5@128x120) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  0.49 |  0.00 |  0.49
+dttlog: | 950213 | log scaled (5@128x120) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  3.82 |  0.00 |  3.82
+dtinst.sh: 13 Feb 95 21:29 QW0 complete
+===========================================
+dttiming: 13 Feb 95 22:30 QW1
+dttmem: | 950213 | disk 63000 (20) | QW1 | Watcom-9.5(QNX32) | Alpha-DX33 |  0.18 |  0.11 | 30.33
+dttmem: | 950213 | disk 16384 (20) | QW1 | Watcom-9.5(QNX32) | Alpha-DX33 |  0.39 |  0.32 | 11.76
+dttmem: | 950213 | disk 4000 (10) | QW1 | Watcom-9.5(QNX32) | Alpha-DX33 |  0.97 |  0.47 |  9.62
+dttmem: | 950213 | disk 512 (2) | QW1 | Watcom-9.5(QNX32) | Alpha-DX33 |  1.23 |  1.03 |  8.98
+dttmem: | 950213 | ram 63000 (100000) | QW1 | Watcom-9.5(QNX32) | Alpha-DX33 | 14.02 |  0.00 | 14.39
+dttmem: | 950213 | ram 16384 (20000) | QW1 | Watcom-9.5(QNX32) | Alpha-DX33 |  9.26 |  0.00 |  9.26
+dttmem: | 950213 | ram 4000 (5000) | QW1 | Watcom-9.5(QNX32) | Alpha-DX33 |  9.27 |  0.00 |  9.27
+dttmem: | 950213 | ram 512 (500) | QW1 | Watcom-9.5(QNX32) | Alpha-DX33 |  9.26 |  0.00 |  9.26
+dttmem: | 950213 | ems 63000 (100) | QW1 | Watcom-9.5(QNX32) | Alpha-DX33 |  7.51 |  0.00 |  7.51
+dttmem: | 950213 | ems 16384 (100) | QW1 | Watcom-9.5(QNX32) | Alpha-DX33 |  8.04 |  0.00 |  8.04
+dttmem: | 950213 | ems 4000 (100) | QW1 | Watcom-9.5(QNX32) | Alpha-DX33 | 10.47 |  0.00 | 10.48
+dttmem: | 950213 | ems 512 (50) | QW1 | Watcom-9.5(QNX32) | Alpha-DX33 | 17.23 |  0.00 | 17.23
+dttmem: | 950213 | xms 63000 (100) | QW1 | Watcom-9.5(QNX32) | Alpha-DX33 |  7.40 |  0.00 |  7.40
+dttmem: | 950213 | xms 16384 (100) | QW1 | Watcom-9.5(QNX32) | Alpha-DX33 |  7.97 |  0.00 |  7.97
+dttmem: | 950213 | xms 4000 (100) | QW1 | Watcom-9.5(QNX32) | Alpha-DX33 | 10.54 |  0.01 | 10.55
+dttmem: | 950213 | xms 512 (50) | QW1 | Watcom-9.5(QNX32) | Alpha-DX33 | 17.74 |  0.00 | 17.74
+dttcast: | 950213 | b08->b01 (50) | QW1 | Watcom-9.5(QNX32) | Alpha-DX33 |  3.68 |  0.00 |  3.68
+dttcast: | 950213 | b01->b08 (50) | QW1 | Watcom-9.5(QNX32) | Alpha-DX33 |  2.61 |  0.00 |  2.62
+dttcast: | 950213 | b08->b08 (50) | QW1 | Watcom-9.5(QNX32) | Alpha-DX33 |  0.64 |  0.00 |  0.64
+dttcast: | 950213 | b08->b08 (50) | QW1 | Watcom-9.5(QNX32) | Alpha-DX33 |  0.60 |  0.00 |  0.60
+dttcast: | 950213 | b08->b16 (50) | QW1 | Watcom-9.5(QNX32) | Alpha-DX33 |  3.75 |  0.00 |  3.75
+dttcast: | 950213 | b16->b08 (50) | QW1 | Watcom-9.5(QNX32) | Alpha-DX33 |  3.21 |  0.00 |  3.21
+dttcast: | 950213 | b08->b32 (50) | QW1 | Watcom-9.5(QNX32) | Alpha-DX33 |  3.71 |  0.00 |  3.71
+dttcast: | 950213 | b32->b08 (50) | QW1 | Watcom-9.5(QNX32) | Alpha-DX33 |  3.23 |  0.00 |  3.23
+dttcast: | 950213 | b08->s1  (50) | QW1 | Watcom-9.5(QNX32) | Alpha-DX33 |  3.17 |  0.00 |  3.17
+dttcast: | 950213 | s1 ->b08 (50) | QW1 | Watcom-9.5(QNX32) | Alpha-DX33 |  3.17 |  0.00 |  3.17
+dttcast: | 950213 | b08->s2  (50) | QW1 | Watcom-9.5(QNX32) | Alpha-DX33 |  3.65 |  0.00 |  3.65
+dttcast: | 950213 | s2 ->b08 (50) | QW1 | Watcom-9.5(QNX32) | Alpha-DX33 |  3.40 |  0.00 |  3.40
+dttcast: | 950213 | b08->s4  (50) | QW1 | Watcom-9.5(QNX32) | Alpha-DX33 |  3.61 |  0.00 |  3.61
+dttcast: | 950213 | s4 ->b08 (50) | QW1 | Watcom-9.5(QNX32) | Alpha-DX33 |  3.20 |  0.00 |  3.20
+dttcast: | 950213 | b08->f1  (10) | QW1 | Watcom-9.5(QNX32) | Alpha-DX33 |  2.38 |  0.00 |  2.38
+dttcast: | 950213 | f1 ->b08 (10) | QW1 | Watcom-9.5(QNX32) | Alpha-DX33 |  6.26 |  0.00 |  6.27
+dttcast: | 950213 | b08->f2  (10) | QW1 | Watcom-9.5(QNX32) | Alpha-DX33 |  2.64 |  0.00 |  2.64
+dttcast: | 950213 | f2 ->b08 (10) | QW1 | Watcom-9.5(QNX32) | Alpha-DX33 |  6.38 |  0.00 |  6.38
+dttconv: | 950213 | dttconv_h1d | QW1 | Watcom-9.5(QNX32) | Alpha-DX33 |  3.47 |  0.00 |  3.47
+dttconv: | 950213 | dttconv_ave | QW1 | Watcom-9.5(QNX32) | Alpha-DX33 |  0.88 |  0.00 |  0.88
+dttconv: | 950213 | dttconv_laplace | QW1 | Watcom-9.5(QNX32) | Alpha-DX33 |  1.22 |  0.00 |  1.22
+dttconv: | 950213 | dttconv_cross | QW1 | Watcom-9.5(QNX32) | Alpha-DX33 |  2.72 |  0.00 |  2.72
+dtt1d: | 950213 | random uniform (  7500) | QW1 | Watcom-9.5(QNX32) | Alpha-DX33 |  0.16 |  0.00 |  0.16
+dtt1d: | 950213 | random gauss (  7500) | QW1 | Watcom-9.5(QNX32) | Alpha-DX33 |  0.41 |  0.00 |  0.41
+dtt1d: | 950213 | inverted sort (  7500) | QW1 | Watcom-9.5(QNX32) | Alpha-DX33 |  0.74 |  0.00 |  0.74
+dtt1d: | 950213 | random sort (  7500) | QW1 | Watcom-9.5(QNX32) | Alpha-DX33 |  0.77 |  0.00 |  0.77
+dttlog: | 950213 | log10 unscaled (5@128x120) | QW1 | Watcom-9.5(QNX32) | Alpha-DX33 |  0.19 |  0.00 |  0.20
+dttlog: | 950213 | log10 scaled (5@128x120) | QW1 | Watcom-9.5(QNX32) | Alpha-DX33 |  2.73 |  0.00 |  2.73
+dttlog: | 950213 | log unscaled (5@128x120) | QW1 | Watcom-9.5(QNX32) | Alpha-DX33 |  0.20 |  0.00 |  0.20
+dttlog: | 950213 | log scaled (5@128x120) | QW1 | Watcom-9.5(QNX32) | Alpha-DX33 |  2.73 |  0.00 |  2.73
+dtinst.sh: 13 Feb 95 22:35 QW1 complete

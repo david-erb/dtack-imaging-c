@@ -1,0 +1,10 @@
+define(TOP, UP2)
+define(DIR, app/qbaby)
+
+__shexe(prj_test_bin(qbaby),   
+  qbaby, , ,
+  PRJ_LOADS)
+
+__finish
+
+

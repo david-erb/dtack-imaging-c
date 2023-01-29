@@ -1,0 +1,19 @@
+# this file does:
+# get images from tabgrab on localhost
+# accept connection from any client
+# wait forever for the client to connect
+# listen at fixed port 10000
+# some debug
+# jpeg compress 25
+# server 100 frames before stopping
+# die if client disconnects
+#
+
+-input rocket,localhost:5720
+-name rocket,0.0.0.0:0
+-connect rocket,0:10000
+-dt -1
+-D usr1+usr2+command+reply+config+ipc
+-t 25
+-max -10
+# -output rocket,192.9.200.6:80

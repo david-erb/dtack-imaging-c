@@ -1,0 +1,66 @@
+NOTES ON MULTIPLE TABLEAU USING TABSTART 2000-02-16
+
+As you know, Tabstart is the watchdog program which starts
+Tableau, Tabchief and other programs.  It also monitors them
+and restarts them if they stop for any reason.
+
+Tabstart is, by design, a very simple program.  
+One of the simplifying assumptions made by Tabstart is that there 
+will be only one instance of a program to be monitored.
+However, there may be times when you want to run multiple instances.
+This situation occurs on a Win32 Tableau rocket receiver machine
+which is to serve as a receiver to multiple Tableau capture boxes.
+
+To manage multiple instances of the Tableau rocket receiver using 
+Tabstart, please take the following steps.  If your system is set
+up using 'tabserve.exe', then use 'tabserve' instead of 'tableau'
+where appropriate.
+
+1. Copy the tableau rocket receiver config file multiple times:
+  cd c:\tableau\config
+  copy tableau.arg tableau-00.arg
+  copy tableau.arg tableau-01.arg
+  copy tableau.arg tableau-02.arg
+  copy tableau.arg tableau-03.arg
+
+2. Edit the individual config files, changing 00 to 01, 02, 03:
+  -connect rocket,0:5700
+  -path c:/inetpub/wwwroot
+  -screen roll,cap00
+  -errto ../logs/tableau-00.log
+  -dbgto ../logs/tableau-00.log
+  -sayto ../logs/tableau-00.log
+
+3. Make the following directories to correspond with -path and -screen above:
+  cd c:\inetpub\wwwroot
+  mkdir cap00
+  mkdir cap01
+  mkdir cap02
+  mkdir cap03
+
+4. Obtain a license file from Tableau which contains the lines.
+  This file MUST be named dtlicens.dat and placed in the folder
+  specified by -config in the tableau-XX.arg.
+  FEATURE tableau-00 DTACK 1.000 1-jan-0 0 4C58E3F0F24BF53175BA "" ...
+  FEATURE tableau-01 DTACK 1.000 1-jan-0 0 4C68E3F0F94BF53176B3 "" ...
+  FEATURE tableau-02 DTACK 1.000 1-jan-0 0 4C78E3F0F84BF53177B4 "" ...
+  FEATURE tableau-03 DTACK 1.000 1-jan-0 0 4C88E3F0F74BF53178B5 "" ...
+
+5. Edit the tabstart config file to have lines like below, except
+  join each pair of lines to form four long lines in the file.
+  There must be NO BLANK LINES in this file, even at the end of it.
+  c:\tableau\02-03\run\tableau-00.exe=c:\tableau\02-03\tableau.exe 
+  0 0 0 @c:\tableau\config\tableau-00.arg
+  c:\tableau\02-03\run\tableau-01.exe=c:\tableau\02-03\tableau.exe 
+  0 0 0 @c:\tableau\config\tableau-01.arg
+  c:\tableau\02-03\run\tableau-02.exe=c:\tableau\02-03\tableau.exe 
+  0 0 0 @c:\tableau\config\tableau-02.arg
+  c:\tableau\02-03\run\tableau-03.exe=c:\tableau\02-03\tableau.exe 
+  0 0 0 @c:\tableau\config\tableau-03.arg
+
+6. Stop tabstart if it is running, then restart it.
+  Check logs for errors as usually.
+
+Any questions, call 360.417.6700 or email erb@tableau.com.
+Thanks,
+Dave

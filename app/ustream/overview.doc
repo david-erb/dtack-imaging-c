@@ -1,0 +1,59 @@
+/*..........................................................................
+| NAME
+| Datagram and Streaming Client/Server Function Groups
+|
+| SUMMARY
+| Four Function Groups (object classes) provide the means for programs
+| to send commands (datagrams) and streaming data to one another.
+|
+| These four Function Groups are:
+| 
+| :dtdgserver:	act as datagram server (get request, give response)
+| :dtdgclient:	act as datagram client (give request, get response)
+| :dtistream:	act as streaming data sink (receive data packets)
+| :dtostream:	act as streaming data source (send data packets)
+| 
+| Both datagram and streaming data servers advertise a name of the form 
+| #scheme,carrier#.
+| The #scheme# is something such as #http#.
+| The carrier is something such as #host:port# for TCP/IP or
+| #/nameloc-name# for QNX native IPC.
+|
+| #Datagram conversation overview#
+| 
+| A datagram conversation follows this form:
+| 1.	server indicates willingness to hear requests from anyone
+| 2.	client contacts server, sending the request immediately
+|		if server is busy with another request, client waits
+| 3.	server accepts request, now client is free to continue
+| 4.	server processes request
+| 5.	server sends response
+| 6.	client may perform other processing before waiting for response
+| 
+| In general, datagram conversation follows these guidelines:
+| -	to the :dtdgserver: object, each request is atomic:
+| 	it will not handle another request until the response to
+| 	the first is the
+| -	a server process may fork in order to handle multiple requests concurrently
+| -	a request is a short string, under 4K bytes
+| -	response consists of a response header composed of lines with one
+|	field:value pair on each line
+| -	after header lines comes data in any form
+| -	both request and response header are in ASCII
+|
+| #Streaming conversation overview#
+| 
+| A stream conversation follows this form:
+| 1.	istream server indicates willingness to receive data and waits
+| 		for a client to contact it
+| 2.	ostream client contacts server indicating desire to send data
+| 3.	ostream client sends one or many packets of data
+| 4.	either client or server close their end of the conversation
+| 
+| In general, stream conversations follow these guidelines:
+| -	data is broken to packets of the same or different sizes
+| -	the data stream appears as an unparsed bit stream to the 
+| 	dtistream/dtostream objects
+|
+| END
+ *..........................................................................*/

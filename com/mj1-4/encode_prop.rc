@@ -1,0 +1,99 @@
+//==========================================================================;
+//
+//  THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
+//  KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+//  IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR
+//  PURPOSE.
+//
+//  Copyright (c) 1992 - 1996  Microsoft Corporation.  All Rights Reserved.
+//
+//--------------------------------------------------------------------------;
+//
+//Microsoft Visual C++ generated resource script.
+//
+
+#include <windows.h>
+#include <activex.ver>
+
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include <windows.h>
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE
+BEGIN
+    "#include <windows.h>\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_EZrgb24PROP DIALOG DISCARDABLE  0, 0, 192, 88
+STYLE WS_CHILD
+FONT 8, "MS Shell Dlg"
+BEGIN
+    EDITTEXT        IDC_QUALITY,65,14,40,13,ES_AUTOHSCROLL
+    LTEXT           "&Quality",IDS_STATIC,132,37,25,9
+END
+
+STRINGTABLE DISCARDABLE
+BEGIN
+    IDS_TITLE,      "Quality"
+END
+
+//
+// Version
+//
+
+#define VERSION_RES_BIN_NAME        "mj1-0.ax\0"
+#define VERSION_RES_BIN_DESCRIPTION "Quality\0"
+
+#define AMOVIE_SELF_REGISTER
+
+#define AMOVIE_SELF_REGISTER
+
+#include <activex.rcv>
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

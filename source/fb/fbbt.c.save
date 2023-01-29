@@ -1,0 +1,545 @@
+/*..........................................................................
+| NAME
+| Introduction - intro
+|
+| DESCRIPTION
+| As yet undocumented.
+| 
+| RETURN VALUES
+| All functions Return DTOS_RANWELL on success.  
+| Any other return value indicates failure.
+| 
+| ERRORS
+| As yet undocumented.
+| 
+| REV
+| 1.5 19970525 fixed bug which turned 24-bit into 8 bit
+| 1.6 19970902 switch video source
+| 
+| END
+ *..........................................................................*/
+
+#include <dt.h>
+DT_RCSID("source/fb $RCSfile: fbbt.c,v $ $Revision: 1.7 $");
+#include <dtlut8.h>
+#include <dt_color.h>
+#include <dtfb.h>
+#include <dtos.h>
+#include <dtstr.h>
+#include <dtprj.h>
+#include <dtyield.h>
+#include <dtportio.h>
+#include <dtvidmux.h>
+#include <dterrno.h>
+
+#define DESC "bt capture card"
+
+extern dtfb_init_f dtfb_bt_init;
+
+#if DTPRJ_BTTV == DT_1
+
+typedef struct {
+  dtportio_t portio;
+  dtos_time_t switch_time;				/* time at source switch 			*/
+  char *spec;
+  unsigned char *mem;
+  long mem_size;
+  long switch_delay;					/* delay needed after source switch */
+  int fd;
+  int source;							/* last-set video source 			*/
+  int acquiring;
+  int flag_skip;
+  int flag_dup;
+  int portio_initialized;
+  char vidmux[128];						/* last vidmux spec 				*/
+} priv_t;
+
+static priv_t global_priv;
+
+#define SVALUE(S) \
+  value = (S); svalue = #S
+
+#ifndef DTDEPEND
+#include <sys/types.h>
+#include <sys/mman.h>
+#include <sys/fcntl.h>
+#include <sys/ioctl.h>
+#include "bttv.h"
+#include "bt848.h"
+#endif
+  
+#define IOCTL(C, V)						\
+{										\
+  int sysrc;							\
+  sysrc = ioctl(priv->fd, C, V); 		\
+  if (sysrc != 0)						\
+  {										\
+    int e = errno;						\
+	rc = dt_err(ctl, F,					\
+      "ioctl(%d, %s (%d), %s"			\
+      " (%ld, 0x%08lx))"				\
+          DTERRNO_FMT,					\
+          priv->fd, #C, C, 				\
+          #V, 							\
+          *(unsigned long*)(V),			\
+          *(unsigned long *)(V),		\
+          DTERRNO_ARG(e));				\
+    goto cleanup;						\
+  }										\
+}
+
+/*..........................................................................
+ * query driver and print interesting things
+ *..........................................................................*/
+
+static
+dt_rc_e
+dtfb_bt_report(
+  dt_ctl_t *ctl,
+  dtfb_t *fb,
+  const char *prefix)
+{
+  DT_F("dtfb_bt_report");
+  priv_t *priv = (priv_t *)fb->priv;
+  dt_rc_e rc = DT_RC_GOOD;
+cleanup:
+  return rc;
+}
+
+/*..........................................................................
+ *..........................................................................*/
+
+static
+dt_rc_e
+dtfb_bt_control(
+  dt_ctl_t *ctl,
+  dtfb_t *fb,
+  dtfb_control_e control)
+{
+  DT_F("dtfb_bt_control");
+  priv_t *priv = (priv_t *)fb->priv;
+  int value;
+  char *svalue;
+  int sysrc;
+  dt_rc_e rc = DT_RC_GOOD;
+
+  DTCSTACK_HIGHWATER;
+
+  switch (control)
+  {
+	case DTFB_CONTROL_RESET:
+	break;
+	case DTFB_CONTROL_SNAPSHOT:
+	break;
+	case DTFB_CONTROL_FREEZE:
+	break;
+	case DTFB_CONTROL_ACQUIRE:
+    if (!priv->acquiring)
+	{
+	  dt_dbg(ctl, F, DT_DBG_MASK_COMMAND,
+        "ACQUIRE");
+	  priv->acquiring = 1;
+	}
+	break;
+	default:
+      rc = dt_err(ctl, F,
+        "invalid control code 0x%04x",
+        control);
+  }
+  
+cleanup:
+  return rc;
+}
+
+/*..........................................................................
+ *..........................................................................*/
+
+static
+dt_rc_e
+dtfb_bt_getblock(
+  dt_ctl_t *ctl,
+  dtfb_t *fb,
+  void *data,
+  int x0,
+  int y0,
+  int xe,
+  int ye)
+{
+  DT_F("dtfb_bt_getblock");
+  priv_t *priv = (priv_t *)fb->priv;
+  dt_rc_e rc = DT_RC_GOOD;
+  
+  if (x0 != 0 || y0 != 0)				/* the whole pie only			    */
+    return dt_err(ctl, F,
+      "x0=%d or y0=%d is not 0",
+      x0, y0);
+
+  DT_C(dtos_time_delay,(ctl,			/* delay after switching 			*/
+    &priv->switch_time,
+    priv->switch_delay));
+  priv->switch_delay = 0;				/* delay no more 					*/
+
+  IOCTL(BTTV_GRAB, &priv->mem);			/* load bt's buffer 				*/
+ 
+  DT_C(dtfb_util_bgr_rgb,(ctl,			/* copy bytes from bt's buffer 		*/
+    (const unsigned char *)priv->mem, 
+    (unsigned char *)data, xe, ye));
+
+#if 0
+  memcpy(data, priv->mem,			
+    priv->mem_size);
+#endif
+
+cleanup:
+  return rc;
+}
+
+/*..........................................................................
+ *..........................................................................*/
+
+static
+dt_rc_e
+dtfb_bt_release(						/* release resources 				*/
+  dt_ctl_t *ctl,
+  priv_t *priv)
+{
+  DT_F("dtfb_bt_release");
+  long result;
+  dt_rc_e rc = DT_RC_GOOD;
+
+  if (priv == NULL)
+    return rc;
+
+  if (priv->portio_initialized)
+    DT_I(dtportio_uninit,(ctl,
+      &priv->portio));
+
+  if (priv->mem != NULL)
+  {
+	int sysrc;
+	sysrc = munlock(priv->mem, 0x200000);
+	if (sysrc != 0)
+	{
+	  int e = errno;
+	  rc = dt_err(ctl, F,
+        "munlock(0x%08lx, 0x2000000)"
+        DTERRNO_FMT,
+        priv->mem, DTERRNO_ARG(e));
+	}
+	free(priv->mem);					/* free buffer memory 				*/
+  }
+  
+  if (priv->fd > 0)
+	close(priv->fd);
+
+  if (priv->spec != NULL)
+    DT_I(dtos_free2,(ctl, priv->spec,
+      F, "spec"));
+
+  DT_I(dtos_free2,(ctl, priv,
+    F, "priv"));
+
+  return rc;
+}
+
+/*..........................................................................
+ *..........................................................................*/
+
+static
+dt_rc_e
+dtfb_bt_source(						/* change signal source				*/
+  dt_ctl_t *ctl,
+  dtfb_t *fb,
+  const char *source)
+{
+  DT_F("dtfb_bt_source");
+  priv_t *priv = (priv_t *)fb->priv;
+  char *s = NULL;
+  int i, n;
+  char *p;
+  long v;
+  char c;
+  int sysrc;
+  dt_rc_e rc = DT_RC_GOOD;
+
+  if (source == NULL)
+    goto cleanup;
+
+  DT_C(dtos_strdup,(ctl, source, &s));	/* a place to edit 					*/
+  DT_C(dtstr_tokenize,(ctl, s, '+',		/* multiple commands together 		*/
+    &n));
+
+  p = s;
+  for (i=0; i<n; i++)
+  {
+										/* ................................ */
+	if (DT_ABBREV(p, "source,"))
+	{
+	  p = strchr(p, ',') + 1;
+	  DT_C(dtstr_to_long,(ctl, p, &v));
+	  if (v != (long)priv->source)
+	  {
+	    dt_dbg(ctl, F, DT_DBG_MASK_SCHEDULE,
+          "switch to video source 0x%04lx",
+          v);
+		IOCTL(BTTV_INPUT, &v);
+		priv->source = (int)v;
+	  }
+	}
+	else
+										/* ................................ */
+	if (DT_ABBREV(p, "vidmux,"))
+	{
+	  long port, value, delay;
+
+	  if (!strcmp(p, priv->vidmux))		/* same vidmux as last time? 		*/
+		continue;
+	  DTSTR_CPY(ctl, priv->vidmux, p);
+		  
+	  DT_C(dtfb_vidmux_parse,(ctl,		/* parse the vidmux string 			*/
+        strchr(p, ',')+1, 
+        &port, &value, &delay));
+
+	  if (!priv->portio_initialized)	/* ports not accessed yet? 			*/
+	    DT_C(dtportio_init,(ctl,		/* access ports directly		    */
+          &priv->portio, NULL));
+	  priv->portio_initialized = 1;
+
+	  DT_C(dtfb_vidmux_switch,(ctl,		/* switch the vidmux 				*/
+        &priv->portio, port, value));
+	  
+	  DT_Q(dtos_time,(ctl,				/* current time at switch			*/
+        &priv->switch_time));
+	  priv->switch_delay = delay;		/* delay just before getblock		*/
+	}
+										/* ................................ */
+	else
+	{
+	  rc = dt_err(ctl, F,
+        "invalid bt command \"%s\"",
+        p);
+	  goto cleanup;
+	}
+	p = p + strlen(p) + 1;
+  }
+  
+cleanup:
+  if (s != NULL)
+    DT_I(dtos_free2,(ctl, s,
+      F, "source string"));
+  return rc;
+}
+
+/*..........................................................................
+ *..........................................................................*/
+
+static
+dt_rc_e
+dtfb_bt_uninit(						/* release resources 				*/
+  dt_ctl_t *ctl,
+  dtfb_t *fb)
+{
+  DT_F("dtfb_bt_uninit");
+  priv_t *priv = (priv_t *)fb->priv;
+  DT_Q(dtfb_bt_release,(ctl, priv));
+  return DT_RC_GOOD;
+}
+
+#endif
+
+/*..........................................................................
+ *..........................................................................*/
+
+dt_rc_e
+DTCONFIG_API1
+dtfb_bt_init(
+  dt_ctl_t *ctl,
+  dtfb_t *fb,
+  const char *spec)
+{
+  DT_F("dtfb_bt_init");
+# if DTPRJ_BTTV == DT_1
+  priv_t *priv = NULL;
+  int ntokens;
+  char *p;
+  char *dev = "";
+  long longval;
+  int value;
+  char *svalue;
+  struct bttv_window wtw;
+  int i;
+  int sysrc;
+  dt_rc_e rc;
+
+  DTCSTACK_HIGHWATER;
+
+  if (spec == NULL)
+  {
+    rc = dt_err(ctl, F,
+      "NULL bt spec");
+    goto cleanup;
+  }
+  else
+  if (strlen(spec) == 0)
+  {
+    rc = dt_err(ctl, F,
+      "zero-length bt spec");
+    goto cleanup;
+  }
+
+  DT_C(dtos_malloc2,(ctl,				/* space for private structure	    */
+    (void **)&priv,
+    sizeof(priv_t),
+    F, "priv"));
+  memset(priv, 0, sizeof(priv_t));		/* clear private structure 			*/
+
+  DT_C(dtos_strdup,(ctl, spec,			/* get space for spec edit 			*/
+    &priv->spec));
+
+  DT_C(dtstr_tokenize,(ctl,				/* separate spec into tokens 		*/
+    priv->spec,
+    ',', &ntokens));
+										/* ................................ */
+  p = priv->spec;
+
+  if (ntokens >= 1)
+  {
+    dev = p;
+	p += strlen(p) + 1;
+  }
+
+  if (ntokens >= 2)						/* width 							*/
+  {
+    DT_C(dtstr_to_long,(ctl,
+      p, &longval));
+	fb->xe = longval;
+	p += strlen(p) + 1;
+  }
+  else
+    fb->xe = 352;
+
+  if (ntokens >= 3)						/* height 							*/
+  {
+    DT_C(dtstr_to_long,(ctl,
+      p, &longval));
+	fb->ye = longval;
+	p += strlen(p) + 1;
+  }
+  else
+    fb->ye = 288;
+
+  if (ntokens >= 4)						/* flags+flags						*/
+  {
+    priv->flag_skip = !!strstr(p, "skip");
+    priv->flag_dup = !!strstr(p, "dup");
+  }
+										/* ................................ */
+  priv->fd = open(dev, O_RDONLY);
+  if (priv->fd < 0)
+  {
+	rc = dt_err(ctl, F,
+      "open(\"%s\", O_RDONLY)"
+      DTERRNO_FMT,
+      dev, DTERRNO_ARG(errno));
+	goto cleanup;
+  }
+										/* ................................ */
+  
+  IOCTL(BTTV_GETWTW, &wtw);
+  wtw.y = 0;
+  wtw.bpp = 3;
+  wtw.bpl = fb->xe * wtw.bpp;
+  wtw.width = fb->xe;
+  wtw.height = fb->ye;
+  wtw.swidth = fb->xe;
+  wtw.sheight = fb->ye;
+  wtw.norm = 1;
+  wtw.interlace = 0;
+  IOCTL(BTTV_SETWTW, &wtw);
+
+  priv->mem = (unsigned char *)malloc(0x200000);
+  if (priv->mem == NULL)
+  {
+	int e = errno;
+	rc = dt_err(ctl, F,
+      "malloc(0x200000) failed"
+      DTERRNO_FMT,
+      DTERRNO_ARG(e));
+	goto cleanup;
+  }
+
+  sysrc = mlock(priv->mem, 0x200000);
+  if (sysrc == -1)
+  {
+	int e = errno;
+	rc = dt_err(ctl, F,
+      "mlock(0x%08lx, 0x200000) failed"
+      DTERRNO_FMT,
+      priv->mem,
+      DTERRNO_ARG(e));
+	goto cleanup;
+  }
+
+  /* The memory is formally allocated and locked but not really there yet!
+     Access one byte in each page (assumed to be 4096 Bytes) to really do it.
+     */
+  for (i=0; i<0x200000; i+=4096)
+    priv->mem[i]=1;
+  // Just in case memory is not page aligned
+
+  priv->mem[0x1fffff]=1;
+
+  priv->mem_size = fb->xe * 3 * fb->ye;
+										/* ................................ */
+  fb->priv = priv;
+  DT_C(dtfb_bt_report,(ctl, fb,			/* report what we have so far 		*/
+    "1"));
+										/* ................................ */
+  
+  fb->uninit   = dtfb_bt_uninit;
+  fb->control  = dtfb_bt_control;
+  fb->getblock = dtfb_bt_getblock;
+  fb->source   = dtfb_bt_source;
+
+  fb->org.org  = DT_COLOR_ORG_RGB888;
+  fb->rowsize  = 3 * fb->xe;			/* three bytes per pixel 			*/
+
+  DT_C(dtfb_bt_source,(ctl, fb,			/* set source to composite 			*/
+    "source,1"));
+  
+cleanup:
+  if (rc != DT_RC_GOOD)
+  {
+	DT_I(dtfb_bt_release,(ctl, priv));
+	memset(fb, 0, sizeof(*fb));
+  }
+
+  return rc;
+# else
+  return dt_err_notlinked(ctl, F, DESC);  
+# endif
+}
+
+/*..........................................................................
+ *..........................................................................*/
+
+dt_rc_e
+DTCONFIG_API1
+dtfb_bt_rev(						/* deliver revision 				*/
+  dt_ctl_t *ctl,						/* environment control 				*/
+  const char **rev_string,				/* returned rev string 				*/
+  int *rev_major,						/* returned rev major 				*/
+  int *rev_minor,						/* returned rev minor 				*/
+  long *rev_date)						/* returned rev date 				*/
+{
+  if (rev_string != NULL)
+    *rev_string = "dtfb_bt lib";
+  if (rev_major != NULL)
+    *rev_major = 1;
+  if (rev_minor != NULL)
+    *rev_minor = 0;
+  if (rev_date != NULL)
+    *rev_date = 19980208;
+  return DT_RC_GOOD;
+}
+

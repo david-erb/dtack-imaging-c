@@ -1,0 +1,10 @@
+-connect rocket,localhost:%d!
+-input ser,%s
+-D usr1+usr2
+-path /img/tableau/test1
+    -op "stamp,test %%d %%b %%y %%H:%%M:%%S"
+    -dz 5
+    -t 25
+    -errto /usr/erb/prj/dt/app/wrangler/drone.log
+    -dbgto /usr/erb/prj/dt/app/wrangler/drone.log
+    -sayto /usr/erb/prj/dt/app/wrangler/drone.log

@@ -1,0 +1,68 @@
+define(TOP, UP2)
+define(DIR, source/mpeg)
+__prolog
+
+__summary(prj_lib_summary(umdecq), umdec.doc, NCI)
+
+__example(umdec1, umdec.doc)
+
+__proto(umdecscr,
+  umdecscr+
+  fast+
+  raw)
+
+pushdef(`CCOPTIMIZE', `CCOPTIMIZE_HIGH')
+pushdef(`CCDEBUGGER', `CCDEBUGGER_OFF')
+__src(fast)
+popdef(`CCDEBUGGER')
+popdef(`CCOPTIMIZE')
+
+define(`__common', 
+  prj_lib(dtxchg)+
+  prj_lib(dtwinc)+
+  prj_lib(dtxchgs)+
+  prj_lib(dthigh)+
+  prj_lib(dtcolor)+
+  prj_lib(dtscr)+
+  prj_lib(dtcan)+
+  prj_lib(dthws)+
+  prj_lib(umdec)+
+  PRJ_KEYBD_LIB+
+  PRJ_SCR_LIBS+
+  PRJ_LIBS+
+  prj_fourth_lib(xv310a)+
+  prj_fourth_lib(mpegssg))
+
+__shexe(prj_lib_prog(umdec1), 
+  umdec1,    , 
+  prj_lib(umdec)+
+  __common,
+  PRJ_LOADS PRJ_SCR_LOADS PRJ_MPEG_VIDEOPLEX_LOAD)
+
+pushdef(`CCSHARABLE', `CCSHARABLE_ON')
+
+__src(umdecssg, 
+  PRJ_INCLUDES+PRJ_MPEG_SSG_INCLUDE, 
+  PRJ_DEFINES+PRJ_MPEG_SSG_DEFINE)
+__src(umdecscr, 
+  PRJ_INCLUDES+PRJ_MPEG_SSG_INCLUDE, 
+  PRJ_DEFINES+PRJ_MPEG_SSG_DEFINE)
+__src(umdecvp, 
+  PRJ_INCLUDES+PRJ_MPEG_VIDEOPLEX_INCLUDE, 
+  PRJ_DEFINES+PRJ_MPEG_VIDEOPLEX_DEFINE)
+
+__shlib(prj_lib(umdec),
+  umdeclib+
+  umdecssg+
+  umdecvp+
+  umdecscr+
+  fast+
+  raw+
+  libmain, , , 
+  __common)
+
+
+popdef(`CCSHARABLE')
+
+__finish
+

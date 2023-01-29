@@ -1,0 +1,16 @@
+# -screen roll,unit1
+# -path /video
+
+# -screen ftp,/tmp/webcam/%s.%08ld.rgb888.enc
+
+-screen rocket,192.9.200.11:5710
+
+# -screen http://192.9.200.11:6080/nph-tabserve.cgi?ident=erbcam
+
+-input bt,/dev/bttv,320,240
+-config config
+-D usr1+usr2+command
+
+-errto logs/tableau.log
+-dbgto logs/tableau.log
+-sayto logs/tableau.log

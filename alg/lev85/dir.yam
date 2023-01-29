@@ -1,0 +1,121 @@
+define(TOP, PRJ_ALG_TOP)
+define(DIR, alg/lev85)
+
+__promo(prj_product_info(lev85p), lev85p.doc)
+
+__proto(prj_alg_proto(lev85),
+  cmd+test+time+
+  total+
+  label+
+  blob+
+  hist+
+  init+
+  compute+
+  combine)
+__guide(prj_alg_guide(lev85), 
+  lev85.doc+
+  cmd.c+
+  total.c+
+  label.c+
+  blob.c+
+  hist.c+
+  init.c+
+  compute.c+
+  combine.c,
+  PRJ_ALG_SERIES)
+__usage(lev85, cmd)
+__help(prj_alg_help(lev85), doc)
+__script(prj_alg_script(lev85t), lev85t.sh)
+
+__guide(prj_alg_guide(lev85s), 
+  short.doc,
+  PRJ_ALG_SERIES_SHORT)
+
+__example(lev85a, total.c)
+__example(lev85b, label.c)
+__example(lev85c, compute.c)
+__example(lev85d, lev85.doc)
+
+pushdef(`CCSHARABLE', `CCSHARABLE_ON')
+
+pushdef(`CCOPTIMIZE', `CCOPTIMIZE_HIGH')
+pushdef(`CCDEBUGGER', `CCDEBUGGER_OFF')
+__src(total)
+__src(label)
+__src(blob)
+__src(hist)
+__src(compute)
+popdef(`CCDEBUGGER')
+popdef(`CCOPTIMIZE')
+
+__shlib(prj_alg_lib(lev85), 
+  total+
+  label+
+  blob+
+  hist+
+  init+
+  compute+
+  combine+
+  data)
+__shlib(prj_alg_lib(lev85x), cmd+test+time)
+
+__shexe(prj_alg_exe(lev85), 
+  main, ,
+  prj_alg_lib(lev85x)+
+  prj_alg_lib(lev85)+
+  PRJ_APP1_LIBS,
+  PRJ_APP1_LOADS)
+
+__shexe(prj_alg_samp(lev85, a), 
+  lev85a, ,
+  prj_alg_lib(lev85)+
+  PRJ_APP2_LIBS,
+  PRJ_APP2_LOADS)
+
+__shexe(prj_alg_samp(lev85, b), 
+  lev85b, ,
+  prj_alg_lib(lev85)+
+  PRJ_APP2_LIBS,
+  PRJ_APP2_LOADS)
+
+__shexe(prj_alg_samp(lev85, c), 
+  lev85c, ,
+  prj_alg_lib(lev85)+
+  PRJ_APP2_LIBS,
+  PRJ_APP2_LOADS)
+
+__shexe(prj_alg_samp(lev85, d), 
+  lev85d, ,
+  prj_alg_lib(lev85)+
+  PRJ_APP2_LIBS,
+  PRJ_APP2_LOADS)
+
+__finish
+
+divert(0)`'dnl
+
+define(`__figone', `PRJ_DOCDIR/DIR/$1.ps')
+define(`__figtwo', `PRJ_DOCDIR/DIR/$1.ps3.gz PRJ_DOCDIR/DIR/$1.ps6.gz')
+define(`__figmakeone', `dnl
+__figone($1)3.gz: now
+	sh PRJ_SRCDIR/DIR/figs.sh $1.ps \
+	  DIR PRJ_SRCDIR PRJ_OUTDIR PRJ_DOCDIR 300
+__figone($1)6.gz: now
+	sh PRJ_SRCDIR/DIR/figs.sh $1.ps \
+	  DIR PRJ_SRCDIR PRJ_OUTDIR PRJ_DOCDIR 600')
+
+
+define(`__figs', 
+  gray2+seg2a+seg2b+
+  gray3+seg3a+seg3b+
+  gray4a+seg4a+gray4b+seg4b+
+  gray5+seg5a+seg5b+seg5c+seg5d+
+  gray5x2+gray5x3+seg5ax2+seg5bx2+
+  draw6)
+
+__list(`__figmakeone', __figs, __ret)
+figs: \
+	__list(`__figtwo', __figs, __contin`	')
+
+
+divert(-1)

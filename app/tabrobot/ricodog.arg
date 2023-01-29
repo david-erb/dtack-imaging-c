@@ -1,0 +1,19 @@
+# :-connect:    server to try to connect to
+# :-output:     serial port where duet is
+# :-variant:    serial port setup string
+# :-n:          duet OFF byte
+# :-y:          duet ON byte
+# :-epsilon:    connect timeout (miliseconds)
+# :-dx:         dwell time while duet is off (milliseconds)
+# :-dt:			time between polls (seconds)
+
+-connect rocket,www.surfcheck.com:80
+-output COM2:
+-variant 1200-N-8-1
+-n 0x00
+-y 0x40
+-epsilon 30000
+-dx 5000
+-dt 60000
+
+

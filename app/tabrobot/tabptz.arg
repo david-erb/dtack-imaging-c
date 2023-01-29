@@ -1,0 +1,21 @@
+# this file starts the Tabptz server
+
+# change the port number here only if necessary
+
+-config .
+-connect rocket,0:5791
+
+# change the device to the serial port where the ptz is connected
+
+# Linux
+-output pela,/dev/cua0
+
+# Win95
+#-output pela,com1:,9600-n-8-1
+
+-D usr1+command
+
+#-errto logs/tabptz.log
+#-dbgto logs/tabptz.log
+#-sayto logs/tabptz.log
+

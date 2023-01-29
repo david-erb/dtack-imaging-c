@@ -1,0 +1,241 @@
+===========================================
+date     Thu Aug 17 06:23:59 CDT 1995
+uname    FreeBSD d0 2.0-RELEASE FreeBSD 2.0-RELEASE #7: Fri Apr 21 16:45:02  1995     erb@d0:/usr/src/sys/compile/ERB  i386
+pwd      /bbsy/home/erb/prj/dt
+dttmem: being started by dttiming.sh 17 Aug 95 06:23 
+dttmem: | 950817 | disk 63000 (20) | FG1 | compiler | cpu |  0.08 |  7.78 |  7.86
+dttmem: | 950817 | disk 16384 (20) | FG1 | compiler | cpu |  0.26 |  7.22 |  8.16
+dttmem: | 950817 | disk 4000 (10) | FG1 | compiler | cpu |  0.32 |  3.97 |  4.30
+dttmem: | 950817 | disk 512 (2) | FG1 | compiler | cpu |  0.59 |  1.47 |  2.07
+dttmem: | 950817 | ram 63000 (100000) | FG1 | compiler | cpu |  3.10 |  0.01 |  3.11
+dttmem: | 950817 | ram 16384 (20000) | FG1 | compiler | cpu |  2.05 |  0.01 |  2.06
+dttmem: | 950817 | ram 4000 (5000) | FG1 | compiler | cpu |  2.05 |  0.01 |  2.06
+dttmem: | 950817 | ram 512 (500) | FG1 | compiler | cpu |  2.13 | -0.00 |  2.13
+dttmem: | 950817 | ems 63000 (100) | FG1 | compiler | cpu |  9.09 |  0.09 |  9.19
+dttmem: | 950817 | ems 16384 (100) | FG1 | compiler | cpu |  7.55 |  0.08 |  7.63
+dttmem: | 950817 | ems 4000 (100) | FG1 | compiler | cpu |  7.76 |  0.05 |  7.81
+dttmem: | 950817 | ems 512 (50) | FG1 | compiler | cpu |  6.36 |  0.04 |  6.55
+dttmem: | 950817 | xms 63000 (100) | FG1 | compiler | cpu |  8.87 |  0.12 |  9.01
+dttmem: | 950817 | xms 16384 (100) | FG1 | compiler | cpu |  7.56 |  0.04 |  7.60
+dttmem: | 950817 | xms 4000 (100) | FG1 | compiler | cpu |  7.71 |  0.05 |  7.76
+dttmem: | 950817 | xms 512 (50) | FG1 | compiler | cpu |  6.28 |  0.04 |  6.32
+dttmem:   all memory freed
+dttstack: being started by dttiming.sh 17 Aug 95 06:25 
+dttstack: dttstack_check:   default type 0x02 after push overflow at nels=100000 (got code 1)
+dttstack: dttstack_check:   default type 0x02 after push poke/peek/pop 100000 out of 100000
+dttstack: dttstack_check:   default type 0x02 after push underflow at -1 (got code 2)
+dttstack: dttstack_paged:   default type 0x02 after limited full read code 0 (0), eof 0 (0)
+dttstack: dttstack_check:   default type 0x02 after limited full read overflow at nels=100000 (got code 1)
+dttstack: dttstack_check:   default type 0x02 after limited full read poke/peek/pop 100000 out of 100000
+dttstack: dttstack_check:   default type 0x02 after limited full read underflow at -1 (got code 2)
+dttstack: dttstack_paged:   default type 0x02 after unlimited full read code 0 (0), eof 0 (0)
+dttstack: dttstack_check:   default type 0x02 after unlimited full read poke/peek/pop 100000 out of 100000
+dttstack: dttstack_check:   default type 0x02 after unlimited full read underflow at -1 (got code 2)
+dttstack: dttstack_check:   default type 0x02 after push overflow at nels=100000 (got code 1)
+dttstack: dttstack_check:   default type 0x02 after push poke/peek/pop 100000 out of 100000
+dttstack: dttstack_check:   default type 0x02 after push underflow at -1 (got code 2)
+dttstack: dttstack_paged:   default type 0x02 after limited full read code 0 (0), eof 0 (0)
+dttstack: dttstack_check:   default type 0x02 after limited full read overflow at nels=100000 (got code 1)
+dttstack: dttstack_check:   default type 0x02 after limited full read poke/peek/pop 100000 out of 100000
+dttstack: dttstack_check:   default type 0x02 after limited full read underflow at -1 (got code 2)
+dttstack: dttstack_paged:   default type 0x02 after unlimited full read code 0 (0), eof 0 (0)
+dttstack: dttstack_check:   default type 0x02 after unlimited full read poke/peek/pop 100000 out of 100000
+dttstack: dttstack_check:   default type 0x02 after unlimited full read underflow at -1 (got code 2)
+dttstack: dttstack_check:   default type 0x02 after push overflow at nels=100000 (got code 1)
+dttstack: dttstack_check:   default type 0x02 after push poke/peek/pop 100000 out of 100000
+dttstack: dttstack_check:   default type 0x02 after push underflow at -1 (got code 2)
+dttstack: dttstack_paged:   default type 0x02 after limited full read code 0 (0), eof 0 (0)
+dttstack: dttstack_check:   default type 0x02 after limited full read overflow at nels=100000 (got code 1)
+dttstack: dttstack_check:   default type 0x02 after limited full read poke/peek/pop 100000 out of 100000
+dttstack: dttstack_check:   default type 0x02 after limited full read underflow at -1 (got code 2)
+dttstack: dttstack_paged:   default type 0x02 after unlimited full read code 0 (0), eof 0 (0)
+dttstack: dttstack_check:   default type 0x02 after unlimited full read poke/peek/pop 100000 out of 100000
+dttstack: dttstack_check:   default type 0x02 after unlimited full read underflow at -1 (got code 2)
+dttstack: dttstack_check:   default type 0x02 after push overflow at nels=100000 (got code 1)
+dttstack: dttstack_check:   default type 0x02 after push poke/peek/pop 100000 out of 100000
+dttstack: dttstack_check:   default type 0x02 after push underflow at -1 (got code 2)
+dttstack: dttstack_paged:   default type 0x02 after limited full read code 0 (0), eof 0 (0)
+dttstack: dttstack_check:   default type 0x02 after limited full read overflow at nels=100000 (got code 1)
+dttstack: dttstack_check:   default type 0x02 after limited full read poke/peek/pop 100000 out of 100000
+dttstack: dttstack_check:   default type 0x02 after limited full read underflow at -1 (got code 2)
+dttstack: dttstack_paged:   default type 0x02 after unlimited full read code 0 (0), eof 0 (0)
+dttstack: dttstack_check:   default type 0x02 after unlimited full read poke/peek/pop 100000 out of 100000
+dttstack: dttstack_check:   default type 0x02 after unlimited full read underflow at -1 (got code 2)
+dttstack: dttstack_check:   default type 0x02 after push overflow at nels=100000 (got code 1)
+dttstack: dttstack_check:   default type 0x02 after push poke/peek/pop 100000 out of 100000
+dttstack: dttstack_check:   default type 0x02 after push underflow at -1 (got code 2)
+dttstack: dttstack_paged:   default type 0x02 after limited full read code 0 (0), eof 0 (0)
+dttstack: dttstack_check:   default type 0x02 after limited full read overflow at nels=100000 (got code 1)
+dttstack: dttstack_check:   default type 0x02 after limited full read poke/peek/pop 100000 out of 100000
+dttstack: dttstack_check:   default type 0x02 after limited full read underflow at -1 (got code 2)
+dttstack: dttstack_paged:   default type 0x02 after unlimited full read code 0 (0), eof 0 (0)
+dttstack: dttstack_check:   default type 0x02 after unlimited full read poke/peek/pop 100000 out of 100000
+dttstack: dttstack_check:   default type 0x02 after unlimited full read underflow at -1 (got code 2)
+dttstack: | 950817 | 100000 type 2 ( 5) | FG1 | compiler | cpu |  7.84 |  1.72 | 10.29
+dttstack:   all memory freed
+dttbpe: being started by dttiming.sh 17 Aug 95 06:25 
+dttbpe: dttbpe_compress_expand:   constant 512x512 size 262144 (262144) compare 0 (0)
+dttbpe: | 950817 | compress constant 512x512 | FG1 | compiler | cpu |  7.33 |  0.02 |  7.35
+dttbpe: | 950817 | expand constant 512x512 | FG1 | compiler | cpu |  2.08 |  0.09 |  2.17
+dttbpe: dttbpe_compress_expand:   uniform 512x512 size 262144 (262144) compare 0 (0)
+dttbpe: | 950817 | compress uniform 512x512 | FG1 | compiler | cpu |  5.87 |  0.05 |  5.93
+dttbpe: | 950817 | expand uniform 512x512 | FG1 | compiler | cpu |  2.20 |  0.02 |  2.21
+dttbpe: dttbpe_expand_compress:   dice256.bpe size 48833 (48833) compare 0 (0)
+dttbpe: | 950817 | expand dice256.bpe | FG1 | compiler | cpu |  0.42 |  0.02 |  0.44
+dttbpe: | 950817 | compress dice256.bpe | FG1 | compiler | cpu | 14.66 |  0.10 | 14.78
+dttbpe: dttbpe_expand_compress:   dice256s.bpe size 1640 (1640) compare 0 (0)
+dttbpe: | 950817 | expand dice256s.bpe | FG1 | compiler | cpu |  0.42 |  0.00 |  0.42
+dttbpe: | 950817 | compress dice256s.bpe | FG1 | compiler | cpu |  2.18 | -0.00 |  2.18
+dttbpe:   all memory freed
+dttlog: being started by dttiming.sh 17 Aug 95 06:26 
+dttlog: | 950817 | log10 unscaled (50@128x120) | FG1 | compiler | cpu |  0.55 | -0.00 |  0.55
+dttlog: dttlog2:   log10 32-into-8 unscaled (top)
+dttlog: dttlog2:   log10 32-into-8 unscaled (middle)
+dttlog: dttlog2:   log10 32-into-8 unscaled (bottom)
+dttlog: | 950817 | log10 scaled (50@128x120) | FG1 | compiler | cpu | 13.59 |  0.08 | 13.69
+dttlog: dttlog3:   log10 32-into-8 unscaled (top)
+dttlog: dttlog3:   log10 32-into-8 unscaled (middle)
+dttlog: dttlog3:   log10 32-into-8 unscaled (bottom)
+dttlog: | 950817 | log unscaled (50@128x120) | FG1 | compiler | cpu |  0.53 |  0.02 |  0.56
+dttlog: dttlog4:   log 32-into-8 unscaled (top)
+dttlog: dttlog4:   log 32-into-8 unscaled (middle)
+dttlog: dttlog4:   log 32-into-8 unscaled (bottom)
+dttlog: | 950817 | log scaled (50@128x120) | FG1 | compiler | cpu | 11.56 |  0.03 | 11.59
+dttlog: dttlog5:   log 32-into-8 unscaled (top)
+dttlog: dttlog5:   log 32-into-8 unscaled (middle)
+dttlog: dttlog5:   log 32-into-8 unscaled (bottom)
+dttlog:   all memory freed
+dttrun: being started by dttiming.sh 17 Aug 95 06:26 
+dttrun: dttrun_time:   empty blobs 0 (0)
+dttrun: | 950817 | empty ( 5) | FG1 | compiler | cpu |  0.17 |  0.01 |  0.18
+dttrun: dttrun_time:   solid blobs 1 (1)
+dttrun: | 950817 | solid ( 5) | FG1 | compiler | cpu |  0.18 | -0.00 |  0.18
+dttrun: dttrun_time:   checquer blobs 65536 (65536)
+dttrun: | 950817 | checquer ( 5) | FG1 | compiler | cpu |  2.65 |  0.12 |  2.77
+dttrun: dttrun_time:   tiny_blobs blobs 16384 (16384)
+dttrun: | 950817 | tiny_blobs ( 5) | FG1 | compiler | cpu |  0.58 |  0.01 |  0.58
+dttrun: dttrun_time:   tiny_holes blobs 1 (1)
+dttrun: | 950817 | tiny_holes ( 5) | FG1 | compiler | cpu |  0.86 |  0.00 |  0.86
+dttrun: dttrun_time:   tree blobs 2 (2)
+dttrun: | 950817 | tree ( 5) | FG1 | compiler | cpu |  0.58 | -0.00 |  0.58
+dttrun: dttrun_time:   solid blobs 1 (1)
+dttrun: | 950817 | solid ( 5) | FG1 | compiler | cpu |  0.18 |  0.00 |  0.18
+dttrun: dttrun_time:   dice128.bpe blobs 12487 (-1)
+dttrun: | 950817 | dice128.bpe ( 5) | FG1 | compiler | cpu |  2.15 | -0.00 |  2.15
+dttrun: dttrun_time:   dice256/t080.bpe blobs 4 (-1)
+dttrun: | 950817 | dice256/t080.bpe ( 5) | FG1 | compiler | cpu |  0.18 |  0.00 |  0.18
+dttrun: dttrun_time:   dice256/t170.bpe blobs 44 (-1)
+dttrun: | 950817 | dice256/t170.bpe ( 5) | FG1 | compiler | cpu |  0.20 |  0.00 |  0.20
+dttrun: dttrun_time:   timer256/seg1.bpe blobs 393 (-1)
+dttrun: | 950817 | timer256/seg1.bpe ( 5) | FG1 | compiler | cpu |  0.29 |  0.00 |  0.29
+dttrun:   all memory freed
+dtt1d: being started by dttiming.sh 17 Aug 95 06:27 
+dtt1d: | 950817 | random uniform (  7500) | FG1 | compiler | cpu |  0.06 |  0.01 |  0.07
+dtt1d: dtt1d_random_uniform_double_timing:   7500 random uniform generation complete
+dtt1d: | 950817 | random gauss (  7500) | FG1 | compiler | cpu |  0.30 | -0.00 |  0.30
+dtt1d: dtt1d_random_gauss_double_timing:   7500 random gauss generation complete
+dtt1d: | 950817 | inverted sort (  7500) | FG1 | compiler | cpu |  0.12 | -0.00 |  0.12
+dtt1d: dtt1d_sort_double_invert_timing:   vector size 7500 is properly sorted
+dtt1d: | 950817 | random sort (  7500) | FG1 | compiler | cpu |  0.13 | -0.00 |  0.13
+dtt1d: dtt1d_sort_double_random_timing:   vector size 7500 is properly sorted
+dtt1d:   all memory freed
+dttcast: being started by dttiming.sh 17 Aug 95 06:27 
+dttcast: | 950817 | b08->b01 (50) | FG1 | compiler | cpu |  0.70 | -0.00 |  0.70
+dttcast: | 950817 | b01->b08 (50) | FG1 | compiler | cpu |  0.55 |  0.01 |  0.56
+dttcast: dttcast_time_one:   image comparison (256)
+dttcast: | 950817 | b08->b08 (50) | FG1 | compiler | cpu |  0.27 |  0.00 |  0.27
+dttcast: | 950817 | b08->b08 (50) | FG1 | compiler | cpu |  0.29 | -0.00 |  0.29
+dttcast: dttcast_time_one:   image comparison (256)
+dttcast: | 950817 | b08->b16 (50) | FG1 | compiler | cpu |  0.99 |  0.03 |  1.02
+dttcast: | 950817 | b16->b08 (50) | FG1 | compiler | cpu |  0.87 | -0.00 |  0.88
+dttcast: dttcast_time_one:   image comparison (256)
+dttcast: | 950817 | b08->b32 (50) | FG1 | compiler | cpu |  0.95 |  0.02 |  0.96
+dttcast: | 950817 | b32->b08 (50) | FG1 | compiler | cpu |  1.23 |  0.05 |  1.28
+dttcast: dttcast_time_one:   image comparison (256)
+dttcast: | 950817 | b08->s1  (50) | FG1 | compiler | cpu |  0.91 | -0.00 |  0.91
+dttcast: | 950817 | s1 ->b08 (50) | FG1 | compiler | cpu |  0.83 |  0.01 |  0.83
+dttcast: dttcast_time_one:   image comparison (256)
+dttcast: | 950817 | b08->s2  (50) | FG1 | compiler | cpu |  1.01 |  0.00 |  1.01
+dttcast: | 950817 | s2 ->b08 (50) | FG1 | compiler | cpu |  0.93 |  0.00 |  0.93
+dttcast: dttcast_time_one:   image comparison (256)
+dttcast: | 950817 | b08->s4  (50) | FG1 | compiler | cpu |  0.95 |  0.00 |  0.95
+dttcast: | 950817 | s4 ->b08 (50) | FG1 | compiler | cpu |  1.23 | -0.00 |  1.23
+dttcast: dttcast_time_one:   image comparison (256)
+dttcast: | 950817 | b08->f1  (10) | FG1 | compiler | cpu |  0.66 |  0.02 |  0.68
+dttcast: | 950817 | f1 ->b08 (10) | FG1 | compiler | cpu |  0.91 |  0.02 |  0.93
+dttcast: dttcast_time_one:   image comparison (256)
+dttcast: | 950817 | b08->f2  (10) | FG1 | compiler | cpu |  0.70 |  0.02 |  0.72
+dttcast: | 950817 | f2 ->b08 (10) | FG1 | compiler | cpu |  1.09 |  0.02 |  1.10
+dttcast: dttcast_time_one:   image comparison (256)
+dttcast:   all memory freed
+dttconv: being started by dttiming.sh 17 Aug 95 06:27 
+dttconv: | 950817 | ave 3x3     long   (2) | FG1 | compiler | cpu |  5.05 |  0.03 |  5.08
+dttconv: | 950817 | ave 3x3     double (2) | FG1 | compiler | cpu |  8.36 |  0.27 |  8.71
+dttconv: | 950817 | ave 5x5     long   (2) | FG1 | compiler | cpu | 16.17 |  0.11 | 16.29
+dttconv: | 950817 | ave 5x5     double (2) | FG1 | compiler | cpu | 22.70 |  0.09 | 22.81
+dttconv: | 950817 | ave 7x7     long   (2) | FG1 | compiler | cpu | 16.18 |  0.05 | 16.23
+dttconv: | 950817 | ave 7x7     double (2) | FG1 | compiler | cpu | 22.74 |  0.05 | 22.81
+dttconv: | 950817 | laplace 3x3 long   (2) | FG1 | compiler | cpu |  3.57 |  0.02 |  3.58
+dttconv: | 950817 | laplace 3x3 double (2) | FG1 | compiler | cpu |  6.12 |  0.04 |  6.16
+dttconv: | 950817 | laplace 5x5 long   (2) | FG1 | compiler | cpu |  6.53 |  0.02 |  6.55
+dttconv: | 950817 | laplace 5x5 double (2) | FG1 | compiler | cpu |  9.04 |  0.02 |  9.06
+dttconv: | 950817 | h1d 3x1     long   (2) | FG1 | compiler | cpu |  2.00 |  0.02 |  2.01
+dttconv: | 950817 | h1d 3x1     double (2) | FG1 | compiler | cpu |  3.39 |  0.01 |  3.39
+dttconv: | 950817 | h1d 5x1     long   (2) | FG1 | compiler | cpu |  2.84 | -0.00 |  2.84
+dttconv: | 950817 | h1d 5x1     double (2) | FG1 | compiler | cpu |  4.65 |  0.02 |  4.67
+dttconv: | 950817 | mad256/t5ave3.bpe (4) | FG1 | compiler | cpu |  1.74 |  0.01 |  1.75
+dttconv: dttconv_known:   mad256/t5ave3.bpe (4) cmp 256 (0)
+dttconv: | 950817 | mad256/t5high3.bpe (4) | FG1 | compiler | cpu |  1.82 |  0.01 |  1.83
+dttconv: dttconv_known:   mad256/t5high3.bpe (4) cmp 256 (0)
+dttconv: | 950817 | mad256/t5ave5.bpe (4) | FG1 | compiler | cpu |  4.53 | -0.00 |  4.54
+dttconv: dttconv_known:   mad256/t5ave5.bpe (4) cmp 256 (0)
+dttconv: | 950817 | mad256/t5ave7.bpe (4) | FG1 | compiler | cpu |  8.40 |  0.02 |  8.42
+dttconv: dttconv_known:   mad256/t5ave7.bpe (4) cmp 256 (0)
+dttconv:   all memory freed
+dttadj: being started by dttiming.sh 17 Aug 95 06:29 
+dttadj: dttadj_time:   empty fill blob count 0 (0)
+dttadj: | 950817 | fill  empty ( 5) | FG1 | compiler | cpu |  0.26 |  0.01 |  0.28
+dttadj: dttadj_time:   empty flood blob count 0 (0)
+dttadj: | 950817 | flood empty ( 5) | FG1 | compiler | cpu |  0.14 |  0.01 |  0.15
+dttadj: dttadj_time:   solid fill blob count 1 (1)
+dttadj: | 950817 | fill  solid ( 5) | FG1 | compiler | cpu |  0.93 |  0.02 |  0.95
+dttadj: dttadj_time:   solid flood blob count 1 (1)
+dttadj: | 950817 | flood solid ( 5) | FG1 | compiler | cpu |  0.61 |  0.00 |  0.61
+dttadj: dttadj_time:   checquer fill blob count 65536 (65536)
+dttadj: | 950817 | fill  checquer ( 5) | FG1 | compiler | cpu | 11.85 |  0.03 | 12.01
+dttadj: dttadj_time:   checquer flood blob count 65536 (65536)
+dttadj: | 950817 | flood checquer ( 5) | FG1 | compiler | cpu | 12.99 |  0.10 | 13.11
+dttadj: dttadj_time:   tiny_blobs fill blob count 16384 (16384)
+dttadj: | 950817 | fill  tiny_blobs ( 5) | FG1 | compiler | cpu |  3.16 |  0.01 |  3.17
+dttadj: dttadj_time:   tiny_blobs flood blob count 16384 (16384)
+dttadj: | 950817 | flood tiny_blobs ( 5) | FG1 | compiler | cpu |  3.37 | -0.00 |  3.37
+dttadj: dttadj_time:   tiny_holes fill blob count 1 (1)
+dttadj: | 950817 | fill  tiny_holes ( 5) | FG1 | compiler | cpu |  2.38 |  0.06 |  2.45
+dttadj: dttadj_time:   tiny_holes flood blob count 1 (1)
+dttadj: | 950817 | flood tiny_holes ( 5) | FG1 | compiler | cpu |  1.53 |  0.01 |  1.54
+dttadj: dttadj_time:   tree fill blob count 2 (2)
+dttadj: | 950817 | fill  tree ( 5) | FG1 | compiler | cpu |  1.82 |  0.01 |  1.83
+dttadj: dttadj_time:   tree flood blob count 2 (2)
+dttadj: | 950817 | flood tree ( 5) | FG1 | compiler | cpu |  1.37 | -0.00 |  1.37
+dttadj: dttadj_time:   solid fill blob count 1 (1)
+dttadj: | 950817 | fill  solid ( 5) | FG1 | compiler | cpu |  0.94 |  0.01 |  0.95
+dttadj: dttadj_time:   solid flood blob count 1 (1)
+dttadj: | 950817 | flood solid ( 5) | FG1 | compiler | cpu |  0.61 | -0.00 |  0.61
+dttadj: dttadj_time:   dice128.bpe fill blob count 12487 (-1)
+dttadj: | 950817 | fill  dice128.bpe ( 5) | FG1 | compiler | cpu |  2.46 | -0.00 |  2.46
+dttadj: dttadj_time:   dice128.bpe flood blob count 12487 (-1)
+dttadj: | 950817 | flood dice128.bpe ( 5) | FG1 | compiler | cpu |  2.62 |  0.02 |  2.63
+dttadj: dttadj_time:   dice256/t080.bpe fill blob count 4 (-1)
+dttadj: | 950817 | fill  dice256/t080.bpe ( 5) | FG1 | compiler | cpu |  0.89 |  0.01 |  0.90
+dttadj: dttadj_time:   dice256/t080.bpe flood blob count 4 (-1)
+dttadj: | 950817 | flood dice256/t080.bpe ( 5) | FG1 | compiler | cpu |  0.59 | -0.00 |  0.59
+dttadj: dttadj_time:   dice256/t170.bpe fill blob count 44 (-1)
+dttadj: | 950817 | fill  dice256/t170.bpe ( 5) | FG1 | compiler | cpu |  0.87 |  0.02 |  0.88
+dttadj: dttadj_time:   dice256/t170.bpe flood blob count 44 (-1)
+dttadj: | 950817 | flood dice256/t170.bpe ( 5) | FG1 | compiler | cpu |  0.56 |  0.01 |  0.57
+dttadj: dttadj_time:   timer256/seg1.bpe fill blob count 393 (-1)
+dttadj: | 950817 | fill  timer256/seg1.bpe ( 5) | FG1 | compiler | cpu |  1.20 |  0.00 |  1.20
+dttadj: dttadj_time:   timer256/seg1.bpe flood blob count 393 (-1)
+dttadj: | 950817 | flood timer256/seg1.bpe ( 5) | FG1 | compiler | cpu |  0.83 | -0.00 |  0.83
+dttadj:   all memory freed
+dtinst.sh: 17 Aug 95 06:30 bsd1 MK_TARGET=fg1 complete 

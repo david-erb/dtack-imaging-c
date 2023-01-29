@@ -1,0 +1,82 @@
+;; forms-demo -- demo forms-mode 	-*- forms -*- emacs-lisp 
+
+;; Set the name of the data file.
+(setq forms-file "biblio.dat")
+
+;; Use 'forms-enumerate' to set field names and number thereof.
+(setq forms-number-of-fields
+      (forms-enumerate
+       '(
+	biblio-added
+	biblio-id
+	 biblio-author
+	 biblio-title
+	 biblio-journal
+	biblio-year 
+	biblio-status
+	biblio-keywords
+	biblio-rating
+	biblio-related
+	biblio-type
+	biblio-notes
+	biblio-volume
+	biblio-number
+	biblio-date
+	biblio-pages
+	biblio-rsvd1
+       )))
+
+;; The following functions are used by this form for layout purposes.
+;;
+(defun biblio-tocol (target &optional fill)
+  "Produces a string to skip to column TARGET. Prepends newline if needed.
+The optional FILL should be a character, used to fill to the column."
+  (if (null fill)
+      (setq fill ? ))
+  (if (< target (current-column))
+      (concat "\n" (make-string target fill))
+    (make-string (- target (current-column)) fill)))
+;;
+(defun biblio-rj (target field &optional fill) 
+  "Produces a string to skip to column TARGET minus the width of field FIELD.
+Prepends newline if needed. The optional FILL should be a character,
+used to fill to the column."
+  (biblio-tocol (- target (length (nth field forms-fields))) fill))
+
+;; Record filters.
+;;
+(defun biblio-new-record-filter (the-record)
+  "Form a new record with some defaults."
+  (aset the-record biblio-added (current-time-string))
+  the-record				; return it
+)
+(setq forms-new-record-filter 'biblio-new-record-filter)
+
+;; The format list.
+(setq forms-format-list
+     '(
+        "====== biblio ======\n\n"
+        "id:     " biblio-id             "\n"
+        "author: " biblio-author         "\n"
+        "title:  " biblio-title          "\n"
+                                         "\n"
+	"type:     " biblio-type           "\n"
+	"keywords: " biblio-keywords       "\n"
+	"status:   " biblio-status         "\n"
+                                           "\n"
+        "journal/publisher: " biblio-journal        "\n"
+        "volume:            " biblio-volume         "\n"
+        "number/edition:    " biblio-number         "\n"
+        "pages:             " biblio-pages          "\n"
+        "date:              " biblio-date           "\n"
+        "year:              " biblio-year           "\n"
+                                                    "\n"
+        "rating:            " biblio-rating         "\n"
+        "related:           " biblio-related        "\n"
+                                                    "\n"
+        "notes:             " biblio-notes          "\n"
+                                                    "\n"
+        "added:             " biblio-added          "\n"
+     ))
+
+;; That's all, folks!

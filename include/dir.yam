@@ -1,0 +1,7 @@
+define(TOP, UP1)
+define(DIR, include)
+__prolog
+
+__sub(dtack)
+
+__finish

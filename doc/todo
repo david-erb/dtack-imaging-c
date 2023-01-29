@@ -1,0 +1,52 @@
+;; forms-demo -- demo forms-mode 	-*- forms -*- emacs-lisp 
+
+;; Set the name of the data file.
+(setq forms-file "todo.dat")
+
+;; Use 'forms-enumerate' to set field names and number thereof.
+(setq forms-number-of-fields
+      (forms-enumerate
+       '(todo-done
+	 todo-date
+	 todo-desc)))
+
+;; The following functions are used by this form for layout purposes.
+;;
+(defun todo-tocol (target &optional fill)
+  "Produces a string to skip to column TARGET. Prepends newline if needed.
+The optional FILL should be a character, used to fill to the column."
+  (if (null fill)
+      (setq fill ? ))
+  (if (< target (current-column))
+      (concat "\n" (make-string target fill))
+    (make-string (- target (current-column)) fill)))
+;;
+(defun todo-rj (target field &optional fill) 
+  "Produces a string to skip to column TARGET minus the width of field FIELD.
+Prepends newline if needed. The optional FILL should be a character,
+used to fill to the column."
+  (todo-tocol (- target (length (nth field forms-fields))) fill))
+
+;; Record filters.
+;;
+(defun todo-new-record-filter (the-record)
+  "Form a new record with some defaults."
+  (aset the-record todo-date (current-time-string))
+  the-record				; return it
+)
+(setq forms-new-record-filter 'todo-new-record-filter)
+
+;; The format list.
+(setq forms-format-list
+     '(
+       "====== TODO list ======\n\n"
+       "desc: \n"
+       todo-desc
+       "\n\n"
+       "\n-------------------------------------------\n"
+       "date: " todo-date
+       "\n\n"
+       "done: " todo-done
+     ))
+
+;; That's all, folks!

@@ -1,0 +1,156 @@
+
+
+
+SRC = ../..
+OUT = ../..
+
+all: exes 
+
+allsubs:
+
+#----------------------------------------------------------------------------
+protos: \
+	  tableau.p
+
+#----------------------------------------------------------------------------
+
+$(SRC)/doc/doclist.m4: $(SRC)/doc/doclist.dat
+	sh $(SRC)/sh/dtdocm4.sh $(SRC)
+
+lj4s-: \
+	  $(DOC)/doc/lj4/dtcaesar.lj4 \
+	  $(DOC)/doc/lj4/dtturnon.lj4
+lj4s: lj4s-
+
+
+lj3s-: \
+	  $(DOC)/doc/lj3/dtcaesar.lj3 \
+	  $(DOC)/doc/lj3/dtturnon.lj3
+lj3s: lj3s-
+
+
+ps6s-: \
+	  $(DOC)/doc/ps6/dtcaesar.ps6 \
+	  $(DOC)/doc/ps6/dtturnon.ps6
+ps6s: ps6s-
+
+
+ps3s-: \
+	  $(DOC)/doc/ps3/dtcaesar.ps3 \
+	  $(DOC)/doc/ps3/dtturnon.ps3
+ps3s: ps3s-
+
+
+dvis-: \
+	  $(DOC)/doc/dvi/dtcaesar.dvi \
+	  $(DOC)/doc/dvi/dtturnon.dvi
+dvis: dvis-
+
+
+dvls-: \
+	  $(DOC)/doc/dvi/dtcaesar.dvl \
+	  $(DOC)/doc/dvi/dtturnon.dvl
+dvls: dvls-
+
+
+latexs-: \
+	  $(DOC)/app/tableau/dtcaesar.ltx \
+	  $(DOC)/app/tableau/dtturnon.ltx
+latexs: latexs-
+
+
+mans-: 
+mans: mans-
+
+
+infos-: 
+infos: infos-
+
+
+htmls-: \
+	  $(DOC)/doc/html/dtcaesar/all.htm \
+	  $(DOC)/doc/html/dtturnon/all.htm
+htmls: htmls-
+
+
+htm2s-: \
+	  $(DOC)/doc/html/dtcaesar/sect000.htm \
+	  $(DOC)/doc/html/dtturnon/sect000.htm
+htm2s: htm2s-
+
+
+texts-: \
+	  $(DOC)/doc/text/dtcaesar.txt \
+	  $(DOC)/doc/text/dtturnon.txt
+texts: texts-
+
+
+
+#-------------------------------------------------------------------------
+# docs
+
+
+docs: latexs dvls ps6s ps3s lj4s mans infos htmls htm2s
+
+
+
+
+$(DOC)/doc/lj4/dtcaesar.lj4: $(DOC)/doc/ps6/dtcaesar.ps6
+	sh $(SRC)/sh/dtps2lj4.sh $(DOC)/doc/ps6/dtcaesar.ps6 $(DOC)/doc/lj4/dtcaesar.lj4
+
+$(DOC)/doc/lj3/dtcaesar.lj3: $(DOC)/doc/ps3/dtcaesar.ps3
+	sh $(SRC)/sh/dtps2lj3.sh $(DOC)/doc/ps3/dtcaesar.ps3 $(DOC)/doc/lj3/dtcaesar.lj3
+
+$(DOC)/doc/ps6/dtcaesar.ps6: $(DOC)/doc/dvi/dtcaesar.dvl
+	sh $(SRC)/sh/dtdvl2ps.sh $(DOC)/app/tableau $(DOC)/doc/dvi/dtcaesar.dvl $(DOC)/doc/ps6/dtcaesar.ps6 1200
+
+$(DOC)/doc/ps3/dtcaesar.ps3: $(DOC)/doc/dvi/dtcaesar.dvl
+	sh $(SRC)/sh/dtdvl2ps.sh $(DOC)/app/tableau $(DOC)/doc/dvi/dtcaesar.dvl $(DOC)/doc/ps3/dtcaesar.ps3 300
+
+$(DOC)/doc/dvi/dtcaesar.dvl: $(DOC)/app/tableau/dtcaesar.ltx $(SRC)/doc/data/utopia.ltx
+	cd $(DOC)/app/tableau; \
+	sh $(SRC)/sh/dtlatex.sh $(SRC) $(DOC)/app/tableau/dtcaesar.ltx \
+	   $(DOC)/doc/dvi/dtcaesar.dvl:utopia.ltx \
+	   $(DOC)/doc/dvi/dtcaesar.dvi:plain.ltx
+
+$(DOC)/doc/dvi/dtcaesar.dvi: $(DOC)/app/tableau/dtcaesar.ltx
+	cd $(DOC)/app/tableau; \
+	sh $(SRC)/sh/dtlatex.sh $(SRC) $(DOC)/app/tableau/dtcaesar.ltx \
+	   $(DOC)/doc/dvi/dtcaesar.dvi:plain.ltx
+
+$(DOC)/app/tableau/dtcaesar.ltx: $(DOC)/app/tableau/dtcaesar.dx
+	sh $(SRC)/sh/dtdx2ltx.sh guide \
+	  $(SRC) \
+	  $(DOC)/app/tableau/dtcaesar.dx \
+	  $(DOC)/app/tableau/dtcaesar.ltx \
+	  "caesar" \
+	  "Tableau Web"
+
+$(DOC)/doc/html/dtcaesar/all.htm: $(DOC)/app/tableau/dtcaesar.dx
+	sh $(SRC)/sh/dtdx2htm.sh  guide \
+	  $(SRC) \
+	  $(DOC)/app/tableau/dtcaesar.dx \
+	  $(DOC)/doc/html/dtcaesar/all.htm \
+	  "dtcaesar" "Tableau Web"
+
+$(DOC)/doc/html/dtcaesar/sect000.htm: $(DOC)/app/tableau/dtcaesar.dx
+	sh $(SRC)/sh/dtdx2ht2.sh guide \
+	  $(SRC) \
+	  $(DOC)/app/tableau/dtcaesar.dx \
+	  $(DOC)/doc/html/dtcaesar \
+	  "dtcaesar" "Tableau Web"
+
+$(DOC)/doc/text/dtcaesar.txt: $(DOC)/app/tableau/dtcaesar.dx
+	sh $(SRC)/sh/dtdx2txt.sh guide \
+	  $(SRC) \
+	  $(DOC)/app/tableau/dtcaesar.dx \
+	  $(DOC)/doc/text/dtcaesar.txt \
+	  "dtcaesar" "Tableau Web"
+
+
+$(DOC)/app/tableau/dtcaesar.dx: $(SRC)/doc/doclist.m4 \
+	  $(SRC)/app/tableau/tableau.doc
+	sh $(SRC)/sh/dtinclude.sh \
+	  -I$(SRC)/doc/include \
+	  -I$(DOC)/app/tableau \
+	  -Dfilebase=dtcaesar \

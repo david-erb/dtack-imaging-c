@@ -1,0 +1,30 @@
+/*..........................................................................
+| TITLE revision
+| Dtack Base Library Revisions
+|
+|!Revisions
+| #:01-18 19990705:#
+| -	added win32/*.res files to distribution
+| -	top level makefiles now need DT_YAM environment variable
+| 
+| #:01-12 19980924:#
+| -	bug in overlay
+| 
+| #:01-11 19980909:#
+| -	minor bug fixes and additions
+| 
+| #:01-10 19980826:#
+| -	minor bug fixes
+| 
+| #:01-09 19980727:#
+| -	minor bug fix to low level list handling
+| 
+| #:01-08 19980720:#
+| -	many small changes to remove SunPro 3.0.1 compiler warnings
+| -	replaced free, memcpy, and memset with DT_FREE, DT_MEMCPY, and DT_MEMSET
+| 
+|!Changes
+dxinclude(doc/changes.i)|
+| END
+ *..........................................................................*/
+

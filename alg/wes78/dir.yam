@@ -1,0 +1,24 @@
+define(TOP, PRJ_ALG_TOP)
+
+__proto(prj_alg_proto(wes78), cmd)
+
+pushdef(`CCOPTIMIZE', `CCOPTIMIZE_HIGH')
+pushdef(`CCDEBUGGER', `CCDEBUGGER_OFF')
+
+popdef(`CCDEBUGGER')
+popdef(`CCOPTIMIZE')
+
+__lib(prj_alg_lib(wes78), cmd)
+
+__exe(prj_alg_exe(wes78), 
+  main,
+  prj_alg_lib(wes78)+
+  prj_alg_lib(sez90)+
+  prj_base_lib(dthigh)+
+  prj_base_lib(WINLIB)+
+  prj_base_lib(dtlow))
+
+__finish
+
+
+

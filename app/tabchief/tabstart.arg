@@ -1,0 +1,5 @@
+c:\tableau\01-04\run\tabchief.exe=c:\tableau\01-05\tabchief.exe 0 0 0 @c:\tableau\config\tabchief.arg
+c:\tableau\01-04\run\tableau.exe=c:\tableau\01-05\tableau.exe 0 0 0 @c:\tableau\config\tableau.arg
+c:\tableau\01-04\run\tabrobot.exe=c:\tableau\01-04\tabrobot.exe 0 0 0 @c:\tableau\config\tabrobot.arg
+c:\tableau\01-04\run\tabtiny0.exe=c:\tableau\01-04\tableau.exe 0 0 0 @c:\tableau\config\tabtiny0.arg
+c:\tableau\01-04\run\tabtiny1.exe=c:\tableau\01-04\tableau.exe 0 0 0 @c:\tableau\config\tabtiny1.arg

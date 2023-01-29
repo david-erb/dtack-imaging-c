@@ -1,0 +1,69 @@
+define(TOP, UP2)
+define(DIR, source/1d)
+__prolog
+
+pushdef(`CCSHARABLE', `CCSHARABLE_ON')
+
+__src(1d_fftw, PRJ_INCLUDES+$(MK_FFTW_INCLUDE), PRJ_DEFINES+$(MK_FFTW_DEFINE))
+__src(1d_fft, PRJ_INCLUDES, PRJ_DEFINES+$(MK_FFTW_DEFINE))
+
+pushdef(`CCOPTIMIZE', `CCOPTIMIZE_HIGH')
+pushdef(`CCDEBUGGER', `CCDEBUGGER_OFF')
+__src(1d_thres)
+__src(1d_arith)
+__src(1d_logic)
+__src(1d_cast)
+__src(1d_clip)
+__src(1d_cmp)
+__src(1d_conv)
+__src(1d_cumf)
+__src(1d_cumr)
+__src(1d_diff)
+__src(1d_look)
+__src(1d_noise)
+__src(1d_ran)
+__src(1d_range)
+__src(1d_set)
+__src(1d_sort1)
+__src(1d_sort5)
+__src(1d_sum)
+__src(1d_sumsq)
+__src(1d_sumsd)
+__src(1d_sumss)
+__src(1d_vari)
+popdef(`CCDEBUGGER')
+popdef(`CCOPTIMIZE')
+
+__shlib(prj_lib(dt1d),
+  1d_thres+
+  1d+
+  1d_abs+
+  1d_arith+
+  1d_noise+
+  1d_set+
+  1d_sum+1d_sumsq+1d_sumsd+1d_sumss+
+  1d_cumf+1d_cumr+
+  1d_logic+
+  1d_look+
+  1d_cmp+
+  1d_diff+
+  1d_fft+1d_fftw+
+  1d_range+
+  1d_ran+
+  1d_sort1+1d_sort5+
+  1d_stats+
+  1d_cast+1d_conv+1d_clip+1d_vari+
+  1d_dat+
+  1d_ntype+
+  libmain, , 1d_dat+1d_ntype)
+
+popdef(`CCSHARABLE')
+
+__finish
+
+
+
+
+
+
+

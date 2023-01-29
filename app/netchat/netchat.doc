@@ -1,0 +1,118 @@
+Netchat notes 1.1 2/26/97
+
+
+INSTALLATION - SOUNDBLASTER
+---------------------------
+The netchat software works with a SoundBlaster-16.
+This is a full-length 16-bit ISA card.
+
+This board comes in two flavors: not-PnP and PnP.
+With both flavors of Soundblaster you *MUST* use interrupt 5!
+
+Both flavors use I/O 220-23f and 16-bit DMA channel 1.
+
+You need not install or run any software received with the
+board to set it up.
+
+
+INSTALLATION - CRYSTAL CHIPSET
+------------------------------
+The netchat software also works with the on-board Crystal chipset
+found on some of the Intel motherboards we use.
+
+With the Crystal chipset you *MUST* use interrupt 5!
+
+This option uses I/O 220-23f and 16-bit DMA channel 1.
+
+
+INSTALLATION - MICROPHONE
+-------------------------
+You must use a standard NCI mic-to-line apparatus.  
+It plugs into the LINE-IN input on the SoundBlaster.
+
+
+INSTALLATION - SPEAKERS
+-----------------------
+The Soundblaster will work with both amplified and non-amplified
+speakers.  The Crystal chipset requires amplified speakers.
+Output from both the Soundblaster and the Crystal chipset is
+equal in both left and right channels so only one speaker is
+required.
+
+
+INSTALLATION - SOFTWARE
+-----------------------
+Obtain the latest file named unetchat.pax.F from R&D.
+Place this in the /tmp directory.  Type unpax netchat.
+
+Obtain the udb.pax.F dated on or after 2/25/97 and unpax it.
+
+Add the following to site.udb: sound(1);
+This will add the following to sysinit:  /devel/bin/netchat.sh init_node
+
+Add the following lines to /CONFIG/custom_list:
+"-"   ""
+"      NetChat         " "/bin/sh /devel/bin/netchat.sh start_node"
+"   NetChat Cycle      " "/bin/sh /devel/bin/netchat.sh restart_node"
+
+
+INSTALLATION - TESTING
+----------------------
+
+1. Hardware Testing
+After unpaxing unetchat.pax.F, test the hardware as follows:
+
+  Audio sb -i 5 &
+  cat /devel/test/uaudio/houston.pcm > /dev/dsp
+  dttaudio play
+  dttaudio record
+
+2. Automated testing
+After ugen and udist with the sound() macros in site.udb, reboot
+all nodes and start the netchat delete via the Custom List on each node.
+Make sure all Netchats are idle before each test.
+
+  netchat.sh test1 AUDxx
+  netchat.sh test2 AUDxx AUDyy
+  netchat.sh test3 AUDxx AUDyy AUDzz
+
+3. Click testing
+These tests will ask you to click certain things then hit enter.
+Make sure all Netchats are idle before each test.
+
+  netchat.sh qc2 AUDxx AUDyy
+  netchat.sh qc3 AUDxx AUDyy AUDzz
+
+
+DEBUGGING AND DIAGNOSING
+------------------------
+The logs may be examined with:
+
+Utail ustream.AUDxx      audio bytes shoveling
+Utail netchat.AUDyy      front end user interface
+
+You can increase the amount of debug by changing the ustream_dbg and/or
+netchat_dbg variables at the start of netchat.sh.  String the values
+together with + signs, for example:
+
+  netchat_dbg=usr1+usr2+command
+
+Here are the debug classes:
+
+  alimits - system limits            memstats - memory summary at end
+  all     - all debug masks          memtrace - memory allocation
+  alt     - program alternatives     memx     - big memory interface
+  arg     - command line args        object   - object values
+  assert  - program assertions       page     - memory paging
+  async   - asynchronous events      pixel    - pixel values
+  bigio   - big blocks of I/O        stats    - statistics
+  complex - execution complexity     time     - execution times
+  img     - image operations         trace    - execution trace
+  intermd - intermediate values      usr1     - user's use
+  io      - all file I/O             usr2     - user's use
+  ipc     - interprocess comm        win      - client/server window
+
+
+
+
+

@@ -1,0 +1,93 @@
+define(TOP, UP2)
+define(DIR, test/high)
+
+__usage(dttcast, dttcast)
+
+pushdef(`CCSHARABLE', `CCSHARABLE_ON')
+pushdef(`CCOPTIMIZE', `CCOPTIMIZE_NONE')  dnl MSVC152 barfs unless we do this
+__shlib(prj_lib(dtthix1),
+  dtthist+
+  dttpgm+
+  dttplot+
+  dttrun+
+  dttlog+
+  libmain, , ,
+  prj_lib(dttaa)+
+  prj_lib(dthigh)+
+  prj_lib(dtlow)+
+  prj_lib(dt1d))
+
+__shlib(prj_lib(dtthix2),
+  dttresam+
+  dttcooc+
+  dttjoint+
+  dttstat+
+  dttmatrix+
+  libmain, , ,
+  prj_lib(dttaa)+
+  prj_lib(dthigh)+
+  prj_lib(dtlow)+
+  prj_lib(dt1d))
+popdef(`CCSHARABLE')
+
+__shexe(prj_test_bin(dtthigh1), high1, , 
+  prj_lib(dtthix1)+
+  prj_lib(dttaa)+
+  PRJ_APP2_LIBS,
+  PRJ_APP2_LOADS)
+
+__shexe(prj_test_bin(dtthigh2), high2, , 
+  prj_lib(dtthix2)+
+  prj_lib(dttaa)+
+  PRJ_APP1_LIBS, 
+  PRJ_APP1_LOADS)
+
+__shexe(prj_test_bin(dttarith),   dttarith, , 
+  prj_lib(dttaa)+
+  PRJ_APP1_LIBS, 
+  PRJ_APP1_LOADS, 
+  prj_test_bin(dttarith))
+
+__shexe(prj_test_bin(dttadj),   dttadj, , 
+  prj_lib(dttaa)+
+  PRJ_APP1_LIBS, 
+  PRJ_APP1_LOADS)
+
+__shexe(prj_test_bin(dttconv),  dttconv, ,
+  prj_lib(dttaa)+
+  PRJ_APP1_LIBS, 
+  PRJ_APP1_LOADS)
+
+__shexe(prj_test_bin(dttmorph),  dttmorph, ,
+  prj_lib(dttaa)+
+  PRJ_APP1_LIBS, 
+  PRJ_APP1_LOADS)
+
+__shexe(prj_test_bin(dttgeom),  dttgeom, ,
+  prj_lib(dttaa)+
+  PRJ_APP1_LIBS, 
+  PRJ_APP1_LOADS)
+
+__shexe(prj_test_bin(dttcast),  dttcast, , 
+  prj_lib(dttaa)+
+  PRJ_APP1_LIBS, 
+  PRJ_APP1_LOADS)
+
+__shexe(prj_test_bin(dttcmp),  dttcmp, , 
+  prj_lib(dttaa)+
+  PRJ_APP1_LIBS, 
+  PRJ_APP1_LOADS)
+
+__shexe(prj_test_bin(dttdb),  dttdb, , 
+  prj_lib(dttaa)+
+  PRJ_APP1_LIBS, 
+  PRJ_APP1_LOADS)
+
+
+dnl -----------------------------------------------------------------------
+dnl __help(H(cast), dttcast)
+dnl -----------------------------------------------------------------------
+
+__finish
+
+

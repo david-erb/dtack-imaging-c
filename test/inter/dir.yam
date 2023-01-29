@@ -1,0 +1,25 @@
+define(TOP, UP2)
+define(DIR, test/inter)
+
+pushdef(`CCSHARABLE', `CCSHARABLE_ON')
+__shlib(prj_lib(dttinter),
+  dttmap+
+  dttkey+
+  dttdia+
+  dttalpha+
+  dttnote)
+popdef(`CCSHARABLE')
+
+__shexe(prj_test_bin(dttinter),   inter, ,   
+  prj_lib(dttinter)+  
+  prj_lib(dttzz)+
+  PRJ_INTER_LIBS+
+  prj_lib(dtbigmem)+
+  prj_lib(dtlow)+
+  prj_lib(dt1d)+
+  PRJ_SUPPORT_LIBS,
+  PRJ_LOADS PRJ_INTER_LOADS)
+
+__finish
+
+

@@ -1,0 +1,86 @@
+define(TOP, UP2)
+define(DIR, app/ustream)
+
+__usage(ustream, ustream)
+
+__summary(prj_lib_summary(dgios), 
+  overview.doc, NCI)
+__summary(prj_lib_summary(istream), 
+  istream.c, NCI)
+__summary(prj_lib_summary(ostream), 
+  ostream.c, NCI)
+
+__proto(dtaudio,
+  audio+
+  sbqnx+
+  fake)
+
+__proto(dtistream,
+  istream+
+  iipc+
+  ifile+
+  iaudio)
+
+__proto(dtostream,
+  ostream+
+  oipc+
+  ofile+
+  oaudio)
+
+__proto(ustream,
+  c_cease+
+  c_ident+
+  c_lock+
+  c_state+
+  c_stream+
+  init+
+  log+
+  rev+
+  server+
+  shovel)
+
+pushdef(`CCSHARABLE', `CCSHARABLE_ON')
+
+define(`__common', 
+  prj_lib(dtdg)+
+  prj_lib(ustatex)+
+  PRJ_LIBS)
+
+__shlib(prj_lib(dtaudio),
+  audio+sbqnx+fake)
+
+__shlib(prj_lib(ustreamx),
+  istream+iipc+ifile+iaudio+
+  ostream+oipc+ofile+oaudio+
+  c_cease+
+  c_ident+
+  c_lock+
+  c_state+
+  c_stream+
+  init+
+  log+
+  rev+
+  server+
+  shovel+
+  libmain, , ,
+  __common,
+  PRJ_LOADS)
+
+popdef(`CCSHARABLE')
+
+__shexe(prj_test_bin(ustream),   
+  ustream, ,
+  prj_lib(ustreamx)+
+  prj_lib(dtaudio)+
+  __common, 
+  PRJ_LOADS)
+
+__shexe(prj_test_bin(dttaudio),   
+  dttaudio, ,
+  prj_lib(dtaudio)+
+  PRJ_LIBS,
+  PRJ_LOADS)
+
+__finish
+
+

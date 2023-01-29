@@ -1,0 +1,184 @@
+/*..........................................................................
+| TITLE tabunix
+| Video Caesar Operating Instructions for Unix
+| 
+|!Video Caesar Operating Instructions for Unix
+| Thanks for buying from Tableau!
+|
+| These instructions will tell you how to operate your new
+| Video Caesar capture computer.
+|
+| It is our sincere wish that your experience with the Video Caesar
+| web cam system is pleasant and rewarding.
+|
+| Please call us at 1.800.221.7583 with any questions.
+| 
+|!Summary
+| #PROGRAMS#
+| tabstart		watchdog to start, monitor and restart other programs
+| tabgrab		grab raw image from frame grabber
+| tabrocket		compress raw image and send to rocket server
+| tabserve		rocket server to receive images from tabrocket
+| tabshow		display video on-screen
+| 
+| #CONFIGURATION#
+| 
+| Login root, click on #Network Configuration# button
+| (scroll #Control Panel# window to see the button).
+|: cd /home/pump/tableau/config
+|: vi tabstart.arg
+|: vi tabgrab.arg
+|: vi tabrocket.arg
+|: vi tabserve.arg
+|: vi tabshow.arg
+|
+| #COMMANDS#
+| halt			prepare for power down
+| reboot		reboot computer
+| tabstop		stop tableau operations
+| tabstart		start tableau operations
+| tabshow		show live video on-screen
+|
+|!External connection
+| 1.	Connect your computer to your 10Base2 or 10BaseT ethernet.
+|		Note: the system is shipped for 10Base2 (thin coax),
+|		and may require hardware setup to switch to 10BaseT (twisted pair).
+| 2.	Plug in the mouse and keyboard supplied with your system.
+| 3.	Connect any standard VGA monitor.
+| 4.	Hook up your NTSC video signal.
+| 5.	Plug in the power cord.
+| 
+|!Initial configuration
+| Your computer may be shipped with an IP address which is meaningless on 
+| your network.
+| If so, please refer to the Procedures section below
+| for changing the IP address.
+| 
+| Your computer is configured to send jpeg via the rocket protocol to itself.
+| It is capable of acting as a web server for its own live video.
+| To see the live video, point an external browser to the url:
+| 
+|   http://12.34.56.78/site1.html
+| 
+| Replace the :12.34.56.78: with the IP address of your system.
+| 
+| \<img src="../gifs/tabunix-init.gif" alt="initial configuration"\>
+|
+| This is an inefficient configuration,  
+| to be used for demonstration purposes only.
+| You should probably send the jpeg files via the rocket protocol
+| to your main web server computer.
+| 
+| Please contact Tableau for advice on customizing the configuration
+| to your exact needs.
+| 
+|!Procedures
+| The following procedures allow you to control your computer.
+| 
+|.Login
+| Enter an account name at ~Ident:~ and
+| password at ~Confirm:~.
+|
+| There are passwords for each of three accounts:
+| #root#	system maintenance account
+| #pump#	non-privileged access mainly to show on-screen video
+| #demo#	generic login with standard Linux GUI interface
+|
+| Get your passwords for each account via phone or email from Tableau.
+|
+|.Logout
+| To return to the login screen from any account,
+| click your mouse anywhere on the blue-green desktop.
+| Then select "Exit" or "Exit Fvwm" from the popup menu.
+| 
+|.Halt the system (prepare for power down)
+| as root, type 
+|:  halt
+| 
+|.Reboot the system
+| as root, type 
+|:  reboot
+| 
+|.Stop all Tableau programs
+| as root, type 
+|:  tabstop
+| 
+|.Restart all Tableau programs
+| as root, type 
+|:  tabstart
+|
+|.Display on-screen video
+| as root or pump, type:
+|:  tabshow
+|
+|.Configure Tableau software
+| as root or pump, type:
+|:  cd /home/pump/tableau/config
+|:  vi xxxxxxx.arg         (replace xxxxxxx with the program name)
+| 
+| These programs each have an argument file:
+| tabstart		watchdog to start, monitor and restart other programs
+| tabgrab		grab raw image from frame grabber
+| tabrocket		compress raw image and send to rocket server
+| tabserve		rocket server to receive images from tabrocket
+| tabshow		display video on-screen
+|
+|.Check Tableau logs
+| as root or pump, type:
+|:  cd /home/pump/tableau/logs
+|:  tail xxxxxxx.log         (replace xxxxxxx with the program name)
+| 
+| Each program in the list above has a log file.
+| Normally only startup and error messages are written to the log files.
+| However, when debug is enabled, more information is written there.
+| 
+| \<img src="../gifs/tabunix-panel.gif" alt="control panel"\>
+|
+|.Change DNS server
+| Login as root.
+| In the #Control Panel# window,
+| double-click on #Network Configuration#.
+| Then click on the #Names# button at the top.
+| Edit the #Nameservers# multiline text box
+| After you are finished, click on the #Save# button.
+| Rebooting may be necessary.
+| 
+| \<img src="../gifs/tabunix-dns.gif" alt="dns dialog"\>
+|
+|.Change IP address
+| Login as root.
+| In the #Control Panel# window,
+| double-click on #Network Configuration#.
+| Then click on the #Interfaces# button at the top.
+| Click on the #eth0# line then the #Edit# button near the bottom.
+| After you are finished, click on the #Save# button.
+| Rebooting may be necessary.
+| 
+| \<img src="../gifs/tabunix-if.gif" alt="ifconfig dialog"\>
+|
+|.Change default gateway
+| Login as root.
+| In the #Control Panel# window,
+| double-click on #Network Configuration#.
+| Then click on the #Routing# button at the top.
+| Click on the line you want to edit or delete.
+| To add new routing information, click on the #Add# button.
+| Rebooting may be necessary.
+| 
+| \<img src="../gifs/tabunix-route.gif" alt="routing dialog"\>
+|
+|!Security
+| Standard Linux servers are active on this computer.
+| This includes FTP, telnet, http, ident, nntp and others.
+| You should create a security policy for this computer
+| and implement it appropriately.
+| 
+|!Troubleshooting
+| The most useful way to determine the origin of any problems
+| is to look at the log files in #c:\tableau\logs# on both 
+| the capture and server computers.
+|
+| #Good luck!#
+| 
+| END
+ *..........................................................................*/

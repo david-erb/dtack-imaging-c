@@ -1,0 +1,21 @@
+rm -f /hd1/tmp/*
+/usr/erb/prj/dtqw1/bin/tableau \
+  -in psi,0xad6,0xd0000,/vmc2/config/vmc2.cfg \
+  -screen roll,tmp \
+  -path /hd1 \
+  -op raw \
+  -variant btpc \
+  -dz 9999.0000 \
+  -phi 0 \
+  -epsilon 0 \
+  -w 0 \
+  -mu 0 \
+  -min 0 \
+  -max 0 \
+  -t 100 \
+  -D usr1+usr2
+
+exit
+
+  -dbgto /tmp/tmp.out \
+  -errto /tmp/tmp.out

@@ -1,0 +1,35 @@
+/*..........................................................................
+| TITLE dtlinks
+| Dtack Links Page
+dtinclude(prolog1.dx)
+dtinclude(legal1.dx)
+| 
+|!Dtack Links Page
+|_link dtcorp/,inline \<img src="/gifs/ABOUT.gif" alt=About Dtack""\>
+| \<img src="/gifs/space10.gif" alt=""\>
+|_link dtlegal/,inline \<img src="/gifs/LEGAL.gif" alt=Legal""\>
+| 
+|_link dtprice/,inline \<img src="/gifs/PRICE.gif" alt="Price List"\>
+| \<img src="/gifs/space10.gif" alt=""\>
+|_link dtsales/,inline \<img src="/gifs/SALES.gif" alt=Sales Lit""\>
+| \<img src="/gifs/space10.gif" alt=""\>
+|_link dtdoc/,inline \<img src="/gifs/TECHREF.gif" alt="Tech Docs"\>
+| \<img src="/gifs/space10.gif" alt=""\>
+|_link dtdown/,inline \<img src="/gifs/DOWNLOAD.gif" alt="Down Load"\>
+| \<img src="/gifs/space10.gif" alt=""\>
+| Main Web Pages
+|  
+dxinclude(links.dx)
+| 
+| \<br\>\<img src="/gifs/hr.gif" alt="------------------------------"\>\<br\>
+| Links to external image processing web pages:
+| 
+|_link http://www.cs.cmu.edu/afs/cs/project/cil/ftp/html/vision.html,arrow Computer Vision Home Page
+| 
+|_link http://www.cs.cmu.edu/~cil/v-images.html,arrow Computer Vision Test Images
+| 
+|_link http://rsb.info.nih.gov/nih-image,arrow NIH Image Home Page
+| 
+| END
+ *..........................................................................*/
+

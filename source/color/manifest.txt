@@ -1,0 +1,12 @@
+readme.txt	description of the directory
+dir.yam		makefile builder control file
+bsd1.mak	makefile for Unix-like systems such as Solaris, FreeBSD, Linux
+libmain.c	used when library is built as a Microsoft Windows DLL
+convert.c	color space conversion routines
+org.c		color organization object support routines
+r_g_b.c		convert from band-interleaved RGB
+rgb.c		convert from 16-bit RGB
+rgb888.c	convert from byte-interleaved RGB
+y_cb_cr.c	convert from band-interleaved YCbCr
+ycbycr.c	convert from 16-bit 4:2:2 YCbCr
+yuyv.c		convert from YUV

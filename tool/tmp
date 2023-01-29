@@ -1,0 +1,4 @@
+  
+  DT_GI(dt_interactive_parse,(			/* parse command line interactively	*/
+    argc, argv, F, usage, param,
+    arg, dttool_cmd_check));

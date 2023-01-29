@@ -1,0 +1,4 @@
+; to compile for win32:
+; rc k:iqsign\config\win32\tabptz.rc
+icon        ICON   tabptz.ico
+dthws_icon  ICON   tabptz.ico

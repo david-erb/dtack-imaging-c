@@ -1,0 +1,156 @@
+wb3:
+	$(MAKE) -$(MAKEFLAGS) \
+	  SRC=$(SRC) \
+	  OUT=$(OUT) \
+	  -f $(SRC)/app/tableau/wb3.mak 
+wv4:
+	$(MAKE) -$(MAKEFLAGS) \
+	  SRC=$(SRC) \
+	  OUT=$(OUT) \
+	  -f $(SRC)/app/tableau/wv4.mak 
+dv0:
+	$(MAKE) --$(MAKEFLAGS) --x- \
+	  SRC=$(SRC) \
+	  OUT=$(OUT) \
+	  --f $(SRC)/app/tableau/dv0.mak 
+bsd1:
+	$(MAKE) \
+	  -f $(SRC)/config/bsd1.set \
+	  -f $(SRC)/config/$(MK_TARGET).set \
+	  -f $(SRC)/app/tableau/bsd1.mak $(ACT) \
+	  SRC=$(SRC) \
+	  OUT=$(OUT) \
+	  MK_TARGET=$(MK_TARGET)
+
+sg1:
+	$(MAKE) -f $(SRC)/app/tableau/sg1.mak SRC=$(SRC) OUT=$(OUT) 
+sg1x5:
+	$(MAKE) -f $(SRC)/app/tableau/sg1x5.mak SRC=$(SRC) OUT=$(OUT) 
+fg1:
+	$(MAKE) -f $(SRC)/app/tableau/fg1.mak SRC=$(SRC) OUT=$(OUT) 
+lg1:
+	$(MAKE) -f $(SRC)/app/tableau/lg1.mak SRC=$(SRC) OUT=$(OUT) 
+
+#-------------------------------------------------------------------------
+# protos
+
+tableau.p: \
+	  $(SRC)/app/tableau/annotate.c \
+	  $(SRC)/app/tableau/cam.c \
+	  $(SRC)/app/tableau/cook.c \
+	  $(SRC)/app/tableau/decode.c \
+	  $(SRC)/app/tableau/demo0.c \
+	  $(SRC)/app/tableau/demo1.c \
+	  $(SRC)/app/tableau/dir.c \
+	  $(SRC)/app/tableau/encode.c \
+	  $(SRC)/app/tableau/fast.c \
+	  $(SRC)/app/tableau/get.c \
+	  $(SRC)/app/tableau/get_fb.c \
+	  $(SRC)/app/tableau/get_roll.c \
+	  $(SRC)/app/tableau/get_ser.c \
+	  $(SRC)/app/tableau/http.c \
+	  $(SRC)/app/tableau/ipc.c \
+	  $(SRC)/app/tableau/lowstats.c \
+	  $(SRC)/app/tableau/put.c \
+	  $(SRC)/app/tableau/put_scr.c \
+	  $(SRC)/app/tableau/put_roll.c \
+	  $(SRC)/app/tableau/put_ftp.c \
+	  $(SRC)/app/tableau/put_ipc.c \
+	  $(SRC)/app/tableau/rev.c \
+	  $(SRC)/app/tableau/roll.c \
+	  $(SRC)/app/tableau/shovel.c \
+	  $(SRC)/app/tableau/test.c
+	sh $(SRC)/sh/dtdxc.sh tableau.p -fproto \
+	  $(SRC)/app/tableau/annotate.c \
+	  $(SRC)/app/tableau/cam.c \
+	  $(SRC)/app/tableau/cook.c \
+	  $(SRC)/app/tableau/decode.c \
+	  $(SRC)/app/tableau/demo0.c \
+	  $(SRC)/app/tableau/demo1.c \
+	  $(SRC)/app/tableau/dir.c \
+	  $(SRC)/app/tableau/encode.c \
+	  $(SRC)/app/tableau/fast.c \
+	  $(SRC)/app/tableau/get.c \
+	  $(SRC)/app/tableau/get_fb.c \
+	  $(SRC)/app/tableau/get_roll.c \
+	  $(SRC)/app/tableau/get_ser.c \
+	  $(SRC)/app/tableau/http.c \
+	  $(SRC)/app/tableau/ipc.c \
+	  $(SRC)/app/tableau/lowstats.c \
+	  $(SRC)/app/tableau/put.c \
+	  $(SRC)/app/tableau/put_scr.c \
+	  $(SRC)/app/tableau/put_roll.c \
+	  $(SRC)/app/tableau/put_ftp.c \
+	  $(SRC)/app/tableau/put_ipc.c \
+	  $(SRC)/app/tableau/rev.c \
+	  $(SRC)/app/tableau/roll.c \
+	  $(SRC)/app/tableau/shovel.c \
+	  $(SRC)/app/tableau/test.c
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#----------------------------------------------------------------------------
+deps: 
+	sh $(SRC)/sh/dtdep.sh $(SRC)/app/tableau \
+	  $(SRC)/app/tableau/main.c \
+	  $(SRC)/app/tableau/fast.c \
+	  $(SRC)/app/tableau/cam.c \
+	  $(SRC)/app/tableau/test.c \
+	  $(SRC)/app/tableau/tableau.c \
+	  $(SRC)/app/tableau/demo0.c \
+	  $(SRC)/app/tableau/annotate.c \
+	  $(SRC)/app/tableau/cook.c \
+	  $(SRC)/app/tableau/data.c \
+	  $(SRC)/app/tableau/decode.c \
+	  $(SRC)/app/tableau/dir.c \
+	  $(SRC)/app/tableau/encode.c \
+	  $(SRC)/app/tableau/get.c \
+	  $(SRC)/app/tableau/get_fb.c \
+	  $(SRC)/app/tableau/get_roll.c \
+	  $(SRC)/app/tableau/get_ser.c \
+	  $(SRC)/app/tableau/http.c \
+	  $(SRC)/app/tableau/ipc.c \
+	  $(SRC)/app/tableau/put.c \
+	  $(SRC)/app/tableau/put_scr.c \
+	  $(SRC)/app/tableau/put_roll.c \
+	  $(SRC)/app/tableau/put_ftp.c \
+	  $(SRC)/app/tableau/put_ipc.c \
+	  $(SRC)/app/tableau/rev.c \
+	  $(SRC)/app/tableau/roll.c \
+	  $(SRC)/app/tableau/shovel.c \
+	  $(SRC)/app/tableau/libmain.c \
+	  $(SRC)/app/tableau/demo1.c \
+	  $(SRC)/app/tableau/put_scr2.c
+
+#----------------------------------------------------------------------------
+docclean:
+	rm -f *.rtf *.hh *.hpj
+	rm -f *.htm
+	rm -f *.txi
+	rm -f *.txt
+	rm -f *.inf
+	rm -f *.ref
+	rm -f *.lj4 *.lj4.gz
+	rm -f *.lj3 *.lj3.gz
+	rm -f *.ps6 *.ps6.gz
+	rm -f *.ps3 *.ps3.gz
+	rm -f *.idx *.ind *.log *.dvi *.dvl *.aux *.blg *.bbl *.ltx
+
+#----------------------------------------------------------------------------
+veryclean: docclean 

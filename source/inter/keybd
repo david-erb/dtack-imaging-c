@@ -1,0 +1,59 @@
+/* Example Program dtkeybd1                                                 */
+/* Illustrates basic keyboard operations                                    */
+/* Program takes one optional command line arguments: the keyboard spec.    */
+/* Wait for a key, poll for a key.                                          */
+/* Prints out simple result like:                                           */
+/*   dtkeybd1: hit any key (waiting)                                        */
+/*   dtkeybd1: you hit F1                                                   */
+/*   dtkeybd1: hit any key (polling) .....                                  */
+/*   dtkeybd1: you hit F2                                                   */
+/* All error checking left out for clarity.                                 */
+
+#include <dt.h>
+#include <dtkeymap.h>
+#include <dtkeybd.h>
+#include <dtos.h>
+
+void main(int argc, char *argv[])
+{
+  dtkeybd_t keybd;
+  dt_key_t key;
+  char string[16];
+
+  dtkeybd_init(NULL, &keybd,          /* initialize keyboard                */
+    argc>1? argv[1]: NULL, 0);
+
+  printf("dtkeybd1:"
+    " hit any key (waiting)\n");
+  dtkeybd_read(NULL, &keybd, &key);   /* read key from keyboard             */
+  dtkeymap_name_str(NULL,             /* convert key value to string        */
+    &keybd.keymap,
+    key, string, sizeof(string));
+  printf("dtkeybd1:"                  /* print what we got                  */
+    " you hit %s\n",
+    string);
+
+  printf("dtkeybd1:"
+    " hit any key (polling) ");
+  while(1)
+  {
+    int iskey;
+    dtkeybd_scan(NULL, &keybd,        /* poll keyboard                      */
+      &iskey, &key);
+    if (iskey)                        /* a key was hit?                     */
+      break;
+    printf(".");                      /* no key was hit?                    */
+    fflush(stdout);
+    dtos_delay(NULL, 1000);
+  }
+  printf("\n");
+
+  dtkeymap_name_str(NULL,             /* convert key value to string        */
+    &keybd.keymap,
+    key, string, sizeof(string));
+  printf("dtkeybd1:"                  /* print what we got                  */
+    " you hit %s\n",
+    string);
+
+  dtkeybd_uninit(NULL, &keybd);       /* release keyboard resources         */
+}

@@ -1,0 +1,17 @@
+# mjserver.arg
+# acts like web server, can start nph-mj.exe (the filter graph)
+# -connect is listen IP:PORT
+# -path is where to find html and gif files
+# -config is arg file for nph-mj.exe
+# -D is debug settings
+
+-connect rocket,0:8080
+-path .
+-ident mjserver
+-path nph-mj.exe
+-config nph-mj.arg
+-D usr1+usr2
+-errto ../logs/mjserver.log
+-dbgto ../logs/mjserver.log
+-sayto ../logs/mjserver.log
+

@@ -1,0 +1,15 @@
+product	dtbase
+title1	Dtack Base Library
+title2	dtdoclist(dtbase, title2)
+part	100
+lic_fee	0
+doc_fee	40
+doc	dtbase
+
+product	dtlev85
+title1	dtdoclist(dtlev85, title)
+title2	dtdoclist(dtlev85, title2)
+part	201
+lic_fee	100
+doc_fee	20
+doc	dtlev85

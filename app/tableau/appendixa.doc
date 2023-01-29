@@ -1,0 +1,41 @@
+/*..........................................................................
+| TITLE appendixa
+| Appendix A
+|      
+|!Appendix A: Time stamp substitution strings
+|_index time stamp
+| The time stamp substitution strings used in the
+| "Tableau op parameter" are given in the list below.
+| This list is courtesy of the FreeBSD operating system.
+| 
+| %A	is replaced by national representation of the full weekday name.
+| %a	is replaced by national representation of the abbreviated weekday
+| 		name, where the abbreviation is the first three characters.
+| %B	is replaced by national representation of the full month name.
+| %b	is replaced by national representation of the abbreviated month
+| 		name, where the abbreviation is the first three characters.
+| %c	is replaced by national representation of time and date (the format
+| 		is similar with produced by asctime(3)).
+| %d	is replaced by the day of the month as a decimal number (01-31).
+| %H	is replaced by the hour (24-hour clock) as a decimal number 00-23).
+| %I	is replaced by the hour (12-hour clock) as a decimal number (01-12).
+| %j	is replaced by the day of the year as a decimal number (001-366).
+| %M	is replaced by the minute as a decimal number (00-59).
+| %p	is replaced by national representation of either "ante meridiem" or
+| 		post meridiem" as appropriate.
+| %S	is replaced by the second as a decimal number (00-60).
+| %U	is replaced by the week number of the year (Sunday as the first day
+| 		of the week) as a decimal number (00-53).
+| %W	is replaced by the week number of the year (Monday as the first day
+| 		of the week) as a decimal number (00-53).
+| %w	is replaced by the weekday (Sunday as the first day of the week) as
+| 		a decimal number (0-6).
+| %X	is replaced by national representation of the time.
+| %x	is replaced by national representation of the date.
+| %Y	is replaced by the year with century as a decimal number.
+| %y	is replaced by the year without century as a decimal number (00-99).
+| %Z	is replaced by the time zone name.
+| %%	is replaced by `%'.
+| 
+| END
+ *..........................................................................*/

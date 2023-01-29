@@ -1,0 +1,23 @@
+cmd.bat: starting 09:37 
+
+ Volume in drive C has no label
+ Volume Serial Number is 161A-1100
+ Directory of C:\TABLEAU\00-31\DOC
+
+.              <DIR>        05-09-97  5:07a .
+..             <DIR>        05-09-97  5:07a ..
+ALL      HTM        32,246  12-09-96  6:35a ALL.HTM
+FILLOUT  GIF         3,338  12-08-96  2:17p FILLOUT.GIF
+OVERVIEW GIF         2,485  12-08-96  2:17p OVERVIEW.GIF
+SPACE4   GIF            43  12-06-96 11:36a SPACE4.GIF
+TABHEAD  GIF         1,186  12-06-96 11:36a TABHEAD.GIF
+TABLEAU1 GIF           482  12-06-96 11:36a TABLEAU1.GIF
+HR       GIF            57  12-06-96 11:36a HR.GIF
+ROBOT~1  HTM         1,093  05-14-97  8:10a robot.html
+JAVA           <DIR>        05-11-97  2:06a java
+PTZ~1    HTM           652  07-03-97 12:08p ptz.html
+VID0PT~1 HTM           749  07-03-97  3:41p vid0ptz.html
+TWOCAM~1 HTM           517  07-03-97  3:50p twocam.html
+        11 file(s)         42,848 bytes
+         3 dir(s)     831,160,320 bytes free
+cmd.bat: ending 

@@ -1,0 +1,152 @@
+define(TOP, UP2)
+define(DIR, app/tableau)
+
+dnl __guide(caesar, tableau.doc, Tableau Web, caesar)
+dnl __guide(turnon, turnon.doc, Tableau Web, turnon)
+dnl __guide(tabserve, tabserve.doc, Tableau Web, tabserve)
+dnl __guide(tabunix, tabunix.doc, Tableau Web, tabunix)
+
+__guide(tabtech, 
+  tech.doc+
+  arg.doc+
+  input.doc+
+  op.doc+
+  output.doc+
+  scenario.doc+
+  tricks.doc+
+  debug.doc+
+  appendixa.doc,
+  Dtack)
+
+__usage(tableau, tableau)
+
+__proto(tableau,
+  dialog+
+  annotate+
+  cam+
+  cook+
+  decode+
+  demo0+
+  demo1+
+  dir+
+  encode+
+  fast+
+  get+get_fb+get_roll+get_ser+get_file+
+  http+
+  ipc+
+  log+
+  poll+
+  put+put_scr+put_roll+put_ftp+put_ipc+put_file+put_push+
+  rev+
+  roll+
+  shovel+
+  test)
+
+pushdef(`CCSHARABLE', `CCSHARABLE_ON')
+
+dnl pushdef(`CC', `CPP')
+__src(main)
+dnl popdef(`CC')
+
+pushdef(`CCOPTIMIZE', `CCOPTIMIZE_HIGH')
+pushdef(`CCDEBUGGER', `CCDEBUGGER_OFF')
+__src(fast)
+popdef(`CCDEBUGGER')
+popdef(`CCOPTIMIZE')
+
+__src(cam, PRJ_INCLUDES+PRJ_SRCDIR/app/tabchief, PRJ_DEFINES)
+__src(test, PRJ_INCLUDES+PRJ_SRCDIR/app/tabchief, PRJ_DEFINES)
+
+__shlib(prj_lib(tableaux),
+  tableau+
+  dialog+
+  demo0+
+  annotate+
+  cam+
+  cook+
+  data+
+  decode+
+  dir+
+  encode+
+  fast+
+  get+get_fb+get_roll+get_ser+get_file+
+  http+
+  ipc+
+  log+
+  poll+
+  put+put_roll+put_ftp+put_ipc+put_file+put_push+put_scr+
+  rev+
+  roll+
+  shovel+
+  test+
+  libmain, , ,
+  prj_lib(dschedx)+
+  prj_lib(reverbx)+
+  prj_lib(dtxchg)+
+  prj_lib(dtwinc)+
+  prj_lib(dtxchgs)+
+  prj_lib(dtfb)+
+  prj_lib(dthigh)+
+  prj_lib(dtcolor)+
+  prj_lib(dtscr)+
+  prj_lib(dtbigmem)+
+  prj_lib(dtdg)+
+  prj_lib(dtlow)+
+  prj_lib(dt1d))
+
+popdef(`CCSHARABLE')
+
+dnl pushdef(`LD', `LDPP')
+ifdef(`LDSTACK_HUGE',
+`pushdef(`LDSTACK', `LDSTACK_HUGE')',
+`pushdef(`LDSTACK', `LDSTACK_LARGE')')
+
+define(`__libs_screen', 
+  prj_lib(tableaux)+
+  prj_lib(dschedx)+
+  prj_lib(reverbx)+
+  prj_lib(dtxchg)+
+  prj_lib(dtwinc)+
+  prj_lib(dtxchgs)+
+  prj_lib(dtfb)+
+  prj_lib(dthigh)+
+  prj_lib(dtcolor)+
+  prj_lib(dtdg)+
+  PRJ_SCR_LIBS+
+  PRJ_LIBS)
+
+define(`__libs_noscreen', 	
+  prj_lib(tableaux)+
+  prj_lib(dschedx)+
+  prj_lib(reverbx)+
+  prj_lib(dtxchg)+
+  prj_lib(dtwinc)+
+  prj_lib(dtfb)+
+  prj_lib(dthigh)+
+  prj_lib(dtcolor)+
+  prj_lib(dtdg)+
+  PRJ_LIBS)
+
+dnl __shexe(prj_test_bin(tableaus),   
+dnl  main+put_scr+demo0, ,
+dnl  __libss,
+dnl  PRJ_LOADS PRJ_INTER_LOADS PRJ_SCR_LOADS)
+
+dnl __shexe(prj_test_bin(tableau-),   
+dnl   main+demo1, ,
+dnl   __libs_screen,
+dnl  PRJ_WINNOV_LOAD
+dnl   PRJ_LOADS PRJ_SCR_LOADS)
+
+__shexe(prj_test_bin(tableau),   
+  main+demo0, ,
+  __libs_screen,
+  PRJ_WINNOV_LOAD
+  PRJ_FLEXLM_LOAD
+  PRJ_LOADS PRJ_SCR_LOADS)
+
+popdef(`LDSTACK')
+
+__finish
+
+

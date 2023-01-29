@@ -1,0 +1,28 @@
+/*..........................................................................
+| TITLE dtprice
+| Dtack Price List
+dtinclude(prolog1.dx)
+dtinclude(legal1.dx)
+| 
+|!Dtack Price List
+dxinclude(price.dx)
+| \<hr\>
+| 
+| All prices in U.S. dollars.
+| 
+| All prices subject to change without notice.
+| 
+| License fee waived for every fifth fully paid license.
+| (Not combinable with educational discount).
+| 
+| Approved educational institutions may deduct 50% of license fees.
+| 
+| VISA and Mastercard accepted.
+| 
+| Use our convenient 
+|_link dtorder,inline order form
+| or simply call, write, fax or e-mail.
+| 
+| END
+ *..........................................................................*/
+

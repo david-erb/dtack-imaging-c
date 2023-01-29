@@ -1,0 +1,212 @@
+Sat Jan 13 07:31:40 1996																
+Wed Nov 15 05:51:43 1995	che80	P.C. Chen and T. Pavlidis	Image Segmentation As An Estimation Problem	cgip	1980	have	segmentation		from wu93 and che86	article		12			153--172	
+Wed Nov 15 05:42:18 1995	pav90	T. Pavlidis and Y.-T. Liow	Integrating Region Growing and Edge Detection	t-pami	1990	have	segmentation-region		from ada94	article		12	3	mar	225--233	
+Wed Nov 15 05:40:16 1995	mey90	F. Meyer and S. Beucher	Morphological Segmentation	jvcir	1990	want	segmentation		from ada94	article		1			21--46	
+Tue Nov 14 06:18:58 1995	rus88	Russ and Russ	Improved Implementation of a Convex Segmentation Algorithm	acta-ster	1988	want	segmentation			article		7	1		33--40	
+Tue Nov 14 06:16:14 1995	fre87	F. Freidlander and F. Meyer	A Sequential Algorithm for Detecting Watersheds in a Gray Level Image	acta-ster	1987	want	segmentation			article		6	3		663--668	
+Tue Nov 14 06:14:07 1995	dob94	B.P. Dobrin and T. Viero and M. Gabbouj	Fast Watershed Algorithms: Analysis and Extension	SPIE Nonlinear Image Processing V	1994	have	segmentation-watershed			article		2180			209--220	
+Tue Nov 14 05:49:33 1995	pav80	Theo Pavlidis and Yuh-Tay Liow	Integrating Region Growing and Edge Detection	t-pami	1990	want	segmentation-region			article		12	3	mar	225--233	
+Tue Nov 14 05:33:15 1995	hor76	S.L. Horowitz and T. Pavlidis	Picture Segmentation by a Tree Traversal Algorithm	j-acm	1976	have	segmentation-region			article		23			368--388	
+Fri Nov 17 05:47:04 1995	doh85	M.F. Doherty and M.T. Nogu and C.M. Bjorklund	Use of Compound Predicates in Split-and-Merge Segmentation	proc-cvpr85	1985	want	segmentation-region		from pav90	article					659--661	
+Tue Nov 14 05:28:36 1995	hor74	S.L. Horowitz and T. Pavlidis	Picture Segmentation by a Directed Split and Merge Procedure	proc-ijcpr2	1974	have	segmentation-region			article	landmark			Aug	424--433	
+Tue Nov 14 05:21:04 1995	vin91	L. Vincent and P. Soille	Watersheds in Digital Spaces: An Efficient Algorithm Based on Immersion Simulations	t-pami	1991	1	segmentation		from ada94	article	landmark	13			583--598	
+Fri Nov 17 05:56:18 1995	che94	W.P. Cheung and C.K. Lee and K.C. Li	Multithresholding: a Neural Approach	SPIE Nonlinear Image Processing V	1994	have	thresholding, neural			article		2180			322--331	
+Tue Nov 14 05:16:16 1995	ogo11	L. O'Gorman and A.C. Sanderson	The Converging Squares Algorithm: An Efficient Method for Locating Peaks in Multidimensions	t-pami	1984	have	segmentation		from ada94	article		6	3	may	280--288	
+Wed Nov 15 05:49:29 1995	sil88	J.F. Silverman and D.B. Cooper	Bayesian Clustering for Unsupervised Estimation of Surface and Texture Models	t-pami	1988	want	segmentation-clustering		from wu93	article		10		jul	482--495	
+Tue Nov 14 05:12:54 1995	che91	S.-Y. Chen and W.-C. Lin and C.-T. Chen	Split-and-Merge Image Segmentation Based on Localized Feature Analysis and Statistical Tests	cvgip	1991	have	segmentation-region		from che94 and ada94	article		53	5	sep	456--475	
+Tue Nov 14 05:10:38 1995	che79	P.C. Chen and T. Pavlidis	Segmentation by Texture Using a Concurrence Matrix and a Split-and-Merge Algorithm	cgip	1979	have	segmentation-region, texture		from cha94	article		10			172--182	
+Sun Nov  5 08:45:02 1995	mar86	Petros A. Maragos and Ronald W. Schafer	Morphological Skeleton Representation and Coding of Binary Images	t-assp	1986	have	thinning			article		34	5	oct	1228--1244	
+Sun Nov  5 08:43:17 1995	bra95	Brase and Brase	Understandable Statistics	D.C. Heath	1995	want	statistics			book			5			
+Fri Nov  3 06:16:57 1995	hum83	Robert A. Hummel and Stephen W. Zucker	On the Foundations of Relaxation Labeling Processes	t-pami	1983	have	segmentation-relaxation			article		5	3	may	267--287	
+Fri Nov  3 06:15:13 1995	har83	Robert M. Haralick	An Interpretation for Probabilistic Relaxation	cvgip	1983	have	segmentation-relaxation			article		22			388--395	
+Wed Nov  1 07:15:13 1995	pri84	Keith Price	Image Segmentation: a Comment on Studies in Global and Local Histogram Guided Relaxation Algorithms	t-pami	1984	have	segmentation-relaxation			article		6	2		247--249	
+Wed Nov  1 07:13:03 1995	ohl78	R. Ohlander and K. Price and D.R. Reddy	Picture Segmentation Using a Recursive Region Splitting Method	cgip	1978	have	segmentation-region			article		8			313--333	
+Tue Oct 31 06:06:44 1995	zuc78	Steven W. Zucker and E.V. Krishnamurthy and Robert L. Haar	Relaxation Processes for Scene Labeling: Convergence, Speed, and Stability	t-smc	1978	have	segmentation-relaxation		from dan81	article		8			41--48	
+Tue Oct 31 05:13:50 1995	pav77	T. Pavlidis	Structure Pattern Recognition	Springer	1977	want	segmentation			book	extensive review of partitioning techniques					
+Wed Nov  1 07:09:07 1995	zuc81	Steven W. Zucker and Yvan G. Leclerc and John L. Mohammed	Continuous Relaxation and Local Maxima Selection: Conditions for Equivalence	t-pami	1981	have	segmentation-relaxation			article		3		mar	117--128	
+Wed Nov  1 07:04:53 1995	pel78	Shmuel Peleg and Azriel Rosenfeld	Determining Compatibility Coefficients for Curve Enhancement Relaxation Processes	t-smc	1978	have	segmentation-relaxation		from nag82	article		8			548--555	
+Wed Nov  1 07:03:02 1995	har80	R. Haralick	Consistent Labeling Problems in Pattern Recognition	Plenum	1980	want	segmentation			book						
+Fri Nov  3 06:12:43 1995	koo85	Ja Young Koo and Kyu Ho Park and Myunghwan Kim	Improving the Labeling Accuracy by a New Probabilistic Relaxation Labeling	prl	1985	have	segmentation-relaxation			article		3		dec	399--402	
+Fri Nov  3 06:10:45 1995	ric81	J.A. Richards and D.A. Landgrebe and P.H. Swain	On the Accuracy of Pixel Relaxation Labeling	t-smc	1981	have	segmentation-relaxation			article		11	4	apr	303--309	
+Tue Oct 31 05:12:09 1995	ros78	Azriel Rosenfeld	Iterative Methods in Image Analysis	pr	1978	have	segmentation-relaxation		from ros82b	article		10			181--187	
+Tue Oct 31 05:09:31 1995	pel80	Shmuel Peleg	A New Probabilistic Relaxation Scheme	t-pami	1980	have	segmentation-relaxation		from ros82b, dan81	article		2			362--369	
+Sat Oct 28 18:01:43 1995	gage94	Philip Gage	A New Algorithm for Data Compression	cuj	1994	have	compression			article		12	2	feb	23--38	
+Sat Oct 28 08:46:32 1995	phi95	Dwayne Phillips	Image Processing in C, Part 15: Basic Texture Operations	cuj	1995	have	texture			article		13	11	nov	55--68	
+Tue Oct 17 20:50:08 1995	bha87	Bir Bhanu and Bahram A. Parvin	Segmentation of Natural Scenes	pr	1987	have	segmentation-relaxation			article		20	5		487--496	
+Tue Oct 17 20:48:22 1995	bha82	Bir Bhanu and Olivier D. Faugeras	Segmentation of Images Having Unimodal Distributions	t-pami	1982	have	segmentation-relaxation			article		4	4	jul	408--419	
+Tue Oct 17 20:45:52 1995	nag82	Paul A. Nagin and Allen R. Hanson and Edward M. Riseman	Studies in Global and Local Histogram-Guided Relaxation Algorithms	t-pami	1982	have	segmentation-relaxation			article		4	3	may	263--277	
+Tue Oct 17 20:43:00 1995	bha83	Bir Bhanu	Evaluation of Automatic Target Recognition Algorithms	spie-proc	1983	have	target recognition, segmentation evaluation			article		435		aug	18--27	
+Tue Oct 17 19:16:21 1995	goe80	George A. Goehrig II and Lynda G. Ledford	Analysis of Image Segmentation Approaches with Emphasis on Performance Evaluation Criteria	spie-ss	1980	have	segmentation evaluation			article		252	II		124--129	
+Tue Oct 17 19:14:55 1995	jon88	Kenneth De Jong	Learning with Genetic Algorithms: An Overview	ml	1988	have	genetic algorithms			article		3			121--138	
+Tue Oct 17 19:07:57 1995	bha86	Bir Bhanu	Automatic Target Recognition: State of the Art Survey	t-aes	1986	have	target recognition			article		22	4	jul	364--379	
+Sun Oct  1 13:36:21 1995	lim90	Young Won Lim and Sang Uk Lee	On the Color Image Segmentation Algorithm Based on the Thresholding and the Fuzzy c-Means Techniques	pr	1990	have	segmentation			article		23	9		935--952	
+Sun Oct  1 13:34:59 1995	gro83	William I. Grosky and Ramesh Jain	Optimal Quadtrees for Image Segmentation	t-pami	1983	have	segmentation			article		5	1	jan	77--83	
+Sun Oct  1 13:33:24 1995	kno92	Keith T. Knox	Error Image in Error Diffusion	spie-ipat	1992	have	halftoning, dithering			article		1657	III		268--279	
+Sun Oct  1 13:29:59 1995	zha92	Yu Jin Zhang and Jan J. Gerbrands	Segmentation Evaluation Using Ultimate Measurement Accuracy	spie-ipat	1992	have	segmentation			article		1657	III		449--460	
+Sun Oct  1 13:26:53 1995	che86	Fusak Cheevasuvit and Henri Maitre and Daniel Vidal-Madjar	A Robust Method for Picture Segmentation Based on Split-and-Merge Procedure	cvgip	1986	have	segmentation-region			article		34			268--281	
+Tue Oct 17 19:11:42 1995	bha94	Bir Bhanu and Sungkee Lee	Genetic Learning for Adaptive Image Segmentation	Kluwer Academic Publishers	1994	have partial copy and bibliography	segmentation, genetic algorithms			book						
+Sun Oct  1 13:25:31 1995	spa85a	M. Wilson and R. Spann	Image Segmentation and Uncertainty	unknown	1985	have bibliography only	segmentation			book						
+Sun Oct  1 13:23:33 1995	jai89	Anil K. Jain	Fundamentals of Digital Image Processing	prentice-hall	1989	have				book						
+Sun Oct  1 13:22:41 1995	gon92	Raphael C. Gonzalez and Richard E. Woods	Digital Image Processing	addison-wesley	1992	have				book						
+Sun Oct  1 13:20:50 1995	wat93	Christopher D. Watkins and Alberto Sadun and Stephen Marenka	Modern Image Processing: Warping, Morphing, and Classical Techniques	academic	1993	have				book						
+Sun Oct  1 13:19:37 1995	pra78	William K. Pratt	Digital Image Processing	wiley	1978	have				book						
+Sun Oct  1 13:18:39 1995	pra95	William K. Pratt	PIKS Foundation C Programmer's Guide	Manning	1995	have				book						
+Sun Oct  1 13:16:53 1995	pre88	William H. Press and Brian P. Flannery and Saul A Teukolsky and William T. Vetterling	Numerical Recipes in C	Cambridge University Press	1988	have				book						
+Wed Nov 15 05:51:43 1995	che80	P.C. Chen and T. Pavlidis	Image Segmentation As An Estimation Problem	cgip	1980	want	segmentation		from wu93 and che86	article		12			153--172	
+Sun Oct  1 13:14:37 1995	new79	William M. Newman and Robert F. Sproull	Principles of Interactive Computer Graphics	mcgraw-hill	1979	have				book			2			
+Sun Oct  1 13:12:43 1995	fol82	James D. Foley and Andries van Dam	Fundamentals of Interactive Computer Graphics	addison-wesley	1982	have				book						
+Sun Oct  1 13:11:24 1995	rog85	David F. Rogers	Procedural Elements for Computer Graphics	mcgraw-hill	1985	have				book						
+Sun Oct  1 13:09:50 1995	cas79	Kenneth R. Castleman	Digital Image Processing	prentice-hall	1979	have				book						
+Sun Oct  1 13:08:48 1995	ros82a	Azriel Rosenfeld and Avinash C. Kak	Digital Picture Processing	academic	1982	have				book		1	2			
+Sun Oct  1 13:05:38 1995	ros82b	Azriel Rosenfeld and Avinash C. Kak	Digital Picture Processing	academic	1982	have				book		2	2			
+Sun Sep 24 11:57:56 1995	diz83	Silvano Di Zenzo	Advances in Image Segmentation	ivc	1983	have	segmentation-survey			article		1	4	nov	196--210	
+Sun Sep 24 11:56:21 1995	bon93	G. Bongiovannie and L. Cinque and S. Levialdi and A. Rosenfeld	Image Segmentation by a Multiresolution Approach	pr	1993	have	segmentation			article		26	12		1845--1854	
+Sun Sep 24 11:54:47 1995	gla93	C.A. Glasbey	An Analysis of Histogram-Based Thresholding Algorithms	gmip	1993	have	thresholding			article		55	6	nov	532--537	
+Sun Sep 24 11:52:19 1995	wu93	Zhenyu Wu	Homogeneity Testing for Unlabeled Data: a Performance Evaluation	gmip	1993	have	segmentation-region			article		55	5	sep	370--380	
+Sun Sep 24 11:50:45 1995	ada94	Rolf Adams and Leanne Bischof	Seeded Region Growing	t-pami	1994	have	segmentation-region			article		16	6	jun	641--647	
+Sun Sep 24 11:49:26 1995	iye95	S. Sitharama Iyengar and Weian Deng	An Efficient Edge Detection Algorithm Using Relaxation Labeling Technique	pr	1995	have	edge			article		4			519--536	
+Sun Sep 24 11:47:21 1995	sun83	Chengjun Sun and WIlliam G. Wee	Neighboring Gray Level Dependence Matrix for Texture Classification	cvgip	1983	have	texture			article		23			341--352	
+Sun Sep 24 11:44:04 1995	cha94	Yian-Leng Chang and Xiaobo Li	Adaptive Image Region-Growing	t-ip	1994	have	segmentation-region			article		3	6	nov	868--872	
+Sun Sep 24 11:42:47 1995	zuc76	Steven W. Zucker	Region Growing: Childhood and Adolescence	cgip	1976	have	segmentation			article		5			382--399	
+Sun Sep 24 11:41:08 1995	ros76	Azriel Rosenfeld and Robert A. Hummel and Steven W. Zucker	Scene Labeling by Relaxation Operations	t-smc	1976	have	segmentation-relaxation			article	original relaxation paper	6	6	jun	420--433	
+Sun Sep 24 11:39:24 1995	dan81a	Alan J. Danker and Azriel Rosenfeld	Blob Detection by Relaxation	t-pami	1981	have	segmentation-relaxation			article		3	1	jan	79--92	
+Sun Sep 24 11:37:32 1995	sam81	Hanan Samet	An Algorithm for Converting Rasters into Quadtrees	t-pami	1981	have	connected components			article		3	1	jan	93--95	
+Sun Sep 24 11:36:00 1995	don82	Philip A. Dondes and Azriel Rosenfeld	Pixel Classification Based on Gray Level and Local Busyness	t-pami	1982	have	segmentation			article		4	1	jan	79--84	
+Sun Sep 24 11:34:00 1995	spa85b	M. Spann and R. Wilson	A Quad-Tree Approach to Image Segmentation Which Combines Statistical an Spatial Information	pr	1985	have	segmentation			article		18	3		257--269	
+Sun Sep 24 11:31:39 1995	col79	Guy B. Colemand and Harry C. Andrews	Image Segmentation by Clustering	proc-ieee	1979	have	segmentation			article		67	5	may	773--785	
+Sun Sep 24 11:29:24 1995	dub90	J.M.H. du Buf and M. Kardan and M. Spann	Texture Feature Performance for Image Segmentation	pr	1990	have	texture		from ree93	article	synthetic images, single performance measure: mean boundary error	23	3		291--309	
+Sun Sep 24 11:26:06 1995	pal93	Nikhil R. Pal and Sankar K. Pal	A Review on Image Segmentation Techniques	pr	1993	have	segmentation-survey		from dub90	article	refers to lev85 and several other performance measurement algorithms	26	9		1277--1294	
+Tue Aug 29 06:00:38 1995	wha91	R.J. Whatmough	Automatic Threshold Selection from a Histogram Using the Exponential Hull	unknown	1991	have	thresholding			article						
+Tue Aug 29 05:59:14 1995	whi83	J.M. White and G.D. Rohrer	Image Thresholding for Optical Character Recognition and Other Applications Requiring Character Image Extraction	unknown	unknown	have	thresholding			article						
+Tue Aug 29 05:58:09 1995	wes78b	Joan S. Weszka and Azriel Rosenfeld	Threshold Evaluation Techniques	t-smc	1978	have	thresholding			article		8	8	aug	622--629	
+Tue Aug 29 05:57:01 1995	yas77	William A. Yasnoff and Jack K. Mui and James W. Bacus	Error Measures for Scene Segmentation	pr	1977	have	segmentation			article		9			217--231	
+Tue Aug 29 05:53:02 1995	yam80	Hiromichi Yamamoto	Some Experiments on LANDSAT Pixel Classification Using Relaxation Operators	cgip	1980	have	segmentation			article		13			31--45	
+Tue Aug 29 05:51:54 1995	wes74	Joan S. Weszka and R.N. Nagel and Azriel Rosenfeld	A Threshold Selection Technique	t-c 	1974	have	thresholding			article		23			1322--1326	
+Tue Aug 29 05:50:12 1995	wes78	Joan S. Weszka	A Survey of Threshold Selection Techniques	unknown	unknown	have	thresholding, survey			article						
+Tue Aug 29 05:48:42 1995	wes79	Joan S. Weszka and Azriel Rosenfeld	Histogram Modification for Threshold Selection	unknown	unknown	have	thresholding			article						
+Tue Aug 29 05:47:28 1995	wan84	Shyuan Wang and Robert M. Haralick	Automatic Multithreshold Selection	unknown	unknown	have	thresholding			article						
+Tue Aug 29 05:46:26 1995	tax89	Torfinn Taxt and Patrick J. Flynn and Anil K. Jain	Segmentation of Document Images	t-pami	1989	have	segmentation			article		11	12	dec	1322--1329	
+Tue Aug 29 05:43:46 1995	sez89	M. Ibrahim Sezan and A. Murat Tekalp and Ralph Schaetzing	Automatic Anatomically Selective Image Enhancement in Digital Chest Radiography	unknown	unknown	have	thresholding			article						
+Tue Aug 29 05:42:34 1995	sny90	Wesley Snyder and Griff Bilbro and Ambalavaner Logenthiran and Sarah Rajala	Optimal Thresholding--A New Approach	unknown	unknown	have	thresholding			article						
+Tue Aug 29 05:41:29 1995	skl78	Jack Sklansky	Image Segmentation and Feature Extraction	unknown	unknown	have	segmentation			article						
+Tue Aug 29 05:39:17 1995	ree93	Todd R. Reed and J.M. Hans du Buf	A Review of Recent Texture Segmentation and Feature Extraction Techniques	iu	1993	have	segmentation-survey			article		57	3	may	359--372	
+Tue Aug 29 05:38:26 1995	par91	J.R. Parker	Gray Level Thresholding in Badly Illuminated Images	unknown	unknown	have	thresholding			article						
+Tue Aug 29 05:37:34 1995	per87	Arnulfo Perez and Rafael C. Gonzalez	An Iterative Thresholding Algorithm for Image Segmentation	t-pami	1987	have	segmentation			article		9	6	nov	742--751	
+Tue Aug 29 05:28:58 1995	jol91	Jean-Michel Jolion and Peter Meer and Samira Bataouche	Robus Clustering with Applications in Computer Vision	unknown	unknown	have	segmentation			article						
+Mon Sep 11 10:27:40 1995	dan81b	Per-Erik Danielsson	Getting the Median Faster	cgip	1981	have	median			article		17			71--78	
+Mon Sep 11 10:26:25 1995	hua79	Thomas S. Huang and George J. Yang and Gregory Y. Tang	A Fast Two-Dimensional Median Filtering Algorithm	t-assp	1979	have	median			article		27	1	feb	13--18	
+Mon Sep 11 10:34:38 1995	juh91	Martti Juhola and Jyrki Katajainen and Timo Raita	Comparison of Algorithms for Standard Median Filtering	t-sp	1991	have	median			article		39	1	jan	204--208	
+Mon Sep 11 10:33:03 1995	ran91	Sanja Ranka and Sartaj Sahni	Efficient Serial and Parallel Algorithms for Median Filtering	t-sp	1991	have	median			article		39	6	jun	1462--1466	
+Mon Sep 11 10:20:11 1995	lee93	Charng Long Lee and Chein-Wei Jen	Binary Partition Algorithms and VLSI Architecture for Median and Rank Order Filtering	t-sp	1993	have	median			article		41	9	sep	2937-2941	
+Mon Sep 11 10:18:32 1995	har73	Haralick and Shanmugam and Dinstein	Textural Features for Image Classification	unknown	unknown	have	texture, segmentation			article						
+Mon Sep 11 10:16:02 1995	pun80	Thierry Pun	A New Method for Gray-Level Picture Thresholding Using the Entropy of the Histogram	unknown	unknown	have	thresholding			article						
+Tue Aug 29 05:27:43 1995	fu81	K.S. Fu and J.K. Mui	A Survey on Image Segmentation	pr	1981	have	segmentation-survey			article		13			3--16	
+Tue Aug 29 05:26:23 1995	ekl79	Jan-Olaf Eklundh and Azriel Rosenfeld	Peak Detection Using Difference Operators	unknown	unknown	have	thresholding			article						
+Tue Aug 29 05:25:14 1995	dun84	Stanley M. Dunn and David Harwood and Larry S. Davis	Local Estimation of the Uniform Error Threshold	unknown	unknown	have	thresholding			article						
+Fri Nov  3 21:03:04 1995	sch77	Schachter and Lev and Zucker and Rosenfeld	An Application of Relaxation Methods to Edge Reinforcement	t-smc	1977	have	segmentation-relaxation			article		7	11	nov	813--816	
+Fri Nov  3 20:59:47 1995	dav77	Davis and Rosenfeld	Curve Segmentation by Relaxation Labeling	t-c	1977 	have	segmentation-relaxation			article		26	10		1053--1057	
+Fri Nov  3 06:55:00 1995	han80	A.R. Hanson and E.M. Riseman and F.C. Glazer::R. Haralick	Edge Relaxation and Boundary Continuity::Consistent Labeling Problems in Pattern Recognition	Plenum	1980	want	segmentation-relaxation			incollection						
+Tue Aug 29 05:23:51 1995	dav74	Larry S. Davis and Azriel Rosenfeld and Joan S. Weszka	Region Extraction by Averaging and Thresholding	unknown	unknown	have	segmentation			article						
+Tue Aug 29 05:22:33 1995	lee89	Jong-Sen Lee and Mark C.K. Yang	Threshold Selection Using Estimates from Truncated Normal Distribution	unknown	unknown	have	thresholding			article						
+Tue Aug 29 05:21:12 1995	mar88	K.V. Mardia and T.J. Hainsworth	A Spatial Thresholding Method for Image Segmentation	unknown	unknown	have	thresholding			article						
+Tue Aug 29 05:19:01 1995	mit85	Amar Mitiche and J.K. Aggarwal	Image Segmentation by Conventional and Information-Integrating Techniques: a Synopsis	unknown	unknown	have	segmentation-survey			article						
+Tue Aug 29 05:18:20 1995	pun81	Pun	Entropic Thresholding, A New Approach	unknown	unknown	have	thresholding			article						
+Sat Jan 28 08:17:06 1995	kir79	Kirby and Rosenfeld	A Note on the Use of (Gray Level, Local Average Gray Level) Space As An Aid in Threshold Selection	unknown	unknown	have, water damaged	thresholding			article						
+Sat Jan 28 08:16:39 1995	kol??	Kolmogorov	various excerpts			have, water damaged				misc						
+Sat Jan 28 08:14:41 1995	kar89	Karaman and Onural	New Radix-2-Based Algorithm for Fast Median Filtering	unknown	unknown	have, water damaged	median			article						
+Sat Jan 28 08:13:37 1995	kit85b	Kittler and Illingworth	Threshold Selection Based on a Simple Image Statistic	unknown	unknown	have, water damaged	thresholding			article						
+Sat Jan 28 08:12:52 1995	kit85	Kittler and Illingworth	On Threshold Selection Using Clustering Criteria	unknown	unknown	have, water damaged	thresholding			article						
+Sat Jan 28 08:12:01 1995	kit86a	Kittler and Illingworth	Minimum Error Thresholding	unknown	unknown	have, water damaged	thresholding			article						
+Sat Jan 28 08:10:56 1995	knu87	Donald E. Knuth	Digital Halftones by Dot Diffusion	unknown	unknown	have, water damaged	halftoning			article						
+Sat Jan 28 08:09:56 1995	kol91	Kollias and Anastassiou	A Unified Neural Network Approach to Digital Image Halftoning	unknown	unknown	have, water damaged	halftoning			article						
+Sat Jan 28 08:08:54 1995	kol92	Kolpatzi and Bouman	Optimized Error Diffusion for Image Display	unknown	unknown	have, water damaged	halftoning			article						
+Sat Jan 28 06:04:03 1995	car91	Wayne E. Carlson	A Survey of Computer Graphics Image Encoding and Storage Formats	unknown	unknown	have	survey, file formats			article						
+Sat Jan 28 06:02:51 1995	bil83	C. Billotet-Hoffmann and O. Bryngdahl	On the Error Diffusion Technique for Electronic Halftoning	unknown	unknown	have	halftoning			article						
+Sat Jan 28 06:01:55 1995	hol80	Thomas M. Holladay	An Optimum Algorithm for Halftone Generation for Displays and Hard Copies	unknown	unknown	have	halftoning			article						
+Sat Jan 28 06:00:33 1995	esc87	Reiner Eschbach and R. Hauck	Binarization Using a Two-Dimensional Pulse-Density Modulation	unknown	unknown	have	halftoning			article						
+Sat Jan 28 05:59:22 1995	goe87	Goertzel and Thompson	Digital Halftoning on the IBM 4250 Printer	unknown	unknown	have	halftoning			article						
+Sat Jan 28 05:56:51 1995	esc90	Reiner Eschbach	Pulse-Density Modulation on Rastered Media: Combining Pulse-Density Modulation and Error Diffusion	unknown	unknown	have	halftoning			article						
+Sat Jan 28 05:38:57 1995	sez90	M. Ibrahim Sezan	A Peak Detection Algorithm and Its Application to Histogram-Based Image Data Reduction	unknown	unknown	have	thresholding			article						
+Sat Jan 28 05:23:53 1995	iap92	IAPR	A Survey of Image Processing and Computer Vision Software Systems on Workstations			have	survey			report						
+Sat Jan 28 05:22:19 1995	sny??	Snyder	Image Quality: Measures and Visual Performance	unknown	unknown	have	image quality			article						
+Sat Jan 28 05:20:50 1995	nil92	Nill and Bouzas	Objective Image Quality Measure Derived from Digital Image Power Spectra	unknown	unknown	have	image quality			article						
+Sat Jan 28 05:19:24 1995	sag89	Saghri and Cheatham and Habibi	Image Quality Measure Based on a Human Visual System Model	unknown	unknown	have	image quality			article						
+Sat Jan 28 05:15:35 1995	arc85	Arcelli and Di Baja	A Width-Independent Fast Thinning Algorithm	unknown	unknown	have	thinning			article						
+Sat Jan 28 05:13:40 1995	kan80	Takeo Kanade	Region Segmentation: Signal vs Semantics	cgip	1980	have	segmentation-survey			article		13			279--297	
+Sat Jan 28 05:08:27 1995	kon89	Kong and Rosenfeld	Digital Topology: Introduction and Survey	unknown	unknown	have	survey			article						
+Sat Jan 28 05:07:00 1995	kap85	Kapur and Sahoo and Wong	A New Method for Gray-Level Picture Thresholding Using the Entropy of the Histogram	unknown	unknown	have	thresholding			article						
+Sat Jan 28 05:03:54 1995	lee90	Sang Uk Lee and Seok Yoon Chung	A Comparative Performance Study of Several Global Thresholding Techniques for Segmentation	cvgip	1990	have	thresholding			article		52			171--190	
+Sat Jan 28 04:59:53 1995	lum83	Lumia and Shapiro and Zuniga	A New Connected Components Algorithm for Virtual Memory Computers	unknown	unknown	have moved	connected components		har85	article						
+Mon Aug 21 21:28:37 1995	hsi89b	Hsiao and Sawchuk	Supervised Textured Image Segmentation Using Feature Smoothing and Probabilitic Relaxation Techniques	unknown	unknown	have	texture, segmentation			article						
+Mon Aug 21 21:25:08 1995	hsi89a	Hsiao	Unsupervised Textured Image Segmentation Using Feature Smoothing and Probabilitic Relaxation Techniques	unknown	unknown	have	texture, segmentation			article						
+Mon Aug 21 21:21:18 1995	har00	R.M. Haralick::Morio Ono and Kendall Preston, Jr. and Azriel Rosenfeld	Some Neighborhood Operators::Real-Time/Parallel Computing Image Analysis	Plenum	1900	have	connected components, morphology			incollection						
+Mon Aug 21 21:19:26 1995	har85	Robert M. Haralick and Linda G. Shapiro	Image Segmentation Techniques	cvgip	1985	have	segmentation-survey			article		29			100-132	
+Sun Aug 20 13:48:35 1995	sah88	P.K. Sahoo and S. Soltani and A.K.C. Wong and Y.C. Chen	A Survey of Thresholding Techniques	cvgip	1988	have	thresholding, survey			article		41			233--260	
+Sun Aug 20 13:43:37 1995	Ana92	Analoui	Model Based Halftoning Using Direct Binary Search	unknown	unknown	have	halftoning			article						
+Sun Aug 20 13:41:21 1995	avi87	aviad	Semantic Thresholding	unknown	unknown	have	thresholding			article						
+Sun Aug 20 13:39:57 1995	abd79	Ikram E. Abdou and William K. Pratt	Quantitative Design and Evaluation of Enhancement/Threshold Edge Detectors	proc-ieee	1979	have	thresholding, edge			article		67	5	may	753--763	
+Sun Aug 20 13:38:40 1995	and87	Anderson	A Modular Feedback System for Image Segmentation			have	segmentation			report						
+Sun Aug 20 13:36:51 1995	anb88	Anbalagan	A Segmentation and Object Extraction Algorithm with Linear Memory and Time Constraints			have	segmentation			report						
+Sun Aug 20 13:34:46 1995	ahm87	M. Omair Ahmad and Duraisamy Sundararajan	A Fast Algorithm for Two-Dimensional Median Filtering	t-c s	1987	have	median			article		34	11	nov	1364--1374	
+Sun Aug 20 13:33:08 1995	ahu78	Ahuja and Rosenfeld	A Note on the Use of Second-Order Gray-Level Statistics for Threshold Selection	unknown	unknown	have	thresholding			article						
+Sun Aug 20 13:31:11 1995	abu89	Abutaleb	Automatic Thresholding of Gray-Level Pictures Using Two-Dimensional Entropy 	unknown	unknown	have	thresholding			article						
+Sun Aug 20 12:58:10 1995	bou85	Boukharouba	An Amplitude Segmentation Method Based on the Distribution Function of an Image	unknown	unknown	have	thresholding, histogram analysis			article						
+Mon Sep 11 10:46:12 1995	tsa85	Wen-Hsiang Tsai	Moment-Preserving Thresholding: a New Approach	unknown	unknown	have	thresholding			article						
+Mon Sep 11 10:45:27 1995	ros81	Azriel Rosenfeld and Russell C. Smith	Thresholding Using Relaxation	unknown	unknown	have	thresholding			article						
+Mon Sep 11 10:44:32 1995	ots79	Nobuyuki Otsu	A Threshold Selection Method from Gray-Level Histograms	unknown	unknown	have	thresholding			article						
+Mon Sep 11 10:43:32 1995	wu82	Angela Y. Wu and Tsai-Hong Hong and Azriel Rosenfeld	Threshold Selection Using Quadtrees	unknown	unknown	have	threshold			article						
+Mon Sep 11 10:39:39 1995	won89	Andrew K.C. Wong and P.K. Sahoo	A Gray-Level Threshold Selection Method Based on Maximum Entropy Principle	t-smc	1989	have	thresholding			article		19	4	jul	866--871	
+Sun Aug 20 12:57:13 1995	bri89	Brink	Gray-Level Thresholding of Images Using a Correlation Criterion	unknown	unknown	have	thresholding-			article						
+Sun Aug 20 12:55:02 1995	ban93	J. Andrew Bangham	Properties of a Series of Nested Median Filters, Namely the Data Sieve	t-sp	1993	have	median			article		41	1	jan	31--42	
+Sun Aug 20 12:52:20 1995	bes86	Best and Jain	Segmentation through Symbolic Surface Descriptions	unknown	unknown	have	segmentation			article						
+Wed Aug  9 06:58:23 1995	dta95a	Dtack Imaging Software	General Purpose Library Guide		1995	have				manual						
+Mon Aug  7 11:49:54 1995	eng93	Ludger Engbert	On-The-Fly Huffman Coding	cuj	1993	have	compression, archiving			article	compresses/decompresses list of files; possible use inself extracting archive; compresses C source code to 60%	11	12	dec		
+Mon Aug  7 11:48:29 1995	tre94	Anton Treuenfels	An Efficient Flood Visit Algorithm	cuj	1994	have	flood fill			article		12	8	aug		
+Mon Aug  7 11:22:31 1995	wil95	K.B. Williams	Magic Matrix Multiply	cuj	1995	have	matrix			article		13	6	jun		
+Mon Aug  7 11:21:14 1995	dwy95	Jerry Dwyer	Quick and Portable Random Number Generators	cuj	1995	have	random numbers			article						
+Fri Nov  3 06:01:00 1995	kit86b	J. Kittler and J. Foeglein	On Compatibility and Support Functions in Probabilistic Relaxation	cvgip	1986	have	segmentation-relaxation			article		34			257--267	
+Fri Nov  3 05:58:44 1995	chr95	William J. Christmas and Josef Kittler and Maria Petrou	Structural Matching in Computer Vision Using Probabilistic Relaxation	t-pami	1995	have	segmentation-relaxation			article		17	8	aug	749--764	
+Sun Jul 23 11:00:01 1995	pri93	Tim Prince	Performance Tuning a Complex FFT	cuj	1993	have	fft		pre88	article	how to optimize FFT code from Numerical Recipes					
+Sat Jan 28 05:36:16 1995	mil79	Milgram and Herman	Clustering Edge Values for Threshold Selection Intentionally	unknown	unknown	have	thresholding			article						
+Sat Jan 28 05:35:09 1995	ros94	Rosenfeld	Image Analysis and Computer Vision: 1993	unknown	unknown	have	survey			article						
+Fri Jul 21 19:58:33 1995	ros95	Azriel Rosenfeld	Image Analysis and Computer Vision: 1994	iu	1995	have	survey			article						
+Fri Jul 21 19:55:51 1995	new95	Newman and Jain	A Survey of Automated Visual Inspection	iu	1995	have	applications, survey			article						
+Fri Jul 21 19:54:00 1995	tsa95	Du-Ming Tsai	A Fast Thresholding Selection Procedure for Multimodal and Unimodal Histograms	prl	1995	have	threshold, segmentation, histogram			article						
+Fri Jul 21 19:51:08 1995	lam92	Lam and others	Thinning Methodologies - A Comprehensive Survey	t-pami	1992	have	thinning, survey			article						
+Fri Jul 21 19:47:47 1995	kim95	Jihong Kim and Yongmin Kim	Efficient 2-D Convolution Algorithm with the Single-Data Multiple Kernel Approach	gmip	1995	have	convolution	implemented		article						
+Sun Jul 23 11:33:56 1995	lev84	Martin D. Levine and Ahmed M. Nazif	An Optimal Set of Image Segmentation Rules	prl	1984	have	segmentation		lev85, lev82	article						
+Sun Jul 23 11:37:47 1995	lev81	Martin D. Levine and Samir I. Shaheen	A Modular Computer Vision System for Picture Segmentation and Interpretation	t-pami	1981	have				article		3	5	sep	540--556	
+Sun Jul 23 11:30:32 1995	lev85	Martin D. Levine and Ahmed M. Nazif	Dynamic Measurement of Computer Generated Image Segmentations	t-pami	1985	have, implemented	segmentation, measurement			article		7	2	mar	155--164	
+Fri Jul 21 19:44:05 1995	nic95	C.J. Nicol	A Systolic Approach for Real Time Connected Complement Labeling	iu	1995	have	connected components			article						
+Tue Nov 14 05:35:15 1995	j-acm		Journal of the Association for Computing Machines							abbreviation						
+Fri Nov 17 05:50:21 1995	proc-cvpr85		Proceedings Computer Vision and Pattern Recognition 85							abbreviation						
+Tue Nov 14 05:31:19 1995	proc-ijcpr2		Proceedings 2nd International Joint Conference on Pattern Recognition							abbreviation						
+Sun Sep 24 11:59:14 1995	ivc		Image and Vision Computing							abbreviation						
+Sun Sep 24 11:45:24 1995	t-ip		IEEE Transactions on Image Processing							abbreviation						
+Sun Sep 24 11:32:55 1995	proc-ieee		Proceedings of the IEEE							abbreviation						
+Mon Sep 11 10:37:56 1995	t-cs		IEEE Transactions on Circuits and Systems							abbreviation						
+Sun Sep 17 13:57:42 1995	pr		Pattern Recognition							abbreviation						
+Sun Jul 23 11:35:04 1995	prl		Pattern Recognition Letters							abbreviation						
+Sun Jul 23 11:26:43 1995	t-pami		IEEE Transactions on Pattern Analysis and Machine Intelligence							abbreviation						
+Sun Jul 23 11:26:27 1995	iu		Image Understanding							abbreviation						
+Mon Sep 11 10:25:24 1995	t-smc		IEEE Transactions on Systems, Man, and Cybernetics							abbreviation						
+Sun Sep 24 11:48:20 1995	cvgip		Computer Vision, Graphics, and Image Processing							abbreviation						
+Mon Sep 11 10:24:22 1995	cgip		Computer Graphics and Image Processing							abbreviation						
+Mon Sep 11 10:23:13 1995	t-assp		IEEE Transactions on Acoustics, Speech, and Signal Processing							abbreviation						
+Mon Sep 11 10:22:17 1995	t-sp		IEEE Transactions on Signal Processing							abbreviation						
+Sun Sep 17 13:50:04 1995	t-c		IEEE Transactions on Computers							abbreviation						
+Wed Sep 20 07:10:25 1995	cuj		C Users Journal							abbreviation						
+Sun Oct  1 13:20:32 1995	wiley		Wiley							abbreviation						
+Tue Oct 17 19:10:39 1995	t-aes		IEEE Transactions on Aerospace and Electronic Systems							abbreviation						
+Wed Sep 20 07:11:23 1995	t-cs		IEEE Transactions on Circuits and Systems							abbreviation						
+Sun Oct  1 13:08:01 1995	academic		Academic Press							abbreviation						
+Sun Oct  1 13:10:43 1995	prentice-hall		Prentice-Hall							abbreviation						
+Sun Oct  1 13:12:09 1995	mcgraw-hill		McGraw-Hill							abbreviation						
+Sun Oct  1 13:13:40 1995	addison-wesley		Addison-Wesley							abbreviation						
+Tue Oct 17 19:19:17 1995	spie-ss		SPIE Smart Sensors							abbreviation						
+Sun Oct  1 13:31:59 1995	spie-ipat		SPIE Image Processing Algorithms and Techniques							abbreviation						
+Tue Oct 17 19:16:05 1995	ml		Machine Learning							abbreviation						
+Tue Nov 14 06:17:58 1995	acta-ster		Acta Stereologica							abbreviation						
+Wed Nov 15 05:44:14 1995	jvcir		Journal of Visual Communications and Image Representation							abbreviation						
+Sun Jul 23 11:25:39 1995	gmip		Graphical Models and Image Processing							abbreviation						
+Fri Jul 21 19:11:36 1995	cho95	Choy et.al.	New Single-Pass Algorithm for Parallel Thinning	iu	1995	have	thinning	good to implement		article						

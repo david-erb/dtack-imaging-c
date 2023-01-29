@@ -1,0 +1,41 @@
+define(TOP, UP2)
+define(DIR, source/color)
+__prolog
+
+pushdef(`CCSHARABLE', `CCSHARABLE_ON')
+
+pushdef(`CCOPTIMIZE', `CCOPTIMIZE_HIGH')
+pushdef(`CCDEBUGGER', `CCDEBUGGER_OFF')
+
+__src(rgb888,
+  PRJ_INCLUDES+PRJ_XV_INCLUDE,
+  PRJ_DEFINES+PRJ_XV_DEFINE)
+
+__src(r_g_b,
+  PRJ_INCLUDES+PRJ_XV_INCLUDE,
+  PRJ_DEFINES+PRJ_XV_DEFINE)
+
+__src(y_cb_cr,
+  PRJ_INCLUDES+PRJ_XV_INCLUDE,
+  PRJ_DEFINES+PRJ_XV_DEFINE)
+
+__shlib(prj_lib(dtcolor),
+  convert+
+  org+
+  rgb+
+  rgb888+
+  r_g_b+
+  ycbycr+
+  y_cb_cr+
+  yuyv+
+  libmain, , , 
+  prj_lib(dtlow)+
+  prj_lib(dt1d))
+
+popdef(`CCDEBUGGER')
+popdef(`CCOPTIMIZE')
+
+popdef(`CCSHARABLE')
+
+__finish
+

@@ -1,0 +1,32 @@
+===========================================
+dttime: 03 Feb 95 05:18 QW0 
+dttcast: | 950203 | b08->b01 (50) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  4.29 |  0.00 |  4.29
+dttcast: | 950203 | b01->b08 (50) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  4.84 |  0.00 |  4.84
+dttcast: | 950203 | b08->b08 (50) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  1.39 |  0.00 |  1.39
+dttcast: | 950203 | b08->b08 (50) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  1.40 |  0.00 |  1.40
+dttcast: | 950203 | b08->b16 (50) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  5.76 |  0.00 |  5.76
+dttcast: | 950203 | b16->b08 (50) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  5.84 |  0.00 |  5.84
+dttcast: | 950203 | b08->b32 (50) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  6.57 |  0.00 |  6.57
+dttcast: | 950203 | b32->b08 (50) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  5.36 |  0.00 |  5.36
+dttcast: | 950203 | b08->s1  (50) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  4.96 |  0.00 |  4.96
+dttcast: | 950203 | s1 ->b08 (50) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  5.27 |  0.00 |  5.27
+dttcast: | 950203 | b08->s2  (50) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  5.55 |  0.00 |  5.55
+dttcast: | 950203 | s2 ->b08 (50) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  5.16 |  0.00 |  5.16
+dttcast: | 950203 | b08->s4  (50) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  6.48 |  0.00 |  6.48
+dttcast: | 950203 | s4 ->b08 (50) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  5.27 |  0.00 |  5.27
+dttcast: | 950203 | b08->f1  (10) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  3.39 |  0.00 |  3.39
+dttcast: | 950203 | f1 ->b08 (10) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  8.77 |  0.00 |  8.78
+dttcast: | 950203 | b08->f2  (10) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  3.55 |  0.00 |  3.55
+dttcast: | 950203 | f2 ->b08 (10) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  8.86 |  0.00 |  8.86
+dttconv: | 950203 | dttconv_h1d | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  9.82 |  0.00 |  9.82
+dttconv: | 950203 | dttconv_ave | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  2.22 |  0.00 |  2.22
+dttconv: | 950203 | dttconv_laplace | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  2.55 |  0.00 |  2.56
+dttconv: | 950203 | dttconv_cross | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  6.97 |  0.00 |  6.97
+dtt1d: | 950203 | random uniform (  7500) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  1.06 |  0.00 |  1.06
+dtt1d: | 950203 | random gauss (  7500) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  1.70 |  0.00 |  1.70
+dtt1d: | 950203 | inverted sort (  7500) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  1.63 |  0.00 |  1.63
+dtt1d: | 950203 | random sort (  7500) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  1.70 |  0.00 |  1.70
+dttlog: | 950203 | log10 unscaled (5@128x120) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  0.55 |  0.00 |  0.55
+dttlog: | 950203 | log10 scaled (5@128x120) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  4.25 |  0.00 |  4.25
+dttlog: | 950203 | log unscaled (5@128x120) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  0.55 |  0.00 |  0.55
+dttlog: | 950203 | log scaled (5@128x120) | QW0 | Watcom-9.5(QNX16) | Alpha-DX33 |  4.26 |  0.00 |  4.26

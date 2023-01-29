@@ -1,0 +1,15 @@
+define(TOP, UP2)
+define(DIR, test/1d)
+
+__src(dtt1d, PRJ_INCLUDES, PRJ_DEFINES+$(MK_FFTW_DEFINE))
+
+__shexe(prj_test_bin(dtt1d),    dtt1d, ,
+  prj_lib(dttzz)+
+  prj_lib(dtlow)+
+  prj_lib(dt1d)+
+  PRJ_SUPPORT_LIBS,
+  PRJ_LOADS PRJ_INTER_LOADS)
+
+__finish
+
+

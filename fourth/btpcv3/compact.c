@@ -1,0 +1,360 @@
+/*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
+  ! Copyright (C) 1998 Dtack Inc. All Rights Reserved
+  ! To use this file, you must have signed a license agreement with Dtack Inc.
+  ! Under no circumstances may you redistribute this file.
+  ! This software is provided AS IS with no warranty expressed or implied.
+  ! Dtack Inc. accepts no liability for use or misuse of this file.
+  ! http://www.dtack.com  dtack@dtack.com  telephone +360.417.6700
+  ! Dtack Inc, P.O. Box 3061, Port Angeles, WA USA 98362
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+
+
+
+
+
+#include <dtack/base.h>
+#include <cfpio.h>
+#include <compactr.h>
+
+//
+// Member functions for the compact data type implement a static Huffman coder.
+//
+
+void Compactr::reset(void) 
+{
+	// printf("reset\n"); fflush(stdout);
+	for (int i = 0; i < 256; i++)
+		freq[i] = 0;
+}
+
+void Compactr::buildtree(void)
+// Based on JPEG huffman algorithm
+{
+	// printf("buildtree\n"); fflush(stdout);
+	int h1;
+	int h2;
+	int length[256];
+	int descendents[256];
+	for (int i = 0; i < 256; i++)
+		{
+		length[i] = 0;
+		descendents[i] = -1;
+		}
+	while(1) {
+		h1 = -1;
+		h2 = -1;
+		// Find smallest non-zero frequency
+		for (i = 0; i < 256; i++) {
+			if (freq[i]) {
+			    if (h1 == -1 || freq[i] < freq[h1]) {
+				if (h2 == -1 || freq[h1] < freq[h2])
+					h2 = h1;
+				h1 = i;
+			    } else if (h2 == -1 || freq[i] < freq[h2])
+				h2 = i;
+			}
+		}
+		if (h2 == -1) // Found the root
+			break;
+		// Merge the two trees
+		freq[h1] += freq[h2];
+		freq[h2] = 0;
+		length[h1]++;
+		while (descendents[h1] >= 0) {
+			h1 = descendents[h1];	// Go down chain
+			length[h1]++;
+			}
+		//  Put h2 on this chain
+		descendents[h1] = h2;
+		// And go down its chain
+		while (descendents[h1] >= 0) {
+			h1 = descendents[h1];
+			length[h1]++;
+			}
+		}
+	if (h1 == -1) // Empty tree - create dummy char
+		{
+		longest = 0;
+		num_symbols_of_length[0] = 1;
+		ordered_symbols[0] = 0;
+		return;
+		}
+	if (length[h1] == 0)	// one symbol
+		{
+		longest = 0;
+		num_symbols_of_length[0] = 1;
+		ordered_symbols[0] = h1;
+		return;
+		}
+	for (i = 0; i < 32; i++)
+		num_symbols_of_length[i] = 0;
+	for (i = 0; i < 256; i++) {
+		if (length[i])
+			num_symbols_of_length[length[i]]++;
+			// Assume never have case of 256 equal symbols
+		}
+	// Reduce to TABLEBITS-sized words using JPEG algorithm
+	for (i = 31; i > TABLEBITS; i--) {
+		while(num_symbols_of_length[i]) {
+			int j = i - 2;
+			while (!num_symbols_of_length[j])
+				j--;
+			num_symbols_of_length[i] -= 2;
+			num_symbols_of_length[i-1]++;
+			num_symbols_of_length[j+1] += 2;
+			num_symbols_of_length[j]--;
+			}
+		}
+	while(num_symbols_of_length[i] == 0)
+		i--;
+	// i is now length of longest codeword
+	longest = i;
+	int k = 0;
+	for (i = 1; i <= 31; i++) {
+		for (int j = 0; j < 256; j++)
+			if (length[j] == i)
+				ordered_symbols[k++] = j;
+		}
+	}
+
+// Write the Huffman tree to the output code file
+void Compactr::writetree(void) {
+	// printf("writetree\n"); fflush(stdout);
+	pfio->putbit(longest & 0x8);
+	pfio->putbit(longest & 0x4);
+	pfio->putbit(longest & 0x2);
+	pfio->putbit(longest & 0x1);
+	// printf("longest = %d\n", longest); fflush(stdout);
+	for (int i = 1; i <= longest; i++)
+		{
+		// printf("num of length %d = %d\n",i, num_symbols_of_length[i]);
+		pfio->putbyte(num_symbols_of_length[i]);
+		}
+	// Then the literals
+	int k = 0;
+	for (i = 0; i <= longest; i++) {
+		for (int j = 0; j < num_symbols_of_length[i]; j++)
+			{
+			// printf("%d ",ordered_symbols[k]);
+			pfio->putbyte(ordered_symbols[k++]);
+			}
+		}
+	// printf("\n");
+	// fflush(stdout);
+	maketable_encode();
+	}
+
+// Read the Huffman tree from the input code file.
+void Compactr::readtree(void) {
+	longest = pfio->lookbits(4,0xf);
+	pfio->skipbits(4);
+	//printf("longest = %d\n", longest); fflush(stdout);
+	int tablesize = 1<<longest;
+	longmask = tablesize - 1;
+	if (!longest)
+		num_symbols_of_length[0] = 1;
+	else
+		num_symbols_of_length[0] = 0;
+	for (int i = 1; i <= longest; i++) {
+		num_symbols_of_length[i] = pfio->lookbits(8,0xff);
+		pfio->skipbits(8);
+		//printf("num of length %d = %d\n",i,num_symbols_of_length[i]);
+		}
+	int k = 0;
+	for (i = 0; i <= longest; i++) {
+		for (int j = 0; j < num_symbols_of_length[i]; j++) {
+			ordered_symbols[k++] = pfio->lookbits(8,0xff);
+			pfio->skipbits(8);
+			//printf("%d ", ordered_symbols[k-1]);
+			}
+		}
+	//printf("\n"); fflush(stdout);
+	maketable_decode();
+	}
+void Compactr::maketable_encode(void) {
+	// Create coding tables
+	// First create temporary tables ordered by code length
+	//printf("maketable_encode\n"); fflush(stdout);
+	unsigned char codelength[257];
+	unsigned short codebits[256];
+	int k = 0;
+	for (int i = 1; i <= longest; i++) {
+		for (int j = 0; j < num_symbols_of_length[i]; j++)
+			codelength[k++] = i;
+		}
+	codelength[k] = 0;	// Sentinal
+	int lastsymbol = k;
+	int codeword = 0;
+	k = 0;
+	int total = codelength[0];
+	while(codelength[k]) {
+		while(codelength[k] == total) {
+			codebits[k++] = codeword;
+			codeword++;
+			}
+		codeword <<= 1;
+		total++;
+		}
+	// And finally install in lookup table
+	memset(enclength,0,256);	// So all unused slots will be 0
+	/*
+	if (!longest) {
+		printf("0-bit symbol: %d\n",ordered_symbols[0]); fflush(stdout);
+		}
+	*/
+	for (k = 0; k < lastsymbol; k++) {
+		encode[ordered_symbols[k]] = codebits[k];
+		enclength[ordered_symbols[k]] = codelength[k];
+		/*
+		printf("%d: %d bits: ",ordered_symbols[k],codelength[k]);
+		for (int temp = 1; temp <= codelength[k]; temp++) {
+			if (codebits[k] & (1<<(codelength[k]-temp)))
+				printf("1");
+			else
+				printf("0");
+			}
+		printf("\n"); fflush(stdout);
+		*/
+		}
+	}
+void Compactr::maketable_decode(void) {
+	// Create coding tables
+	//printf("maketable_decode\n"); fflush(stdout);
+	if (!longest)	// Null table
+		{
+		memset(declength,0,TABLESIZE);
+		memset(decode,ordered_symbols[0],TABLESIZE);
+		//printf("0-bit symbol: %d\n",ordered_symbols[0]); fflush(stdout);
+		return;
+		}
+	// First create temporary tables ordered by code length
+	unsigned char codelength[257];
+	unsigned short codebits[256];
+	int k = 0;
+	for (int i = 1; i <= longest; i++) {
+		for (int j = 0; j < num_symbols_of_length[i]; j++)
+			codelength[k++] = i;
+		}
+	codelength[k] = 0;	// Sentinal
+//	int lastsymbol = k;
+	int codeword = 0;
+	k = 0;
+	int total = codelength[0];
+	while(codelength[k]) {
+		while(codelength[k] == total) {
+			codebits[k++] = codeword;
+			codeword++;
+			}
+		codeword <<= 1;
+		total++;
+		}
+	// And finally install in lookup table
+	k = 0;
+	for (int length = 1; length <= longest; length++) {
+		for (i = 1; i <= num_symbols_of_length[length]; i++) {
+			int entry = codebits[k] << (longest-length);
+			int j = 1 << (longest-length);
+		/*
+		printf("%d: %d bits: ",ordered_symbols[k],codelength[k]);
+		printf("installing in table from %d to %d... ",
+			entry, entry+j);
+		for (int temp = 1; temp <= codelength[k]; temp++) {
+			if (codebits[k] & (1<<(codelength[k]-temp)))
+				printf("1");
+			else
+				printf("0");
+			}
+		printf("\n"); fflush(stdout);
+		*/
+			while(j--) {
+				decode[entry] = ordered_symbols[k];
+				declength[entry] = length;
+				entry++;
+				}
+			k++;
+			}
+		}
+	}
+void Compactr::put(int symbol)
+{
+	int cnt;
+	if ((cnt = enclength[symbol]) != 0)
+		pfio->putbits(encode[symbol],cnt);
+	//if (longest && !cnt)
+	//	fprintf(stderr,"Tried to code untrained symbol %d\n",symbol);
+	//printf("unenc = %d, coded %d bits\n",symbol,cnt);
+}
+void 
+Compactr::
+putbit(int val) 
+{
+	pfio->putbit(val);
+}
+int 
+Compactr::
+getbit() 
+{
+	return pfio->getbit();
+}
+int
+Compactr::
+get ()
+{
+	return pfio->get(declength, decode, longest, longmask);
+}
+
+Compactr::Compactr()
+{
+  this->shared = (Compactr_shared_t *)
+    malloc(sizeof(*this->shared));
+  if (this->shared == NULL)
+  {
+    this->constructor_failed = 1;
+	this->shared = NULL;
+  }
+  else
+  {
+    this->constructor_failed = 0;
+	memset(this->shared, 0, sizeof(*this->shared));
+	freq = shared->enctables.f;
+	encode = shared->enctables.enc;
+	enclength = shared->enctables.len;
+	decode = shared->dectables.dec;
+	declength = shared->dectables.len;
+	pfio = 0; 
+	longest = 0;
+	reset();
+  }
+}
+
+Compactr::
+~Compactr()
+{
+  if (this->shared != NULL)
+    free(this->shared);
+}
+
+void 
+Compactr::attach(class cfpio *f) { pfio = f; }
+	void 
+
+Compactr::
+inc(int symbol) {freq[symbol]++;};
+	void 
+
+Compactr::
+dec(int symbol) {freq[symbol]--;};
+
+
+
+
+
+/*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
+  ! Copyright (C) 1998 Dtack Inc. All Rights Reserved
+  ! To use this file, you must have signed a license agreement with Dtack Inc.
+  ! Under no circumstances may you redistribute this file.
+  ! This software is provided AS IS with no warranty expressed or implied.
+  ! Dtack Inc. accepts no liability for use or misuse of this file.
+  ! http://www.dtack.com  dtack@dtack.com  telephone +360.417.6700
+  ! Dtack Inc, P.O. Box 3061, Port Angeles, WA USA 98362
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */

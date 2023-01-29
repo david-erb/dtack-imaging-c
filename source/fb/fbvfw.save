@@ -1,0 +1,919 @@
+/*..........................................................................
+| NAME
+| Introduction - intro
+|
+| DESCRIPTION
+| As yet undocumented.
+| 
+| RETURN VALUES
+| All functions Return DTOS_RANWELL on success.  
+| Any other return value indicates failure.
+| 
+| ERRORS
+| As yet undocumented.
+| 
+| END
+ *..........................................................................*/
+
+#include <dt.h>
+DT_RCSID("source/fb $RCSfile: fbvfw.c,v $ $Revision: 1.7 $");
+#include <dtlut8.h>
+#include <dt_color.h>
+#include <dtfb.h>
+#include <dtos.h>
+#include <dtstr.h>
+#include <dtprj.h>
+#include <dtyield.h>
+
+#include <dtmsw.h>
+
+#define DESC "vfw capture card"
+
+extern dtfb_init_f dtfb_vfw_init;
+
+#if DTPRJ_VFW == DT_1
+
+typedef struct {
+  dt_ctl_t *ctl;
+  char *buffer;
+  char *spec;
+  char *board_type;
+  BITMAPINFOHEADER *header;
+  HWND hwnd;
+  HANDLE grab;
+  HANDLE done;
+  int xe;
+  int ye;
+  int hide;
+  int async;
+  int shutdown;
+  int writeraw;
+  int setsize;
+  const char *capturing_died;
+  dt_rc_e rc;
+  char action[32];
+} dtfb_vfw_priv_t;
+
+static dtfb_vfw_priv_t global_priv;
+
+#define ACTION(PRIV, S) \
+  dt_dbg(ctl, F, DT_DBG_MASK_ALIMITS, "doing %s", (S)); \
+  strcpy((PRIV)->action, (S))
+
+#define RESULT(PRIV) \
+  if ((PRIV)->rc != DT_RC_GOOD) \
+  { \
+    rc = dt_err(ctl, F, "%s failed", \
+      (PRIV)->action); \
+    goto cleanup; \
+  }  
+
+#ifndef DTDEPEND
+#  define NOCOMPMAN						/* dont include COMPMAN				*/
+#  define NODRAWDIB						/* dont include DRAWDIB				*/
+#  define NOAVIFMT						/* dont include AVI file format		*/
+#  define NOMMREG						/* dont include MMREG				*/
+#  define NOAVIFILE						/* dont include AVIFile interface	*/
+#  define NOMCIWND						/* dont include AVIWnd class		*/
+#  define NOMSACM						/* dont include ACM stuff			*/
+#  include <vfw.h>
+#endif
+
+/*..........................................................................
+ *..........................................................................*/
+
+static
+LRESULT FAR PASCAL 
+dtfb_vfw_error(							/* error callback 					*/
+  HWND hwnd, 
+  int n, 
+  LPCSTR s)
+{
+  dtfb_vfw_priv_t *priv;
+  dt_ctl_t *ctl;
+
+  priv = (dtfb_vfw_priv_t *)
+    capGetUserData(hwnd);
+  if (priv == NULL)						/* safety check 					*/
+  {
+    MessageBox((HWND)NULL, "NULL priv", 
+      "Tableau Error", MB_OK);
+	return (LRESULT)TRUE;
+  }
+
+  if (n == 0)
+  {
+    priv->rc = DT_RC_GOOD;
+	return (LRESULT)TRUE;
+  }
+
+  ctl = priv->ctl;
+  if (ctl == NULL)						/* safety check 					*/
+  {
+    MessageBox((HWND)NULL, "NULL ctl", 
+      "Tableau Error", MB_OK);
+	return (LRESULT)TRUE;
+  }
+
+  priv->rc = dt_err(ctl, 
+    priv->action,
+    "result %d: \"%s\"", n, s);
+
+  return (LRESULT)TRUE;
+}
+
+/*..........................................................................
+ *..........................................................................*/
+
+static
+LRESULT FAR PASCAL 
+dtfb_vfw_video(							/* video callback 					*/
+  HWND hwnd, 
+  LPVIDEOHDR video)
+{
+  DT_F("dtfb_vfw_video");
+  dtfb_vfw_priv_t *priv;
+  dt_ctl_t *ctl;
+  int size;
+  long result;
+
+  priv = (dtfb_vfw_priv_t *)
+    capGetUserData(hwnd);
+
+  if (priv == NULL)						/* safety check 					*/
+  {
+    MessageBox((HWND)NULL, "NULL priv", 
+      "Tableau Video", MB_OK);
+	return (LRESULT)TRUE;
+  }
+
+  ctl = priv->ctl;
+  if (ctl == NULL)						/* safety check 					*/
+  {
+    MessageBox((HWND)NULL, "NULL ctl", 
+      "Tableau Video", MB_OK);
+	return (LRESULT)TRUE;
+  }
+
+  result = WaitForSingleObject(			/* wait for OK to grab			    */
+    priv->grab, INFINITE);
+
+  if (priv->capturing_died != NULL)		/* parent did it? 					*/
+    goto cleanup;
+
+  if (result == WAIT_TIMEOUT)			/* waited too long? 				*/
+  {
+	priv->capturing_died = 
+      "waited too long"
+      " for capture to complete";
+	goto cleanup;
+  }
+
+  size = priv->xe * priv->ye *			/* expected buffer size 			*/
+    priv->header->biBitCount / 8;
+  
+  if (priv->buffer == NULL ||			/* no buffer? 						*/
+	  size != video->dwBytesUsed)		/* buffer size is unexpected?		*/
+	  
+  {
+	priv->capturing_died = 
+      "got unexpected captured image size";
+	goto cleanup;
+  }
+
+  if (priv->header->biBitCount == 16)	/* 16 bit RGB? 						*/
+    dtfb_util_rgb555_reverse(ctl,		/* load the buffer				    */
+      video->lpData,
+      priv->buffer,
+      priv->xe, priv->ye);
+  else									/* presume 24 						*/
+    dtfb_util_bgr888_reverse(ctl,		/* load the buffer				    */
+      video->lpData,
+      priv->buffer,
+      priv->xe, priv->ye);
+
+  if (priv->writeraw)					/* supposed to write raw bytes? 	*/
+  {
+    dtfb_util_write_raw(ctl,			/* write the buffer					*/
+      video->lpData,
+      video->dwBytesUsed,
+      "fbvfw.raw");
+    priv->writeraw = 0;				/* only do it once 					*/
+  }
+
+cleanup:
+  ReleaseSemaphore(priv->done, 1,		/* signal grab is done				*/
+    NULL);
+
+  if (priv->capturing_died != NULL)
+  {
+	ACTION(priv, "capCaptureAbort");
+    capCaptureAbort(priv->hwnd);		/* thread suicide				    */
+  }
+
+  return (LRESULT)TRUE;
+}
+
+/*..........................................................................
+ *..........................................................................*/
+
+# ifdef NONO
+
+static
+LRESULT FAR PASCAL 
+dtfb_vfw_yield(							/* yield callback 					*/
+  HWND hwnd)
+{
+  dtfb_vfw_priv_t *priv;
+  dt_ctl_t *ctl;
+  dtmsw_t *msw;
+  MSG msg;
+
+  priv = (dtfb_vfw_priv_t *)
+    capGetUserData(hwnd);
+
+  if (priv == NULL)						/* safety check 					*/
+  {
+    MessageBox((HWND)NULL, "NULL priv", 
+      "Tableau Video", MB_OK);
+	return (LRESULT)TRUE;
+  }
+
+  MessageBox((HWND)NULL, "pause", 
+   "Tableau Yield", MB_OK);
+
+  ctl = priv->ctl;
+  if (ctl == NULL)						/* safety check 					*/
+  {
+    MessageBox((HWND)NULL, "NULL ctl", 
+      "Tableau Video", MB_OK);
+	return (LRESULT)TRUE;
+  }
+
+  msw = (dtmsw_t *)ctl->msw;			/* reference special msw structure 	*/
+
+  if (msw != NULL)
+  while (PeekMessage(&msg,
+      (HWND)msw->pidwin, 
+      0, 0, PM_REMOVE))
+  {
+    if (msg.message ==					/* got stop? 						*/
+		DTMSW_MESSAGE_STOP ||
+		msg.message ==					/* got close? 						*/
+		WM_CLOSE ||
+		msg.message ==					/* got windows quit? 				*/
+		WM_QUIT)
+      return (LRESULT)FALSE;			/* stop streaming 					*/
+  }
+
+  return (LRESULT)TRUE;
+}
+
+#endif
+
+/*..........................................................................
+ * query driver and print interesting things
+ *..........................................................................*/
+
+static
+dt_rc_e
+dtfb_vfw_report(
+  dt_ctl_t *ctl,
+  dtfb_t *fb,
+  const char *prefix)
+{
+  DT_F("dtfb_vfw_report");
+  dtfb_vfw_priv_t *priv =
+    fb->priv;
+  CAPDRIVERCAPS caps;
+  CAPSTATUS capstatus;
+  CAPTUREPARMS captureparms;
+  dt_rc_e rc = DT_RC_GOOD;
+
+  ACTION(priv, "capDriverGetCaps");
+  capDriverGetCaps(priv->hwnd, 
+    &caps, sizeof(caps));
+  RESULT(priv);
+ 
+
+#define REPORT(S) \
+  dt_dbg(ctl, F, DT_DBG_MASK_ALIMITS, \
+    "%s  capdrivercaps.%s %s", prefix, #S, caps.S? "true": "false");
+  REPORT(fHasOverlay);
+  REPORT(fHasDlgVideoSource);
+  REPORT(fHasDlgVideoFormat);
+  REPORT(fHasDlgVideoDisplay);
+  REPORT(fCaptureInitialized);
+  REPORT(fDriverSuppliesPalettes);
+#undef REPORT
+
+
+#define REPORT(S) \
+  dt_dbg(ctl, F, DT_DBG_MASK_ALIMITS, \
+    "%s  bitmaphdr.%s %ld (0x%08lx)", prefix, #S, \
+    (long)priv->header->S, \
+    (long)priv->header->S);
+  REPORT(biSize);
+  REPORT(biCompression);
+  REPORT(biWidth);
+  REPORT(biHeight);
+  REPORT(biPlanes);
+  REPORT(biBitCount);
+  REPORT(biSizeImage);
+#undef REPORT
+
+  ACTION(priv, "capGetStatus");
+  capGetStatus(priv->hwnd, 
+    &capstatus, sizeof(capstatus));
+  RESULT(priv);
+
+#define REPORT(S) \
+  dt_dbg(ctl, F, DT_DBG_MASK_ALIMITS, \
+    "%s  capstatus.%s %ld (0x%08lx)", prefix, #S, \
+    (long)capstatus.S, \
+    (long)capstatus.S)
+  REPORT(uiImageWidth);
+  REPORT(uiImageHeight);
+  REPORT(fLiveWindow);
+  REPORT(fOverlayWindow);
+  REPORT(dwCurrentVideoFrame);
+  REPORT(dwCurrentTimeElapsedMS);
+  REPORT(fCapturingNow);
+  REPORT(dwReturn);
+#undef REPORT
+
+  ACTION(priv, "capCaptureGetSetup");
+  capCaptureGetSetup(priv->hwnd, 
+    &captureparms, sizeof(captureparms));
+  RESULT(priv);
+
+#define REPORT(S) \
+  dt_dbg(ctl, F, DT_DBG_MASK_ALIMITS, \
+    "%s  captureparms.%s %ld (0x%08lx)", prefix, #S, \
+    (long)captureparms.S, \
+    (long)captureparms.S)
+  REPORT(dwRequestMicroSecPerFrame);
+  REPORT(fYield);
+  REPORT(wNumVideoRequested);
+  REPORT(fCaptureAudio);
+  REPORT(fLimitEnabled);
+  REPORT(wTimeLimit);
+#undef REPORT
+cleanup:
+  return rc;
+}
+
+/*..........................................................................
+ *..........................................................................*/
+
+static
+dt_rc_e
+dtfb_vfw_control(
+  dt_ctl_t *ctl,
+  dtfb_t *fb,
+  dtfb_control_e control)
+{
+  DT_F("dtfb_vfw_control");
+
+  DTCSTACK_HIGHWATER;
+
+  switch (control)
+  {
+	case DTFB_CONTROL_RESET:
+	break;
+	case DTFB_CONTROL_SNAPSHOT:
+	break;
+	case DTFB_CONTROL_FREEZE:
+	break;
+	case DTFB_CONTROL_ACQUIRE:
+	break;
+	default:
+      return dt_err(ctl, F,
+        "invalid control code 0x%04x",
+        control);
+  }
+  return DT_RC_GOOD;
+}
+
+/*..........................................................................
+ *..........................................................................*/
+
+static
+dt_rc_e
+dtfb_vfw_getblock(
+  dt_ctl_t *ctl,
+  dtfb_t *fb,
+  void *data,
+  int x0,
+  int y0,
+  int xe,
+  int ye)
+{
+  DT_F("dtfb_vfw_getblock");
+  dtfb_vfw_priv_t *priv =
+    fb->priv;
+  dtos_time_t beg, end;
+  long result;
+  dt_rc_e rc;
+  
+  if (x0 != 0 || y0 != 0)				/* the whole pie only			    */
+    return dt_err(ctl, F,
+      "x0=%d or y0=%d is not 0",
+      x0, y0);
+
+  priv->ctl = ctl;
+  priv->buffer = data;
+  priv->xe = fb->xe;
+  priv->ye = fb->ye;
+
+  if (priv->capturing_died != NULL)
+  {
+	rc = dt_err(ctl, F,
+      "capturing died before frame because %s",
+      priv->capturing_died);
+	goto cleanup;
+  }
+
+  ReleaseSemaphore(priv->grab, 1,		/* ready to grab				    */ 
+    NULL);
+
+  DT_C(dtos_time,(ctl, &beg));
+
+  if (!priv->async)						/* synchronous?					    */
+  {
+	ACTION(priv, "capGrabFrameNoStop");
+	capGrabFrameNoStop(priv->hwnd);		/* grab one frame 					*/
+	RESULT(priv);
+  }
+
+  result = WaitForSingleObject(			/* wait for grab to be done		    */
+    priv->done,  10000L);
+  if (result == WAIT_TIMEOUT)
+  {
+	rc = dt_err(ctl, F,
+      "timeout waiting for S%d",
+      priv->done);
+	goto cleanup;
+  }
+
+  DT_C(dtos_time,(ctl, &end));
+
+  if (priv->capturing_died != NULL)
+  {
+	rc = dt_err(ctl, F,
+      "capturing died during frame because %s",
+      priv->capturing_died);
+	goto cleanup;
+  }
+
+  dt_dbg(ctl, F, DT_DBG_MASK_ASYNC,
+    "grab took"
+    " %0.3f seconds",
+    priv->done, end.wall-beg.wall);
+
+cleanup:
+  priv->buffer = NULL;					/* not our buffer 					*/
+  return rc;
+}
+
+/*..........................................................................
+ *..........................................................................*/
+
+static
+dt_rc_e
+dtfb_vfw_release(						/* release resources 				*/
+  dt_ctl_t *ctl,
+  dtfb_vfw_priv_t *priv)
+{
+  DT_F("dtfb_vfw_release");
+  long result;
+  dt_rc_e rc = DT_RC_GOOD;
+
+  if (priv == NULL)
+    return rc;
+
+  if (priv->async)
+  {
+    priv->capturing_died =				/* we are going down 				*/
+	  "closing";
+    ReleaseSemaphore(priv->grab, 1,		/* signal death to capture thread	*/
+      NULL);
+
+    result = WaitForSingleObject(		/* wait for grab to die	    		*/
+      priv->done,	2000L);
+    if (result == WAIT_TIMEOUT)
+	  rc = dt_err(ctl, F,
+        "timeout waiting for S%d",
+        priv->done);
+
+    DT_I(dtos_delay,(ctl, 2000));		/* wait even longer				    */
+  
+    ACTION(priv, "capCaptureAbort");
+    capCaptureAbort(priv->hwnd);
+  }
+
+  if (priv->header != NULL)
+    DT_I(dtos_free2,(ctl, 
+      priv->header,
+      F, "bitmapinfo"));
+
+  if (priv->hwnd != NULL)
+  {
+	ACTION(priv, "capDriverDisconnect");
+    capDriverDisconnect(priv->hwnd);
+  }
+	
+  if (priv->buffer != NULL)
+    DT_I(dtos_free2,(ctl, priv->buffer,
+      F, "buffer"));
+
+  if (priv->done != (HANDLE)NULL)
+  {
+	CloseHandle(priv->done);
+	priv->done = NULL;
+  }
+
+  if (priv->grab != (HANDLE)NULL)
+  {
+	CloseHandle(priv->grab);
+	priv->grab = NULL;
+  }
+
+  if (priv->spec != NULL)
+    DT_I(dtos_free2,(ctl, priv->spec,
+      F, "spec"));
+
+  if (priv != &global_priv)
+    DT_I(dtos_free2,(ctl, priv,
+      F, "priv"));
+
+  return rc;
+}
+
+/*..........................................................................
+ *..........................................................................*/
+
+static
+dt_rc_e
+dtfb_vfw_source(						/* change signal source				*/
+  dt_ctl_t *ctl,
+  dtfb_t *fb,
+  int source)
+{
+  return DT_RC_GOOD;
+}
+
+/*..........................................................................
+ *..........................................................................*/
+
+static
+dt_rc_e
+dtfb_vfw_uninit(						/* release resources 				*/
+  dt_ctl_t *ctl,
+  dtfb_t *fb)
+{
+  DT_F("dtfb_vfw_uninit");
+  dtfb_vfw_priv_t *priv =
+    fb->priv;
+  DT_Q(dtfb_vfw_release,(ctl, priv));
+  return DT_RC_GOOD;
+}
+
+#endif
+
+/*..........................................................................
+ *..........................................................................*/
+
+dt_rc_e
+DTCONFIG_API1
+dtfb_vfw_init(
+  dt_ctl_t *ctl,
+  dtfb_t *fb,
+  const char *spec)
+{
+  DT_F("dtfb_vfw_init");
+# if DTPRJ_VFW == DT_1
+  dtfb_vfw_priv_t *priv = NULL;
+  int ntokens;
+  char *p;
+  long longval;
+  LRESULT result;
+  int hsize;
+  int i, j;
+  CAPTUREPARMS captureparms;
+  dt_rc_e rc;
+
+  DTCSTACK_HIGHWATER;
+
+  if (spec == NULL)
+  {
+    rc = dt_err(ctl, F,
+      "NULL vfw spec");
+    goto cleanup;
+  }
+  else
+  if (strlen(spec) == 0)
+  {
+    rc = dt_err(ctl, F,
+      "zero-length vfw spec");
+    goto cleanup;
+  }
+
+  DT_C(dtos_malloc2,(ctl,				/* space for private structure	    */
+    (void **)&priv,
+    sizeof(dtfb_vfw_priv_t),
+    F, "priv"));
+  memset(priv, 0,						/* clear private structure 			*/
+    sizeof(dtfb_vfw_priv_t));
+  
+  priv->ctl = ctl;
+
+  DT_C(dtos_strdup,(ctl, spec,			/* get space for spec edit 			*/
+    &priv->spec));
+
+  DT_C(dtstr_tokenize,(ctl,				/* separate spec into tokens 		*/
+    priv->spec,
+    ',', &ntokens));
+										/* ................................ */
+  p = priv->spec;
+
+  if (ntokens >= 1)
+  {
+    priv->board_type = p;
+	p += strlen(p) + 1;
+  }
+
+  if (ntokens >= 2)						/* width 							*/
+  {
+    DT_C(dtstr_to_long,(ctl,
+      p, &longval));
+	fb->xe = longval;
+	p += strlen(p) + 1;
+  }
+  else
+    fb->xe = 352;
+
+  if (ntokens >= 3)						/* height 							*/
+  {
+    DT_C(dtstr_to_long,(ctl,
+      p, &longval));
+	fb->ye = longval;
+	p += strlen(p) + 1;
+  }
+  else
+    fb->ye = 288;
+
+  if (ntokens >= 4)						/* flags+flags						*/
+  {
+    priv->hide = !!strstr(p, "hide");
+    priv->async = !!strstr(p, "async");
+    priv->shutdown = !!strstr(p, "shutdown");
+    priv->writeraw = !!strstr(p, "writeraw");
+    priv->setsize = !!strstr(p, "setsize");
+  }
+
+										/* ................................ */
+  priv->grab = CreateSemaphore(NULL,
+    0, 1, NULL);
+  if (priv->grab == (HANDLE)NULL)
+  {
+	rc = dt_err(ctl, F,
+      "CreateSemaphore failed");
+	goto cleanup;
+  }
+  priv->done = CreateSemaphore(NULL,
+    0, 1, NULL);
+  if (priv->done == (HANDLE)NULL)
+  {
+	rc = dt_err(ctl, F,
+      "CreateSemaphore failed");
+	goto cleanup;
+  }
+										/* ................................ */
+  j = -1;
+  for (i=0; i<10; i++)
+  {
+	char name[80];
+	char version[80];
+		 
+    if (capGetDriverDescription(i,		/* get ith capture driver name 		*/
+          name, sizeof(name),
+          version, sizeof(version)))
+	{
+	  dt_dbg(ctl, F, DT_DBG_MASK_ALIMITS,
+        "%d. driver name=\"%s\""
+        " version=\"%s\"",
+        i, name, version);
+	  if (!strncmp(name, 
+            priv->board_type, 
+            strlen(priv->board_type)))
+	    j = i;
+	}
+  }
+  if (j == -1)
+  {
+	rc = dt_err(ctl, F,
+      "board type \"%s\" not found",
+      priv->board_type);
+	goto cleanup;
+  }
+										/* ................................ */
+  priv->hwnd = capCreateCaptureWindow(	/* create window for capture 		*/
+    (LPSTR) "Video Monitor",
+    WS_OVERLAPPED | 
+    priv->hide? 0: WS_VISIBLE,
+    0, 0, fb->xe, fb->ye,
+    NULL, 0);
+
+  if (priv->hwnd == NULL)
+  {
+	rc = dt_err(ctl, F,
+      "capCreateCaptureWindow(\"%s\","
+      " WS_OVERLAPPED | WS_VISIBLE,"
+      "0, 0, %d, %d, NULL, 0)"
+      " failed",
+      "tableau fbvfw", fb->xe, fb->ye);
+	goto cleanup;
+  }
+
+  ACTION(priv, "capSetUserData");
+  capSetUserData(priv->hwnd, priv);
+
+  ACTION(priv, "capSetCallbackOnError");
+  capSetCallbackOnError(priv->hwnd,		/* define the error callback 		*/
+    (FARPROC)dtfb_vfw_error);
+  RESULT(priv);
+
+  ACTION(priv, "capDriverConnect");
+  result = capDriverConnect(			/* connect capture driver to window */
+    priv->hwnd, j);
+  if (result != TRUE)
+  {
+	rc = dt_err(ctl, F,
+      "capDriverConnect(0x%08lx, %d)"
+      " failed result=%ld", 
+      (long)priv->hwnd, j, result);
+	if (priv->shutdown)					/* supposed to shut down on this? 	*/
+	  rc = DT_RC_SHUTDOWN;
+	goto cleanup;
+  }
+  RESULT(priv);
+
+  ACTION(priv, "capOverlay");
+  capOverlay(priv->hwnd, priv->hide? FALSE: TRUE);
+  RESULT(priv);
+
+  DT_C(dt_yield,(ctl, "overlay enabled"));
+
+  ACTION(priv, "capCaptureGetSetup");
+  capCaptureGetSetup(priv->hwnd, 
+    &captureparms, sizeof(captureparms));
+  RESULT(priv);
+
+  captureparms.fYield = priv->async?	/* asynchronous operation		    */
+    TRUE: FALSE;
+  captureparms.wNumVideoRequested = 1;	/* single video buffer			    */
+
+  ACTION(priv, "capCaptureSetSetup");
+  capCaptureSetSetup(priv->hwnd, 
+    &captureparms, sizeof(captureparms));
+  RESULT(priv);
+
+  if (priv->async)						/* running asynchronously?		    */
+  {
+    ACTION(priv, 
+      "capSetCallbackOnVideoStream");
+    capSetCallbackOnVideoStream(		/* define the video callback 		*/
+      priv->hwnd,
+      (FARPROC)dtfb_vfw_video);
+    RESULT(priv);
+  }
+  else
+  {
+    ACTION(priv, "capSetCallbackOnFrame");
+    capSetCallbackOnFrame(				/* define the frame callback 		*/
+      priv->hwnd,
+      (FARPROC)dtfb_vfw_video);
+    RESULT(priv);
+  }
+
+# ifdef NONO
+  ACTION(priv, "capSetCallbackOnYield");
+  capSetCallbackOnYield(priv->hwnd,		/* define the yield callback 		*/
+    (FARPROC)dtfb_vfw_yield);
+  RESULT(priv);
+# endif
+
+# ifdef NONO
+  BITMAPINFOHEADER h;
+  memset(&h, 0, sizeof(h));
+  h.biSize = sizeof(h);
+  h.biCompression = BI_RGB;
+  h.biWidth = fb->xe;
+  h.biHeight = fb->ye;
+  h.biPlanes = 1;
+  h.biBitCount = 24;
+  h.biSizeImage = fb->xe * fb->ye * 3;
+  ACTION(priv, "capSetVideoFormat");
+  capSetVideoFormat(priv->hwnd,			/* set image size and 24-bit RGB	*/
+    &h, sizeof(h));
+  RESULT(priv);
+# endif
+
+  ACTION(priv, "capGetVideoFormatSize");
+  hsize = capGetVideoFormatSize(
+    priv->hwnd);
+  RESULT(priv);
+
+  DT_C(dtos_malloc2,(ctl, 
+    (void **)&priv->header, hsize,
+    F, "bitmapinfo"));
+
+  ACTION(priv, "capGetVideoFormat 1");
+  (void)capGetVideoFormat(priv->hwnd,
+    priv->header, hsize);
+  RESULT(priv);
+  
+										/* ................................ */
+  fb->priv = priv;
+  DT_C(dtfb_vfw_report,(ctl, fb, "1"));	/* report what we have so far 		*/
+
+  if (priv->setsize)					/* supposed to set format? 			*/
+  {
+	priv->header->biWidth = fb->xe;
+	priv->header->biHeight = fb->ye;
+  
+	ACTION(priv, "capSetVideoFormat");
+	capSetVideoFormat(priv->hwnd,		/* set image size and 24-bit RGB	*/
+      priv->header, hsize);
+	RESULT(priv);
+
+	ACTION(priv, "capGetVideoFormat 2");
+	(void)capGetVideoFormat(priv->hwnd,
+      priv->header, hsize);
+	RESULT(priv);
+  }
+										/* ................................ */
+
+  fb->xe = priv->header->biWidth;
+  fb->ye = priv->header->biHeight;
+
+  fb->org.org  = DT_COLOR_ORG_RGB888;
+  fb->rowsize  = 3 * fb->xe;			/* three bytes per pixel 			*/
+  
+  fb->uninit   = dtfb_vfw_uninit;
+  fb->control  = dtfb_vfw_control;
+  fb->getblock = dtfb_vfw_getblock;
+  fb->source   = dtfb_vfw_source;
+
+  if (priv->async)						/* running asynchronously?		    */
+  {
+    long parent = GetCurrentThreadId();
+	int i;
+	ACTION(priv, "capCaptureSequenceNoFile");
+	capCaptureSequenceNoFile(priv->hwnd);
+    if (GetCurrentThreadId() != parent)
+	{
+	  capCaptureAbort(priv->hwnd);
+	  ExitThread(0);					/* probably don't get here		    */
+	}
+	RESULT(priv);
+
+	for (i=0; i<30; i++)
+	{
+	  DT_C(dt_yield,(ctl, "grabbing starting"));
+	  DT_C(dtos_delay,(ctl, 100));
+	}
+	DT_C(dt_yield,(ctl, "grabbing started"));
+  }
+
+  DT_C(dtfb_vfw_report,(ctl, fb, "2"));	/* report what we have so far 		*/
+
+  if (priv->header->biCompression != BI_RGB ||
+	  priv->header->biPlanes != 1 ||
+	  (priv->header->biBitCount != 16 &&
+	   priv->header->biBitCount != 24))
+  {
+	rc = dt_err(ctl, F,
+      "invalid Compression/Planes/BitCount"
+      " 0x%08lx/%d/%d"
+      " expecting 0x%08lx/%d/%d or %d",
+      priv->header->biCompression, 
+      priv->header->biPlanes, 
+      priv->header->biBitCount,
+      BI_RGB, 1, 16, 24);
+	goto cleanup;
+  }
+
+cleanup:
+  if (rc != DT_RC_GOOD)
+  {
+	DT_I(dtfb_vfw_release,(ctl, priv));
+	memset(fb, 0, sizeof(*fb));
+  }
+
+  return rc;
+# else
+  return dt_err_notlinked(ctl, F, DESC);  
+# endif
+}

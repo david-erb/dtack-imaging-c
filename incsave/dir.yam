@@ -1,0 +1,374 @@
+define(TOP, UP1)
+define(DIR, include)
+define(`__make_default', `others')
+define(`__make_shared', `others')
+define(`__make_static', `others')
+
+define(SOURCE, TOP/source)
+define(APP, TOP/app)
+
+define(TEST, TOP/test)
+__prolog
+
+__proto(dtt, 
+  TEST/lib/check+
+  TEST/lib/gen256+
+  TEST/lib/util1+
+  TEST/lib/time+
+  TEST/lib/raw)
+
+__proto(dt,
+  SOURCE/inter/interact+
+  SOURCE/inter/interdia+
+  SOURCE/inter/interhlp+
+  SOURCE/low/assert+
+  SOURCE/low/dbg+
+  SOURCE/low/dbg2+
+  SOURCE/low/err+
+  SOURCE/low/err2+
+  SOURCE/low/enter+
+  SOURCE/low/leave+
+  SOURCE/low/usage+
+  SOURCE/low/heapmon+
+  SOURCE/low/ntype+
+  SOURCE/low/say+
+  SOURCE/low/yield)
+
+# ----------------------------------------------
+
+__proto(dtcstack,
+  SOURCE/low/cstack)
+
+__proto(dtheap,
+  SOURCE/low/heap2)
+
+__proto(dtliner,
+  SOURCE/low/liner)
+
+__proto(dtprj,
+  SOURCE/low/prj)
+
+__proto(dtphys,
+  SOURCE/low/phys)
+
+__proto(dtportio,
+  SOURCE/low/portio)
+
+__proto(dtstack,
+  SOURCE/bigmem/stack+
+  SOURCE/bigmem/stack_io)
+
+__proto(dtparam,
+  SOURCE/low/param)
+
+__proto(dthist,
+  SOURCE/low/hist+
+  SOURCE/low/hist2)
+
+__proto(dtrev,
+  SOURCE/low/rev)
+
+__proto(dtfont,
+  SOURCE/bigmem/font)
+
+__proto(umdec,
+  SOURCE/mpeg/umdeclib+
+  SOURCE/mpeg/umdecssg+
+  SOURCE/mpeg/umdecvp)
+
+__proto(ustate,
+  APP/ustate/ustatelib+
+  APP/ustate/rev)
+
+__proto(reverb,
+  APP/reverb/client+
+  APP/reverb/rev)
+
+__proto(dtvidmux,
+  SOURCE/fb/fbvidmux)
+
+__proto(dtfb,
+  SOURCE/fb/fb+
+  SOURCE/fb/fbdir+
+  SOURCE/fb/fbgen+
+  SOURCE/fb/fbvbmci+
+  SOURCE/fb/fbvmc+
+  SOURCE/fb/fbvfw+
+  SOURCE/fb/fbpsi+
+  SOURCE/fb/fbcortex+
+  SOURCE/fb/fbmeteor+
+  SOURCE/fb/fbbt+
+  SOURCE/fb/fbutil)
+
+__proto(dt_color,
+  SOURCE/color/convert+
+  SOURCE/color/org+
+  SOURCE/color/rgb+
+  SOURCE/color/rgb888+
+  SOURCE/color/r_g_b+
+  SOURCE/color/ycbycr+
+  SOURCE/color/y_cb_cr+
+  SOURCE/color/yuyv)
+
+__proto(dtmem,
+  SOURCE/bigmem/memsourc+
+  SOURCE/bigmem/mem+
+  SOURCE/bigmem/memclip+
+  SOURCE/bigmem/memputp+
+  SOURCE/bigmem/memgetp+
+  SOURCE/bigmem/memconf+
+  SOURCE/bigmem/memparse+
+  SOURCE/bigmem/memcopy+
+  SOURCE/bigmem/memio+
+  SOURCE/bigmem/memcmp+
+  SOURCE/bigmem/memset+
+  SOURCE/bigmem/mem_std+
+  SOURCE/bigmem/mem_ram+
+  SOURCE/bigmem/mem_disk+
+  SOURCE/bigmem/mem_ems+
+  SOURCE/bigmem/memxmsif+
+  SOURCE/bigmem/memxmslb+
+  SOURCE/bigmem/memtxms)
+
+__proto(dt1d,       
+  SOURCE/1d/1d+
+  SOURCE/1d/1d_abs+
+  SOURCE/1d/1d_arith+
+  SOURCE/1d/1d_ran+
+  SOURCE/1d/1d_range+
+  SOURCE/1d/1d_cast+
+  SOURCE/1d/1d_cmp+
+  SOURCE/1d/1d_diff+
+  SOURCE/1d/1d_set+
+  SOURCE/1d/1d_stats+
+  SOURCE/1d/1d_sum+
+  SOURCE/1d/1d_sumsq+
+  SOURCE/1d/1d_sumsd+
+  SOURCE/1d/1d_sumss+
+  SOURCE/1d/1d_cumf+
+  SOURCE/1d/1d_cumr+
+  SOURCE/1d/1d_look+
+  SOURCE/1d/1d_logic+
+  SOURCE/1d/1d_noise+
+  SOURCE/1d/1d2_db+
+  SOURCE/1d/1d_sort1+
+  SOURCE/1d/1d_sort5+
+  SOURCE/1d/1d_conv+
+  SOURCE/1d/1d_clip+
+  SOURCE/1d/1d_vari)
+
+__proto(dtftp,
+  SOURCE/low/ftp)
+
+__proto(dtipc,
+  SOURCE/low/ipc+
+  SOURCE/low/ipcqnx4+
+  SOURCE/low/ipcqbaby+
+  SOURCE/low/ipcrock+
+  SOURCE/low/ipcdde)
+
+__proto(dtdg,
+  SOURCE/dg/line+
+  SOURCE/dg/header+
+  SOURCE/dg/dgserver+
+  SOURCE/dg/request+
+  SOURCE/dg/response+
+  SOURCE/dg/rev+
+  SOURCE/dg/exit+
+  SOURCE/dg/delay+
+  SOURCE/dg/dgclient)
+
+__proto(dtcons,
+  SOURCE/low/cons)
+
+__proto(dtos,       
+  SOURCE/low/os_delay+
+  SOURCE/low/os_futil+
+  SOURCE/low/os_heap+
+  SOURCE/low/os_heap2+
+  SOURCE/low/os_mem+
+  SOURCE/low/os_time+
+  SOURCE/low/os_env)
+__proto(dtstr,      SOURCE/low/str)
+__proto(dtfd,       SOURCE/low/fd)
+__proto(dtpnm,      SOURCE/low/pnm)
+__proto(dtlut8,     SOURCE/xchg/lut8xchg+SOURCE/low/lut8+SOURCE/low/lut8_mat)
+
+__proto(dtqnx4,     SOURCE/low/qnx4)
+
+__proto(dtlist,
+  SOURCE/low/list+
+  SOURCE/low/list_io)
+
+__proto(dtdsk,   SOURCE/win/dsk)
+__proto(dtdsk_c, SOURCE/win/dsk_c)
+
+# ----------------------------------------------
+
+__proto(dtxchg,  
+  SOURCE/xchg/parse+
+  SOURCE/xchg/xchg_dtm+
+  SOURCE/xchg/xchg_win+
+  SOURCE/xchg/xchg_wxx+
+  SOURCE/xchg/xchg_jpg+
+  SOURCE/xchg/xchg_scr+
+  SOURCE/xchg/xchg_can)
+
+__proto(dtwmf,
+  SOURCE/xchg/wmf)
+
+__proto(dtbmp,
+  SOURCE/xchg/bmp)
+
+__proto(dtdib,
+  SOURCE/xchg/dib)
+
+__proto(dtrun,
+  SOURCE/high/run)
+
+__proto(dtrunf,
+  SOURCE/high/runf)
+
+__proto(dtimage,
+  SOURCE/high/assign+
+  SOURCE/high/image+
+  SOURCE/xchg/import+
+  SOURCE/xchg/export+
+  SOURCE/xchg/read+
+  SOURCE/xchg/readtif+
+  SOURCE/xchg/write+
+  SOURCE/xchg/writebmp+
+  SOURCE/xchg/writewmf+
+  SOURCE/high/thresh+
+  SOURCE/high/logical+
+  SOURCE/high/arith+
+  SOURCE/high/check+
+  SOURCE/high/dbg+
+  SOURCE/high/err+
+  SOURCE/high/log+
+  SOURCE/high/noise+
+  SOURCE/high/cast+
+  SOURCE/high/col+
+  SOURCE/high/convolve+
+  SOURCE/high/cooc+
+  SOURCE/high/cooc2+
+  SOURCE/high/constant+
+  SOURCE/high/conv_l+
+  SOURCE/high/conv_d+
+  SOURCE/high/conv_s+
+  SOURCE/high/joint+
+  SOURCE/high/joint2+
+  SOURCE/high/label1+
+  SOURCE/high/lookup+
+  SOURCE/high/sum+
+  SOURCE/high/sum_rows+
+  SOURCE/high/sum_cols+
+  SOURCE/high/cmp+
+  SOURCE/high/gen1+
+  SOURCE/high/gen2+
+  SOURCE/high/gen3+
+  SOURCE/high/gen_kern+
+  SOURCE/high/median+
+  SOURCE/high/morph+
+  SOURCE/high/stats+
+  SOURCE/high/range+
+  SOURCE/high/scan+
+  SOURCE/high/blob+
+  SOURCE/high/run_len+
+  SOURCE/high/mean+
+  SOURCE/high/cumul+
+  SOURCE/high/sumsq+
+  SOURCE/high/sumsqd+
+  SOURCE/high/sumsqs+
+  SOURCE/high/resample+
+  SOURCE/high/rotate+
+  SOURCE/high/transpos+
+  SOURCE/high/pixel+
+  SOURCE/high/hist1+SOURCE/high/hist2+
+  SOURCE/high/plot1+SOURCE/high/plot2+SOURCE/high/plot_txt+
+  SOURCE/high/adj+
+  SOURCE/high/adj_run)
+
+# ----------------------------------------------
+
+__proto(dtcanvas,       
+  SOURCE/screen/canvas+
+  SOURCE/screen/canpoll+
+  SOURCE/screen/candum+
+  SOURCE/screen/canfastg+
+  SOURCE/screen/cansvgac+
+  SOURCE/screen/canhws)
+
+__proto(dtvga,
+  SOURCE/screen/vga)
+
+__proto(dthws,
+  SOURCE/screen/hws+
+  SOURCE/screen/hwsx+
+  SOURCE/screen/hwsqw4+
+  SOURCE/screen/hwsfgw+
+  SOURCE/screen/hwsmsw)
+
+__proto(dtscr,      
+  SOURCE/screen/scr_main+
+  SOURCE/screen/scr_cur+
+  SOURCE/screen/scr_act+
+  SOURCE/screen/scr_dbg+
+  SOURCE/screen/scrdum+
+  SOURCE/screen/scrcan+
+  SOURCE/screen/scrhws)
+
+# ----------------------------------------------
+
+__proto(dttrmios,       
+  SOURCE/keybd/trmios)
+
+__proto(dtkeybd,       
+  SOURCE/keybd/keybd+
+  SOURCE/keybd/keyqnx+
+  SOURCE/keybd/keyunix+
+  SOURCE/keybd/keydos)
+__proto(dtkeymap,       
+  SOURCE/keybd/keymap+
+  SOURCE/keybd/keymapt+
+  SOURCE/keybd/keymapq+
+  SOURCE/keybd/keymapc)
+
+__proto(dtiact,
+  SOURCE/inter/iact)
+
+__proto(dtnote,
+  SOURCE/inter/note)
+
+__proto(dtalpha,
+  SOURCE/inter/alpha)
+
+__proto(dtdialog,
+  SOURCE/inter/dialog+
+  SOURCE/inter/diatext+
+  SOURCE/inter/diavba)
+
+__proto(dtmsw,
+  SOURCE/low/msw)
+
+__proto(dttext,
+  SOURCE/inter/text+
+  SOURCE/inter/textcur1+
+  SOURCE/inter/texttcap+
+  SOURCE/inter/textdos1+
+  SOURCE/inter/textqnx1)
+
+# ----------------------------------------------
+
+
+__proto(dtwinc,     SOURCE/win/winc+
+                    SOURCE/win/winc_ipc+
+                    SOURCE/win/winc_dsk)
+__proto(dtsvc,      SOURCE/win/svc+
+                    SOURCE/win/svc_ipc+
+                    SOURCE/win/svc_dsk)
+__proto(dtwins,     SOURCE/win/wins+
+                    SOURCE/win/wins_ipc+
+                    SOURCE/win/wins_dsk)
+
+__finish

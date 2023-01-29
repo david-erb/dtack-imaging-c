@@ -1,0 +1,85 @@
+/*..........................................................................
+| TITLE zlib
+| ZLIB Library and Dtack Base Library
+|
+|!Zlib Library and Dtack Base Library
+|_revision 10-4a
+| 
+| Zlib 1.0.4 is a general purpose data compression library.
+| The library provides a programming API to read and write
+| files compressed with the ubiquitous Unix tool "gzip".
+| Often such files will have the ending ".gz".
+|
+| Read more about it at the
+| @Zlib Home Page,http://quest.jpl.nasa.gov/zlib/@.
+|
+| If enabled at compile time, the Dtack Base Library reads ".gz" files.
+| Support for Zlib occurs the :dtfd: Function Group.
+| The function dtfd_open() automatically detects ".gz" files
+| which are opened in read mode.
+| The compressed data is automatically decompressed in subsequent reads.
+| 
+| Although Zlib itself can write as well as read,
+| the Dtack Base Library API does not support writing ".gz" files.
+| The Base Library allows forward, but not reverse, seeking on ".gz" files.
+| The Base Library dtfd_size() function works with .gz files.
+| 
+|!Zlib Data Format
+| The data format used by the zlib library is described by RFCs 
+| (Request for Comments) 1950 to 1952 in the files 
+| ftp://ds.internic.net/rfc/rfc1950.txt (zlib format), rfc1951.txt (deflate
+| format) and rfc1952.txt (gzip format). These documents are also available in
+| other formats from ftp://ftp.uu.net/graphics/png/documents/zlib/zdoc-index.html
+| 
+|!Zlib Installation
+| The official Zlib distribution will not work with the Dtack Base Library.
+| You must obtain a special modified version from Dtack Inc.
+|
+| The modified version of Zlib is supported by YAM, Dtack's makefile generator.
+| It is installed in a versioned subdirectory under dtack/zlib.
+| The following steps outline the installation of the modified version:
+| 
+| 1.	obtain the file dtack.zlib.10-4a.tgz from Dtack Inc.
+| 2.	cd to the parent directory of the Dtack tree on your system
+|	for example, if your Dtack tree is /home/dtack, then cd /home
+| 3.	gzip -d < /tmp/dtack.zlib.10-4a.tgz | tar xf -
+| 4.	cd dtack/zlib/10-4a
+| 5.	sh/mkdirs.sh ../10-4a.OSNAME
+| 6.	sh/dtmake.sh OSNAME . shared
+| 7.	sh/dtmake.sh OSNAME . static (for static executables)
+|
+| The "dtmake.sh" script makes certain assumptions about your directory
+| structure and possibly also some environment variables.
+| Normally the Dtack Base Library source is kept in one directory tree.
+| Object, library and executable files are kept in a separate tree.
+| The :OSNAME: is a symbol which you can replace with your operating system name.
+| 
+| To enable the use of Zlib within Dtack,
+| add the following lines to your OSNAME.set file:
+| 
+|:   MK_ZLIB_DEFINE      = 1
+|:   MK_ZLIB_INCLUDE     = $(ZLIB_SRC)
+|:   MK_ZLIB_LOAD        = -Wl,-Bdynamic $(ZLIB_OUT)/libso/libzlib.so
+|
+| For linking statically, use:
+|
+|:   MK_ZLIB_LOAD        = -Wl,-static $(ZLIB_OUT)/libso/libzlib.a
+| 
+| Where the two environment variables could be set to:
+| 
+|:   export ZLIB_SRC=/home/dtack/zlib/10-4a
+|:   export ZLIB_OUT=/home/dtack/zlib/10-4a.OSNAME
+|
+| Make sure to delete dtack/base/XX-YY.OSNAME/source/low/fd.o
+| and recompile it after modifying your OSNAME.set.
+| You will also have to delete relink all your executable files.
+| 
+|!Summary
+| -	zlib is a third-party "freeware" library
+| -	the Base Library can be set up to automatically decompress ".gz" files
+| -	you must install a modified Zlib distribution from Dtack Inc.
+| -	you must enable Dtack to use the library
+| 
+| END
+ *..........................................................................*/
+

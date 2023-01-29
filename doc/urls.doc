@@ -1,0 +1,371 @@
+........................................................................
+>I recently wrote an image processing applet in Java.  I would appreciate 
+>any comments, specifically additions to it, that anyone can give me.
+>Once Netscape supports file i/o, it will be able to read in other 
+>images.
+>
+>Thanks,
+>Mike Mancuso
+>University of Washington
+>http://weber.u.washington.edu/~mmancuso/ee568.html
+
+........................................................................
+
+  Any administrative queries about this mailing list--such as
+  subscribing, unsubscribing, change of address, etc--should be
+  directed to:  Clint Young (c-young@unixg.ubc.ca)
+
+  S U B S C R I B I N G
+
+  [ (un)subscribe via Email: TO     : majordomo@unixg.ubc.ca        ]
+  [                          SUBJECT: <none required>               ]
+  [                          MSG    : (un)subscribe Q-IA-list ]
+
+........................................................................
+
+
+For those of you who suffered through my explnation, here are some
+great web sites.
+
+Comp.graphics.algorithms FAQ
+http://www.cis.ohio-state.edu/hypertext/faq/usenet/graphics/algorithms-faq/faq.h
+tml
+
+Computer Vision Home Page
+http://www.cs.cmu.edu/~cil/vision.html
+
+GSNAKE API
+http://www.iti.gov.sg/iti_people/iti_staff/kflai/gsnake.html
+
+Hausdorff distance-based matching code available.
+http://www.ph.tn.tudelft.nl/PRInfo/software/msg00004.html
+
+Image Processing Links
+http://documents.cfar.umd.edu/imageproc/
+
+Numerical Recipes Books On-Line
+http://cfatab.harvard.edu/nr/nronline.html
+
+Pattern Recognition Information
+http://www.ph.tn.tudelft.nl/PRInfo.html
+
+Model Based Recognition
+http://www.cm.cf.ac.uk/Dave/Vision_lecture/subsection2_1_11_5.html
+
+Public Domain Software, Math and Image Processing Information
+http://risc1.numis.nwu.edu/internet/shareware/prog2.html
+
+Software and Hardware for Pattern Recognition and Image Processing
+Research
+http://www.ph.tn.tudelft.nl/PRInfo/software.html
+
+
+All of the BSD-related information on minnie can be accessed through the
+Web at http://minnie.cs.adfa.oz.au/BSD-info/BSD.html. There are many hot links
+to the FreeBSD and NetBSD web pages. Minnie has web pages with:
+
+   + Interactive access to a Usenet News archive on BSD.
+   + A hyperlinked version of the FreeBSD 2.0.5 kernel source code.
+
+
+telnet to minnie.cs.adfa.oz.au and login as `bsdnews'.
+
+
+................................
+AT&F1&S1M0S2=255S7=90S13.0=1S19=18S38=2Y0
+................................
+
+If you haven't already done so, please visit our Satellite Image Gallery on 
+the World Wide Web.  It features selected images from our Satellite Image 
+Sampler.  These images change on a daily basis and can be downloaded.  The URL
+is http://www.xmission.com/~idi/gallery.htm
+
+................................
+http://www.ustreas.gov/cgi-bin
+
+IRS tax forms
+
+................................
+
+intellectual property homepage
+http://timon.sir.arizona.edu/govdocs/inprop/cover.htm
+
+................................
+
+http://www.entrepreneurs.net/mdb
+
+................................
+
+http://www.freebsd.org/
+
+ftp.mcom.com:/2.0/unix/netscape-v20-export.i386-unknown-bsd.tar.gz
+  for Freebsd netscape
+
+................................
+
+................................
+ftp.cs.umn.edu
+
+230-Commonly used packages and their paths on our site:
+230-Package             Mirror site             Local Directory
+230-Netscape    ftp.netscape.com        /packages/ftp.netscape.com
+230-Tcl-Tk              ftp.smli.com            /pub/misc/tcl
+230-GNU         prep.ai.mit.edu         /packages/gnu
+230-
+230-X11: All located in /packages/X11/
+230-Packages mirrored from ftp.x.org:
+230-  R5        R5-Contrib      R6      R6-Contrib
+230-
+230-Linux:      All located in /packages/linux/
+230-  Slackware ftp.cdrom.com           /slackware
+230-  Kernel    ftp.cs.helsinki.fi      /kernel 
+230-  Docs              sunsite.unc.edu         /docs
+
+................................
+................................
+
+
+http://www.ultranet.com/
+http://www.albany.net/allinone/
+all-in-one search
+
+................................
+
+> How would one go about connecting a monitor that receives it sync signals on
+> the green input (such as fixed frequency displays made by Sun and others) to
+> a VGA card (that has separate horizontal and vertical sync lines)?
+>
+> Thanks in advance,
+> Ed
+
+ Check out http://www.earthlink.net/~photon/
+
+................................
+
+
+ER Mapper offers now a FREE Data Viewer on Unix and PC
+
+http://www.ermapper.com
+
+................................
+
+Check out the NIH image home WWW page.
+
+It has pointers to a number of PC packages.
+
+You can also run NIH Image (free) and other MAC software on a PC using a
+software product called Executor (US$49 for latest version). Details also
+on NIH image home page http://rsb.info.nih.gov/nih-image/
+
+................................
+you can download Macintosh PICT files from my ftp site. These are images
+from The Image Processing Handbook, second edition. Several (e.g.,
+Curds&Whey, Liver, BoneMarrow, CastIron) are good tests fo texture
+segmentation. The site is
+ftp://ftp.ncsu.edu/pub/ncsu/jruss/2DIMages
+
+................................
+ER Mapper offers now a FREE Data Viewer on Unix and PC
+
+http://www.ermapper.com
+
+................................
+Meyer Instruments has a large library of macros written for Optimas 
+(check out the partial list at http://www.meyerinst.com/html/mi_app.htm) 
+and can custom write one or modify and existing routine to solve your 
+image analysis problems.
+
+................................
+Try this URL (it's a GREAT source of the 'standard' images we've all seen):
+  http://www.sys.uea.ac.uk/Research/ResGroups/SIP/images_ftp/index.html
+  http://www.sys.uea.ac.uk/Research/ResGroups/SIP/links_page/
+
+................................
+        You can find pointers to lots of images off the Computer Vision home
+page, on the Test Images subpage:
+                http://www.cs.cmu.edu/~cil/v-images.html
+Unfortunately they are not grouped by name, but there are literally
+thousands of images in the links listed there.  In particular, it has a
+(valid!) pointer to the U East Anglia Standard images page (20 images,
+compressed tiff format) already mentioned in this thread.
+ftp.cse.psu.edu:/pub/vision/MACHINE_VISION/images
+http://www-white.media.mit.edu/vismod/imagery/VisionTexture/vistex.html
+ftp://freebie.engin.umich.edu/pub/misc/textures  Brodatz "d" images
+
+................................
+Luc Vincent and Pierre Soille about the watershed transformation.
+I was willing to send him this code.
+So everybody who is interested, please stop mailing me, and look at my 
+home-page http://www.cs.rug.nl/~arnold/arnold.html using WWW, to see if I 
+already put up the code there. It's not there right now, but I will put
+it there in a few days. Right now, there are only two papers on parallel
+implementations.
+
+................................
+You need GNU FSF Emacs 19 (version 19.23 or later) and TCLX 7.3B (Extended
+TCL) to run Emacspeak. See the Emacspeak distribution for additional
+details. Available from the following sites:
+FTP: ftp://crl.dec.com/pub/digital/emacspeak/emacspeak.tar.gz
+WWW:
+http://www.research.digital.com/CRL/personal/raman/emacspeak/emacspeak.tar.gz
+
+................................
+i am collecting code for FFTs, convolutions etc on my homepage:
+http://www.tu-chemnitz.de/~arndt/joerg.html
+(have a look !)
+
+................................
+Announcing a new WWW home page that covers the work of the Pattern and
+Information Processing Group of the Defence Research Agency (DRA) in the United
+Kingdom.
+
+ The URL of the home page is
+
+ http://www.dra.hmg.gb/cis5pip/Welcome.html
+
+................................
+I thought that people in this group might be interested in Space Imaging's
+new web page. The URL is http://www.spaceimage.com  Space Imaging is planning
+to launch a commmercial satellite in late 1997 that will be capable of
+
+................................
+Amazing!! If you have a moment check out a new web site
+http://Zygon.com.  They have an incredible new multi-media
+technology that uses a special digital headset that forces your
+mind to learn.  It blew my mind!!!  Kinda felt like I was dreaming,
+while learning foreign languages, and programming my subconscious
+
+................................
+
+<li> <a href="http://moralforce.cc.gatech.edu">ARPA Image Database
+Browser:</a>
+     contains pointers to lots of informal image archives, and keyword search on a
+     database.  The database is quite small right now, but should grow
+     quickly.  <em>If you have images on the Net, you can register them
+     here!</em>
+<li> <a href="ftp://teleos.com/VISION-LIST-ARCHIVE/IMAGERY">Vision-list
+Imagery Archive</a> (many images, many formats)
+<li> <a href="http://www.ius.cs.cmu.edu/optical-disk">CMU VASC Image
+Database</a> - Images, sequences, stereo pairs (thousands of images, 
+Sun Rasterimage format)
+<li> <a href="http://www.eecs.wsu.edu/IRL/RID/RID.html">
+     WSU/MSU Range Image Database</a> (hundreds of real and synthetic images,
+     GIF and homebrew formats)
+<li> <a href="http://marathon.csee.usf.edu/range/seg-comp/SegComp.html">USF
+Range Image Data with Segmentation Ground Truth</a> (80 image sets, Sun
+rasterimage format, tar archives)
+<li> <a
+href="http://www-white.media.mit.edu/vismod/imagery/VisionTexture/vistex.html">MIT
+Vision Texture</a> image archive (100+ images, ppm format, stored in
+<em>large</em> tar archive files)
+<li> <a href="cil-ster.html">CMU CIL's Stereo
+     Data with Ground Truth</a> (3 sets of 11 images, GIF format, 1 color
+     TIFF image with spectroradiometry)
+<li> <a href="http://www.ien.it/iengf/is/vislib.html">IEN Image Library</a>
+(1000+ images, mostly outdoor sequences, raw/ppm format)
+<li> <a href="http://olt.et.tudelft.nl/fun/pictures/pictures.html">TU Delft
+Digital Picture Archive</a> (<em>many</em> pictures, gif, jpeg, other formats)
+<li> <a href="ftp://stekt.oulu.fi/pub">U Oulu wood and knots database</a>;
+includes classifications (1000+ color images, ppm format)
+<li> <a href="ftp://ftp.eedsp.gatech.edu/database/images">Georgia Tech
+images</a> (many images, unknown format)
+<li> <a href="ftp://ftp.cps.msu.edu/pub/prip">Michigan State images</a>
+(many images, unknown format)
+<li> SRI's <a href="ftp://ftp.teleos.com/VISION-LIST-ARCHIVE/IMAGERY/JISCT">JISCT
+     Stereo Evaluation</a> data (44 image pairs, SSI format)
+
+<li> <a
+href="http://www-syntim.inria.fr/syntim/analyse/paires-eng.html">INRIA
+Syntim Stereo Images</a> with camera calibration data (and a few other <a
+href="http://www-syntim.inria.fr/syntim/analyse/images-eng.html">test
+images</a>)
+ (about 20 images,
+mostly GIF format)
+<li> <a
+href="http://www.micro.caltech.edu/EE/Groups/Vision/images.html">Caltech
+Image Database</a> (about 20 images, GIF format)
+<li> <a href="ftp://cs.utah.edu/pub/range-database/">Utah Range Image
+     database</a> (33 images, homebrew formats)
+<li> <a href="ftp://ftp.ifp.uni-stuttgart.de/pub/wg3">Stuttgart
+     ISPRS Image Understanding datasets</a> (stereo and/or infrared images)
+     with approximate ground truth (4 compressed datasets, PGM format)
+<li> <a href="http://www.inria.fr/robotvis/images-eng.html">
+     INRIA's Robotvis Images</a> (many images, PGM (and some homebrew) image
+     formats)
+<li> <a href="ftp://ftp.balltown.cma.com/pub/images">RADIUS project test
+imagery</a> (<a
+href="ftp://ftp.balltown.cma.com/pub/images/schen/README.FILEFORMAT">IU
+Testbed</a> format)
+<li> MIT <a href="ftp://whitechapel.media.mit.edu/pub/images">face
+     images</a> and more (hundreds of images, homebrew format, stored in
+     <em>large</em> tar archive files)
+<li> Olivetti <a href="http://www.cam-orl.co.uk/facedatabase.html">face
+database</a> (400 images, pgm format, tar archive)
+<li> Usenix <a href="ftp://ftp.uu.net/published/usenix/faces">face
+     database</a> <em>(European access via <a
+     href="ftp://src.doc.ic.ac.uk/pub/packages/faces">London</a>)</em> (hundreds of images,
+     several formats)
+<li> Optical flow <a href="ftp://csd.uwo.ca/pub/vision/TESTDATA/">test image
+     sequences</a>; see <em>Performance of Optical Flow Techniques</em>
+     under RESEARCH CODE below (6 synthetic and 4 real image sequences, Sun
+     Rasterimage format)
+<li> <a href="http://machine_vision.cse.psu.edu/~book">Machine Vision</a>
+textbook <a
+href="ftp://ftp.cse.psu.edu/pub/vision/MACHINE_VISION/images">images</a>
+(20+ images, compressed GIF/TIFF format)
+<li> <a href="ftp://ftp.tu-graz.ac.at/pub/images">Graz University of
+     Technology</a> stereo pairs (2 image pairs, TIFF format)
+<li> <a href="http://xtreme.gsfc.nasa.gov">AVHRR Pathfinder</a> datasets
+<li> <a href="http://info.amps.gov:2080/dtReqst.html">AMPS Multisensor Image
+Data Archive</a> (several images, GIF, JPEG, MPEG formats; you can order
+original datasets)
+<li> <a href="ftp://jplinfo.jpl.nasa.gov/pub/sircxsar">JPL SIR-C/X-SAR
+datasets</a> (several images, mostly tiff format)
+<li> <a href="ftp://sunsite.unc.edu/pub/academic/computer-science/virtual-reality/3d">
+     UNC's 3D image database</a> (many images, GIF format)
+<li> <A href="ftp://freebie.engin.umich.edu/pub/misc/textures">U Michigan
+textures</a> (compressed raw binary format)
+<li> <a href="ftp://ftp.ipl.rpi.edu/pub/image">Rensselaer Polytechnic
+Instititute (RPI) images</a> (stills and sequences, many formats)
+<li> <a href="http://www.cs.waikato.ac.nz/~singlis/ccitt.html">CCITT Fax
+     standard images</a> (8 images, GIF format)
+<li> <a
+href="http://www.sys.uea.ac.uk/Research/ResGroups/SIP/images_ftp/index.html">U
+East Anglia Standard images</a> (20 images, compressed tiff format)
+<li> <a
+href="http://vision.ce.pusan.ac.kr/vision_image/sample_image_text.html">Pusan
+National U images</a> (20 images, tiff and GIF formats)
+<li> Johns Hopkins <a href="ftp://ftp.cs.jhu.edu/pub/natimages/">Polarization
+     images</a> (several sets of four images, compressed Sun Rasterimage
+     format)
+<li> Los Alamos <a href="ftp://ftp.c3.lanl.gov/pub/WSQ/print_data">Fingerprint
+     images</a> (many images, raw 8 bit format)
+<li> <a href="ftp://sequoyah.ncsl.nist.gov/pub/databases/data">NIST Fingerprint and
+     handwriting</a> datasets (thousands of images, unknown format)
+<li> <a href="ftp://ftp.cs.columbia.edu/jpeg/other/uuencoded">NIST Fingerprint
+     data</a> at Columbia (compressed multipart uuencoded tar file)
+<li> <a href="http://www-ipg.umds.ac.uk/archive.html">UMDS IPG Medical Image
+Archive</a>
+<li> <a
+href="http://www.nlm.nih.gov/extramural_research.dir/visible_human.html">NLM
+HyperDoc Visible Human Project</a> color, CAT and MRI image samples (over 30
+images, jpeg format)
+<li> <a href="ftp://isy.liu.se/images">Linkoping University</a> image
+	database (including a
+	<a href="ftp://isy.liu.se/images/calib.ic">calibrated outdoor stereo
+	scene</a>; see
+     <a href="ftp://isy.liu.se/images/README">README</a> and
+     <a href="ftp://isy.liu.se/images/Stereo.txt">Stereo.txt</a>)
+	(homebrew image format)
+</menu>
+
+<hr>
+<ADDRESS>
+<a href="vision.html">Computer Vision Home Page</a> /
+<a href="txtv-images.html">Text only</a> <!--Txtonlycomment-->
+version of this page <br>
+<a href="submit.html">Please send updates</a> to
+<A HREF="/afs/cs/user/mwm/www/whois-mwm.html">mwm@cmu.edu</A>
+(last updated Tue Oct 24 02:17 EDT 1995)
+</ADDRESS>
+</body>

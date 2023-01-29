@@ -1,0 +1,24 @@
+TABLEAU RELEASE NOTES
+
+tab02-02 December 29, 1997
+- fixed bug relating to program window names
+
+tab01-05 July 17, 1997
+- added Winnov support DLL to distribution
+
+tab01-04 July 13, 1997
+- video window now moveable and iconizable
+- tabstart supports hot swap software upgrades
+- better install for Winnov
+- supports install to directory of choice (not forced to c:\tableau)
+- tabgrab supports on-the-fly changing Winnov contrast etc.
+
+tab00-31 April 4, 1997
+- ignore ^Z in arg files
+- allow FTP filenames with no % in them
+
+tab00-29 April 2, 1997
+- if -ident is present, contact reverb server before shoveling
+- new -screen syntax to start server via cgi
+
+

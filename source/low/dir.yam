@@ -1,0 +1,160 @@
+define(TOP, UP2)
+define(DIR, source/low)
+__prolog
+
+__summary(prj_lib_summary(utilq),  util.doc+fd.c+list.c+str.c)
+__guide(prj_lib_guide(util),       util.doc+fd.c+list.c+str.c)
+
+__guide(prj_lib_guide(hist),
+  hist.doc+ 
+  hist.c+
+  hist2.c)
+
+__guide(prj_lib_guide(env), 
+  env.doc+
+  err.c+
+  say.c+
+  dbg.c+
+  dbg2.c+
+  heapmon.c+
+  leave.c+
+  enter.c+
+  assert.c+
+  yield.c)
+
+__guide(prj_lib_guide(param), 
+  param.doc+
+  param.c)
+
+__example(env1, env.doc)
+__example(hist1, hist.doc)
+__example(param1, param.doc)
+__example(port1, portio.c)
+
+__shexe(prj_lib_samp(env, 1), 
+  dtenv1,    , prj_lib(dtlow)+prj_lib(dt1d)`'PRJ_SUPPORT_LIBS, PRJ_LOADS)
+__shexe(prj_lib_samp(env, 2), 
+  dtenv2,    , prj_lib(dtlow)+prj_lib(dt1d)`'PRJ_SUPPORT_LIBS, PRJ_LOADS)
+__shexe(prj_lib_samp(env, 3), 
+  dtenv3,    , prj_lib(dtlow)+prj_lib(dt1d)`'PRJ_SUPPORT_LIBS, PRJ_LOADS)
+__shexe(prj_lib_samp(env, 4), 
+  dtenv4,    , prj_lib(dtlow)+prj_lib(dt1d)`'PRJ_SUPPORT_LIBS, PRJ_LOADS)
+__shexe(prj_lib_samp(hist, 1), 
+  dthist1,   , prj_lib(dtlow)+prj_lib(dt1d)`'PRJ_SUPPORT_LIBS, PRJ_LOADS)
+__shexe(prj_lib_samp(hist, 2), 
+  dthist2,   , prj_lib(dtlow)+prj_lib(dt1d)`'PRJ_SUPPORT_LIBS, PRJ_LOADS)
+__shexe(prj_lib_samp(param, 1), 
+  dtparam1,  , prj_lib(dtlow)+prj_lib(dt1d)`'PRJ_SUPPORT_LIBS, PRJ_LOADS)
+__shexe(prj_lib_samp(port, 1), 
+  dtport1,   , prj_lib(dtlow)+prj_lib(dt1d)`'PRJ_SUPPORT_LIBS, PRJ_LOADS)
+
+pushdef(`CCSHARABLE', `CCSHARABLE_ON')
+
+pushdef(`CCOPTIMIZE', `CCOPTIMIZE_HIGH')
+pushdef(`CCDEBUGGER', `CCDEBUGGER_OFF')
+__src(hist2)
+popdef(`CCDEBUGGER')
+popdef(`CCOPTIMIZE')
+
+__src(enter,
+  PRJ_INCLUDES,
+  PRJ_DEFINES+PRJ_NOINTER_DEFINE)
+
+__src(ipcqnx4, PRJ_INCLUDES, PRJ_DEFINES+PRJ_QNX4_IPC_DEFINE)
+__src(ipcqbaby, PRJ_INCLUDES, PRJ_DEFINES+PRJ_QNX4_IPC_DEFINE)
+__src(ipcrock, PRJ_INCLUDES+PRJ_SOCKET_INCLUDE, PRJ_DEFINES+PRJ_SOCKET_DEFINE)
+
+__src(license, PRJ_INCLUDES+PRJ_FLEXLM_INCLUDE, PRJ_DEFINES+PRJ_FLEXLM_DEFINE)
+__src(fd, PRJ_INCLUDES+PRJ_ZLIB_INCLUDE, PRJ_DEFINES+PRJ_ZLIB_DEFINE)
+__src(f, PRJ_INCLUDES+PRJ_ZLIB_INCLUDE, PRJ_DEFINES+PRJ_ZLIB_DEFINE)
+__src(cipher, PRJ_INCLUDES+PRJ_ZLIB_INCLUDE+$(MK_MCRYPT_INCLUDE), PRJ_DEFINES+PRJ_ZLIB_DEFINE+$(MK_MCRYPT_DEFINE))
+
+__src(prj_dat, PRJ_INCLUDES,
+PRJ_DEFINES+PRJ_FASTGRAPH_DEFINE+dnl
+PRJ_SVGACC_DEFINE+dnl
+PRJ_X_DEFINE+dnl
+PRJ_NCSA_DTM_DEFINE+dnl
+PRJ_QNX4_IPC_DEFINE+dnl
+PRJ_SOCKET_DEFINE+dnl
+PRJ_EMSIF_DEFINE+dnl
+PRJ_XMSIF_DEFINE+dnl
+PRJ_XMSLB_DEFINE+dnl
+PRJ_TXMS_DEFINE+dnl
+PRJ_QW4_DEFINE+dnl
+PRJ_GWS_DEFINE+dnl
+PRJ_TIFF_DEFINE+dnl
+PRJ_CURSES_DEFINE+dnl
+PRJ_TERMCAP_DEFINE+dnl
+PRJ_TERMIOS_DEFINE+dnl
+PRJ_INT10_DEFINE+dnl
+PRJ_CORTEX_DEFINE+dnl
+PRJ_VMC_DEFINE+dnl
+PRJ_QNXTERM_DEFINE+dnl
+PRJ_NOSCREEN_DEFINE+dnl
+PRJ_NOINTER_DEFINE+dnl
+PRJ_NOWIN_DEFINE+dnl
+)
+
+__shlib(prj_lib(dtlow),
+  dbtable+
+  points+
+  poly+
+  matrix3d+
+  matrix2d+
+  matrix+
+  assert+
+  cipher+
+  cons+
+  cstack+
+  dbg+dbg2+
+  err+err2+
+  enter+
+  eventw+
+  f+
+  fd+
+  ftp+
+  heapmon+
+  heap`'PRJ_HEAPMON_NUMBER+
+  hist+hist2+hist_da+
+  ipc+ipcqnx4+ipcqbaby+ipcrock+ipcdde+
+  leave+
+  license+
+  liner+
+  list+list_io+
+  lut8+lut8_mat+
+  msgu+
+  msw+
+  os_mem+os_delay+os_futil+os_heap+os_heap2+os_time+os_env+
+  param+
+  phys+
+  pnm+
+  portio+
+  prj+
+  qnx4+
+  rev+
+  say+
+  semu+
+  semw+
+  serial+serialu+serialw+
+  shmu+
+  shmw+
+  str+
+  threads+
+  thread+threadu+threadw+
+  usage+
+  yield+
+  libmain, 
+  dbg_dat+            dnl initted consts not referenced by name outside shlib
+  conf_dat+           dnl initted consts referenced by name outside shlib
+  lut8_dat+
+  ntype+ntype_da+
+  prj_dat, 
+  cdecl+dbg_dat+conf_dat+lut8_dat+ntype_da+prj_dat+hist_da, 
+  prj_lib(dt1d),
+  PRJ_FLEXLM_LOAD
+  PRJ_LOADS)
+
+popdef(`CCSHARABLE')
+
+__finish
+

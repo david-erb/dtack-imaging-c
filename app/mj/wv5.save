@@ -1,0 +1,273 @@
+# This makefile is input to nmake, the Microsoft make utility.
+# This makefile assumes the following:
+# 1. that the INCLUDE environment variable points to the standard Microsoft
+#    include directories, for example:
+#      set INCLUDE=c:\msvc\include
+# 2. that the PATH environment variable has the compiler in it, for example:
+#      PATH=c:\mvsc\bin;c:\dos
+
+#                                   optimize for speed
+OPTIMIZE_HIGH = /O2
+
+#                                   good optimization but still able to debug
+OPTIMIZE_LOW = 
+
+
+
+
+default: shared
+
+
+all: static shared others
+
+
+static: libs exes 
+
+shared: shlibs shexes 
+
+allsubs:
+
+exes: \
+	  $(OUT)\static\mj.exe
+
+shexes: \
+	  $(OUT)\dynamic\mj.exe
+
+scripts: 
+
+libs: \
+	  $(OUT)\lib\mjx.lib
+
+shlibs: \
+	  $(OUT)\dynamic\mjx.dll
+
+others: 
+
+
+#----------------------------------------------------------------------------
+strip:
+	cvpack /STRIP
+	cvpack /STRIP
+
+
+
+#----------------------------------------------------------------------------
+clean:
+	-del $(OUT)\dynamic\mj.exe
+	-del $(OUT)\static\mj.exe
+	-del $(OUT)\lib\mjx.lib
+	-del $(OUT)\dynamic\mjx.dll
+	-del $(OUT)\app\mj\*.obj
+	-del *.out
+	-del tmp
+	-del *.map
+
+#----------------------------------------------------------------------------
+veryclean: clean rpcclean
+#----------------------------------------------------------------------------
+rpcclean:
+
+
+
+#-------------------------------------------------------------------------
+# subs
+
+
+
+
+#-------------------------------------------------------------------------
+# exes
+
+
+
+$(OUT)\static\mj.exe: \
+	  $(OUT)\app\mj\mj.obj \
+	  $(OUT)\lib\mjx.lib \
+	  $(OUT)\lib\dtdg.lib \
+	  $(OUT)\lib\dtbigmem.lib \
+	  $(OUT)\lib\dtlow.lib \
+	  $(OUT)\lib\dt1d.lib
+	link /nologo /OUT:$(OUT)\static\mj.exe @<<
+	  /MAP:$(OUT)\static\mj.map /subsystem:windows /DEBUG /PDB:NONE /STACK:64000
+          /NODEFAULTLIB:msvcrt
+	$(OUT)\app\mj\mj.obj
+	$(OUT)\lib\mjx.lib
+	$(OUT)\lib\dtdg.lib
+	$(OUT)\lib\dtbigmem.lib
+	$(OUT)\lib\dtlow.lib
+	$(OUT)\lib\dt1d.lib
+	msvcrtd.lib d:\amovie\lib\strmbasd.lib ole32.lib wsock32.lib vfw32.lib winmm.lib kernel32.lib user32.lib
+<<
+$(OUT)\dynamic\mj.exe: \
+	  $(OUT)\app\mj\mj.obj \
+	  $(OUT)\libdll\mjx.lib \
+	  $(OUT)\libdll\dtdg.lib \
+	  $(OUT)\libdll\dtbigmem.lib \
+	  $(OUT)\libdll\dtlow.lib \
+	  $(OUT)\libdll\dt1d.lib
+	link /nologo /OUT:$(OUT)\dynamic\mj.exe @<<
+	  /MAP:$(OUT)\dynamic\mj.map /subsystem:windows
+	  /DEBUG /PDB:NONE
+	  /STACK:64000
+	  $(OUT)\app\mj\mj.obj
+	  $(OUT)\libdll\mjx.lib
+	  $(OUT)\libdll\dtdg.lib
+	  $(OUT)\libdll\dtbigmem.lib
+	  $(OUT)\libdll\dtlow.lib
+	  $(OUT)\libdll\dt1d.libmsvcrtd.lib d:\amovie\lib\strmbasd.lib ole32.lib
+	  wsock32.lib vfw32.lib winmm.lib kernel32.lib user32.lib
+<<
+	del $(OUT)\dynamic\mj.lib
+	del $(OUT)\dynamic\mj.exp
+
+
+
+#-------------------------------------------------------------------------
+# libs
+
+
+
+$(OUT)\lib\mjx.lib: \
+	  $(OUT)\app\mj\play.obj \
+	  $(OUT)\app\mj\libmain.obj
+	lib /nologo /out:$(OUT)\lib\mjx.lib @<<
+	  $(OUT)\app\mj\play.obj
+	  $(OUT)\app\mj\libmain.obj
+<<
+	
+$(OUT)\dynamic\mjx.dll \
+$(OUT)\libdll\mjx.lib: \
+	  $(OUT)\app\mj\play.obj \
+	  $(OUT)\app\mj\libmain.obj \
+	  $(OUT)\libdll\dtbigmem.lib \
+	  $(OUT)\libdll\dtlow.lib \
+	  $(OUT)\libdll\dt1d.lib
+	link /nologo /out:$(OUT)\dynamic\mjx.dll @<<!
+	  /dll /implib:$(OUT)\libdll\mjx.lib
+	  /subsystem:windows
+	  $(OUT)\app\mj\play.obj
+	  $(OUT)\app\mj\libmain.obj
+	  $(OUT)\libdll\dtbigmem.lib
+	  $(OUT)\libdll\dtlow.lib
+	  $(OUT)\libdll\dt1d.lib 
+	  wsock32.lib vfw32.lib winmm.lib kernel32.lib user32.lib
+<<
+
+#-------------------------------------------------------------------------
+# others
+
+
+
+#-------------------------------------------------------------------------
+# srcs
+
+
+
+$(OUT)\app\mj\play.obj: $(SRC)\app\mj\play.c \
+	  $(SRC)\app\mj\mj.h \
+	  $(SRC)\include\dt.h \
+	  $(SRC)\include\dtconfig.h \
+	  $(SRC)\include\dtntype.h \
+	  $(SRC)\include\dt1d.h \
+	  $(SRC)\include\dt1d.p \
+	  $(SRC)\include\dtparam.h \
+	  $(SRC)\include\dtparam.p \
+	  $(SRC)\include\dtcstack.h \
+	  $(SRC)\include\dtcstack.p \
+	  $(SRC)\include\dthist.h \
+	  $(SRC)\include\dthist.p \
+	  $(SRC)\include\dtfd.h \
+	  $(SRC)\include\dtfd.p \
+	  $(SRC)\include\dtrun.h \
+	  $(SRC)\include\dtrun.p \
+	  $(SRC)\include\dtimage.h \
+	  $(SRC)\include\dtimage.p \
+	  $(SRC)\include\dt.p \
+	  $(SRC)\include\dtos.h \
+	  $(SRC)\include\dtos.p \
+	  $(SRC)\include\dtstr.h \
+	  $(SRC)\include\dtstr.p \
+	  $(SRC)\app\mj\mj.p \
+	  $(SRC)\include\dtmsw.h \
+	  $(SRC)\include\dtmsw.p \
+	  $(SRC)\com\mj1-3\push_prop.h
+	cl /nologo /c /Gf /J /GB /MDd /Gz /DDBG=1 /DDEBUG /D_DEBUG \
+	   /Fo$(OUT)\app\mj\play.obj /Z7 /O1 /TP \
+	   /WX /W0 \
+	  -DDTCONFIG_WV5 \
+	  -I$(SRC) \
+	  -Id:\amovie\classes\base \
+	  -Id:\amovie\include \
+	  -I$(SRC)\app\mj \
+	  -I$(SRC)\include \
+	  $(SRC)\app\mj\play.c
+$(OUT)\app\mj\libmain.obj: $(SRC)\app\mj\libmain.c \
+	  $(SRC)\include\dt.h \
+	  $(SRC)\include\dtconfig.h \
+	  $(SRC)\include\dtntype.h \
+	  $(SRC)\include\dt1d.h \
+	  $(SRC)\include\dt1d.p \
+	  $(SRC)\include\dtparam.h \
+	  $(SRC)\include\dtparam.p \
+	  $(SRC)\include\dtcstack.h \
+	  $(SRC)\include\dtcstack.p \
+	  $(SRC)\include\dthist.h \
+	  $(SRC)\include\dthist.p \
+	  $(SRC)\include\dtfd.h \
+	  $(SRC)\include\dtfd.p \
+	  $(SRC)\include\dtrun.h \
+	  $(SRC)\include\dtrun.p \
+	  $(SRC)\include\dtimage.h \
+	  $(SRC)\include\dtimage.p \
+	  $(SRC)\include\dt.p \
+	  $(SRC)\include\dtmsw.h \
+	  $(SRC)\include\dtmsw.p
+	cl /nologo /c /Gf /J /GB /MDd /Gz /DDBG=1 /DDEBUG /D_DEBUG \
+	   /Fo$(OUT)\app\mj\libmain.obj /Z7 /O1 \
+	   /WX /W0 \
+	  -DDTCONFIG_WV5 \
+	  -I$(SRC) \
+	  -Id:\amovie\classes\base \
+	  -Id:\amovie\include \
+	  -I$(SRC)\app\mj \
+	  -I$(SRC)\include \
+	  $(SRC)\app\mj\libmain.c
+$(OUT)\app\mj\mj.obj: $(SRC)\app\mj\mj.c \
+	  $(SRC)\app\mj\mj.h \
+	  $(SRC)\include\dt.h \
+	  $(SRC)\include\dtconfig.h \
+	  $(SRC)\include\dtntype.h \
+	  $(SRC)\include\dt1d.h \
+	  $(SRC)\include\dt1d.p \
+	  $(SRC)\include\dtparam.h \
+	  $(SRC)\include\dtparam.p \
+	  $(SRC)\include\dtcstack.h \
+	  $(SRC)\include\dtcstack.p \
+	  $(SRC)\include\dthist.h \
+	  $(SRC)\include\dthist.p \
+	  $(SRC)\include\dtfd.h \
+	  $(SRC)\include\dtfd.p \
+	  $(SRC)\include\dtrun.h \
+	  $(SRC)\include\dtrun.p \
+	  $(SRC)\include\dtimage.h \
+	  $(SRC)\include\dtimage.p \
+	  $(SRC)\include\dt.p \
+	  $(SRC)\include\dtos.h \
+	  $(SRC)\include\dtos.p \
+	  $(SRC)\include\dtstr.h \
+	  $(SRC)\include\dtstr.p \
+	  $(SRC)\app\mj\mj.p \
+	  $(SRC)\include\dtmain.h \
+	  $(SRC)\app\mj\mj.use
+	cl /nologo /c /Gf /J /GB /MDd /Gz /DDBG=1 /DDEBUG /D_DEBUG \
+	   /Fo$(OUT)\app\mj\mj.obj /Z7 /O1 \
+	   /WX /W0 \
+	  -DDTCONFIG_WV5 \
+	  -I$(SRC) \
+	  -Id:\amovie\classes\base \
+	  -Id:\amovie\include \
+	  -I$(SRC)\app\mj \
+	  -I$(SRC)\include \
+	  $(SRC)\app\mj\mj.c
+
+

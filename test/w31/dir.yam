@@ -1,0 +1,12 @@
+define(TOP, UP2)
+define(DIR, test/w31)
+
+__shexe(prj_test_bin(dttw31),   dttw31, ,   
+  prj_lib(dtlow)+
+  prj_lib(dt1d)+
+  PRJ_SUPPORT_LIBS,
+  PRJ_LOADS)
+
+__finish
+
+

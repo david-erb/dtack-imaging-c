@@ -1,0 +1,479 @@
+/*
+David Erb
+Dtack Imaging Software
+
+---------------------------------------------
+dt_sez90 - algorithm executive
+
+SYNOPSIS
+dt_sez90 [parameters] input output [plot]
+
+SUMMARY
+Find global thresholds using peaks in histogram.
+Produce a multi-thresholded image and an annotated histogram plot.
+
+ARGUMENTS
+  input      name of the input image 
+  output     name of the optional output multi-thresholded image 
+  plot       name of the output histogram plot image 
+
+PARAMETERS
+  -n           algorithm window size (default 15) 
+  -dx          algorithm closeness value (default 3) 
+  -op          operation, one of:  [normal test time] (default normal) 
+  -foreground  lightest multi-threshold output pixel color (default 255) 
+  -background  darkest multi-threshold output pixel color (default 1) 
+  -x           output x position of image data 
+  -y           output y position of image data 
+  -help        one-page help 
+  -HELP        more help 
+  -D           debug options separated by plus (+) signs, (default none) 
+  -mem         memory sources for large allocations (default DT_MEM) 
+  -win         display server (default DT_WIN) 
+  -errto       output file for error messages, (default stdout) 
+  -yield       yield mode, (default normal) 
+
+OPERATIONS
+The -op parameter may take one of the following values:
+  normal  perform algorithm on input to produce output 
+  test    perform implementation self-tests and display pass/fail result 
+  time    perform implementation benchmark and display execution times 
+
+DESCRIPTION
+First calculates the histogram of <input>.
+Then uses the dt_sez90 algorithm to compute the histogram peaks.
+The N peak start positions are used to make N+1 bins.
+N+1 gray levels for the bins are chosen evenly over the
+gray level range <background> to <foreground>.
+Pixel gray levels in <output> are assigned the gray level of the bin
+corresponding to the pixel at the same position in <input>.
+
+If an <output> image is produced,
+it will have the same dimensions as the input image and be 8 bits deep.
+The maximum value of its pixels will be <foreground>.
+The minimum will be <background> if more than one peak is found.
+
+The default <background> is 1,
+ensuring no pixels in <output> get the value 0.
+This allows you to use the multi-thresholded image as
+a segmentation in which all pixels belong to objects
+and none to background.
+
+For a striking pseudo-color display using a Dtack viewer,
+choosing <background> 1 and <foreground> 7.
+These values are normally assigned bright colors on the display.
+
+If a <plot> image is produced,
+it will have dimensions 256 by 128 and be 8 bits deep.
+It will have gray background with white histogram bars.
+Superimposed on the histogram are green boxes with red bars
+indicating the peak extents and peak maxima.
+A blue waveform indicates the PDS.
+
+The name of an <output> image is optional.
+If <output> is not given, or is a single hyphen (-),
+then no output image is produced.
+The name of a <plot> image is also optional.
+If not given, no plot is produced.
+If neither <output> nor <plot> is produced,
+then the program only produced a printed summary of the peaks.
+
+PAGING
+The test and time operations may be exercised under varying paging
+configurations.
+The minimum no-dialog configurations are:
+  -op test  maxalloc 16384, pagesize 128, npages 1 
+  -op time  maxalloc 262144, pagesize 512, npages 1 
+
+DEBUGGING PARAMETER
+The -D parameter may take any of the following options
+separated by plus signs (+), for example -D img+complex.
+Any option may be abbreviated to the shortest form
+which is not ambiguous with other options.
+  any       all debug masks 
+  all       any debug mask 
+  stats     statistics 
+  img       image operations 
+  time      execution times 
+  complex   execution complexity indicators 
+  ipc       interprocess communication 
+  arg       arguments 
+  assert    assertions 
+  memtrace  any memory allocation/freeing 
+  async     asynchronous events 
+  bigio     big blocks of I/O only 
+  page      memory paging 
+  win       windowing operations 
+  alimits   print limits 
+  object    object values 
+  intermd   intermediate values 
+  pixel     pixel values 
+  io        all I/O 
+  memstats  memory summary 
+  alt       program-chosen alternative 
+  trace     execution trace 
+  usr1      user's use 
+  usr2      user's use 
+*/
+static const char usage[4317] = {
+'D' ,'a' ,'v' ,'i' ,'d' ,' ' ,'E' ,'r' ,'b' ,'\n','D' ,'t' ,
+'a' ,'c' ,'k' ,' ' ,'I' ,'m' ,'a' ,'g' ,'i' ,'n' ,'g' ,' ' ,
+'S' ,'o' ,'f' ,'t' ,'w' ,'a' ,'r' ,'e' ,'\n','\n','-' ,'-' ,
+'-' ,'-' ,'-' ,'-' ,'-' ,'-' ,'-' ,'-' ,'-' ,'-' ,'-' ,'-' ,
+'-' ,'-' ,'-' ,'-' ,'-' ,'-' ,'-' ,'-' ,'-' ,'-' ,'-' ,'-' ,
+'-' ,'-' ,'-' ,'-' ,'-' ,'-' ,'-' ,'-' ,'-' ,'-' ,'-' ,'-' ,
+'-' ,'-' ,'-' ,'-' ,'-' ,'-' ,'-' ,'\n','d' ,'t' ,'_' ,'s' ,
+'e' ,'z' ,'9' ,'0' ,' ' ,'-' ,' ' ,'a' ,'l' ,'g' ,'o' ,'r' ,
+'i' ,'t' ,'h' ,'m' ,' ' ,'e' ,'x' ,'e' ,'c' ,'u' ,'t' ,'i' ,
+'v' ,'e' ,'\n','\n','S' ,'Y' ,'N' ,'O' ,'P' ,'S' ,'I' ,'S' ,
+'\n','d' ,'t' ,'_' ,'s' ,'e' ,'z' ,'9' ,'0' ,' ' ,'[' ,'p' ,
+'a' ,'r' ,'a' ,'m' ,'e' ,'t' ,'e' ,'r' ,'s' ,']' ,' ' ,'i' ,
+'n' ,'p' ,'u' ,'t' ,' ' ,'o' ,'u' ,'t' ,'p' ,'u' ,'t' ,' ' ,
+'[' ,'p' ,'l' ,'o' ,'t' ,']' ,'\n','\n','S' ,'U' ,'M' ,'M' ,
+'A' ,'R' ,'Y' ,'\n','F' ,'i' ,'n' ,'d' ,' ' ,'g' ,'l' ,'o' ,
+'b' ,'a' ,'l' ,' ' ,'t' ,'h' ,'r' ,'e' ,'s' ,'h' ,'o' ,'l' ,
+'d' ,'s' ,' ' ,'u' ,'s' ,'i' ,'n' ,'g' ,' ' ,'p' ,'e' ,'a' ,
+'k' ,'s' ,' ' ,'i' ,'n' ,' ' ,'h' ,'i' ,'s' ,'t' ,'o' ,'g' ,
+'r' ,'a' ,'m' ,'.' ,'\n','P' ,'r' ,'o' ,'d' ,'u' ,'c' ,'e' ,
+' ' ,'a' ,' ' ,'m' ,'u' ,'l' ,'t' ,'i' ,'-' ,'t' ,'h' ,'r' ,
+'e' ,'s' ,'h' ,'o' ,'l' ,'d' ,'e' ,'d' ,' ' ,'i' ,'m' ,'a' ,
+'g' ,'e' ,' ' ,'a' ,'n' ,'d' ,' ' ,'a' ,'n' ,' ' ,'a' ,'n' ,
+'n' ,'o' ,'t' ,'a' ,'t' ,'e' ,'d' ,' ' ,'h' ,'i' ,'s' ,'t' ,
+'o' ,'g' ,'r' ,'a' ,'m' ,' ' ,'p' ,'l' ,'o' ,'t' ,'.' ,'\n',
+'\n','A' ,'R' ,'G' ,'U' ,'M' ,'E' ,'N' ,'T' ,'S' ,'\n',' ' ,
+' ' ,'i' ,'n' ,'p' ,'u' ,'t' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,
+'n' ,'a' ,'m' ,'e' ,' ' ,'o' ,'f' ,' ' ,'t' ,'h' ,'e' ,' ' ,
+'i' ,'n' ,'p' ,'u' ,'t' ,' ' ,'i' ,'m' ,'a' ,'g' ,'e' ,' ' ,
+'\n',' ' ,' ' ,'o' ,'u' ,'t' ,'p' ,'u' ,'t' ,' ' ,' ' ,' ' ,
+' ' ,' ' ,'n' ,'a' ,'m' ,'e' ,' ' ,'o' ,'f' ,' ' ,'t' ,'h' ,
+'e' ,' ' ,'o' ,'p' ,'t' ,'i' ,'o' ,'n' ,'a' ,'l' ,' ' ,'o' ,
+'u' ,'t' ,'p' ,'u' ,'t' ,' ' ,'m' ,'u' ,'l' ,'t' ,'i' ,'-' ,
+'t' ,'h' ,'r' ,'e' ,'s' ,'h' ,'o' ,'l' ,'d' ,'e' ,'d' ,' ' ,
+'i' ,'m' ,'a' ,'g' ,'e' ,' ' ,'\n',' ' ,' ' ,'p' ,'l' ,'o' ,
+'t' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,'n' ,'a' ,'m' ,'e' ,
+' ' ,'o' ,'f' ,' ' ,'t' ,'h' ,'e' ,' ' ,'o' ,'u' ,'t' ,'p' ,
+'u' ,'t' ,' ' ,'h' ,'i' ,'s' ,'t' ,'o' ,'g' ,'r' ,'a' ,'m' ,
+' ' ,'p' ,'l' ,'o' ,'t' ,' ' ,'i' ,'m' ,'a' ,'g' ,'e' ,' ' ,
+'\n','\n','P' ,'A' ,'R' ,'A' ,'M' ,'E' ,'T' ,'E' ,'R' ,'S' ,
+'\n',' ' ,' ' ,'-' ,'n' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,
+' ' ,' ' ,' ' ,' ' ,'a' ,'l' ,'g' ,'o' ,'r' ,'i' ,'t' ,'h' ,
+'m' ,' ' ,'w' ,'i' ,'n' ,'d' ,'o' ,'w' ,' ' ,'s' ,'i' ,'z' ,
+'e' ,' ' ,'(' ,'d' ,'e' ,'f' ,'a' ,'u' ,'l' ,'t' ,' ' ,'1' ,
+'5' ,')' ,' ' ,'\n',' ' ,' ' ,'-' ,'d' ,'x' ,' ' ,' ' ,' ' ,
+' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,'a' ,'l' ,'g' ,'o' ,'r' ,
+'i' ,'t' ,'h' ,'m' ,' ' ,'c' ,'l' ,'o' ,'s' ,'e' ,'n' ,'e' ,
+'s' ,'s' ,' ' ,'v' ,'a' ,'l' ,'u' ,'e' ,' ' ,'(' ,'d' ,'e' ,
+'f' ,'a' ,'u' ,'l' ,'t' ,' ' ,'3' ,')' ,' ' ,'\n',' ' ,' ' ,
+'-' ,'o' ,'p' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,
+' ' ,'o' ,'p' ,'e' ,'r' ,'a' ,'t' ,'i' ,'o' ,'n' ,',' ,' ' ,
+'o' ,'n' ,'e' ,' ' ,'o' ,'f' ,':' ,' ' ,' ' ,'[' ,'n' ,'o' ,
+'r' ,'m' ,'a' ,'l' ,' ' ,'t' ,'e' ,'s' ,'t' ,' ' ,'t' ,'i' ,
+'m' ,'e' ,']' ,' ' ,'(' ,'d' ,'e' ,'f' ,'a' ,'u' ,'l' ,'t' ,
+' ' ,'n' ,'o' ,'r' ,'m' ,'a' ,'l' ,')' ,' ' ,'\n',' ' ,' ' ,
+'-' ,'f' ,'o' ,'r' ,'e' ,'g' ,'r' ,'o' ,'u' ,'n' ,'d' ,' ' ,
+' ' ,'l' ,'i' ,'g' ,'h' ,'t' ,'e' ,'s' ,'t' ,' ' ,'m' ,'u' ,
+'l' ,'t' ,'i' ,'-' ,'t' ,'h' ,'r' ,'e' ,'s' ,'h' ,'o' ,'l' ,
+'d' ,' ' ,'o' ,'u' ,'t' ,'p' ,'u' ,'t' ,' ' ,'p' ,'i' ,'x' ,
+'e' ,'l' ,' ' ,'c' ,'o' ,'l' ,'o' ,'r' ,' ' ,'(' ,'d' ,'e' ,
+'f' ,'a' ,'u' ,'l' ,'t' ,' ' ,'2' ,'5' ,'5' ,')' ,' ' ,'\n',
+' ' ,' ' ,'-' ,'b' ,'a' ,'c' ,'k' ,'g' ,'r' ,'o' ,'u' ,'n' ,
+'d' ,' ' ,' ' ,'d' ,'a' ,'r' ,'k' ,'e' ,'s' ,'t' ,' ' ,'m' ,
+'u' ,'l' ,'t' ,'i' ,'-' ,'t' ,'h' ,'r' ,'e' ,'s' ,'h' ,'o' ,
+'l' ,'d' ,' ' ,'o' ,'u' ,'t' ,'p' ,'u' ,'t' ,' ' ,'p' ,'i' ,
+'x' ,'e' ,'l' ,' ' ,'c' ,'o' ,'l' ,'o' ,'r' ,' ' ,'(' ,'d' ,
+'e' ,'f' ,'a' ,'u' ,'l' ,'t' ,' ' ,'1' ,')' ,' ' ,'\n',' ' ,
+' ' ,'-' ,'x' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,
+' ' ,' ' ,'o' ,'u' ,'t' ,'p' ,'u' ,'t' ,' ' ,'x' ,' ' ,'p' ,
+'o' ,'s' ,'i' ,'t' ,'i' ,'o' ,'n' ,' ' ,'o' ,'f' ,' ' ,'i' ,
+'m' ,'a' ,'g' ,'e' ,' ' ,'d' ,'a' ,'t' ,'a' ,' ' ,'\n',' ' ,
+' ' ,'-' ,'y' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,
+' ' ,' ' ,'o' ,'u' ,'t' ,'p' ,'u' ,'t' ,' ' ,'y' ,' ' ,'p' ,
+'o' ,'s' ,'i' ,'t' ,'i' ,'o' ,'n' ,' ' ,'o' ,'f' ,' ' ,'i' ,
+'m' ,'a' ,'g' ,'e' ,' ' ,'d' ,'a' ,'t' ,'a' ,' ' ,'\n',' ' ,
+' ' ,'-' ,'h' ,'e' ,'l' ,'p' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,
+' ' ,' ' ,'o' ,'n' ,'e' ,'-' ,'p' ,'a' ,'g' ,'e' ,' ' ,'h' ,
+'e' ,'l' ,'p' ,' ' ,'\n',' ' ,' ' ,'-' ,'H' ,'E' ,'L' ,'P' ,
+' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,'m' ,'o' ,'r' ,'e' ,
+' ' ,'h' ,'e' ,'l' ,'p' ,' ' ,'\n',' ' ,' ' ,'-' ,'D' ,' ' ,
+' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,'d' ,'e' ,
+'b' ,'u' ,'g' ,' ' ,'o' ,'p' ,'t' ,'i' ,'o' ,'n' ,'s' ,' ' ,
+'s' ,'e' ,'p' ,'a' ,'r' ,'a' ,'t' ,'e' ,'d' ,' ' ,'b' ,'y' ,
+' ' ,'p' ,'l' ,'u' ,'s' ,' ' ,'(' ,'+' ,')' ,' ' ,'s' ,'i' ,
+'g' ,'n' ,'s' ,',' ,' ' ,'(' ,'d' ,'e' ,'f' ,'a' ,'u' ,'l' ,
+'t' ,' ' ,'n' ,'o' ,'n' ,'e' ,')' ,' ' ,'\n',' ' ,' ' ,'-' ,
+'m' ,'e' ,'m' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,
+'m' ,'e' ,'m' ,'o' ,'r' ,'y' ,' ' ,'s' ,'o' ,'u' ,'r' ,'c' ,
+'e' ,'s' ,' ' ,'f' ,'o' ,'r' ,' ' ,'l' ,'a' ,'r' ,'g' ,'e' ,
+' ' ,'a' ,'l' ,'l' ,'o' ,'c' ,'a' ,'t' ,'i' ,'o' ,'n' ,'s' ,
+' ' ,'(' ,'d' ,'e' ,'f' ,'a' ,'u' ,'l' ,'t' ,' ' ,'D' ,'T' ,
+'_' ,'M' ,'E' ,'M' ,')' ,' ' ,'\n',' ' ,' ' ,'-' ,'w' ,'i' ,
+'n' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,'d' ,'i' ,
+'s' ,'p' ,'l' ,'a' ,'y' ,' ' ,'s' ,'e' ,'r' ,'v' ,'e' ,'r' ,
+' ' ,'(' ,'d' ,'e' ,'f' ,'a' ,'u' ,'l' ,'t' ,' ' ,'D' ,'T' ,
+'_' ,'W' ,'I' ,'N' ,')' ,' ' ,'\n',' ' ,' ' ,'-' ,'e' ,'r' ,
+'r' ,'t' ,'o' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,'o' ,'u' ,
+'t' ,'p' ,'u' ,'t' ,' ' ,'f' ,'i' ,'l' ,'e' ,' ' ,'f' ,'o' ,
+'r' ,' ' ,'e' ,'r' ,'r' ,'o' ,'r' ,' ' ,'m' ,'e' ,'s' ,'s' ,
+'a' ,'g' ,'e' ,'s' ,',' ,' ' ,'(' ,'d' ,'e' ,'f' ,'a' ,'u' ,
+'l' ,'t' ,' ' ,'s' ,'t' ,'d' ,'o' ,'u' ,'t' ,')' ,' ' ,'\n',
+' ' ,' ' ,'-' ,'y' ,'i' ,'e' ,'l' ,'d' ,' ' ,' ' ,' ' ,' ' ,
+' ' ,' ' ,' ' ,'y' ,'i' ,'e' ,'l' ,'d' ,' ' ,'m' ,'o' ,'d' ,
+'e' ,',' ,' ' ,'(' ,'d' ,'e' ,'f' ,'a' ,'u' ,'l' ,'t' ,' ' ,
+'n' ,'o' ,'r' ,'m' ,'a' ,'l' ,')' ,' ' ,'\n','\n','O' ,'P' ,
+'E' ,'R' ,'A' ,'T' ,'I' ,'O' ,'N' ,'S' ,'\n','T' ,'h' ,'e' ,
+' ' ,'-' ,'o' ,'p' ,' ' ,'p' ,'a' ,'r' ,'a' ,'m' ,'e' ,'t' ,
+'e' ,'r' ,' ' ,'m' ,'a' ,'y' ,' ' ,'t' ,'a' ,'k' ,'e' ,' ' ,
+'o' ,'n' ,'e' ,' ' ,'o' ,'f' ,' ' ,'t' ,'h' ,'e' ,' ' ,'f' ,
+'o' ,'l' ,'l' ,'o' ,'w' ,'i' ,'n' ,'g' ,' ' ,'v' ,'a' ,'l' ,
+'u' ,'e' ,'s' ,':' ,'\n',' ' ,' ' ,'n' ,'o' ,'r' ,'m' ,'a' ,
+'l' ,' ' ,' ' ,'p' ,'e' ,'r' ,'f' ,'o' ,'r' ,'m' ,' ' ,'a' ,
+'l' ,'g' ,'o' ,'r' ,'i' ,'t' ,'h' ,'m' ,' ' ,'o' ,'n' ,' ' ,
+'i' ,'n' ,'p' ,'u' ,'t' ,' ' ,'t' ,'o' ,' ' ,'p' ,'r' ,'o' ,
+'d' ,'u' ,'c' ,'e' ,' ' ,'o' ,'u' ,'t' ,'p' ,'u' ,'t' ,' ' ,
+'\n',' ' ,' ' ,'t' ,'e' ,'s' ,'t' ,' ' ,' ' ,' ' ,' ' ,'p' ,
+'e' ,'r' ,'f' ,'o' ,'r' ,'m' ,' ' ,'i' ,'m' ,'p' ,'l' ,'e' ,
+'m' ,'e' ,'n' ,'t' ,'a' ,'t' ,'i' ,'o' ,'n' ,' ' ,'s' ,'e' ,
+'l' ,'f' ,'-' ,'t' ,'e' ,'s' ,'t' ,'s' ,' ' ,'a' ,'n' ,'d' ,
+' ' ,'d' ,'i' ,'s' ,'p' ,'l' ,'a' ,'y' ,' ' ,'p' ,'a' ,'s' ,
+'s' ,'/' ,'f' ,'a' ,'i' ,'l' ,' ' ,'r' ,'e' ,'s' ,'u' ,'l' ,
+'t' ,' ' ,'\n',' ' ,' ' ,'t' ,'i' ,'m' ,'e' ,' ' ,' ' ,' ' ,
+' ' ,'p' ,'e' ,'r' ,'f' ,'o' ,'r' ,'m' ,' ' ,'i' ,'m' ,'p' ,
+'l' ,'e' ,'m' ,'e' ,'n' ,'t' ,'a' ,'t' ,'i' ,'o' ,'n' ,' ' ,
+'b' ,'e' ,'n' ,'c' ,'h' ,'m' ,'a' ,'r' ,'k' ,' ' ,'a' ,'n' ,
+'d' ,' ' ,'d' ,'i' ,'s' ,'p' ,'l' ,'a' ,'y' ,' ' ,'e' ,'x' ,
+'e' ,'c' ,'u' ,'t' ,'i' ,'o' ,'n' ,' ' ,'t' ,'i' ,'m' ,'e' ,
+'s' ,' ' ,'\n','\n','D' ,'E' ,'S' ,'C' ,'R' ,'I' ,'P' ,'T' ,
+'I' ,'O' ,'N' ,'\n','F' ,'i' ,'r' ,'s' ,'t' ,' ' ,'c' ,'a' ,
+'l' ,'c' ,'u' ,'l' ,'a' ,'t' ,'e' ,'s' ,' ' ,'t' ,'h' ,'e' ,
+' ' ,'h' ,'i' ,'s' ,'t' ,'o' ,'g' ,'r' ,'a' ,'m' ,' ' ,'o' ,
+'f' ,' ' ,'<' ,'i' ,'n' ,'p' ,'u' ,'t' ,'>' ,'.' ,'\n','T' ,
+'h' ,'e' ,'n' ,' ' ,'u' ,'s' ,'e' ,'s' ,' ' ,'t' ,'h' ,'e' ,
+' ' ,'d' ,'t' ,'_' ,'s' ,'e' ,'z' ,'9' ,'0' ,' ' ,'a' ,'l' ,
+'g' ,'o' ,'r' ,'i' ,'t' ,'h' ,'m' ,' ' ,'t' ,'o' ,' ' ,'c' ,
+'o' ,'m' ,'p' ,'u' ,'t' ,'e' ,' ' ,'t' ,'h' ,'e' ,' ' ,'h' ,
+'i' ,'s' ,'t' ,'o' ,'g' ,'r' ,'a' ,'m' ,' ' ,'p' ,'e' ,'a' ,
+'k' ,'s' ,'.' ,'\n','T' ,'h' ,'e' ,' ' ,'N' ,' ' ,'p' ,'e' ,
+'a' ,'k' ,' ' ,'s' ,'t' ,'a' ,'r' ,'t' ,' ' ,'p' ,'o' ,'s' ,
+'i' ,'t' ,'i' ,'o' ,'n' ,'s' ,' ' ,'a' ,'r' ,'e' ,' ' ,'u' ,
+'s' ,'e' ,'d' ,' ' ,'t' ,'o' ,' ' ,'m' ,'a' ,'k' ,'e' ,' ' ,
+'N' ,'+' ,'1' ,' ' ,'b' ,'i' ,'n' ,'s' ,'.' ,'\n','N' ,'+' ,
+'1' ,' ' ,'g' ,'r' ,'a' ,'y' ,' ' ,'l' ,'e' ,'v' ,'e' ,'l' ,
+'s' ,' ' ,'f' ,'o' ,'r' ,' ' ,'t' ,'h' ,'e' ,' ' ,'b' ,'i' ,
+'n' ,'s' ,' ' ,'a' ,'r' ,'e' ,' ' ,'c' ,'h' ,'o' ,'s' ,'e' ,
+'n' ,' ' ,'e' ,'v' ,'e' ,'n' ,'l' ,'y' ,' ' ,'o' ,'v' ,'e' ,
+'r' ,' ' ,'t' ,'h' ,'e' ,'\n','g' ,'r' ,'a' ,'y' ,' ' ,'l' ,
+'e' ,'v' ,'e' ,'l' ,' ' ,'r' ,'a' ,'n' ,'g' ,'e' ,' ' ,'<' ,
+'b' ,'a' ,'c' ,'k' ,'g' ,'r' ,'o' ,'u' ,'n' ,'d' ,'>' ,' ' ,
+'t' ,'o' ,' ' ,'<' ,'f' ,'o' ,'r' ,'e' ,'g' ,'r' ,'o' ,'u' ,
+'n' ,'d' ,'>' ,'.' ,'\n','P' ,'i' ,'x' ,'e' ,'l' ,' ' ,'g' ,
+'r' ,'a' ,'y' ,' ' ,'l' ,'e' ,'v' ,'e' ,'l' ,'s' ,' ' ,'i' ,
+'n' ,' ' ,'<' ,'o' ,'u' ,'t' ,'p' ,'u' ,'t' ,'>' ,' ' ,'a' ,
+'r' ,'e' ,' ' ,'a' ,'s' ,'s' ,'i' ,'g' ,'n' ,'e' ,'d' ,' ' ,
+'t' ,'h' ,'e' ,' ' ,'g' ,'r' ,'a' ,'y' ,' ' ,'l' ,'e' ,'v' ,
+'e' ,'l' ,' ' ,'o' ,'f' ,' ' ,'t' ,'h' ,'e' ,' ' ,'b' ,'i' ,
+'n' ,'\n','c' ,'o' ,'r' ,'r' ,'e' ,'s' ,'p' ,'o' ,'n' ,'d' ,
+'i' ,'n' ,'g' ,' ' ,'t' ,'o' ,' ' ,'t' ,'h' ,'e' ,' ' ,'p' ,
+'i' ,'x' ,'e' ,'l' ,' ' ,'a' ,'t' ,' ' ,'t' ,'h' ,'e' ,' ' ,
+'s' ,'a' ,'m' ,'e' ,' ' ,'p' ,'o' ,'s' ,'i' ,'t' ,'i' ,'o' ,
+'n' ,' ' ,'i' ,'n' ,' ' ,'<' ,'i' ,'n' ,'p' ,'u' ,'t' ,'>' ,
+'.' ,'\n','\n','I' ,'f' ,' ' ,'a' ,'n' ,' ' ,'<' ,'o' ,'u' ,
+'t' ,'p' ,'u' ,'t' ,'>' ,' ' ,'i' ,'m' ,'a' ,'g' ,'e' ,' ' ,
+'i' ,'s' ,' ' ,'p' ,'r' ,'o' ,'d' ,'u' ,'c' ,'e' ,'d' ,',' ,
+'\n','i' ,'t' ,' ' ,'w' ,'i' ,'l' ,'l' ,' ' ,'h' ,'a' ,'v' ,
+'e' ,' ' ,'t' ,'h' ,'e' ,' ' ,'s' ,'a' ,'m' ,'e' ,' ' ,'d' ,
+'i' ,'m' ,'e' ,'n' ,'s' ,'i' ,'o' ,'n' ,'s' ,' ' ,'a' ,'s' ,
+' ' ,'t' ,'h' ,'e' ,' ' ,'i' ,'n' ,'p' ,'u' ,'t' ,' ' ,'i' ,
+'m' ,'a' ,'g' ,'e' ,' ' ,'a' ,'n' ,'d' ,' ' ,'b' ,'e' ,' ' ,
+'8' ,' ' ,'b' ,'i' ,'t' ,'s' ,' ' ,'d' ,'e' ,'e' ,'p' ,'.' ,
+'\n','T' ,'h' ,'e' ,' ' ,'m' ,'a' ,'x' ,'i' ,'m' ,'u' ,'m' ,
+' ' ,'v' ,'a' ,'l' ,'u' ,'e' ,' ' ,'o' ,'f' ,' ' ,'i' ,'t' ,
+'s' ,' ' ,'p' ,'i' ,'x' ,'e' ,'l' ,'s' ,' ' ,'w' ,'i' ,'l' ,
+'l' ,' ' ,'b' ,'e' ,' ' ,'<' ,'f' ,'o' ,'r' ,'e' ,'g' ,'r' ,
+'o' ,'u' ,'n' ,'d' ,'>' ,'.' ,'\n','T' ,'h' ,'e' ,' ' ,'m' ,
+'i' ,'n' ,'i' ,'m' ,'u' ,'m' ,' ' ,'w' ,'i' ,'l' ,'l' ,' ' ,
+'b' ,'e' ,' ' ,'<' ,'b' ,'a' ,'c' ,'k' ,'g' ,'r' ,'o' ,'u' ,
+'n' ,'d' ,'>' ,' ' ,'i' ,'f' ,' ' ,'m' ,'o' ,'r' ,'e' ,' ' ,
+'t' ,'h' ,'a' ,'n' ,' ' ,'o' ,'n' ,'e' ,' ' ,'p' ,'e' ,'a' ,
+'k' ,' ' ,'i' ,'s' ,' ' ,'f' ,'o' ,'u' ,'n' ,'d' ,'.' ,'\n',
+'\n','T' ,'h' ,'e' ,' ' ,'d' ,'e' ,'f' ,'a' ,'u' ,'l' ,'t' ,
+' ' ,'<' ,'b' ,'a' ,'c' ,'k' ,'g' ,'r' ,'o' ,'u' ,'n' ,'d' ,
+'>' ,' ' ,'i' ,'s' ,' ' ,'1' ,',' ,'\n','e' ,'n' ,'s' ,'u' ,
+'r' ,'i' ,'n' ,'g' ,' ' ,'n' ,'o' ,' ' ,'p' ,'i' ,'x' ,'e' ,
+'l' ,'s' ,' ' ,'i' ,'n' ,' ' ,'<' ,'o' ,'u' ,'t' ,'p' ,'u' ,
+'t' ,'>' ,' ' ,'g' ,'e' ,'t' ,' ' ,'t' ,'h' ,'e' ,' ' ,'v' ,
+'a' ,'l' ,'u' ,'e' ,' ' ,'0' ,'.' ,'\n','T' ,'h' ,'i' ,'s' ,
+' ' ,'a' ,'l' ,'l' ,'o' ,'w' ,'s' ,' ' ,'y' ,'o' ,'u' ,' ' ,
+'t' ,'o' ,' ' ,'u' ,'s' ,'e' ,' ' ,'t' ,'h' ,'e' ,' ' ,'m' ,
+'u' ,'l' ,'t' ,'i' ,'-' ,'t' ,'h' ,'r' ,'e' ,'s' ,'h' ,'o' ,
+'l' ,'d' ,'e' ,'d' ,' ' ,'i' ,'m' ,'a' ,'g' ,'e' ,' ' ,'a' ,
+'s' ,'\n','a' ,' ' ,'s' ,'e' ,'g' ,'m' ,'e' ,'n' ,'t' ,'a' ,
+'t' ,'i' ,'o' ,'n' ,' ' ,'i' ,'n' ,' ' ,'w' ,'h' ,'i' ,'c' ,
+'h' ,' ' ,'a' ,'l' ,'l' ,' ' ,'p' ,'i' ,'x' ,'e' ,'l' ,'s' ,
+' ' ,'b' ,'e' ,'l' ,'o' ,'n' ,'g' ,' ' ,'t' ,'o' ,' ' ,'o' ,
+'b' ,'j' ,'e' ,'c' ,'t' ,'s' ,'\n','a' ,'n' ,'d' ,' ' ,'n' ,
+'o' ,'n' ,'e' ,' ' ,'t' ,'o' ,' ' ,'b' ,'a' ,'c' ,'k' ,'g' ,
+'r' ,'o' ,'u' ,'n' ,'d' ,'.' ,'\n','\n','F' ,'o' ,'r' ,' ' ,
+'a' ,' ' ,'s' ,'t' ,'r' ,'i' ,'k' ,'i' ,'n' ,'g' ,' ' ,'p' ,
+'s' ,'e' ,'u' ,'d' ,'o' ,'-' ,'c' ,'o' ,'l' ,'o' ,'r' ,' ' ,
+'d' ,'i' ,'s' ,'p' ,'l' ,'a' ,'y' ,' ' ,'u' ,'s' ,'i' ,'n' ,
+'g' ,' ' ,'a' ,' ' ,'D' ,'t' ,'a' ,'c' ,'k' ,' ' ,'v' ,'i' ,
+'e' ,'w' ,'e' ,'r' ,',' ,'\n','c' ,'h' ,'o' ,'o' ,'s' ,'i' ,
+'n' ,'g' ,' ' ,'<' ,'b' ,'a' ,'c' ,'k' ,'g' ,'r' ,'o' ,'u' ,
+'n' ,'d' ,'>' ,' ' ,'1' ,' ' ,'a' ,'n' ,'d' ,' ' ,'<' ,'f' ,
+'o' ,'r' ,'e' ,'g' ,'r' ,'o' ,'u' ,'n' ,'d' ,'>' ,' ' ,'7' ,
+'.' ,'\n','T' ,'h' ,'e' ,'s' ,'e' ,' ' ,'v' ,'a' ,'l' ,'u' ,
+'e' ,'s' ,' ' ,'a' ,'r' ,'e' ,' ' ,'n' ,'o' ,'r' ,'m' ,'a' ,
+'l' ,'l' ,'y' ,' ' ,'a' ,'s' ,'s' ,'i' ,'g' ,'n' ,'e' ,'d' ,
+' ' ,'b' ,'r' ,'i' ,'g' ,'h' ,'t' ,' ' ,'c' ,'o' ,'l' ,'o' ,
+'r' ,'s' ,' ' ,'o' ,'n' ,' ' ,'t' ,'h' ,'e' ,' ' ,'d' ,'i' ,
+'s' ,'p' ,'l' ,'a' ,'y' ,'.' ,'\n','\n','I' ,'f' ,' ' ,'a' ,
+' ' ,'<' ,'p' ,'l' ,'o' ,'t' ,'>' ,' ' ,'i' ,'m' ,'a' ,'g' ,
+'e' ,' ' ,'i' ,'s' ,' ' ,'p' ,'r' ,'o' ,'d' ,'u' ,'c' ,'e' ,
+'d' ,',' ,'\n','i' ,'t' ,' ' ,'w' ,'i' ,'l' ,'l' ,' ' ,'h' ,
+'a' ,'v' ,'e' ,' ' ,'d' ,'i' ,'m' ,'e' ,'n' ,'s' ,'i' ,'o' ,
+'n' ,'s' ,' ' ,'2' ,'5' ,'6' ,' ' ,'b' ,'y' ,' ' ,'1' ,'2' ,
+'8' ,' ' ,'a' ,'n' ,'d' ,' ' ,'b' ,'e' ,' ' ,'8' ,' ' ,'b' ,
+'i' ,'t' ,'s' ,' ' ,'d' ,'e' ,'e' ,'p' ,'.' ,'\n','I' ,'t' ,
+' ' ,'w' ,'i' ,'l' ,'l' ,' ' ,'h' ,'a' ,'v' ,'e' ,' ' ,'g' ,
+'r' ,'a' ,'y' ,' ' ,'b' ,'a' ,'c' ,'k' ,'g' ,'r' ,'o' ,'u' ,
+'n' ,'d' ,' ' ,'w' ,'i' ,'t' ,'h' ,' ' ,'w' ,'h' ,'i' ,'t' ,
+'e' ,' ' ,'h' ,'i' ,'s' ,'t' ,'o' ,'g' ,'r' ,'a' ,'m' ,' ' ,
+'b' ,'a' ,'r' ,'s' ,'.' ,'\n','S' ,'u' ,'p' ,'e' ,'r' ,'i' ,
+'m' ,'p' ,'o' ,'s' ,'e' ,'d' ,' ' ,'o' ,'n' ,' ' ,'t' ,'h' ,
+'e' ,' ' ,'h' ,'i' ,'s' ,'t' ,'o' ,'g' ,'r' ,'a' ,'m' ,' ' ,
+'a' ,'r' ,'e' ,' ' ,'g' ,'r' ,'e' ,'e' ,'n' ,' ' ,'b' ,'o' ,
+'x' ,'e' ,'s' ,' ' ,'w' ,'i' ,'t' ,'h' ,' ' ,'r' ,'e' ,'d' ,
+' ' ,'b' ,'a' ,'r' ,'s' ,'\n','i' ,'n' ,'d' ,'i' ,'c' ,'a' ,
+'t' ,'i' ,'n' ,'g' ,' ' ,'t' ,'h' ,'e' ,' ' ,'p' ,'e' ,'a' ,
+'k' ,' ' ,'e' ,'x' ,'t' ,'e' ,'n' ,'t' ,'s' ,' ' ,'a' ,'n' ,
+'d' ,' ' ,'p' ,'e' ,'a' ,'k' ,' ' ,'m' ,'a' ,'x' ,'i' ,'m' ,
+'a' ,'.' ,'\n','A' ,' ' ,'b' ,'l' ,'u' ,'e' ,' ' ,'w' ,'a' ,
+'v' ,'e' ,'f' ,'o' ,'r' ,'m' ,' ' ,'i' ,'n' ,'d' ,'i' ,'c' ,
+'a' ,'t' ,'e' ,'s' ,' ' ,'t' ,'h' ,'e' ,' ' ,'P' ,'D' ,'S' ,
+'.' ,'\n','\n','T' ,'h' ,'e' ,' ' ,'n' ,'a' ,'m' ,'e' ,' ' ,
+'o' ,'f' ,' ' ,'a' ,'n' ,' ' ,'<' ,'o' ,'u' ,'t' ,'p' ,'u' ,
+'t' ,'>' ,' ' ,'i' ,'m' ,'a' ,'g' ,'e' ,' ' ,'i' ,'s' ,' ' ,
+'o' ,'p' ,'t' ,'i' ,'o' ,'n' ,'a' ,'l' ,'.' ,'\n','I' ,'f' ,
+' ' ,'<' ,'o' ,'u' ,'t' ,'p' ,'u' ,'t' ,'>' ,' ' ,'i' ,'s' ,
+' ' ,'n' ,'o' ,'t' ,' ' ,'g' ,'i' ,'v' ,'e' ,'n' ,',' ,' ' ,
+'o' ,'r' ,' ' ,'i' ,'s' ,' ' ,'a' ,' ' ,'s' ,'i' ,'n' ,'g' ,
+'l' ,'e' ,' ' ,'h' ,'y' ,'p' ,'h' ,'e' ,'n' ,' ' ,'(' ,'-' ,
+')' ,',' ,'\n','t' ,'h' ,'e' ,'n' ,' ' ,'n' ,'o' ,' ' ,'o' ,
+'u' ,'t' ,'p' ,'u' ,'t' ,' ' ,'i' ,'m' ,'a' ,'g' ,'e' ,' ' ,
+'i' ,'s' ,' ' ,'p' ,'r' ,'o' ,'d' ,'u' ,'c' ,'e' ,'d' ,'.' ,
+'\n','T' ,'h' ,'e' ,' ' ,'n' ,'a' ,'m' ,'e' ,' ' ,'o' ,'f' ,
+' ' ,'a' ,' ' ,'<' ,'p' ,'l' ,'o' ,'t' ,'>' ,' ' ,'i' ,'m' ,
+'a' ,'g' ,'e' ,' ' ,'i' ,'s' ,' ' ,'a' ,'l' ,'s' ,'o' ,' ' ,
+'o' ,'p' ,'t' ,'i' ,'o' ,'n' ,'a' ,'l' ,'.' ,'\n','I' ,'f' ,
+' ' ,'n' ,'o' ,'t' ,' ' ,'g' ,'i' ,'v' ,'e' ,'n' ,',' ,' ' ,
+'n' ,'o' ,' ' ,'p' ,'l' ,'o' ,'t' ,' ' ,'i' ,'s' ,' ' ,'p' ,
+'r' ,'o' ,'d' ,'u' ,'c' ,'e' ,'d' ,'.' ,'\n','I' ,'f' ,' ' ,
+'n' ,'e' ,'i' ,'t' ,'h' ,'e' ,'r' ,' ' ,'<' ,'o' ,'u' ,'t' ,
+'p' ,'u' ,'t' ,'>' ,' ' ,'n' ,'o' ,'r' ,' ' ,'<' ,'p' ,'l' ,
+'o' ,'t' ,'>' ,' ' ,'i' ,'s' ,' ' ,'p' ,'r' ,'o' ,'d' ,'u' ,
+'c' ,'e' ,'d' ,',' ,'\n','t' ,'h' ,'e' ,'n' ,' ' ,'t' ,'h' ,
+'e' ,' ' ,'p' ,'r' ,'o' ,'g' ,'r' ,'a' ,'m' ,' ' ,'o' ,'n' ,
+'l' ,'y' ,' ' ,'p' ,'r' ,'o' ,'d' ,'u' ,'c' ,'e' ,'d' ,' ' ,
+'a' ,' ' ,'p' ,'r' ,'i' ,'n' ,'t' ,'e' ,'d' ,' ' ,'s' ,'u' ,
+'m' ,'m' ,'a' ,'r' ,'y' ,' ' ,'o' ,'f' ,' ' ,'t' ,'h' ,'e' ,
+' ' ,'p' ,'e' ,'a' ,'k' ,'s' ,'.' ,'\n','\n','P' ,'A' ,'G' ,
+'I' ,'N' ,'G' ,'\n','T' ,'h' ,'e' ,' ' ,'t' ,'e' ,'s' ,'t' ,
+' ' ,'a' ,'n' ,'d' ,' ' ,'t' ,'i' ,'m' ,'e' ,' ' ,'o' ,'p' ,
+'e' ,'r' ,'a' ,'t' ,'i' ,'o' ,'n' ,'s' ,' ' ,'m' ,'a' ,'y' ,
+' ' ,'b' ,'e' ,' ' ,'e' ,'x' ,'e' ,'r' ,'c' ,'i' ,'s' ,'e' ,
+'d' ,' ' ,'u' ,'n' ,'d' ,'e' ,'r' ,' ' ,'v' ,'a' ,'r' ,'y' ,
+'i' ,'n' ,'g' ,' ' ,'p' ,'a' ,'g' ,'i' ,'n' ,'g' ,'\n','c' ,
+'o' ,'n' ,'f' ,'i' ,'g' ,'u' ,'r' ,'a' ,'t' ,'i' ,'o' ,'n' ,
+'s' ,'.' ,'\n','T' ,'h' ,'e' ,' ' ,'m' ,'i' ,'n' ,'i' ,'m' ,
+'u' ,'m' ,' ' ,'n' ,'o' ,'-' ,'d' ,'i' ,'a' ,'l' ,'o' ,'g' ,
+' ' ,'c' ,'o' ,'n' ,'f' ,'i' ,'g' ,'u' ,'r' ,'a' ,'t' ,'i' ,
+'o' ,'n' ,'s' ,' ' ,'a' ,'r' ,'e' ,':' ,'\n',' ' ,' ' ,'-' ,
+'o' ,'p' ,' ' ,'t' ,'e' ,'s' ,'t' ,' ' ,' ' ,'m' ,'a' ,'x' ,
+'a' ,'l' ,'l' ,'o' ,'c' ,' ' ,'1' ,'6' ,'3' ,'8' ,'4' ,',' ,
+' ' ,'p' ,'a' ,'g' ,'e' ,'s' ,'i' ,'z' ,'e' ,' ' ,'1' ,'2' ,
+'8' ,',' ,' ' ,'n' ,'p' ,'a' ,'g' ,'e' ,'s' ,' ' ,'1' ,' ' ,
+'\n',' ' ,' ' ,'-' ,'o' ,'p' ,' ' ,'t' ,'i' ,'m' ,'e' ,' ' ,
+' ' ,'m' ,'a' ,'x' ,'a' ,'l' ,'l' ,'o' ,'c' ,' ' ,'2' ,'6' ,
+'2' ,'1' ,'4' ,'4' ,',' ,' ' ,'p' ,'a' ,'g' ,'e' ,'s' ,'i' ,
+'z' ,'e' ,' ' ,'5' ,'1' ,'2' ,',' ,' ' ,'n' ,'p' ,'a' ,'g' ,
+'e' ,'s' ,' ' ,'1' ,' ' ,'\n','\n','D' ,'E' ,'B' ,'U' ,'G' ,
+'G' ,'I' ,'N' ,'G' ,' ' ,'P' ,'A' ,'R' ,'A' ,'M' ,'E' ,'T' ,
+'E' ,'R' ,'\n','T' ,'h' ,'e' ,' ' ,'-' ,'D' ,' ' ,'p' ,'a' ,
+'r' ,'a' ,'m' ,'e' ,'t' ,'e' ,'r' ,' ' ,'m' ,'a' ,'y' ,' ' ,
+'t' ,'a' ,'k' ,'e' ,' ' ,'a' ,'n' ,'y' ,' ' ,'o' ,'f' ,' ' ,
+'t' ,'h' ,'e' ,' ' ,'f' ,'o' ,'l' ,'l' ,'o' ,'w' ,'i' ,'n' ,
+'g' ,' ' ,'o' ,'p' ,'t' ,'i' ,'o' ,'n' ,'s' ,'\n','s' ,'e' ,
+'p' ,'a' ,'r' ,'a' ,'t' ,'e' ,'d' ,' ' ,'b' ,'y' ,' ' ,'p' ,
+'l' ,'u' ,'s' ,' ' ,'s' ,'i' ,'g' ,'n' ,'s' ,' ' ,'(' ,'+' ,
+')' ,',' ,' ' ,'f' ,'o' ,'r' ,' ' ,'e' ,'x' ,'a' ,'m' ,'p' ,
+'l' ,'e' ,' ' ,'-' ,'D' ,' ' ,'i' ,'m' ,'g' ,'+' ,'c' ,'o' ,
+'m' ,'p' ,'l' ,'e' ,'x' ,'.' ,'\n','A' ,'n' ,'y' ,' ' ,'o' ,
+'p' ,'t' ,'i' ,'o' ,'n' ,' ' ,'m' ,'a' ,'y' ,' ' ,'b' ,'e' ,
+' ' ,'a' ,'b' ,'b' ,'r' ,'e' ,'v' ,'i' ,'a' ,'t' ,'e' ,'d' ,
+' ' ,'t' ,'o' ,' ' ,'t' ,'h' ,'e' ,' ' ,'s' ,'h' ,'o' ,'r' ,
+'t' ,'e' ,'s' ,'t' ,' ' ,'f' ,'o' ,'r' ,'m' ,'\n','w' ,'h' ,
+'i' ,'c' ,'h' ,' ' ,'i' ,'s' ,' ' ,'n' ,'o' ,'t' ,' ' ,'a' ,
+'m' ,'b' ,'i' ,'g' ,'u' ,'o' ,'u' ,'s' ,' ' ,'w' ,'i' ,'t' ,
+'h' ,' ' ,'o' ,'t' ,'h' ,'e' ,'r' ,' ' ,'o' ,'p' ,'t' ,'i' ,
+'o' ,'n' ,'s' ,'.' ,'\n',' ' ,' ' ,'a' ,'n' ,'y' ,' ' ,' ' ,
+' ' ,' ' ,' ' ,' ' ,' ' ,'a' ,'l' ,'l' ,' ' ,'d' ,'e' ,'b' ,
+'u' ,'g' ,' ' ,'m' ,'a' ,'s' ,'k' ,'s' ,' ' ,'\n',' ' ,' ' ,
+'a' ,'l' ,'l' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,'a' ,'n' ,
+'y' ,' ' ,'d' ,'e' ,'b' ,'u' ,'g' ,' ' ,'m' ,'a' ,'s' ,'k' ,
+' ' ,'\n',' ' ,' ' ,'s' ,'t' ,'a' ,'t' ,'s' ,' ' ,' ' ,' ' ,
+' ' ,' ' ,'s' ,'t' ,'a' ,'t' ,'i' ,'s' ,'t' ,'i' ,'c' ,'s' ,
+' ' ,'\n',' ' ,' ' ,'i' ,'m' ,'g' ,' ' ,' ' ,' ' ,' ' ,' ' ,
+' ' ,' ' ,'i' ,'m' ,'a' ,'g' ,'e' ,' ' ,'o' ,'p' ,'e' ,'r' ,
+'a' ,'t' ,'i' ,'o' ,'n' ,'s' ,' ' ,'\n',' ' ,' ' ,'t' ,'i' ,
+'m' ,'e' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,'e' ,'x' ,'e' ,'c' ,
+'u' ,'t' ,'i' ,'o' ,'n' ,' ' ,'t' ,'i' ,'m' ,'e' ,'s' ,' ' ,
+'\n',' ' ,' ' ,'c' ,'o' ,'m' ,'p' ,'l' ,'e' ,'x' ,' ' ,' ' ,
+' ' ,'e' ,'x' ,'e' ,'c' ,'u' ,'t' ,'i' ,'o' ,'n' ,' ' ,'c' ,
+'o' ,'m' ,'p' ,'l' ,'e' ,'x' ,'i' ,'t' ,'y' ,' ' ,'i' ,'n' ,
+'d' ,'i' ,'c' ,'a' ,'t' ,'o' ,'r' ,'s' ,' ' ,'\n',' ' ,' ' ,
+'i' ,'p' ,'c' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,'i' ,'n' ,
+'t' ,'e' ,'r' ,'p' ,'r' ,'o' ,'c' ,'e' ,'s' ,'s' ,' ' ,'c' ,
+'o' ,'m' ,'m' ,'u' ,'n' ,'i' ,'c' ,'a' ,'t' ,'i' ,'o' ,'n' ,
+' ' ,'\n',' ' ,' ' ,'a' ,'r' ,'g' ,' ' ,' ' ,' ' ,' ' ,' ' ,
+' ' ,' ' ,'a' ,'r' ,'g' ,'u' ,'m' ,'e' ,'n' ,'t' ,'s' ,' ' ,
+'\n',' ' ,' ' ,'a' ,'s' ,'s' ,'e' ,'r' ,'t' ,' ' ,' ' ,' ' ,
+' ' ,'a' ,'s' ,'s' ,'e' ,'r' ,'t' ,'i' ,'o' ,'n' ,'s' ,' ' ,
+'\n',' ' ,' ' ,'m' ,'e' ,'m' ,'t' ,'r' ,'a' ,'c' ,'e' ,' ' ,
+' ' ,'a' ,'n' ,'y' ,' ' ,'m' ,'e' ,'m' ,'o' ,'r' ,'y' ,' ' ,
+'a' ,'l' ,'l' ,'o' ,'c' ,'a' ,'t' ,'i' ,'o' ,'n' ,'/' ,'f' ,
+'r' ,'e' ,'e' ,'i' ,'n' ,'g' ,' ' ,'\n',' ' ,' ' ,'a' ,'s' ,
+'y' ,'n' ,'c' ,' ' ,' ' ,' ' ,' ' ,' ' ,'a' ,'s' ,'y' ,'n' ,
+'c' ,'h' ,'r' ,'o' ,'n' ,'o' ,'u' ,'s' ,' ' ,'e' ,'v' ,'e' ,
+'n' ,'t' ,'s' ,' ' ,'\n',' ' ,' ' ,'b' ,'i' ,'g' ,'i' ,'o' ,
+' ' ,' ' ,' ' ,' ' ,' ' ,'b' ,'i' ,'g' ,' ' ,'b' ,'l' ,'o' ,
+'c' ,'k' ,'s' ,' ' ,'o' ,'f' ,' ' ,'I' ,'/' ,'O' ,' ' ,'o' ,
+'n' ,'l' ,'y' ,' ' ,'\n',' ' ,' ' ,'p' ,'a' ,'g' ,'e' ,' ' ,
+' ' ,' ' ,' ' ,' ' ,' ' ,'m' ,'e' ,'m' ,'o' ,'r' ,'y' ,' ' ,
+'p' ,'a' ,'g' ,'i' ,'n' ,'g' ,' ' ,'\n',' ' ,' ' ,'w' ,'i' ,
+'n' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,'w' ,'i' ,'n' ,'d' ,
+'o' ,'w' ,'i' ,'n' ,'g' ,' ' ,'o' ,'p' ,'e' ,'r' ,'a' ,'t' ,
+'i' ,'o' ,'n' ,'s' ,' ' ,'\n',' ' ,' ' ,'a' ,'l' ,'i' ,'m' ,
+'i' ,'t' ,'s' ,' ' ,' ' ,' ' ,'p' ,'r' ,'i' ,'n' ,'t' ,' ' ,
+'l' ,'i' ,'m' ,'i' ,'t' ,'s' ,' ' ,'\n',' ' ,' ' ,'o' ,'b' ,
+'j' ,'e' ,'c' ,'t' ,' ' ,' ' ,' ' ,' ' ,'o' ,'b' ,'j' ,'e' ,
+'c' ,'t' ,' ' ,'v' ,'a' ,'l' ,'u' ,'e' ,'s' ,' ' ,'\n',' ' ,
+' ' ,'i' ,'n' ,'t' ,'e' ,'r' ,'m' ,'d' ,' ' ,' ' ,' ' ,'i' ,
+'n' ,'t' ,'e' ,'r' ,'m' ,'e' ,'d' ,'i' ,'a' ,'t' ,'e' ,' ' ,
+'v' ,'a' ,'l' ,'u' ,'e' ,'s' ,' ' ,'\n',' ' ,' ' ,'p' ,'i' ,
+'x' ,'e' ,'l' ,' ' ,' ' ,' ' ,' ' ,' ' ,'p' ,'i' ,'x' ,'e' ,
+'l' ,' ' ,'v' ,'a' ,'l' ,'u' ,'e' ,'s' ,' ' ,'\n',' ' ,' ' ,
+'i' ,'o' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,'a' ,'l' ,
+'l' ,' ' ,'I' ,'/' ,'O' ,' ' ,'\n',' ' ,' ' ,'m' ,'e' ,'m' ,
+'s' ,'t' ,'a' ,'t' ,'s' ,' ' ,' ' ,'m' ,'e' ,'m' ,'o' ,'r' ,
+'y' ,' ' ,'s' ,'u' ,'m' ,'m' ,'a' ,'r' ,'y' ,' ' ,'\n',' ' ,
+' ' ,'a' ,'l' ,'t' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,'p' ,
+'r' ,'o' ,'g' ,'r' ,'a' ,'m' ,'-' ,'c' ,'h' ,'o' ,'s' ,'e' ,
+'n' ,' ' ,'a' ,'l' ,'t' ,'e' ,'r' ,'n' ,'a' ,'t' ,'i' ,'v' ,
+'e' ,' ' ,'\n',' ' ,' ' ,'t' ,'r' ,'a' ,'c' ,'e' ,' ' ,' ' ,
+' ' ,' ' ,' ' ,'e' ,'x' ,'e' ,'c' ,'u' ,'t' ,'i' ,'o' ,'n' ,
+' ' ,'t' ,'r' ,'a' ,'c' ,'e' ,' ' ,'\n',' ' ,' ' ,'u' ,'s' ,
+'r' ,'1' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,'u' ,'s' ,'e' ,'r' ,
+'\'','s' ,' ' ,'u' ,'s' ,'e' ,' ' ,'\n',' ' ,' ' ,'u' ,'s' ,
+'r' ,'2' ,' ' ,' ' ,' ' ,' ' ,' ' ,' ' ,'u' ,'s' ,'e' ,'r' ,
+'\'','s' ,' ' ,'u' ,'s' ,'e' ,' ' ,'\n',
+'\0'};

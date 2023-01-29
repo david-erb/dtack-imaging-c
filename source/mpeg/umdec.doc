@@ -1,0 +1,249 @@
+/*..........................................................................
+| TITLE umdec()
+|dxinclude(liblink1.dx)
+|
+|!SUMMARY
+| #PRELIMINARY# 19 December 1996
+|
+| The :umdec: Function Group defines an MPEG decoder.
+| The Function Group will interoperate to provide a smooth
+| stream of bytes from its caller to the decoding engine.
+| 
+| The details of the decoder operation are hidden by this API.
+| In particular, this API covers a number of different implementations.
+| The desired implementation is selected at run time by a string
+| argument to the initialization function.
+| The following implementations are foreseen at this time:
+|
+| ssg		the MPEG Software Simulation Group's library
+| videoplex	hardware from Optibase
+| brandx	hardware from vendor as yet unknown
+| 
+| Interaction with the decoder is limited to the following functions:
+| 
+| umdec_init()			create and initialize object
+| umdec_uninit()		release and destroy object
+| umdec_set_control()	set object's operation parameters
+| umdec_get_control()	get object's current operation parameters
+| umdec_get_status()	get object's current read-only status
+|
+| In addition, the caller of this Function Group must provide two
+| callback functions.  Here are the typedef names:
+| 
+| umdec_feed_callback_f()	called when the decoder wants more data
+| umdec_frame_callback_f()	called when the decoder has completed a frame
+|
+| This API purposely has no interprocess communication capability.
+| The caller must handle all IPC during the callback functions.
+| 
+| This API has no means of control multiprocessing.
+| An implementation may choose to do multiprocessing at its discretion.
+|
+|.ENVIRONMENT
+| All functions take an environment control structure called ~ctl~.
+| This structure allows a program to control how the functions it
+| calls interact with the run-time environment.
+| 
+| This structure contains such members as:
+| 
+| :ctl->err:		function to be called with error messages
+| :ctl->say:		function to be called with console messages
+| :ctl->dbg:		function to be called with debug messages
+| :ctl->dbg_mask:	mask defining what kinds of debug messages are wanted
+| :ctl->heap:		heap control and monitoring
+|
+|!Example umdec1.c - Decode one frame
+|:// Example Program umdec1                                                   
+|:// Illustrates decoding of one frame                                        
+|:// Command line requires two arguments:                                     
+|://   1. umdec spec                                                          
+|://   2. name of an mpeg file                                                
+|:// Most error checking left out for clarity.                                
+|:
+|:#include <dt.h>
+|:#include <umdec.h>
+|:                                      // ---------------------------------- 
+|:dt_rc_e
+|:DTCONFIG_API1
+|:myfeed(                               // example feed callback              
+|:  dt_ctl_t *ctl,                      // environment control                
+|:  umdec_t *umdec,                     // umdec object                       
+|:  void *arg,                          // caller's unchanged argument        
+|:  void *buffer,                       // buffer to put data in              
+|:  long want,                          // maximum number of bytes wanted     
+|:  long *got)                          // actual number of bytes returned    
+|:{
+|:  FILE *file = (FILE *)arg;           // address our arg                    
+|:
+|:  *got = fread(buffer,                // read data from file                
+|:    1, want, file);
+|:
+|:  return DT_RC_GOOD;
+|:}
+|:                                      // ---------------------------------- 
+|:dt_rc_e
+|:DTCONFIG_API1
+|:myframe(                              // example frame callback             
+|:  dt_ctl_t *ctl,                      // environment control                
+|:  umdec_t *umdec,                     // umdec object                       
+|:  void *arg,                          // caller's unchanged argument        
+|:  umdec_frametype_e frametype)        // tells what kind of frame it is     
+|:{
+|:  umdec_status_t status;
+|:
+|:  umdec_get_status(ctl, umdec,        // get current status
+|:    &status);
+|:
+|:  printf("umdec1: "					// print frame count
+|:    "frame %16.0f\n", status.frame);
+|:
+|:  return DT_RC_GOOD;
+|:}
+|:                                      // ---------------------------------- 
+|:void main(
+|:  int argc,
+|:  char *argv[])
+|:{
+|:  dt_ctl_t *ctl = NULL;
+|:  FILE *file;
+|:  umdec_t umdec;
+|:
+|:  file = fopen(argv[2],               // open input file                    
+|:    DTCONFIG_FOPEN_RBINARY);
+|:
+|:  umdec_init(ctl, &umdec,             // create umdec object
+|:    argv[1], 0);
+|:
+|:  if (argc > 3)
+|:    umdec_overlay_text(ctl, &umdec,	// set up text overlay
+|:      argv[3], 60, 400, 32, 		// text, position and height
+|:      0x00ffffff, 0x00010101);	// foreground and background
+|:
+|:  if (argc > 4)
+|:    umdec_overlay_image(ctl, &umdec,	// set up image overlay
+|:      argv[4], 60, 40);		// filename and position
+|:
+|:  umdec_go(ctl, &umdec,             	// start mpeg decoding                
+|:    myfeed, (void *)file,
+|:    myframe, NULL);
+|:
+|:  umdec_uninit(ctl, &umdec);          // release decoding resources         
+|:}
+|:
+| 
+| END
+ *..........................................................................*/
+
+/*..........................................................................
+| NAME
+| umdec_feed_callback_f() - called when decoder needs data
+|
+| SUMMARY
+| This is a typedef.
+| A pointer to such a function must the given to umdec_init().
+| The value of ~arg~ is passed unchanged from umdec_init().
+| The function must place up to ~want~ bytes in ~buffer~
+| and the actual number of bytes in ~*got~.
+| A value of ~*got~ of 0 will cause the decoder to discontinue.
+|
+| Here is an example which feeds the decoder from a file.
+| 
+|:dt_rc_e
+|:DTCONFIG_API1
+|:myfeed(								// example data callback
+|:  dt_ctl_t *ctl,						// environment control 				
+|:  void *arg,							// caller's unchanged argument 		
+|:  void *buffer,						// buffer to put data in 			
+|:  long want,							// maximum number of bytes wanted 	
+|:  long *got)							// actual number of bytes returned 	
+|:{
+|:  FILE *file = (FILE *)arg;			// address our arg
+|:
+|:  *got = fread(buffer, 				// read data from file
+|:    1, want, file);
+|:
+|:  return DT_RC_GOOD;
+|:}
+|
+| Here is another example which polls for commands on a hypothetical IPC
+| connection while reading a file:
+| 
+|:typedef struct {						// communication with caller
+|:  FILE *file;							// file opened for reading
+|:  dtipc_t *ipc;						// IPC read for connections
+|:  int paused;							// current pause or play state
+|:} myarg_t;
+|:
+|:dt_rc_e
+|:DTCONFIG_API1
+|:myfeed(								// example data callback
+|:  dt_ctl_t *ctl,						// environment control 				
+|:  void *arg,							// caller's unchanged argument 		
+|:  void *buffer,						// buffer to put data in 			
+|:  long want,							// maximum number of bytes wanted 	
+|:  long *got)							// actual number of bytes returned 	
+|:{
+|:  myarg_t *myarg = (myarg_t *)arg;	// address our arg
+|:  int isready;
+|:
+|:  do {
+|:    if (!myarg->paused)				// currently not paused (playing)
+|:      dtipc_poll(ctl, ipc,			// poll ipc for incoming request
+|:        DTIPC_POLL_ACCEPT, &isready);
+|:    if (isready || myarg->paused)		// request pending or we are paused?
+|:      handle_ipc_command(ctl, ipc);	// wait and handle request
+|:  } while (isready || myarg->paused);	// loop while still paused
+|:
+|:  *got = fread(buffer, 				// read data from file
+|:    1, want, file);
+|:
+|:  return DT_RC_GOOD;
+|:}
+| 
+| END
+ *..........................................................................*/
+
+dt_rc_e
+DTCONFIG_API1
+umdec_feed_callback_f(					/* feed data to decoder				*/
+  dt_ctl_t *ctl,						/* environment control 				*/
+  umdec_t *umdec,						/* umdec object 					*/
+  void *arg,							/* caller's unchanged argument 		*/
+  void *buffer,							/* buffer to put data in 			*/
+  long want,							/* maximum number of bytes wanted 	*/
+  long *got)							/* actual number of bytes returned 	*/
+{
+}
+
+/*..........................................................................
+| NAME
+| umdec_frame_callback_f() - called when decoder has a frame
+|
+| SUMMARY
+| This is a typedef.
+| A pointer to such a function must the given to umdec_init().
+| The value of ~arg~ is passed unchanged from umdec_init().
+| Expect ~frame_type~ to have one of the following values:
+| :UMDEC_FRAMETYPE_NONE:		no frame data is being given
+| :UMDEC_FRAMETYPE_YCBCR_420:	three buffers, Cb and Cr are subsampled
+| 								by 2 both horizontally and vertically
+| :UMDEC_FRAMETYPE_PSEUDO:		one buffer of 8-bit bytes
+| :UMDEC_FRAMETYPE_LUT:			buffer is array of RGB lut values,
+| 								xe gives start, ye gives count
+| The function must place a 0 in ~cont~ if the decoder is to discontinue.
+| 
+| END
+ *..........................................................................*/
+
+dt_rc_e
+DTCONFIG_API1
+umdec_frame_callback_f(					/* announce new frame				*/
+  dt_ctl_t *ctl,						/* environment control 				*/
+  umdec_t *umdec,						/* umdec object 					*/
+  void *arg,							/* caller's unchanged argument 		*/
+  umdec_frametype_e frametype,			/* type of frame being given 		*/
+  void **buffer,						/* buffers containing frame data	*/
+  int xe,								/* frame width 						*/
+  int ye)								/* frame height						*/
+{
+}

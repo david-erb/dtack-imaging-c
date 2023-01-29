@@ -1,0 +1,5 @@
+; to compile for win32:
+; rc f:\prj\dt\config\win32\tableau.rc
+
+
+the_ico     ICON   tableau1.ico

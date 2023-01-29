@@ -1,0 +1,4 @@
+; to compile for win32:
+; rc k:iqsign\config\win32\tabrobot.rc
+icon        ICON   tabrobot.ico
+dthws_icon  ICON   tabrobot.ico

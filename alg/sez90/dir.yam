@@ -1,0 +1,48 @@
+define(TOP, PRJ_ALG_TOP)
+define(DIR, alg/sez90)
+
+__proto(prj_alg_proto(sez90), sez90+cmd+test+time)
+
+__guide(sez90, sez90.c)
+__usage(sez90, cmd)
+dnl __help(prj_alg_help(sez90), sez90)
+
+pushdef(`CCSHARABLE', `CCSHARABLE_ON')
+
+pushdef(`CCOPTIMIZE', `CCOPTIMIZE_HIGH')
+pushdef(`CCDEBUGGER', `CCDEBUGGER_OFF')
+
+
+popdef(`CCDEBUGGER')
+popdef(`CCOPTIMIZE')
+
+__shlib(prj_alg_lib(sez90), sez90)
+__shlib(prj_alg_lib(sez90x), cmd+test+time)
+
+__shexe(prj_alg_exe(sez90), main, ,
+  prj_alg_lib(sez90x)+prj_alg_lib(sez90)+PRJ_APP1_LIBS,
+  PRJ_APP1_LOADS)
+
+__shexe(prj_alg_samp(sez90, a), samp_1a, ,
+  prj_alg_lib(sez90x)+prj_alg_lib(sez90)+PRJ_APP1_LIBS,
+  PRJ_APP1_LOADS)
+__shexe(prj_alg_samp(sez90, b), samp_1b, ,
+  prj_alg_lib(sez90x)+prj_alg_lib(sez90)+PRJ_APP1_LIBS,
+  PRJ_APP1_LOADS)
+__shexe(prj_alg_samp(sez90, c), samp_ma, ,
+  prj_alg_lib(sez90)+PRJ_APP2_LIBS,
+  PRJ_APP2_LOADS)
+__shexe(prj_alg_samp(sez90, d), samp_en, ,
+  prj_alg_lib(sez90)+PRJ_APP2_LIBS,
+  PRJ_APP2_LOADS)
+__shexe(prj_alg_samp(sez90, e), samp_pm, ,
+  prj_alg_lib(sez90)+PRJ_APP2_LIBS,
+  PRJ_APP2_LOADS)
+__shexe(prj_alg_samp(sez90, f), samp_pl, ,
+  prj_alg_lib(sez90)+PRJ_APP2_LIBS,
+  PRJ_APP2_LOADS)
+
+__finish
+
+
+

@@ -1,0 +1,99 @@
+Dtack Base Library Installation Instructions for Linux I86
+
+choose a home directory, such as "myhome", where the dtack subdirectory will live
+cd myhome
+mkdir dtack/config
+get lg1.set and bsd1.set from Dtack and save to direcotry dtack/config
+
+fetch the file dtack.base.01-22.tgz from Dtack's web site
+tar xzf dtack.base.01-22.tgz
+  this creates the directory tree ./dtack/base/01-22/...
+
+cd dtack/base/01-22
+sh/mkdirs.sh ../01-22.lg1
+  this will create a directory tree for object code and executables in
+    myhome/dtack/base/01-22.lg1/...
+
+sh/dtmake.sh lg1
+  this will compile the source and link the programs
+
+sh/dttest.sh ../01-22.lg1
+  this will run a bunch of test programs (takes a minutes or so)
+
+sh/dttiming.sh ../01-22.lg1
+  this will run a bunch of timing lib programs (takes a couple minutes)
+
+sh/dtcheck.sh ../01-22.lg1
+  this will check the test programs output, printing something like:
+    dtcheck.sh: scanning ../01-22.lg1/test.out ...................
+    dtcheck.sh: scanning ../01-22.lg1/timing.out .................
+    dtcheck.sh: scanning ../01-22.lg1/test.out ...................
+    dtcheck.sh: scanning ../01-22.lg1/timing.out .................
+  with no other messages
+
+---------------------------------------------------------------
+
+Dtack Image-DT Library Installation Instructions for Linux I86
+
+use the same "myhome" directory for Image-Dt as you did for the Base Library, 
+cd myhome
+
+fetch the file dtack.imagedt.01-53.tgz from Dtack's web site
+tar xzf dtack.imagedt.01-53.tgz
+  this creates the directory tree ./dtack/imagedt/01-53/...
+
+cd dtack/imagedt/01-53
+sh/mkdirs.sh ../01-53.lg1
+  this will create a directory tree for object code and executables in
+    myhome/dtack/imagedt/01-53.lg1/...
+
+export DT_BASE_SRC=myhome/dtack/base/01-22
+export DT_BASE_OUT=myhome/dtack/base/01-22.lg1
+or,
+export DT_BASE_SRC=$HOME/dtack/base/01-22
+export DT_BASE_OUT=$HOME/dtack/base/01-22.lg1
+  these two environment variables let the makefiles know which version
+  of the base library you want to compile and link with
+
+sh/dtmake.sh lg1
+  this will compile the source and link the programs
+
+export LD_LIBRARY_PATH=myhome/dtack/base/01-22.lg1/libso:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=myhome/dtack/imagedt/01-53.lg1/libso:$LD_LIBRARY_PATH
+or,
+export LD_LIBRARY_PATH=$HOME/dtack/base/01-22.lg1/libso:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$HOME/dtack/imagedt/01-53.lg1/libso:$LD_LIBRARY_PATH
+  these two environment variables let the system know which version
+  of the Base and Image-DT shared libraries you want to run with
+
+sh/idttest.sh ../01-53.lg1
+  this will run a bunch of test programs, printing something like:
+    idtbasic: starting
+    idtbasic_table: * 3.21=1.23
+    idtbasic_criteria: * a=1
+    idtbasic: finished, 2 assertion failures
+    idttest.sh: ERROR doing "../01-53.lg1/bin/idtbasic -D usr1"
+    idtvec1: starting
+    idtvec1: finished, 0 assertion failures
+    idtimg1: starting
+    idtimg1: finished, 0 assertion failures
+    idteng1: starting
+    idteng1: finished, 0 assertion failures
+    idtdisp1: starting
+  don't worry about the 2 assertion failures in this release
+
+---------------------------------------------------------------
+
+Dtack Image-DT Library Documentation Installation Instructions
+
+use the same "myhome" directory for the Image-Dt software installation
+cd myhome
+
+fetch the file dtack.imagedt.01-53.doc.tgz from Dtack's web site
+tar xzf dtack.imagedt.01-53.doc.tgz
+  this creates the directory tree ./dtack/imagedt/01-53.doc/...
+  
+
+surf to: file:/myhome/dtack/imagedt/01-53.doc/html/imagedt.htm
+
+

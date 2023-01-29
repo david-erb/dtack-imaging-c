@@ -1,0 +1,19 @@
+to add new memory type:
+source/low/prj_dat.c
+include/dtprj.h
+include/dtxmslb.h
+include/dttxms.h
+config/prj.yam
+config/dt0.yam also add DTT... to get mini-tests compiled
+bat/dtenv.bat
+source/low/dir.yam
+source/low/mem_conf.c
+source/low/memxmslb.c
+source/low/memtxms.c
+test/dir.yam
+test/dttxmslb.c
+test/dtttxms.c
+test/dttmem.c
+include/dir.yam
+include/dtmem.p
+include/dtmem.h

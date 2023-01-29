@@ -1,0 +1,10 @@
+# forward	milliseconds	send PLAY speed=0 then shovel bytes
+# fforward	milliseconds	send PLAY speed=2 then shovel bytes
+# sforward	milliseconds	send PLAY speed=-2 then shovel bytes
+# pause		milliseconds  	send PAUSE command then sleep
+# starve    milliseconds  	don't send any command, just sleep
+# stop		- 				stop and close fifos
+# exit		-  				tell server to exit
+
+forward: 	10000
+exit

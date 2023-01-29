@@ -1,0 +1,41 @@
+/*..........................................................................
+| TITLE tricks
+| Useful tricks
+| 
+|!Useful tricks
+| This section gives some useful tricks and hints when using tableau.
+| 
+|.Startup problems
+| If tableau fails to start and makes no log entries,
+| then its .arg file is messed up.
+| Switch back to the provided sample .arg file.
+| 
+|.Video problems
+| For Vfw framegrabbers,
+| enable the setup dialog by adding ",setsize+fmtdlg+srcdlg"
+| to the end of the -input keyword's value.
+|
+|.Check logs
+| Tableau writes all its error messages to its log file.
+| If tableau fails to work, always check the log file.
+| 
+|.Enable debug
+| To see more of what tableau is doing,
+| add a -D keyword.
+| The subfields following -D should be separated by '+' signs.
+| Some useful subfields and what they help diagnose are:
+| 
+| usr1		program startup and termination
+| usr2		frame sizes and timings
+| ipc		Internet problems
+| schedule	camera schedule problems
+| command	commands to rocket and ftp servers
+| reply		replies from rocket and ftp servers
+| bigio		file I/O problems
+| complex	jpeg information
+|
+| See the "Debug and error output" section for more details.
+| 
+| END
+ *..........................................................................*/
+

@@ -1,0 +1,8 @@
+verbose
+open dtack.com 18600
+bin
+cd /tmp
+cd /usr/table/root/tmp
+lcd /usr/erb/prj/dtdist
+put tab00-05.fg1.tar.gz
+bye

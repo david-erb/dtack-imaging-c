@@ -1,0 +1,55 @@
+define(TOP, UP2)
+define(DIR, app/textchat)
+
+__usage(textchat, textchat)
+
+__proto(textchat,
+  ask+
+  cmd+
+  converse+
+  dialog+
+  graphics+
+  gui+
+  ident+
+  init+
+  log+
+  request+
+  state+
+  update)
+
+pushdef(`CCSHARABLE', `CCSHARABLE_ON')
+
+__src(graphics, 
+  PRJ_INCLUDES+PRJ_NCI_INCLUDES, 
+  PRJ_DEFINES+PRJ_NCI_DEFINES)
+
+define(`__common', 
+  prj_lib(dtdg)+
+  PRJ_LIBS)
+
+__shlib(prj_lib(textchax),
+  ask+
+  cmd+
+  converse+
+  dialog+
+  graphics+
+  gui+
+  ident+
+  init+
+  log+
+  request+
+  state+
+  update)
+
+popdef(`CCSHARABLE')
+
+__shexe(prj_test_bin(textchat),   
+  textchat, ,
+  prj_lib(textchax)+
+  prj_lib(ustatex)+
+  PRJ_INTER_LIBS+
+  __common, 
+  PRJ_INTER_LOADS PRJ_NCI_LOADS PRJ_LOADS PRJ_QW4_LOAD)
+
+__finish
+

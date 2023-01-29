@@ -1,0 +1,51 @@
+Tableau Capture 02-03 Linux Install Instructions
+This file is dt/app/tableau/install.lg1.txt.
+
+1. mkdir /home/tableau
+
+2a. cd /home/tableau
+
+2b. get file bttv-0.4.3.tgz from
+      http://www.thp.uni-koeln.de/~rjkm/linux/bttv.html
+
+2c. tar xzf bttv-0.4.3.tgz
+
+2d. cd bttv
+    vi Makefile, change line 9: TUNER=4
+    vi bttv.c, delete line 3175: printk("bttv: testm:...
+    make bttv.o
+    su
+    export PATH=/sbin:$PATH
+    make ins
+    cp bttv.o
+ 
+2e. vi /etc/rc.d/rc.local, add line at end: 
+      /sbin/insmod -f /home/tableau/bttv/bttv.o
+
+---------------------------------------------------------------------------
+3a. cd /home/tableau
+
+3b. get file tabcgi14.tgz
+
+3c. tar xzf tabcgi14.tgz
+
+3d. cd tabcgi14/dtspush3
+    cc -o nph-dtspush3.cgi dtspush3.c
+
+3e. su
+    cp nph-dtspush3.cgi /home/httpd/cgi-bin
+    cd ..
+    mkdir /home/httpd/html/java
+    cp -R dtack /home/httpd/html/java
+    
+
+3f. cp dtspush3.html /home/httpd/html/test.html
+    vi /home/httpd/html/test.html, change two lines to read:
+      /cgi-bin/nph-dtspush3.cgi?camera=/video/cam0/cam0.%%08ld.rgb888.enc
+
+3g. mkdir /video
+    mkdir /video/cam0
+    chmod a+rwx /video/cam0
+
+
+

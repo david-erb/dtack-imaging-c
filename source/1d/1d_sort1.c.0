@@ -1,0 +1,83 @@
+/*..........................................................................
+| NAME
+| Introduction - intro
+| 
+| DESCRIPTION
+| As yet undocumented.
+| 
+| RETURN VALUES
+| Function return value will be DT1D_RC_GOOD on success.  
+| Any other return value indicates failure or noncompletion.
+| When DT1D_RC_GOOD is not returned, any other return values may not be valid.
+| 
+| ERRORS
+| As yet undocumented.
+| 
+| END
+ *..........................................................................*/
+
+#include <dtntype.h>
+#include <dt1d.h>
+
+
+/*..........................................................................
+ * Numerical Recipes in C page 247
+ * must not be called with n <= 1
+ *..........................................................................*/
+
+static
+void
+sort_double(
+  double *ra,
+  dt1d_i_t n)
+{
+  int l, j, ir, i;
+  double rra;
+  l = (n >> 1) + 1;
+  ir = n;
+  for (;;)
+  {
+	if (l > 1)							/* still in hiring phase		    */
+      rra = ra[--l];
+	else								/* in retirement and promotion	    */
+	{
+	  rra = ra[ir];						/* clear a space at end of array    */
+	  ra[ir] = ra[1];					/* retire top of heap into it	    */
+	  if (--ir == 1)					/* done with last promotion		    */
+	  {
+		ra[1] = rra;					/* the least competent worker	    */
+		return;
+	  }
+	}
+	i = l;								/* sift rra down to proper level	*/
+	j = l << 1;
+	while (j <= ir)
+	{
+	  if (j < ir && ra[j] < ra[j+1])	/* compare to better underling	    */
+        ++j;
+	  if (rra < ra[j])					/* demote rra					    */
+	  {
+		ra[i] = ra[j];
+		j += (i=j);
+	  }
+	  else
+	    j = ir + 1;						/* set j to terminate sift-down	    */
+	}
+	ra[i] = rra;						/* put rra into its slot		    */
+  }
+}
+
+/*..........................................................................
+ * double precision heap sort
+ *..........................................................................*/
+
+dt1d_rc_e
+DT1D_API
+dt1d_sort_double(
+  double *v,
+  dt1d_i_t nv)
+{
+  if (nv > 1)
+    sort_double(v-1, nv);
+  return DT1D_RC_GOOD;
+}

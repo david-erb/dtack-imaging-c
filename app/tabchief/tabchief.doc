@@ -1,0 +1,19 @@
+|.Configuration files
+| The following configuration files live in the directory c:\tableau\config:
+| 
+| tabstart.pid	current process id
+| 
+| tabchief.pid	current process id
+| tabchief.win	current main window id
+| tabchief.arg	command line arguments
+| tabchief.cmd	program startup line
+| 
+| tableau.pid	current process id
+| tableau.win	current main window id
+| tableau.arg	command line arguments
+| tableau.cmd	program startup line
+| 
+| cam.lst		list of camera names and descriptions
+| inside.sch	schedule for "inside" camera
+| ftp.cfg		ftp host name, port and login
+| 

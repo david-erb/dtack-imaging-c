@@ -1,0 +1,250 @@
+define(TOP, UP0)
+define(DIR, .)
+__prolog
+
+dnl __guide_collect(dt,
+dnl   source/low/dtruntime.dx+
+dnl   source/low/dtbpe.dx+
+dnl   source/low/dtmem.dx)
+
+__guide(prj_guide(readme), doc/readme.doc, PRJ_GEN_SERIES)
+
+__guide(prj_guide(revision), doc/revision.doc, PRJ_GEN_SERIES)
+
+dnl __guide(prj_gen_guide(future), future.doc, PRJ_GEN_SERIES)
+dnl __guide(prj_gen_guide(discl), discl.doc, PRJ_GEN_SERIES)
+dnl __guide(prj_gen_guide(home), home.doc, PRJ_GEN_SERIES)
+dnl __guide(prj_gen_guide(doc), doc.doc, PRJ_GEN_SERIES)
+dnl __guide(prj_gen_guide(site), site.doc, PRJ_GEN_SERIES)
+dnl __guide(prj_gen_guide(price), price.doc, PRJ_GEN_SERIES)
+dnl __guide(prj_gen_guide(links), links.doc, PRJ_GEN_SERIES)
+dnl __guide(prj_gen_guide(down), down.doc, PRJ_GEN_SERIES)
+dnl __guide(prj_gen_guide(doc), doc.doc, PRJ_GEN_SERIES)
+dnl __guide(prj_gen_guide(sales), sales.doc, PRJ_GEN_SERIES)
+dnl __guide(prj_gen_guide(corp), corp.doc, PRJ_GEN_SERIES)
+dnl __guide(prj_gen_guide(licens), licens.doc, PRJ_GEN_SERIES)
+dnl __guide(prj_gen_guide(legal), legal.doc, PRJ_GEN_SERIES)
+dnl __guide(prj_gen_guide(base), base.doc, PRJ_GEN_SERIES)
+
+__sub(dtutil)
+dnl __sub(fourth)
+__sub(include)
+__sub(source)
+__sub(server)
+__sub(test)
+__sub(tool)
+dnl __sub(app)
+dnl __sub(alg)
+
+__finish
+divert(0)`'dnl
+define(`T', bin/dtt$1)
+
+dtutil_sub:
+	cd dtutil; $(MAKE) -f $(SRC)/./dtutil/makefile SRC=$(SRC) OUT=$(OUT) $(MK_TARGET)
+
+ifdef(`TARGET_default', `
+
+# --------------------------------------------------------------------------
+figs:
+	-@mkdir $(DOC)/doc/html/dtdoc
+	cp $(SRC)/doctree1.xbm $(DOC)/doc/html/dtdoc
+
+# --------------------------------------------------------------------------
+
+tarall:
+	make makefiles
+	make sungnu.maks
+	make dt.taz
+tardvi:
+	make dvis
+	make dtdvi.taz
+tarimg:
+	make dtimg.taz
+zipall:
+	rm -f dt.list
+	make maks
+	make dt.zip
+
+# --------------------------------------------------------------------------
+
+dt.list: dir.yam
+	find . \( -name "*.[cihpx]" -o \
+                  -name "*.sh" -o \
+                  -name "*.dx" -o \
+                  -name "*.bat" -o \
+                  -name "*.cfg" -o \
+                  -name "*.awk" -o \
+                  -name "*.doc" -o \
+                  -name "*.use" -o \
+                  -name "*.fig" -o \
+                  -name "*.set" -o \
+                  -name "*.rtf" -o \
+                  -name "*.hh" -o \
+                  -name "*.hpj" -o \
+                  -name "*.hlp" -o \
+                  -name "*.exe" -o \
+                  -name "*.def" -o \
+                  -name "*.rc" -o \
+                  -name "*.ico" -o \
+                  -name "*.bmp" -o \
+                  -name "*.tim" -o \
+                  -name "*.yam" -o \
+                  -name "*.java" -o \
+                  -name "makefile" -o \
+                  -name "todo" -o \
+                  -name "todo.dat" -o \
+                  -name "log" -o \
+                  -name "log.dat" -o \
+                  -name "biblio" -o \
+                  -name "biblio.dat" -o \
+                  -name "doclist" -o \
+                  -name "doclist.dat" -o \
+                  -name "*.mak" \) \
+	  -print >dt.list
+dtsrc.list: dt.list
+	egrep -v "[./]mak" dt.list > $@
+dtmak.list: dt.list
+	egrep    "[./]mak" dt.list > $@
+dtdat.list: dir.yam
+	find data -type f -print >$@
+
+dtsrc.tar: dtsrc.list
+	tar cf dtsrc.tar -I dtsrc.list
+dtsrc.taz: dtsrc.tar
+	rm -f $@
+	gzip -9 -v -c dtsrc.tar >$@
+	rm dtsrc.tar
+	ls -l $@
+dtsrc.pax: dtsrc.list
+	cat dtsrc.list | pax -w >$@
+
+dtsrc.paz: dtsrc.list
+	rm -f $@
+	cat dtsrc.list | pax -w | gzip -9 -v -c >$@
+dtmak.paz: dtmak.list
+	rm -f $@
+	cat dtmak.list | pax -w | gzip -9 -v -c >$@
+dtdat.paz: dtdat.list
+	rm -f $@
+	cat dtdat.list | pax -w | gzip -9 -v -c >$@
+
+# --------------------------------------------------------------------------
+
+# --------------------------------------------------------------------------
+
+dtdvi.tar:
+	find . -name "*.dvi" -print >dtdvi.list
+	tar cf dtdvi.tar -I dtdvi.list
+dtdvi.taz: dtdvi.tar
+	rm -f $@
+	gzip -9 -v -c dtdvi.tar > $@
+	rm dtdvi.tar
+	ls -l $@
+
+# --------------------------------------------------------------------------
+
+dtimg.tar:
+	find doc/img -name "*.ps" -print >dtimg.list
+	tar cf dtimg.tar -I dtimg.list
+dtimg.taz: dtimg.tar
+	rm -f $@
+	gzip -9 -v -c dtimg.tar >$@
+	rm dtimg.tar
+	ls -l $@
+
+# --------------------------------------------------------------------------
+
+dt.zip: dt.list
+	rm -f dt.zip
+	zip -qr dt.zip - < dt.list
+	ls -l dt.zip
+dt.ziz: dt.list
+	rm -f dt2.zip
+	NOZIP=":";export NOZIP; zip -qrn dt2.zip - < dt.list
+	ls -l dt2.zip
+	rm -f dt2.zip.gz dt.ziz
+	gzip dt2.zip
+	mv dt2.zip.gz dt.ziz
+	ls -l dt.ziz
+
+# --------------------------------------------------------------------------
+uucp: 
+	make zipall
+	rm -f dt.ziz.pgp
+	pgp -c dt.ziz
+	uucp dt.ziz.pgp fullfeed!nci!/tmp/xxx
+
+# --------------------------------------------------------------------------
+ymodem: 
+	make zipall
+	myymodem dt.ziz
+# --------------------------------------------------------------------------
+kermit: 
+	make zipall
+	kermit
+# --------------------------------------------------------------------------
+ftp: 
+	make zipall
+	cp dt.ziz /usr/pcftp
+# --------------------------------------------------------------------------
+DTDISK = /usr/erb/prj/dtdisk
+disk: 
+	rm -f dt.list
+	make dtsrc.paz
+	make dtmak.paz
+	make dtdat.paz
+	rm -f $(DTDISK)/*~
+	cp dtsrc.paz $(DTDISK)/dtsrc.taz
+	cp dtmak.paz $(DTDISK)/dtmak.taz
+	cp dtdat.paz $(DTDISK)/dtdat.taz
+	ls -lt $(DTDISK)/
+dtgo:
+	rcp $(DTDISK)/*.sh $(DTDISK)/*.bat $(DTDISK)/dt.zip iack:/$(DTDISK)
+	touch dtgo
+	rcp dtgo iack:/tmp/dtgo
+	rm dtgo
+# --------------------------------------------------------------------------
+itemlist: price_html links_html down_html doc_html sales_html base_html
+
+DTWEB = /usr/erb/prj/dtdoc/doc/html
+DTWEB = /usr/dtack/root/web/docs
+
+price_html:
+	sh /usr/erb/prj/dt/sh/dtpage.sh price.htm > /usr/erb/prj/dtdoc/price.dx
+	makedoc /usr/erb/prj/dtdoc/doc/html/dtprice/all.htm
+	grep -v "</*t[ard]" /usr/erb/prj/dtdoc/doc/html/dtprice/all.htm > \
+          $(DTWEB)/dtprice/all.htm
+links_html:
+	sh /usr/erb/prj/dt/sh/dtpage.sh links.htm > /usr/erb/prj/dtdoc/links.dx
+	makedoc /usr/erb/prj/dtdoc/doc/html/dtlinks/all.htm
+	grep -v "</*t[ard]" /usr/erb/prj/dtdoc/doc/html/dtlinks/all.htm > \
+          $(DTWEB)/dtlinks/all.htm
+down_html:
+	sh /usr/erb/prj/dt/sh/dtdown.sh html > /usr/erb/prj/dtdoc/down.dx
+	makedoc /usr/erb/prj/dtdoc/doc/html/dtdown/all.htm
+	grep -v "</*t[ard]" /usr/erb/prj/dtdoc/doc/html/dtdown/all.htm > \
+          $(DTWEB)/dtdown/all.htm
+doc_html:
+	sh /usr/erb/prj/dt/sh/dtpage.sh doc.htm > /usr/erb/prj/dtdoc/doc.dx
+	makedoc /usr/erb/prj/dtdoc/doc/html/dtdoc/all.htm
+	grep -v "</*t[ard]" /usr/erb/prj/dtdoc/doc/html/dtdoc/all.htm > \
+          $(DTWEB)/dtdoc/all.htm
+sales_html:
+	sh /usr/erb/prj/dt/sh/dtpage.sh sales.htm > /usr/erb/prj/dtdoc/sales.dx
+	makedoc /usr/erb/prj/dtdoc/doc/html/dtsales/all.htm
+	grep -v "</*t[ard]" /usr/erb/prj/dtdoc/doc/html/dtsales/all.htm > \
+          $(DTWEB)/dtsales/all.htm
+base_html:
+	sh /usr/erb/prj/dt/sh/dtpage.sh doc.htm bases > /usr/erb/prj/dtdoc/base.dx
+	makedoc /usr/erb/prj/dtdoc/doc/html/dtbase/all.htm
+	grep -v "</*t[ard]" /usr/erb/prj/dtdoc/doc/html/dtbase/all.htm > \
+          $(DTWEB)/dtbase/all.htm
+')
+divert(-1)
+
+
+	
+
+
+

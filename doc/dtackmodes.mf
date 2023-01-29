@@ -1,0 +1,13 @@
+% to active this do:
+% cd /usr/local/lib/texmf/mf
+% inimf plain input modes-2.3 input cmbase input dtackmodes dump
+% mv ../ini/mf.base ../ini/mf.base.date
+% mv plain.base ../ini/mf.base
+
+mode_def dtljfive =                       % 600dpi HP LaserJet 5
+  mode_param (pixels_per_inch, 600);
+  mode_param (blacker, .75);
+  mode_param (fillin, 0);
+  mode_param (o_correction, 1);
+  mode_common_setup_;
+enddef;

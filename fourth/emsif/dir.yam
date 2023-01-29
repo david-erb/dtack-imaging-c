@@ -1,0 +1,20 @@
+define(TOP, UP2)
+define(DIR, fourth/emsif)
+__prolog
+
+
+pushdef(`CCSHARABLE', `CCSHARABLE_ON')
+
+ifdef(`PRJ_EMSIF_FAKE', `
+__src(emsif, PRJ_INCLUDES`'PRJ_EMSIF_INCLUDE)
+
+__shlib(prj_fourth_lib(emsif), emsif)
+')
+__finish
+
+
+
+
+
+
+

@@ -1,0 +1,24 @@
+define(TOP, UP2)
+define(DIR, fourth/fastg)
+__prolog
+
+
+pushdef(`CCSHARABLE', `CCSHARABLE_ON')
+
+ifdef(`PRJ_FASTGRAPH_FAKE', `
+
+__src(fastg,                             dnl fake fastgraph entry points
+  PRJ_INCLUDES`'PRJ_FASTGRAPH_INCLUDE, 
+  PRJ_DEFINES`'PRJ_FASTGRAPH_DEFINE)
+
+__shlib(prj_fourth_lib(fastg), fastg)
+')
+__finish
+
+
+
+
+
+
+
+

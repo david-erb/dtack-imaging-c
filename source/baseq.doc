@@ -1,0 +1,47 @@
+/*..........................................................................
+| TITLE dtbaseq
+| dtdoclist(filebase, title)
+|
+| The Dtack Imaging Software Base Library does basic image processing.
+| 
+| It is freely available, but please review the
+| \<a href="/dthome/dtlegal/"\>
+| \<img src="/dtgif/LEGAL.gif" alt="Legal"\>
+| \</a\>
+| requirements.
+| 
+| The library is organized into several Function Groups.
+| 
+| The links you see here take you to the quick reference documentation.
+| For a full treatment, please see
+| \<a href="/dthome/dtbase/"\>
+| dtdoclist(dtbase, title)
+| \</a\>
+| links page.
+|
+|.Image Functions
+|_link dtimageq/, dtdoclist(dtimageq, title)
+|		Program run-time environment control.
+|
+|.Non-Image Support Functions
+|_link dtbpeq/, dtdoclist(dtbpeq, title)
+|		Lossless compression.
+| 
+|_link dtenvq/, dtdoclist(dtenvq, title)
+|		Program run-time environment control.
+| 
+|_link dthistq/, dtdoclist(dthistq, title)
+|		Histogram manipulation.
+| 
+|_link dtmemq/, dtdoclist(dtmemq, title)
+|		Big memory blocks, potentially bigger than RAM.
+| 
+|_link dtparamq/, dtdoclist(dtparamq, title)
+|		Command line parameter parsing.
+| 
+|_link dtutilq/, dtdoclist(dtutilq, title)
+|		Everyday household functions.
+| 
+| END
+ *..........................................................................*/
+

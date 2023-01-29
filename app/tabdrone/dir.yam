@@ -1,0 +1,73 @@
+define(TOP, UP2)
+define(DIR, app/tabdrone)
+
+__usage(tabdrone, tabdrone)
+
+__proto(tabdrone,
+  clip+
+  live+
+  rev+
+  dir+
+  start+
+  limit+
+  done+
+  init+
+  server+
+  feedback+
+  compress+
+  pumpe+
+  output+
+  grab+
+  verify)
+
+pushdef(`CCSHARABLE', `CCSHARABLE_ON')
+
+__src(license, PRJ_INCLUDES+PRJ_FLEXLM_INCLUDE, PRJ_DEFINES+PRJ_FLEXLM_DEFINE)
+
+__shlib(prj_lib(tabdrox),
+  clip+
+  live+
+  rev+
+  dir+
+  license+
+  start+
+  limit+
+  done+
+  init+
+  server+
+  feedback+
+  compress+
+  output+
+  grab+
+  verify+
+  libmain, , ,
+  prj_lib(dthigh)+
+  PRJ_LIBS)
+
+popdef(`CCSHARABLE')
+
+__shexe(prj_test_bin(tabdrone),   
+  tabdrone+pumpe, ,
+  prj_lib(tabdrox)+
+  prj_lib(dtxchg)+
+  prj_lib(dtwinc)+
+  prj_lib(dthigh)+
+  prj_lib(dtcolor)+
+  prj_lib(dtdg)+
+  PRJ_LIBS,
+  PRJ_FLEXLM_LOAD PRJ_LOADS)
+
+__shexe(prj_test_bin(tabdrona),   
+  tabdrone+pumpa, ,
+  prj_lib(tabdrox)+
+  prj_lib(dtxchg)+
+  prj_lib(dtwinc)+
+  prj_lib(dthigh)+
+  prj_lib(dtcolor)+
+  prj_lib(dtdg)+
+  PRJ_LIBS,
+  PRJ_FLEXLM_LOAD PRJ_LOADS)
+
+__finish
+
+

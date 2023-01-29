@@ -1,0 +1,25 @@
+# this file does:
+# get images as they arrive according to -input pattern (use / not \)
+# accept connection from any client
+# wait forever for the client to connect
+# listen at fixed port 10000
+# some debug
+# serve 100 frames before stopping
+# die if client disconnects
+# hit a start url (-pre)
+# hit a done url (-output)
+#
+
+-input /tmp/webcam/cam0.%08ld.rgb888.enc
+-name rocket,0.0.0.0:0
+-connect rocket,0:10000
+-variant /usr/erb/prj/pertalk01/yahoo1.au
+-dt -1
+-D usr1+usr2+config+trace+object
+-max 0
+-pre rocket,192.9.200.6:80/pre?
+-output rocket,192.9.200.6:80/output?
+
+#-errto tmp.out
+#-dbgto tmp.out
+#-sayto tmp.out

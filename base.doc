@@ -1,0 +1,26 @@
+/*..........................................................................
+| TITLE dtbase
+| dtdoclist(filebase, title)
+dtinclude(prolog1.dx)
+dtinclude(legal1.dx)
+|
+|!dtdoclist(filebase, title)
+| If you're a C programmer, the Base Library is a fundamental toolset.
+|
+| The functions in the library concern themselves primarily with image processing.
+| Other functions provide operating system support,
+| platform independence,
+| and user interaction.
+|
+| The Base Library is licensed at #no cost#.
+|
+| The Base Library is organized into a number Function Groups.
+| From the list below,
+| you may browse documentation for all Function Groups.
+| You may also choose to download printer-ready versions of the documents.
+|
+dxinclude(base.dx) 
+| 
+| END
+ *..........................................................................*/
+

@@ -1,0 +1,31 @@
+echo doing /devel/bin/tcpip...
+if test $# -eq 1
+then
+        eth=$1
+else
+        eth="en2"
+fi
+echo "slay -f Socket" | su
+echo "slay -f inetd" | su
+echo "slay -f portmap" | su
+echo "slay -f nfsd" | su
+echo "slay -f mountd" | su
+echo "slay -f rpc.pcnfsd" | su
+
+sleep 10
+echo Socket -p 2 -t 24 localhost
+echo "Socket -p 2 -t 24 localhost >/dev/null 2>&1 &" | su
+sleep 2
+/etc/ifconfig $eth 199.201.115.1 up
+/etc/ifconfig $eth alias 192.9.200.1
+# /etc/ifconfig $eth 192.9.200.1
+sleep 2
+# /etc/portmap
+# /etc/nfsd 4
+# /etc/mountd -n
+# sleep 2
+echo /etc/inetd
+echo "/etc/inetd >/dev/null 2>&1 &" | su
+# /etc/rpc.pcnfsd
+
+/etc/route add default default_gateway

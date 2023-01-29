@@ -1,0 +1,413 @@
+builtin(`include', def.yam))		# fundamental macros
+builtin(`include', fourth.yam))
+
+define(`PRJ_SRCDIR', `$(SRC)')
+define(`PRJ_OUTDIR', `$(OUT)')
+define(`PRJ_DOCDIR', `$(DOC)')
+define(`PRJ_HTMLDIR', `html')
+
+define(`PRJ_DVIDIR', `dvi')
+define(`PRJ_DVLDIR', `dvl')
+define(`PRJ_LJ4DIR', `lj4')
+define(`PRJ_TEXTDIR', `text')
+define(`PRJ_AUTHOR', `David Erb')
+define(`PRJ_COMPANY', `Dtack, Inc.')
+
+define(prj_guide,    $1)
+define(prj_lib_guide,    $1)
+define(prj_lib_summary,  $1)
+
+define(`PRJ_INCLUDE', `')
+define(`PRJ_INCLUDES', `')
+define(`PRJ_SYS_INCLUDES', `')
+
+#---------------------------------------------------------------------------
+
+define(`PRJ_NCSA_DTM_DEFINE', `')
+define(`PRJ_NCSA_DTM_INCLUDE', `')
+define(`PRJ_NCSA_DTM_LIB', `')
+define(`PRJ_NCSA_DTM_LOAD', `')
+
+define(`PRJ_QNX4_IPC_DEFINE', `')
+define(`PRJ_DDE_IPC_DEFINE', `')
+
+define(`PRJ_EMSIF_DEFINE', `')
+define(`PRJ_EMSIF_INCLUDE', `')
+define(`PRJ_EMSIF_LIB', `')
+
+define(`PRJ_XMSIF_DEFINE', `')
+define(`PRJ_XMSIF_INCLUDE', `')
+define(`PRJ_XMSIF_LIB', `')
+
+define(`PRJ_XMSLB_DEFINE', `')
+define(`PRJ_XMSLB_INCLUDE', `')
+define(`PRJ_XMSLB_LIB', `')
+
+define(`PRJ_TXMS_DEFINE', `')
+define(`PRJ_TXMS_INCLUDE', `')
+define(`PRJ_TXMS_LIB', `')
+
+define(`PRJ_MEMCHECK_DEFINE', `')
+define(`PRJ_MEMCHECK_INCLUDE', `')
+define(`PRJ_MEMCHECK_LIB', `')
+
+define(`PRJ_FASTGRAPH_DEFINE', `')
+define(`PRJ_FASTGRAPH_INCLUDE', `')
+define(`PRJ_FASTGRAPH_LIB', `+prj_lib(dtfastgd)')
+
+define(`PRJ_ROGUE_DEFINE', `')
+define(`PRJ_ROGUE_INCLUDE', `')
+define(`PRJ_ROGUE_LOAD', `')
+
+define(`PRJ_SVGACC_DEFINE', `')
+define(`PRJ_SVGACC_INCLUDE', `')
+define(`PRJ_SVGACC_LIB', `+prj_lib(dtsvgacd)')
+
+define(`PRJ_X_DEFINE', `')
+define(`PRJ_X_INCLUDE', `')
+define(`PRJ_X_LIB', `')
+define(`PRJ_X_LOAD', `')
+
+define(`PRJ_FGW_DEFINE', `')
+define(`PRJ_FGW_INCLUDE', `.')
+define(`PRJ_FGW_LOAD', `')
+
+define(`PRJ_IJG_DEFINE', `')
+define(`PRJ_IJG_INCLUDE', `')
+define(`PRJ_IJG_LOAD', `')
+
+define(`PRJ_XV_DEFINE', `')
+define(`PRJ_XV_INCLUDE', `')
+define(`PRJ_XV_LOAD', `')
+
+define(`PRJ_ZLIB_DEFINE', `')
+define(`PRJ_ZLIB_INCLUDE', `')
+define(`PRJ_ZLIB_LOAD', `')
+
+define(`PRJ_QW4_DEFINE', `')
+define(`PRJ_QW4_INCLUDE', `')
+define(`PRJ_QW4_LIB', `')
+define(`PRJ_QW4_LOAD', `')
+
+define(`PRJ_GWS_DEFINE', `')
+define(`PRJ_GWS_INCLUDE', `')
+define(`PRJ_GWS_LIB', `')
+
+define(`PRJ_MPEG_SSG_DEFINE',   `')
+define(`PRJ_MPEG_SSG_INCLUDE',  `+PRJ_FOURTH_INCLUDE/mpegssg')
+define(`PRJ_MPEG_SSG_LOAD',     `')
+
+define(`PRJ_PTZ_PELA_DEFINE',   `')
+define(`PRJ_PTZ_PELA_INCLUDE',  `')
+define(`PRJ_PTZ_PELA_LOAD',     `')
+
+define(`PRJ_MPEG_VIDEOPLEX_DEFINE',   `')
+define(`PRJ_MPEG_VIDEOPLEX_INCLUDE',  `')
+define(`PRJ_MPEG_VIDEOPLEX_LOAD',     `')
+
+define(`PRJ_NCI_DEFINES',   `')
+define(`PRJ_NCI_INCLUDES',  `')
+define(`PRJ_NCI_LOADS',     `')
+
+define(`PRJ_TIFF_DEFINE', `')
+define(`PRJ_TIFF_INCLUDE', `+PRJ_FOURTH_INCLUDE/tiff3')
+define(`PRJ_TIFF_LOAD', `')
+
+define(`PRJ_CURSES_DEFINE', `')
+define(`PRJ_CURSES_INCLUDE', `')
+define(`PRJ_CURSES_LIB', `')
+define(`PRJ_CURSES_LOAD', `')
+
+define(`PRJ_SOCKET_DEFINE', `')
+define(`PRJ_SOCKET_INCLUDE', `')
+define(`PRJ_SOCKET_LIB', `')
+define(`PRJ_SOCKET_LOAD', `')
+
+define(`PRJ_QNXTERM_DEFINE', `')
+
+define(`PRJ_INT10_DEFINE', `')
+
+define(`PRJ_CORTEX_DEFINE', `')
+
+define(`PRJ_WINNOV_DEFINE', `')
+define(`PRJ_WINNOV_INCLUDE', `')
+define(`PRJ_WINNOV_LOAD', `')
+
+define(`PRJ_FLEXLM_LOAD', `')
+
+define(`PRJ_NOSCREEN_DEFINE',  `')    dnl these are the default states
+define(`PRJ_NOINTER_DEFINE',   `')
+define(`PRJ_NOWIN_DEFINE',     `')
+define(`PRJ_NODTVIEW_DEFINE',  `')
+define(`PRJ_DLLSERVER_DEFINE', `')
+define(`PRJ_UTILWIN_DEFINE',   `')
+
+define(`PRJ_LIBS', `')
+define(`PRJ_WIN_LIBS', `')
+define(`PRJ_INTER_LIBS', `')
+define(`PRJ_OTHER_LIBS', `')
+define(`PRJ_SCR_LIBS', `')
+
+define(`PRJ_LOADS', `')
+define(`PRJ_INTER_LOADS', `')
+define(`PRJ_KEYBD_LOADS', `')
+define(`PRJ_OTHER_LOADS', `')
+define(`PRJ_SCR_LOADS', `')
+
+define(`PRJ_KEYBD_LIB', `prj_lib(dtkeybd)')  dnl reset to empty before double use
+
+define(`UP0', `.')
+define(`UP1', `./..')
+define(`UP2', `./../..')
+define(`UP3', `./../../..')
+
+#---------------------------------------------------------------------------
+define(`PRJ_EMSIF', `
+  define(`PRJ_EMSIF_DEFINE',      `+DTPRJ_EMSIF=DT_1')
+  define(`PRJ_EMSIF_INCLUDE',     `+__env(DT_EMSIF)')	
+  define(`PRJ_EMSIF_LIB',         `+__env(DT_EMSIF)/emsifl')
+')
+define(`PRJ_EMSIF', `')
+
+define(`PRJ_XMSIF', `
+  define(`PRJ_XMSIF_DEFINE',      `+DTPRJ_XMSIF=DT_1')
+  define(`PRJ_XMSIF_INCLUDE',     `+__env(DT_XMSIF)')	
+  define(`PRJ_XMSIF_LIB',         `+__env(DT_XMSIF)/xmsifl')
+')
+
+define(`PRJ_XMSLB', `
+  define(`PRJ_XMSLB_DEFINE',      `+DTPRJ_XMSLB=DT_1')
+  define(`PRJ_XMSLB_INCLUDE',     `+__env(DT_XMSLB)')	
+  define(`PRJ_XMSLB_LIB',         `+__env(DT_XMSLB)/xmslib')
+')
+
+define(`PRJ_TXMS', `
+  define(`PRJ_TXMS_DEFINE',      `+DTPRJ_TXMS=DT_1')
+  define(`PRJ_TXMS_INCLUDE',     `+__env(DT_TXMS)/$1')	
+  define(`PRJ_TXMS_LIB',         `+__env(DT_TXMS)/$1/txms')
+')
+
+define(`PRJ_MEMCHECK', `
+  define(`PRJ_HEAPMON_NUMBER',   3)
+  define(`PRJ_MEMCHECK_DEFINE',  `+DTPRJ_STRATOS_MEMCHECK=4')
+  define(`PRJ_MEMCHECK_INCLUDE', `+__env(DT_MEMCHECK)/include')	
+  define(`PRJ_MEMCHECK_LIB',     `+__env(DT_MEMCHECK)/lib/$1
+                                  +__env(DT_MEMCHECK)/lib/mrocket')
+
+  define(`PRJ_DEFINES',          PRJ_DEFINES`'PRJ_MEMCHECK_DEFINE)
+  define(`PRJ_INCLUDES',         PRJ_INCLUDES`'PRJ_MEMCHECK_INCLUDE)
+')
+
+define(`PRJ_FASTGRAPH', `
+  define(`PRJ_FASTGRAPH_DEFINE',  `+DTPRJ_FASTGRAPH=DT_1')
+  define(`PRJ_FASTGRAPH_DIR',     `__env(DT_FASTGRAPH4)')
+  define(`PRJ_FASTGRAPH_INCLUDE', `+PRJ_FASTGRAPH_DIR/include')
+  define(`PRJ_FASTGRAPH_LIB',     `+prj_lib(dtfastg)+```PRJ_KEYBD_LIB'''+PRJ_FASTGRAPH_DIR/lib/fgl')
+')
+
+define(`PRJ_ROGUE', `
+  define(`PRJ_ROGUE_DEFINE',  `+DTPRJ_ROGUE=DT_1')
+  define(`PRJ_ROGUE_DIR',     `__env(DT_ROGUE)')
+  define(`PRJ_ROGUE_INCLUDE', `+PRJ_ROGUE_DIR')
+  define(`PRJ_ROGUE_LOAD',    `+PRJ_ROGUE_DIR/lib/$1.lib')
+')
+
+define(`PRJ_FASTGRAPH3', `
+  define(`PRJ_FASTGRAPH_DEFINE',  `+DTPRJ_FASTGRAPH=DT_1')
+  define(`PRJ_FASTGRAPH_INCLUDE', `+__env(DT_FASTGRAPH3)/include')	
+  define(`PRJ_FASTGRAPH_LIB',     `+prj_lib(dtfastg)+```PRJ_KEYBD_LIB'''+__env(DT_FASTGRAPH3)/lib/fgl')
+')
+
+define(`PRJ_FGW', `
+
+  define(`PRJ_FGW_DEFINE',         `DTPRJ_FGW=DT_'$(MK_FGW_DEFINE))
+  define(`PRJ_FGW_INCLUDE',        $(MK_FGW_INCLUDE))
+  define(`PRJ_FGW_LOAD',           $(MK_FGW_LOAD))
+
+')
+
+define(`PRJ_SVGACC', `
+  define(`PRJ_SVGACC_DEFINE',     `+DTPRJ_SVGACC=DT_1')
+  define(`PRJ_SVGACC_INCLUDE',    `+__env(DT_SVGACC)')	
+  define(`PRJ_SVGACC_LIB',        `+prj_lib(dtsvgac)+```PRJ_KEYBD_LIB'''+__env(DT_SVGACC)/svgacc')
+')
+
+define(`PRJ_GWS', `
+  define(`PRJ_GWS_DEFINE',        `+DTPRJ_GWS=DT_1')
+  define(`PRJ_GWS_INCLUDE',       `+PRJ_FOURTH_INCLUDE')	
+  define(`PRJ_GWS_LIB',           `+prj_fourth_lib(gws)')
+')
+
+define(`PRJ_MPEG_SSG', `
+  define(`PRJ_MPEG_SSG_DEFINE',   `DTPRJ_MPEG_SSG=DT_1')
+  define(`PRJ_MPEG_SSG_INCLUDE',  `+PRJ_FOURTH_INCLUDE/mpegssg')
+  define(`PRJ_MPEG_SSG_LOAD',     `')
+')
+
+define(`PRJ_VBMCI', `
+  define(`PRJ_VBMCI_DEFINE',      `+DTPRJ_VBMCI=DT_1')
+')
+
+define(`PRJ_VFW', `
+  define(`PRJ_VFW_DEFINE',        `+DTPRJ_VFW=DT_1')
+')
+
+define(`PRJ_WINNOV', `
+  define(`PRJ_WINNOV_DEFINE',     `DTPRJ_WINNOV=__env(DT_WINNOV_DEF)')
+  define(`PRJ_WINNOV_INCLUDE',    `__env(DT_WINNOV_DIR)/.')
+  define(`PRJ_WINNOV_LOAD',       `__env(DT_WINNOV_LIB)')
+')
+
+define(`PRJ_INT10', `
+  define(`PRJ_INT10_DEFINE',      `+DTPRJ_INT10=DT_1')
+')
+
+define(`PRJ_MSW_TRIM', `
+  define(`PRJ_NOINTER_DEFINE',    `+DTPRJ_NOINTER=DT_1')
+dnl  define(`PRJ_NODTVIEW_DEFINE',   `+DTPRJ_NODTVIEW=DT_1')
+')
+
+define(`PRJ_DLLSERVER', `
+  define(`PRJ_DLLSERVER_DEFINE',  `+DTPRJ_DLLSERVER=DT_1')
+')
+
+define(`PRJ_UTILWIN', `
+  define(`PRJ_UTILWIN_DEFINE',    `+DTPRJ_UTILWIN=DT_1')
+')
+
+define(`PRJ_MSW_STD', `
+  define(`PRJ_DDE_IPC_DEFINE',    `+DTPRJ_DDE_IPC=DT_1')
+  PRJ_MSW_TRIM
+')
+
+#---------------------------------------------------------------------------
+
+builtin(`include', target.yam)		# fundamental macros
+
+define(`PRJ_HEAPMON_NUMBER', 2)
+
+#---------------------------------------------------------------------------
+
+define(`prj_lib', 
+       `__libdir'slash`'$1) 	          # where base library is
+define(`prj_libs', 
+       `__list(`prj_lib', $@, +)')	  # list of base libraries
+define(prj_lib_prog, 
+       `__bindir'slash`'$1)	 	  # where lib programs are
+define(prj_lib_samp, 
+       `prj_lib_prog(dt$1`'$2)') 	  # where lib samples are
+
+define(prj_fourth_lib, 
+       `__libdir'slash`'$1) 	          # fourth-party libraries are
+define(prj_alg_proto, 
+       PRJ_SRCDIR/include`'slash`'dt$1)   # where algorithm protos are
+define(prj_server_proto, 
+       PRJ_SRCDIR/include/dtack`'slash`'$1)   # where server protos are
+define(prj_alg_lib, 
+       `__libdir'slash`'dt$1) 	          # where algorithm libraries are
+define(prj_alg_exe, 
+       `__bindir'slash`'dt$1) 	          # where alg executables are
+define(prj_alg_samp, 
+       `__bindir'slash`'dt$1`'$2) 	  # where alg samples are
+define(prj_alg_script, 
+       `__scriptdir'slash`'dt$1) 	  # where alg scripts go
+define(prj_test_bin, 
+       `__bindir'slash`'$1) 		  # where test executables are
+define(prj_tool_bin, 
+       `__bindir'slash`'$1) 		  # where tool executables are
+define(prj_server_bin, 
+       `__bindir'slash`'$1) 		  # where server executables are
+define(prj_app_bin, 
+       `__bindir'slash`'$1) 		  # where app executables are
+
+define(PRJ_ALG_TOP, UP2)
+
+#---------------------------------------------------------------------------
+
+define(`PRJ_INCLUDE',      +PRJ_SRCDIR/include)
+define(`PRJ_INCLUDES',     PRJ_SRCDIR/DIR`'PRJ_INCLUDE`'PRJ_INCLUDES)
+
+define(PRJ_FOURTH,         `PRJ_SRCDIR/fourth')
+define(PRJ_FOURTH_INCLUDE, `PRJ_SRCDIR/fourth')
+
+define(`CCEXCEPTION_ON', `')
+define(`CCEXCEPTION_OFF', `')
+define(`CCEXCEPTION_OFF', `CCEXCEPTION_OFF')
+
+define(`CCDEBUGGER', `CCDEBUGGER_ON')
+define(`LDDEBUGGER', `LDDEBUGGER_ON')
+ifdef(`CCDEBUGGER_TSR', ,
+  `define(`CCDEBUGGER_TSR',  CCDEBUGGER)')	      # debugging in TSR's
+
+#---------------------------------------------------------------------------
+# PRJ_SCR_LIBS is list of those needed for programs with "scr" calls
+define(`PRJ_SCR_LIBS', +prj_lib(dtscr)+prj_lib(dtcand)+prj_lib(dthws)+PRJ_SCR_LIBS)
+define(`PRJ_SCR_LIBS', PRJ_SCR_LIBS`'PRJ_FASTGRAPH_LIB)
+define(`PRJ_SCR_LIBS', PRJ_SCR_LIBS`'PRJ_SVGACC_LIB)
+define(`PRJ_SCR_LIBS', PRJ_SCR_LIBS`'PRJ_GWS_LIB)
+
+# PRJ_WIN_LIBS is for those needing to output to window servers
+define(`PRJ_WIN_LIBS', 
+PRJ_WIN_LIBS`'dnl
++prj_lib(dtwinc))
+
+# PRJ_SUPPORT_LIBS is list of third party support libraries
+define(`PRJ_SUPPORT_LIBS', 
+PRJ_EMSIF_LIB`'dnl
+PRJ_XMSIF_LIB`'dnl
+PRJ_XMSLB_LIB`'dnl
+PRJ_TXMS_LIB`'dnl
+PRJ_NCSA_DTM_LIB`'dnl
+PRJ_MEMCHECK_LIB)
+
+# PRJ_LIBS is list of those needed for all image programs
+define(`PRJ_LIBS', 
++prj_lib(dtbigmem)`'dnl
++prj_lib(dtlow)`'dnl
++prj_lib(dt1d))
+
+define(`PRJ_LIBSSO', `')
+
+# PRJ_INTER_LIBS is list of those needed for programs with dt_interact calls
+ifelse(len(PRJ_NOINTER_DEFINE), 0, `
+define(`PRJ_INTER_LIBS', 
+  +prj_lib(dtinter)`'dnl
+  +PRJ_KEYBD_LIB`'dnl
+  PRJ_INTER_LIBS`'dnl
+  PRJ_CURSES_LIB)
+')
+
+define(`PRJ_KEYBD_LOADS', PRJ_KEYBD_LOADS $(MK_TERMCAP_LOAD) $(MK_TERMIOS_LOAD))
+define(`PRJ_INTER_LOADS', PRJ_INTER_LOADS PRJ_CURSES_LOAD PRJ_KEYBD_LOADS)
+
+define(`PRJ_SCR_LOADS', PRJ_SCR_LOADS PRJ_X_LOAD)
+define(`PRJ_SCR_LOADS', PRJ_SCR_LOADS PRJ_QW4_LOAD)
+define(`PRJ_SCR_LOADS', PRJ_SCR_LOADS PRJ_FGW_LOAD)
+define(`PRJ_SCR_LOADS', PRJ_SCR_LOADS PRJ_KEYBD_LOADS)
+
+define(`PRJ_LOADS', 
+  PRJ_NCSA_DTM_LOAD dnl
+  PRJ_SOCKET_LOAD dnl
+  PRJ_IJG_LOAD dnl
+  PRJ_XV_LOAD dnl
+  PRJ_ZLIB_LOAD dnl
+  $(MK_FFTW_LOAD) dnl
+  $(MK_MCRYPT_LOAD) dnl
+  PRJ_TIFF_LOAD dnl
+  PRJ_LOADS)
+
+# for most apps with interactive
+define(`PRJ_APP1_LIBS', 
+  +prj_lib(dtxchg)
+  +prj_lib(dtcolor)
+  +prj_lib(dthigh)`'PRJ_WIN_LIBS`'PRJ_LIBS)
+define(`PRJ_APP1_LOADS', PRJ_LOADS PRJ_INTER_LOADS)
+
+# for most apps without interactive
+define(`PRJ_APP2_LIBS', 
+  +prj_lib(dtxchg)
+  +prj_lib(dtcolor)
+  +prj_lib(dthigh)`'PRJ_WIN_LIBS`'PRJ_LIBS)
+define(`PRJ_APP2_LOADS', PRJ_LOADS)
+
+#---------------------------------------------------------------------------

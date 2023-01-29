@@ -1,0 +1,9 @@
+-connect rocket,0:5799
+#-output ipc,rocket,208.200.249.107:5791
+-output ipc,rocket,192.9.200.19:5791
+
+-D usr1+command+reply+trace
+
+#-errto tabrobot.log
+#-dbgto tabrobot.log
+#-sayto tabrobot.log

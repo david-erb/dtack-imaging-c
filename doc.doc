@@ -1,0 +1,12 @@
+/*..........................................................................
+| TITLE dtdoc
+| Dtack Technical Documentation
+dtinclude(prolog1.dx)
+dtinclude(legal1.dx)
+| 
+|!Dtack Technical Documentation
+dxinclude(doc.dx)
+| 
+| END
+ *..........................................................................*/
+

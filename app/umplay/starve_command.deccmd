@@ -1,0 +1,39 @@
+
+nop: 		300
+starve:		4000
+delay:		100
+pause:		100
+delay:		100
+forward:	100
+delay:		100
+pause:		100
+forward:	100
+pause:		100
+delay:		2500
+
+forward: 	300
+starve:		4000
+delay:		100
+pause:		100
+delay:		100
+forward:	100
+delay:		100
+pause:		100
+forward:	100
+pause:		100
+delay:		2500
+
+forward: 	300
+starve:		4000
+delay:		100
+pause:		100
+delay:		100
+forward:	100
+delay:		100
+pause:		100
+forward:	100
+pause:		100
+delay:		2500
+
+
+exit

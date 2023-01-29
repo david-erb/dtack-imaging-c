@@ -1,0 +1,353 @@
+/*..........................................................................
+| TITLE dtlibix
+|dxinclude(liblink1.dx)
+|
+|!INTRODUCTION
+| The Dtack Imaging Software Base Library
+| is organized into Function Groups.
+| This document lists all Function Groups alphabetically and topically.
+| It also contains the master index for all Function Groups.
+|
+|!ALPHABETIC LISTING
+| @dtfdq/|dtdoclist(dtfdq, title)@		dtdoclist(dtfdq, title2)
+| @dtkeybdq/|dtdoclist(dtkeybdq, title)@	dtdoclist(dtkeybdq, title2)
+| @dtkeympq/|dtdoclist(dtkeympq, title)@	dtdoclist(dtkeympq, title2)
+| 
+| END
+ *..........................................................................*/
+__sub(1d)
+  1d+
+  1d_abs+
+  1d_arith+
+  1d2_db+
+  1d_noise+
+  1d_set+
+  1d_sum+
+  1d_sumsq+
+  1d_sumsd+
+  1d_sumss+
+  1d_cumf+
+  1d_cumr+
+  1d_logic+
+  1d_look+
+  1d_cmp+
+  1d_diff+
+  1d_range+
+  1d_ran+
+  1d_sort1+1d_sort2+1d_sort3+1d_sort4+1d_sort5+
+  1d_cast+
+  1d_conv+
+  1d_clip+
+  1d_vari+
+  1d_dat+
+  1d_ntype+
+  libmain, , 1d_dat+1d_ntype)
+
+__sub(low)
+__summary(prj_lib_summary(utilq),  util.doc+fd.c+list.c+str.c)
+__guide(prj_lib_guide(util),       util.doc+fd.c+list.c+str.c)
+
+__guide(prj_lib_guide(hist),
+  hist.doc+ 
+  hist.c)
+
+__guide(prj_lib_guide(env), 
+  env.doc+
+  err.c+
+  say.c+
+  dbg.c+
+  dbg2.c+
+  heapmon.c+
+  leave.c+
+  enter.c+
+  assert.c+
+  yield.c)
+
+__guide(prj_lib_guide(param), 
+  param.doc+
+
+  param.c)
+  assert+
+  cons+
+  cstack+
+  dbg+dbg2+
+  dsk_c+dsk+
+  err+err2+
+  enter+
+  fd+
+  heapmon+
+  heap`'PRJ_HEAPMON_NUMBER+
+  hist+hist_da+
+  ipc+ipcqnx4+ipcsock+ipcdde+
+  leave+
+  list+list_io+
+  lut8+lut8_mat+
+  msw+
+  os_mem+os_delay+os_futil+os_heap+os_heap2+os_time+os_env+
+  param+
+  phys+
+  pnm+
+  prj+
+  qnx4+
+  say+
+  str+
+  usage+
+  yield+
+  dbg_dat+            dnl initted consts not referenced by name outside shlib
+  conf_dat+           dnl initted consts referenced by name outside shlib
+  lut8_dat+
+  ntype+ntype_da+
+  prj_dat+
+  libmain, , 
+  cdecl+dbg_dat+conf_dat+lut8_dat+ntype_da+prj_dat+hist_da, 
+  prj_lib(dt1d))
+
+__sub(bigmem)
+__guide(prj_lib_guide(bpe), 
+  bpe.doc+
+  bpe.c+
+  bpewrite.c+
+  bperead.c+
+  bpecompr.c+
+  bpeexpan.c)
+
+__guide(prj_lib_guide(mem), 
+  mem.doc+
+  mem.c+
+  memconf.c+
+  memputp.c+
+  memgetp.c+
+  memio.c+
+  memcopy.c+
+  memcmp.c+
+  memset.c)
+
+__shlib(prj_lib(dtbigmem),
+  bpe+bpewrite+bperead+bpecompr+bpeexpan+bpepush+
+  font+
+  memsourc+
+  mem+memconf+memparse+
+  memcopy+memio+memcmp+memset+memclip+memputp+memgetp+
+  mem_std+mem_ram+mem_disk+
+  mem_ems+
+  memxmsif+memxmslb+memtxms+
+  stack+stack_io+
+  libmain, , , prj_lib(dtlow)+prj_lib(dt1d))
+
+
+__sub(keybd)
+__summary(prj_lib_summary(keybdq),
+  keybd.c, PRJ_LIB_SERIES_SHORT)
+
+__summary(prj_lib_summary(keympq),
+  keymap.c, PRJ_LIB_SERIES_SHORT)
+__shlib(prj_lib(dtkeybd),
+  keybd+keyunix+keyqnx+keydos+
+  keymap+keymapt+keymapc+keymapq+
+  trmios+
+  libmain, , , prj_lib(dtlow))
+
+ifelse(len(PRJ_NOINTER_DEFINE),  0, `__sub(inter)')
+
+__shlib(prj_lib(dtinter),
+  alpha+
+  dialog+diatext+diavba+
+  iact+
+  interact+interdia+interhlp+
+  note+
+  text+
+  textcur1+
+  texttcap+
+  textdos1+
+  textqnx1+
+  libmain, , , 
+  prj_lib(dtkeybd)+
+  prj_lib(dtbigmem)+
+  prj_lib(dtlow)+
+  prj_lib(dt1d))
+
+ifelse(len(PRJ_NOSCREEN_DEFINE), 0, `__sub(screen)')
+__shlib(prj_lib(dtscr),	
+  scr_main+scr_cur+scr_act+scr_dbg+
+  scrdum+
+  vga+
+  libmain, , , 
+
+__shlib(prj_lib(dtcan),	
+  scrcan+
+  canvas+
+  canpoll+
+  candum+
+  libmain, , , 
+
+__shlib(prj_lib(dtcand),
+  scrcand+
+  libmain, , , prj_lib(dtlow)+prj_lib(dt1d))
+
+__shlib(prj_lib(dtfastg),	
+  canfastg+
+  libmain, , , prj_lib(dtlow)+prj_lib(dt1d))
+__shlib(prj_lib(dtfastgd),	
+  canfastd+
+  libmain, , , prj_lib(dtlow)+prj_lib(dt1d))
+
+__shlib(prj_lib(dtsvgac),	
+  cansvgac+
+  libmain, , , prj_lib(dtlow)+prj_lib(dt1d))
+__shlib(prj_lib(dtsvgacd),	
+  cansvgad+
+  libmain, , , prj_lib(dtlow)+prj_lib(dt1d))
+
+__shlib(prj_lib(dthws),	
+  scrhws+
+  canhws+
+  hws+
+  hwsx+
+  hwsqw4+
+  hwsfgw+
+  libmain, , , 
+
+__shlib(prj_lib(dthwsd),
+  scrhwsd+
+  canhwsd+
+  libmain, , , 
+
+ifelse(len(PRJ_NOWIN_DEFINE),    0, `__sub(win)')
+__shlib(prj_lib(dtwinc),
+  winc+
+  winc_ipc+
+  winc_dsk+
+  libmain, , , prj_lib(dtlow)+prj_lib(dt1d))
+
+ifelse(len(PRJ_NOSCREEN_DEFINE), 0, `
+__shlib(prj_lib(dtwins),                    dnl IPC server support
+  svc+
+  svc_ipc+
+  svc_dsk+
+  wins_ipc+                                 dnl   encode/decode ipc args
+  wins_dsk+
+  wins+                                     dnl   common server meat
+  libmain, , , 
+  prj_lib(dtscr)+
+  prj_lib(dtlow)+
+  prj_lib(dt1d))
+')
+
+__sub(fb)
+__shlib(prj_lib(dtfb),
+  fb+
+  fbcortex+
+  fbdir+
+  fbvmc+
+  fbpsi+
+  libmain, , , 
+  prj_lib(dtlow)+
+  prj_lib(dt1d))
+
+__sub(color)
+__shlib(prj_lib(dtcolor),
+  convert+
+  org+
+  rgb+
+  rgb888+
+  r_g_b+
+  ycbycr+
+  y_cb_cr+
+  yuyv+
+  libmain, , , 
+  prj_lib(xv310a)+
+  prj_lib(dtlow)+
+  prj_lib(dt1d))
+
+__sub(high)
+
+__summary(prj_lib_summary(imageq),  
+  image.doc+
+  image1.doc+image.c+
+  pixel.c+
+  image2.doc+arith.c+logical.c+cumul.c+cast.c+cmp.c+diff.c+log.c+ 
+dnl +lookup.c+thresh.c+
+  adj.c+adj_run.c+scan.c+label1.c+blob.c+
+  check.c+dbg.c+err.c)
+
+__shlib(prj_lib(dthigh), 
+  adj+adj_run+
+  arith+
+  blob+
+  cast+
+  check+
+  cmp+
+  constant+
+  convolve+conv_b08+conv_d+conv_l+conv_s+
+  cooc+
+  cumul+
+  dbg+
+  diff+
+  err+
+  gen1+gen2+gen3+gen_kern+gen_dat+
+  hist1+
+  hist2+
+  image+
+  joint+
+  label1+label2+
+  lookup+
+  logical+
+  log+
+  median+
+  morph+
+  mean+
+  noise+
+  pixel+
+  plot1+plot2+plot_txt+
+  range+
+  resample+
+  run+
+  run_dat+
+  run_len+
+  runf+
+  scan+
+  stats+
+  sum+sum_rows+sum_cols+sumsq+sumsqd+sumsqs+
+  thresh+
+  libmain, , gen_dat+run_dat, 
+  prj_lib(dtbigmem)+
+  prj_lib(dtlow)+
+  prj_lib(dt1d))
+
+__sub(xchg)
+__shlib(prj_lib(dtxchg), 
+  dib+
+  export+
+  import+
+  read+read_tif+readbpe+readrad+
+  bmp+
+  lut8xchg+
+  rad+
+  wmf+
+  write+
+  writebpe+
+  writebmp+
+  writerad+
+  writewmf+
+  xchg_w+
+  xchg_dtm+
+  xchg_win+
+  xchg_wxx+
+  xchg_dat+
+  libmain, , xchg_dat, 
+  prj_lib(dtwinc)+
+  prj_lib(dthigh)+
+  prj_lib(dtbigmem)+
+  prj_lib(dtlow)+
+  prj_lib(dt1d))
+
+ifelse(len(PRJ_NOSCREEN_DEFINE), 0, `
+__shlib(prj_lib(dtxchgs), 
+  xchg_scr+
+  xchg_can+
+  libmain, , ,
+  prj_lib(dthigh)+
+  prj_lib(dtscr)+
+  prj_lib(dtcan)+
+  prj_lib(dtlow)+
+  prj_lib(dt1d))

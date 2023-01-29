@@ -1,0 +1,40 @@
+/*..........................................................................
+| TITLE dtlev85s()
+| dtdoclist(filebase, title)
+|_if =dxhyper= == 0
+| This document is titled ~dtdoclist(filebase, title)~.
+| It is part of the ~=dxseries=~ series.
+| Its Dtack Part Number is dtdoclist(filebase, partno).
+|
+| Other documents of interest:
+|_link dt, dtdoclist(dt, title)
+|		Top of documentation hierarchy.
+|_link dtalg, dtdoclist(dtalg, title)
+|		Overview of all algorithms.
+|
+| #LICENSE SUMMARY#
+| 
+|dtinclude(license1.dx)
+| 
+| #DISCLAIMER#
+| 
+|dtinclude(disclaim.dx)
+|_endif
+|_if =dxhyper= == 1
+| Please review our
+|_hyper License Summary
+| and our
+|_hyper Disclaimer
+| below.
+|
+|_link ../..,inline [Dtack Home Page]
+| |
+|_link =dxfilebase=,altpage
+| |
+|_link =dxfilebase=,ps3
+| |
+|_link =dxfilebase=,ps6
+|_endif
+| 
+| END
+ *..........................................................................*/

@@ -1,0 +1,20 @@
+define(TOP, UP2)
+define(DIR, fourth/xmsif)
+__prolog
+
+
+pushdef(`CCSHARABLE', `CCSHARABLE_ON')
+
+ifdef(`PRJ_XMSIF_FAKE', `
+__src(xmsif, PRJ_INCLUDES`'PRJ_XMSIF_INCLUDE)
+
+__shlib(prj_fourth_lib(xmsif), xmsif)
+')
+__finish
+
+
+
+
+
+
+

@@ -1,0 +1,16 @@
+
+documentation checklist:
+verbatim lines not leaking into next line
+step numbering sequences correct
+sentence capitalization correct
+voice word substitutions not present
+bibliographic abbreviations
+bibliographic complete references
+
+
+requirements:
+disk space
+time to compile
+memory to run
+memory to compile
+list of compilers

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+
+set -x
+make SRC=/usr/erb/prj/dt OUT=/usr/erb/prj/dtlg2 MK_TARGET=lg2 bsd1 $@

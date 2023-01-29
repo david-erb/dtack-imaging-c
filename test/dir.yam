@@ -1,0 +1,30 @@
+define(TOP, UP1)
+define(DIR, test)
+__prolog
+
+dnl __guide(prj_lib_guide(test), 
+dnl   testing.doc+
+dnl   screen/dttscr.c+
+dnl   win/dttwin.c+
+dnl   view/dttviewx.c)
+
+dnl __sub(xms)
+__sub(lib)
+__sub(1d)
+__sub(low)
+__sub(bigmem)
+
+ifelse(len(PRJ_NOINTER_DEFINE),  0, `__sub(inter)')
+
+ifelse(len(PRJ_NOSCREEN_DEFINE), 0, `__sub(screen)')
+
+ifelse(len(PRJ_NOWIN_DEFINE),    0, `__sub(win)')
+
+__sub(ftp)
+
+__sub(high)
+__sub(xchg)
+
+ifelse(len(PRJ_NODTVIEW_DEFINE),    0, `__sub(view)')
+
+__finish

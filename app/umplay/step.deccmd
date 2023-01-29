@@ -1,0 +1,40 @@
+
+nop:	 	300
+
+1forward:	300
+1forward:	300
+1forward:	300
+1forward:	300
+1forward:	300
+1forward:	300
+1forward:	300
+1forward:	300
+1forward:	300
+1forward:	300
+
+1forward:	300
+1forward:	300
+1forward:	300
+1forward:	300
+1forward:	300
+1forward:	300
+1forward:	300
+1forward:	300
+1forward:	300
+1forward:	300
+
+1forward:	300
+1forward:	300
+1forward:	300
+1forward:	300
+1forward:	300
+1forward:	300
+1forward:	300
+1forward:	300
+1forward:	300
+1forward:	300
+
+# pause so we can look at it
+pause:		10000
+
+exit

@@ -1,0 +1,61 @@
+
+| 
+
+| :-screen:
+| Where:
+| ~directory~
+| Each program has its own parameter file.
+| You may edit the file with the
+
+|.PROGRAM INTERACTION
+| How to run one without the other.
+| How to stop them.
+
+|.REMOTE CONTROL
+| You can control video capture from a remote location.
+| The remote location must be on the same Internet as the Video Caesar.
+| On any web browser such as Netscape or Internet Explorer,
+| simply enter a URL of the form:
+| 
+|:  http://123.456.789.123:5710/access_code
+| 
+| Substitute the IP address of Video Caesar for the number 123.456.789.123.
+| Substitute the Video Caesar's assigned port for the number 5710.
+| Finally, substitute your private access code.
+| 
+| From the remote control panel, you can do any of the following:
+| - change the access code
+| - set the weekly schedule of operations
+| - restart the capture software
+| - restart the computer
+| - monitor the activity log
+|
+|.LOCAL CONTROL
+| For local control, you must connect a VGA monitor to the Video Caesar.
+| Under local control, you can do any of the following:
+| - change the access code
+| - set the weekly schedule of operations
+| - restart the capture software
+| - restart the computer
+| - monitor the activity log
+| - change the destination to which video is sent
+| - change the image size
+| - change the image quality
+| - disable or enable remote control
+| 
+|.SECURITY
+| For absolute security, remote control must be disabled.
+| Remote control security is based simply on unpublished information.
+| The following pieces of information are required to exercise remote control:
+| - the IP address
+| - the port
+| - the access code
+| This type of security is very poor.
+| A determined hacker could easily determine all required pieces of information.
+| The only sure method of keeping out intruders is to disable remote control.
+| 
+|.INSTALLATION
+| 1.	Obtain the current distribution file from Tableau's web site.
+| 	Full instructions can be found at #http://www.tableau.com/download.html#.
+| 2.	Using Explorer, double-click on the file you downloaded.
+| 3.	Follow the on-screen instructions.

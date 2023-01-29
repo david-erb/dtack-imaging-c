@@ -1,0 +1,27 @@
+dt_interactive_interact
+  param, usage, start, arg, check, xrc
+  returns STOP if ctl->cons or ctl->dialog is NULL
+  displays WAITING status with dtcons_update
+  finds dialog field corresponding to start argument
+  calls dtcons_input
+  makes argc/argv from dialog and parses with dtparam_parse
+  checks arg locally and calls check function
+
+dt_interactive_after
+  param, usage, arg, check, xrc
+  just calls dt_interactive_interact with start = NULL
+
+dt_interactive_dialog
+  param, argc, argv, usage, arg, check
+  parses command line with dt_enter_param
+  calls check function
+  
+new rules:
+  ctl->feedbackonly means emit feedback and STOP as soon as input 
+    structure is built
+  ctl->feedbackwin means emit parse errors via feedback channel and STOP
+
+to do:
+  new protos for dt_enter_feedback
+  add ctl->feedbackonly
+  new DT_MAIN

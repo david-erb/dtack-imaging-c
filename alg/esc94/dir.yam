@@ -1,0 +1,29 @@
+define(TOP, PRJ_ALG_TOP)
+define(DIR, alg/esc94)
+__prolog
+
+__proto(prj_alg_proto(esc94), esc94+cmd+test+time)
+
+__guide(esc94, esc94)
+__help(prj_alg_help(esc94), cmd)
+
+pushdef(`CCSHARABLE', `CCSHARABLE_ON')
+
+pushdef(`CCOPTIMIZE', `CCOPTIMIZE_HIGH')
+pushdef(`CCDEBUGGER', `CCDEBUGGER_OFF')
+
+__src(esc94)
+
+popdef(`CCDEBUGGER')
+popdef(`CCOPTIMIZE')
+
+__shlib(prj_alg_lib(esc94), esc94+cmd+test+time)
+
+__shexe(prj_alg_exe(esc94), main, ,
+  prj_alg_lib(esc94)`'PRJ_APP1_LIBS,
+  PRJ_APP1_LOADS)
+
+__finish
+
+
+

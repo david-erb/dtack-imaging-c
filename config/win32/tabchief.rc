@@ -1,0 +1,5 @@
+; to compile for win32:
+; rc f:\prj\dt\config\win32\tabchief.rc
+
+
+the_ico     ICON   tabchief.ico

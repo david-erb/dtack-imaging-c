@@ -1,0 +1,63 @@
+define(TOP, UP2)
+define(DIR, app/tabchief)
+
+__usage(tabchief, tabchief)
+__proto(dsched,
+  dschedl)
+
+__proto(tabchief,
+  client+
+  copy+
+  dsched+
+  edit+
+  file+
+  index+
+  reply+
+  restart+
+  save+
+  status+
+  server+
+  split+
+  testcopy+
+  testqs)
+
+pushdef(`CCSHARABLE', `CCSHARABLE_ON')
+
+__shlib(prj_lib(dschedx),
+  dschedl+
+  libmain, dsch_da, dsch_da,
+  prj_lib(dtlow))
+
+__shlib(prj_lib(tabchiefx),
+  dsched+
+  client+
+  copy+
+  edit+
+  file+
+  index+
+  reply+
+  restart+
+  save+
+  status+
+  server+
+  split+
+  testcopy+
+  testqs+
+  libmain, , ,
+  prj_lib(dschedx)+
+  prj_lib(reverbx)+
+  prj_lib(dtlow))
+
+popdef(`CCSHARABLE')
+
+__shexe(prj_test_bin(tabchief),   
+  tabchief, ,
+  prj_lib(tabchiefx)+
+  prj_lib(dschedx)+
+  prj_lib(reverbx)+
+  prj_lib(dtlow)+
+  prj_lib(dt1d))
+
+__finish
+
+

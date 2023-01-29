@@ -1,0 +1,66 @@
+
+
+
+
+
+
+
+         for camera
+
+
+              Saturday    at until
+         ADD
+
+              continuously or every
+
+
+              single frame or lingering for
+
+
+              Sunday at 00:00 to 23:59.59 continuously
+         DEL
+         DEL  Tuesday at 00:00 to 23:59 every 1:00, single frame only
+
+         DEL  Wednesday at 09:00 to 17:00 every 00:00.10, lingering for 0.10
+
+         DEL  Saturday at 00:00 to 23:59 every 00:10, lingering for 0.10
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

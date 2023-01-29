@@ -1,0 +1,114 @@
+\begin{thebibliography}{10}
+
+\bibitem[bra95]{bra95}
+Brase and Brase.
+\newblock {\em Understandable Statistics}.
+\newblock D.C. Heath, 5 edition, 1995.
+
+\bibitem[che79]{che79}
+P.C. Chen and T.~Pavlidis.
+\newblock Segmentation by texture using a concurrence matrix and a
+  split-and-merge algorithm.
+\newblock {\em cgip}, 10:172--182, 1979.
+
+\bibitem[che80]{che80}
+P.C. Chen and T.~Pavlidis.
+\newblock Image segmentation as an estimation problem.
+\newblock {\em cgip}, 12:153--172, 1980.
+
+\bibitem[che91]{che91}
+S.-Y. Chen, W.-C. Lin, and C.-T. Chen.
+\newblock Split-and-merge image segmentation based on localized feature
+  analysis and statistical tests.
+\newblock {\em cvgip}, 53(5):456--475, 1991.
+
+\bibitem[dav77]{dav77}
+Davis and Rosenfeld.
+\newblock Curve segmentation by relaxation labeling.
+\newblock {\em t-c}, 26:1053--1057, 1977.
+
+\bibitem[dob94]{dob94}
+B.P. Dobrin, T.~Viero, and M.~Gabbouj.
+\newblock Fast watershed algorithms: Analysis and extension.
+\newblock {\em spie}, 2180(Nonlinear Image Processing V), 1994.
+
+\bibitem[fre87]{fre87}
+F.~Freidlander and F.~Meyer.
+\newblock A sequential algorithm for detecting watersheds in a gray level
+  image.
+\newblock {\em acta-ster}, 6(3):663--668, 1987.
+
+\bibitem[han80]{han80}
+A.R. Hanson, E.M. Riseman, and F.C. Glazer.
+\newblock Edge relaxation and boundary continuity.
+\newblock In R.~Haralick, editor, {\em Consistent Labeling Problems in Pattern
+  Recognition}. Plenum, 1980.
+
+\bibitem[har80]{har80}
+R.~Haralick.
+\newblock {\em Consistent Labeling Problems in Pattern Recognition}.
+\newblock Plenum, 1980.
+
+\bibitem[hor74]{hor74}
+S.L. Horowitz and T.~Pavlidis.
+\newblock Picture segmentation by a directed split and merge procedure.
+\newblock {\em proc-ijcpr}, (2):424--433, 1974.
+
+\bibitem[hor76]{hor76}
+S.L. Horowitz and T.~Pavlidis.
+\newblock Picture segmentation by a tree traversal algorithm.
+\newblock {\em j-acm}, 23:368--388, 1976.
+
+\bibitem[mey90]{mey90}
+F.~Meyer and S.~Beucher.
+\newblock Morphological segmentation.
+\newblock {\em jvcir}, 1:21--46, 1990.
+
+\bibitem[ogo11]{ogo11}
+L.~O'Gorman and A.C. Sanderson.
+\newblock The converging squares algorithm: An efficient method for locating
+  peaks in multidimensions.
+\newblock {\em t-pami}, 6:280--288, 1984.
+
+\bibitem[ohl78]{ohl78}
+R.~Ohlander, K.~Price, and D.R. Reddy.
+\newblock Picture segmentation using a recursive region splitting method.
+\newblock {\em cgip}, 8:313--333, 1978.
+
+\bibitem[pav77]{pav77}
+T.~Pavlidis.
+\newblock {\em Structure Pattern Recognition}.
+\newblock Springer, 1977.
+
+\bibitem[pav90]{pav90}
+T.~Pavlidis and Y.-T. Liow.
+\newblock Integrating region growing and edge detection.
+\newblock {\em t-pami}, 12:225--233, 1990.
+
+\bibitem[pav80]{pav80}
+Theo Pavlidis and Yuh-Tay Liow.
+\newblock Integrating region growing and edge detection.
+\newblock {\em t-pami}, 12(3):225--233, 1990.
+
+\bibitem[rus88]{rus88}
+Russ and Russ.
+\newblock Improved implementation of a convex segmentation algorithm.
+\newblock {\em acta-ster}, 7(1):33--40, 1988.
+
+\bibitem[sch77]{sch77}
+Schachter, Lev, Zucker, and Rosenfeld.
+\newblock An application of relaxation methods to edge reinforcement.
+\newblock {\em t-smc}, 7:813--816, 1977.
+
+\bibitem[sil88]{sil88}
+J.F. Silverman and D.B. Cooper.
+\newblock Bayesian clustering for unsupervised estimation of surface and
+  texture models.
+\newblock {\em t-pami}, 10:482--495, 1988.
+
+\bibitem[mor86]{mor86}
+Unknown.
+\newblock Morphological skeleton representation and coding of binary images.
+\newblock {\em t-assp}, 34(5), 1986.
+
+\end{thebibliography}

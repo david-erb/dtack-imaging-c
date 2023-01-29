@@ -1,0 +1,34 @@
+# tabgrab is a server that grabs frames and stuffs them into the same file
+
+# tabgrab arg file
+# possible args:
+# -connect  address to listen on (required)
+# -input    framegrabber spec (required)
+# -output   output filename, use shared memory if starts with '*' (required)
+# -omega    wait between grab in ms (default 500 ms)
+# -dt       command timeout in ms (default -1=no timeout)
+
+# to talk to tabgrab while it is running, telnet to its listen port
+# commands it understands:
+#   stop    stop and exit
+#   stats   return stats
+#   grab    grabs a new frame
+
+-connect rocket,0:5720
+
+# use +fmtdlg+srcdlg to set up the VfW driver
+#-input vfw,Winnov,320,240,setsize+fmtdlg+srcdlg
+
+-input vfw,Winnov,320,240,setsize+async+srcdlg+fmtdlg
+
+-output c:\tmp\tabgrab.tab
+
+-D usr1+async
+
+# pause between frames
+# if 0, tabgrab will grab continuously, consuming much CPU resource
+-omega 100
+
+#-errto ../logs/tabgrab.log
+#-dbgto ../logs/tabgrab.log
+#-sayto ../logs/tabgrab.log

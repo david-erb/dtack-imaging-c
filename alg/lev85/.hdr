@@ -1,0 +1,9 @@
+
+@string{prl = "Pattern Recognition Letters"}
+@string{pami = "IEEE Transactions on Pattern Analysis and Machine Intelligence"}
+@string{iu = "Image Understanding"}
+@string{t-smc = "IEEE Transactions on Systems, Man, and Cybernetics"}
+@string{ = "Computer Graphics and Image Processing"}
+@string{t-assp = "IEEE Transactions on Acoustics, Speech, and Signal Processing"}
+@string{t-sp = "IEEE Transactions on Signal Processing"}
+@string{gmip = "Graphical Models and Image Processing"}

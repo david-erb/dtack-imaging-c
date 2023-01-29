@@ -1,0 +1,60 @@
+\setlength{\unitlength}{0.00050000in}%
+%
+\begingroup\makeatletter\ifx\SetFigFont\undefined
+% extract first six characters in \fmtname
+\def\x#1#2#3#4#5#6#7\relax{\def\x{#1#2#3#4#5#6}}%
+\expandafter\x\fmtname xxxxxx\relax \def\y{splain}%
+\ifx\x\y   % LaTeX or SliTeX?
+\gdef\SetFigFont#1#2#3{%
+  \ifnum #1<17\tiny\else \ifnum #1<20\small\else
+  \ifnum #1<24\normalsize\else \ifnum #1<29\large\else
+  \ifnum #1<34\Large\else \ifnum #1<41\LARGE\else
+     \huge\fi\fi\fi\fi\fi\fi
+  \csname #3\endcsname}%
+\else
+\gdef\SetFigFont#1#2#3{\begingroup
+  \count@#1\relax \ifnum 25<\count@\count@25\fi
+  \def\x{\endgroup\@setsize\SetFigFont{#2pt}}%
+  \expandafter\x
+    \csname \romannumeral\the\count@ pt\expandafter\endcsname
+    \csname @\romannumeral\the\count@ pt\endcsname
+  \csname #3\endcsname}%
+\fi
+\fi\endgroup
+\begin{picture}(5499,4149)(889,-5398)
+\thicklines
+\put(1126,-4036){\framebox(450,225){}}
+\put(1051,-4036){\framebox(600,225){}}
+\put(1186,-3976){\makebox(0,0)[lb]{\smash{\SetFigFont{6}{7.2}{bf}DEL}}}
+\put(1126,-4411){\framebox(450,225){}}
+\put(1051,-4411){\framebox(600,225){}}
+\put(1186,-4351){\makebox(0,0)[lb]{\smash{\SetFigFont{6}{7.2}{bf}DEL}}}
+\put(1126,-4786){\framebox(450,225){}}
+\put(1051,-4786){\framebox(600,225){}}
+\put(1186,-4726){\makebox(0,0)[lb]{\smash{\SetFigFont{6}{7.2}{bf}DEL}}}
+\put(1126,-5161){\framebox(450,225){}}
+\put(1051,-5161){\framebox(600,225){}}
+\put(1186,-5101){\makebox(0,0)[lb]{\smash{\SetFigFont{6}{7.2}{bf}DEL}}}
+\put(1501,-3361){\framebox(150,150){}}
+\put(1546,-3316){\framebox(60,60){}}
+\put(1501,-2761){\framebox(150,150){}}
+\put(1546,-2716){\framebox(60,60){}}
+\put(1126,-2236){\framebox(450,225){}}
+\put(1051,-2236){\framebox(600,225){}}
+\put(1178,-2176){\makebox(0,0)[lb]{\smash{\SetFigFont{6}{7.2}{bf}ADD}}}
+\put(901,-5386){\framebox(5475,4125){}}
+\put(2101,-1636){\framebox(975,225){}}
+\put(2776,-2236){\framebox(675,225){}}
+\put(4051,-2236){\framebox(675,225){}}
+\put(3601,-2836){\framebox(825,225){}}
+\put(4051,-3436){\framebox(900,225){}}
+\put(1201,-1561){\makebox(0,0)[lb]{\smash{\SetFigFont{6}{7.2}{bf}for camera}}}
+\put(1801,-2161){\makebox(0,0)[lb]{\smash{\SetFigFont{6}{7.2}{bf}Saturday    at}}}
+\put(3601,-2161){\makebox(0,0)[lb]{\smash{\SetFigFont{6}{7.2}{bf}until}}}
+\put(1801,-2761){\makebox(0,0)[lb]{\smash{\SetFigFont{6}{7.2}{bf}continuously or every}}}
+\put(1801,-3361){\makebox(0,0)[lb]{\smash{\SetFigFont{6}{7.2}{bf}single frame or lingering for}}}
+\put(1801,-3961){\makebox(0,0)[lb]{\smash{\SetFigFont{6}{7.2}{bf}Sunday at 00:00 to 23:59.59 continuously}}}
+\put(1801,-4336){\makebox(0,0)[lb]{\smash{\SetFigFont{6}{7.2}{bf}Tuesday at 00:00 to 23:59 every 1:00, single frame only}}}
+\put(1801,-4711){\makebox(0,0)[lb]{\smash{\SetFigFont{6}{7.2}{bf}Wednesday at 09:00 to 17:00 every 00:00.10, lingering for 0.10}}}
+\put(1801,-5086){\makebox(0,0)[lb]{\smash{\SetFigFont{6}{7.2}{bf}Saturday at 00:00 to 23:59 every 00:10, lingering for 0.10}}}
+\end{picture}

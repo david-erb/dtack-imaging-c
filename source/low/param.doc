@@ -1,0 +1,338 @@
+/*..........................................................................
+| TITLE dtparam()
+|dxinclude(liblink1.dx)
+| 
+|!:param: Function Group Introduction
+|_index param Function Group, :param: Function Group, description of
+|_index Function Group,, description of, :param:
+|_index parameters,, command line
+|_index keywords,, command line
+|_index parsing,, command line
+|_index command line,, parsing
+|
+| This Function Group provides command line keyword parameter 
+| parsing services.
+|
+| All Dtack Imaging Software high-level algorithm functions require a
+|_aside ~param~ structure holds parameter values.
+|_index param structure, ~param~ structure
+| ~param~ structure argument.
+| The ~param~ structure contains both the algorithm's runtime environment
+| and the algorithm's operating parameters.
+| The environment and parameters are thus available
+| to all routines in the algorithm.
+| 
+| The :param: Function Group provides a bridge from the command line
+| to the operating parameters in the ~param~ structure.
+| This Function Group has the following functions in it:
+| 
+| dtparam_free()		free param structure resources
+| dtparam_init()		prepare param structure
+| dtparam_parse()		parse command line
+| dtparam_set()			setup keywords for parsing
+| 
+| dtparam_init() prepares a ~param~ structure for
+| use as both a parse specification and as a recipient of parsed values.
+| dtparam_set() marks the keywords in a ~param~ structure
+| to be used in a subsequent parsing operation.
+| dtparam_parse() parses a command line in an argc/argv token form
+| and stores the values in the ~param~ structure.
+| Finally, dtparam_free() releases memory allocated during parsing.
+|
+| This Function Group is principally concerned with command line parsing.
+|_Aside Command line syntax.
+| The command line model is borrowed from Unix and
+| is structured as follows:
+| 
+|:  parameters -- other stuff
+| 
+| Each parameter consists of a keyword followed by its required value.
+|_index keyword,, command line
+| Keywords always begin with a ':-:' sign.
+| Parsing of parameters ends when the first non-keyword is found
+| or when the optional ':--:' is found.
+| Parameters are always optional during dtparam_parse(),
+| although your program may decide later to have an error if
+| a particularly important one is reported missing.
+| This Function Group deals only with the parameters:
+| the "other stuff" is ignored.
+| More details on the command line syntax can be found in the
+| dtparam_parse() function description.
+| 
+| Each marked parameter generates a search in the
+|_aside Places to look for keyword values.
+| following three places in the order given:
+| 
+| 1.	command line
+| 2.	environment variable
+| 3.	compile-time defaults table
+|
+| If a keyword is marked for parsing but is not found on the command line,
+|_Aside Environment variables.
+|_index environment variables
+| Then the parsing function searches for an environment variable
+| with the same name has the keyword without its leading ':-:' sign.
+| This allows you to specify common parameters to be used
+| for all your programs.
+| 
+| If a keyword is marked for parsing but is not in the command line,
+|_Aside Compile-time default.
+|_index defaults,, compile-time
+|_index compile-time,, defaults
+| and is not found as an environment variable,
+| then one more place is checked for a value.
+| This is a static, hard-coded table which may contain
+| a compile-time default for each parameter.
+| The intent of this table is to allow site-specific definitions
+| for parameters such as the default windowing server,
+| or the big memory sources available.
+|
+| Because dtparam_parse() only deals with the keywords and their
+|_aside This Function Group also used internally.
+| values, and ignores the "other stuff" on the command line,
+| the function is not usually called directly from an application program.
+| It is, however, called from other Function Groups  such as the 
+| :enter: Function Group.
+|_index enter Function Group, :enter: Function Group.
+| Please refer to
+|_hyper document, dtdoclist(dtenv, title).
+| It is also used from within the 
+| :interactive: Function Group,
+|_index interactive Function Group, :interactive: Function Group,
+| where values taken from fields on a full-screen dialog are arranged
+| into a command line-like format to be parsed.
+| For more information, see
+|_hyper document, dtdoclist(dtinter, title)
+|
+| This Function Group is tested by the :dttlow param: test program.
+| Please see
+|_hyper document, dtdoclist(dttest, title)
+|_index dttlow test program, :dttlow: Test Program, :param:
+|_index Test Program,, :dttlow param:
+|
+| Your program is not required to make calls to the :param: Function Group.
+|_aside This Function Group not required.
+| It is merely a set of utilities for conveniently setting up the ~param~
+| structure based on tokens found on the command line.
+| You may elect not to use this Function Group,
+| but instead to manipulate the ~param~ structure directly.
+| The next section provides information on doing this.
+|
+|.The :dtparam_t: Structure
+|_index dtparam_t structure, :dtparam_t: structure
+|_index structure,, :dtparam_t:
+| This is a fairly large structure, possibly exceeding 1000 bytes.
+|_Aside Big structure.
+| If stack space is limited, the usual case with DOS,
+| you probably will want to use malloc() to get space
+| for the structure instead of placing it on your stack.
+| 
+| The :dtparam_t: structure contains two unrelated things:
+|_aside ~param~ contains ~ctl~.
+| first it contains a :dt_ctl_t: structure.
+| This structure represents the program environment.
+| All functions who take a ~param~ argument use ~param->ctl~
+| as their program environment.
+|dxinclude(ctl1.dx)
+|
+| Because this structure contains the program environment, ~param->ctl~,
+| it should be cleared to all zeros before use in any function.
+| This includes dtparam_init().
+| The program environment should never contain undefined values.
+| 
+| Second,
+| the :dtparam_t: structure contains values, flags,
+|_aside All possible keywords.
+| and descriptions for the following keywords:
+| 
+|dxinclude(params4.dx)
+| 
+| The ~param~ structure predefines all possible allowed keywords.
+|_Aside Keyword set is static.
+| Your program may not invent new keywords.
+| New parameters may only be added through recompilation of the entire
+| Dtack Imaging Software source tree.
+| 
+| While the keywords themselves are predefined,
+|_aside Interpretation is up to algorithm.
+| each algorithm is free to interpret the value of the keyword in any way.
+| For example, one program may use ~param->k~ as an arbitrary
+| equation constant, while another may treat is as an iteration count.
+|
+| For each keyword,
+| the :dtparam_t: structure contains at least
+|_aside Four members for each keyword.
+| the following four public members.
+| Consider :xxx: to be the name of the keyword as listed in the table above
+| but without the leading ':-:' sign.
+| :TYPE: can be one of :long:, :double: or :char *:.
+| 
+|:  TYPE           xxx;					// current value of the keyword
+|:  const char    *xxx_desc;			// keyword description
+|:  const char    *xxx_help;			// keyword help text
+|:  dtparam_flag_t xxx_flag;			// keyword operational flags
+|
+| The structure member with the same name as the keyword
+|_Aside Keyword's value.
+| is the current keyword value.
+| For example, corresponding to the :-background: keyword,
+| ~param->background~ will contain the background
+| which is a :long: integer value.
+|
+| Each keyword in the ~param~ structure has a ~flag~ field associated with
+|_Aside Keyword's flags.
+| it.  The ~flag~ fields bits include at least:
+| 
+| :DTPARAM_FLAG_PARSE:		the param is allowed to be parsed by 
+|							dtparam_parse()
+| :DTPARAM_FLAG_DEFAULT:	~param.xxx~ has been assigned a value
+| 							by the application program
+| :DTPARAM_FLAG_VALUE:		~param.xxx~ has been assigned a runtime value
+| 							as a result of parsing
+|
+| The algorithms don't usually care if the value
+| was placed there by default or by parsing.
+| They only care if there is a useful value at all.
+| A useful value is indicated by
+| ~param.xxx_flag~ having either of the bits
+| :DTPARAM_FLAG_DEFAULT | DTPARAM_FLAG_VALUE: on.
+| The algorithms are responsible for selecting
+| a suitable compile-time default if ~param.xxx~ is deemed not to have
+| a useful value.
+|
+| If not NULL,
+| the ~param->xxx_desc~ member points to a very short (32 characters or less)
+|_Aside Keyword's descriptions.
+| description of the meaning of the keyword to the current program.
+| This description should be suitable for use as a data-entry
+| field label on a full-screen dialog.
+| 
+| If not NULL,
+| the ~param->xxx_help~ member points to a longer help message
+| describing the parameter.
+| This message may be used in a pop-up window displayed
+| at the human operator's request in a dialog or GUI situation.
+|
+| The architecture of this design suggests the following sequence
+|_aside How to use the ~param~ structure.
+| of operations on the program's part:
+| 
+| 1.	allocate space for ~param~, simply a :dtparam_t: structure
+| 2.	set values of the keywords inside ~param~ based on external input
+| 		(command line, file, dialog, GUI, etc.)
+| 3.	perform an algorithm which is free to
+| 		use values from ~param~ as needed via simple structure member
+| 		reference, for example :param->color: returns the current
+| 		value for the :-color: command line keyword
+| 
+| The principal advantage to this scheme is the simplicity of step 3:
+|_aside Values easy to get from ~param~ structure.
+| parameter values are trivial to access.
+| Parsing is normally a one-time operation for a given run of a program.
+| However, the program will use its parameters many times and in
+| many places throughout the run.
+| Access to the parameter values is made as simple as possible.
+| [fig:param1] illustrates the centrality of the ~param~ structure.
+|_figure picture, param1, Parameter Structure Usage
+|
+| One common means of parameter entry is from the command line.
+|_aside ~param~ structure from command line.
+| Here is where the :param: Function Group comes in handy.
+| In a command line environment, step 2 above consists of the following:
+| 
+| 2a.	initialize ~param~ with dtparam_init()
+| 2b.	describe the keywords expected by the program by calling dtparam_set()
+| 2c.	parse the command line with dtparam_parse()
+| 
+| Besides command line input,
+| this scheme also easily supports
+|_aside Alternatives to the command line.
+| alternative means of parameter input.
+| For example,
+| the :interactive: Function Group
+| displays a text-based full-screen dialog into which the human operator types
+| the parameter values.
+|_index interactive Function Group, :interactive: Function Group,
+| Please refer to
+|_hyper document, dtdoclist(dtinter, title)
+| Another example could be a GUI-based parameter entry facility
+| such as provided by Khoros.
+| Yet another example could be to simply read parameters from a file.
+| 
+|!Summary
+| Parses the #parameters# from as provided by a C :main: program.
+| A parameter is a #keyword# followed by a value.
+| The universe of approximately 50 keywords is predefined,
+| however not all keywords need be parsable each time.
+| You describe the parsable keywords and their default values.
+| The parsing function also checks for an environment variable
+| whose name is the same as a keyword.
+| After parsing, the parsed values are available in a #param structure#
+| which is addressable by all algorithm functions.
+| The param structure has a member for each of the possible 50 or so
+| predefined keywords so the values are accessible by simple reference.
+| 
+| The parsing function is not normally called directly 
+| from application programs:
+| more often it gets called internally from a higher level
+| such as the :enter: Function Group
+| and the :interactive: Function Group.
+|
+|!Example dtparam1.c - Keyword Parsing
+|_index param Function Group, :param: Function Group, example of
+|_index dtparam_parse(),, example of
+|_index dtparam_set(),, example of
+|:// Example Program dtparam1
+|:// Illustrates keyword parsing
+|:// command line        result
+|:// ""                  dtparam1: color defaults to "red"
+|:// "-color blue"       dtparam1: color parsed as "blue"
+|:// "-x 0"              dtparam1: Sorry, "-x" is not understood (try -help).
+|:// Most error checking left out for clarity.
+|:
+|:#include <dtack/base.h>
+|:
+|:int main(
+|:  int argc,
+|:  char *argv[])
+|:{
+|:  dtparam_t param;					// space for param structure
+|:  dt_ctl_t *ctl = &param.ctl;			// for short
+|:  int nused;
+|:  char message[80];
+|:
+|:  memset(&param, 0, sizeof(param));	// clear param structure
+|:  ctl->progname = "dtparam1";			// set program name for messages
+|:  dtparam_init(&param);				// initialize param structure
+|:
+|:  dtparam_set(&param, 0, 	 	        // set default for params we want
+|_aside Describe keyword parameter.
+|:    &param.color, NULL, NULL, "red",	// 4-tuple for "color"
+|:    NULL);							// sentinel
+|:
+|:  dtparam_parse(&param, 				// parse command line
+|_Aside Do parsing.
+|:    argc-1, argv+1, 
+|:    &nused, 
+|:    message, sizeof(message));
+|:
+|:  if (strlen(message) > 0)			// error parsing?
+|_aside Parse error?
+|:    printf("dtparam1: %s\n", 			// print the error message
+|:      message);	
+|:  else								// no error parsing?
+|:    printf("dtparam1:"
+|_Aside Print result.
+|:      " color %s \"%s\"\n",			// print what we got
+|:      param.color_flag &				// check the color flag
+|:      DTPARAM_FLAG_VALUE?
+|:        "parsed as": "defaults to",
+|:      param.color);
+|:  dtparam_free(&param);				// free resources
+|:
+|:  return 0;
+|:}
+| 
+| END
+ *..........................................................................*/
+

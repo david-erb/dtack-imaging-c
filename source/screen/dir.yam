@@ -1,0 +1,98 @@
+define(TOP, UP2)
+define(DIR, source/screen)
+__prolog
+
+pushdef(`CCSHARABLE', `CCSHARABLE_ON')
+
+__src(canfastg,                          dnl dtcanvas_fastgraph_init()
+  PRJ_INCLUDES+PRJ_FASTGRAPH_INCLUDE, 
+  PRJ_DEFINES+PRJ_FASTGRAPH_DEFINE)
+
+__src(cansvgac,                          dnl dtcanvas_svgacc_init()
+  PRJ_INCLUDES+PRJ_SVGACC_INCLUDE, 
+  PRJ_DEFINES+PRJ_SVGACC_DEFINE)
+
+__src(hwsx,                              dnl dthws_x_connect()
+  PRJ_INCLUDES+PRJ_X_INCLUDE,
+  PRJ_DEFINES+PRJ_X_DEFINE)
+
+__src(hwsqw4,                            dnl dthws_qw4_connect()
+  PRJ_INCLUDES+PRJ_QW4_INCLUDE, 
+  PRJ_DEFINES+PRJ_QW4_DEFINE)
+
+__src(hwsfgw,                            dnl dthws_fgw_connect()
+  PRJ_INCLUDES+PRJ_FGW_INCLUDE, 
+  PRJ_DEFINES+PRJ_FGW_DEFINE)
+
+__shlib(prj_lib(dtscr),	
+  scr_main+scr_cur+scr_act+scr_dbg+
+  scrdum+
+  vga+
+  libmain, , , 
+  prj_lib(dtcan)+
+  prj_lib(dthws)+
+  prj_lib(dtbigmem)+
+  prj_lib(dtlow)+
+  prj_lib(dt1d))
+
+__shlib(prj_lib(dtcan),	
+  scrcan+
+  canvas+
+  canpoll+
+  candum+
+  libmain, , , 
+  prj_lib(dtkeybd)+
+  prj_lib(dtfastg)+
+  prj_lib(dtsvgac)+
+  prj_lib(dthws)+
+  prj_lib(dtlow)+
+  prj_lib(dt1d))
+__shlib(prj_lib(dtcand),
+  scrcand+
+  libmain, , , prj_lib(dtlow)+prj_lib(dt1d))
+
+__shlib(prj_lib(dtfastg),	
+  canfastg+
+  libmain, , , prj_lib(dtlow)+prj_lib(dt1d))
+__shlib(prj_lib(dtfastgd),	
+  canfastd+
+  libmain, , , prj_lib(dtlow)+prj_lib(dt1d))
+
+__shlib(prj_lib(dtsvgac),	
+  cansvgac+
+  libmain, , , prj_lib(dtlow)+prj_lib(dt1d))
+__shlib(prj_lib(dtsvgacd),	
+  cansvgad+
+  libmain, , , prj_lib(dtlow)+prj_lib(dt1d))
+
+__shlib(prj_lib(dthws),	
+  scrhws+
+  canhws+
+  hws+
+  hwsx+
+  hwsqw4+
+  hwsfgw+
+  hwsmsw+
+  libmain, , , 
+  prj_lib(dtbigmem)+
+  prj_lib(dtlow)+
+  prj_lib(dt1d),
+  PRJ_LOADS PRJ_INTER_LOADS PRJ_SCR_LOADS)
+
+__shlib(prj_lib(dthwsd),
+  scrhwsd+
+  canhwsd+
+  libmain, , , 
+  prj_lib(dtlow)+
+  prj_lib(dt1d))
+
+popdef(`CCSHARABLE')
+
+__finish
+
+
+
+
+
+
+

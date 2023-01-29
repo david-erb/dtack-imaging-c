@@ -1,0 +1,189 @@
+===========================================
+date     Wed Jul 12 06:13:13 CDT 1995
+uname    FreeBSD d0 2.0-RELEASE FreeBSD 2.0-RELEASE #7: Fri Apr 21 16:45:02  1995     erb@d0:/usr/src/sys/compile/ERB  i386
+pwd      /bbsy/home/erb/prj/dt
+dttmem: being started by dttiming.sh 12 Jul 95 06:13 
+dttmem: | 950712 | disk 63000 (20) | FG1 | compiler | cpu |  0.08 |  7.81 |  7.90
+dttmem: | 950712 | disk 16384 (20) | FG1 | compiler | cpu |  0.20 |  7.13 |  7.97
+dttmem: | 950712 | disk 4000 (10) | FG1 | compiler | cpu |  0.27 |  3.95 |  4.23
+dttmem: | 950712 | disk 512 (2) | FG1 | compiler | cpu |  0.47 |  1.56 |  2.03
+dttmem: | 950712 | ram 63000 (100000) | FG1 | compiler | cpu |  2.97 |  0.02 |  2.99
+dttmem: | 950712 | ram 16384 (20000) | FG1 | compiler | cpu |  1.98 |  0.00 |  1.98
+dttmem: | 950712 | ram 4000 (5000) | FG1 | compiler | cpu |  1.99 | -0.00 |  1.98
+dttmem: | 950712 | ram 512 (500) | FG1 | compiler | cpu |  2.04 |  0.01 |  2.05
+dttmem:   all memory freed
+dttstack: being started by dttiming.sh 12 Jul 95 06:13 
+dttstack: dttstack_check:   default type 0x02 after push overflow at nels=100000 (got code 1)
+dttstack: dttstack_check:   default type 0x02 after push poke/peek/pop 100000 out of 100000
+dttstack: dttstack_check:   default type 0x02 after push underflow at -1 (got code 2)
+dttstack: dttstack_paged:   default type 0x02 after limited full read code 0 (0), eof 0 (0)
+dttstack: dttstack_check:   default type 0x02 after limited full read overflow at nels=100000 (got code 1)
+dttstack: dttstack_check:   default type 0x02 after limited full read poke/peek/pop 100000 out of 100000
+dttstack: dttstack_check:   default type 0x02 after limited full read underflow at -1 (got code 2)
+dttstack: dttstack_paged:   default type 0x02 after unlimited full read code 0 (0), eof 0 (0)
+dttstack: dttstack_check:   default type 0x02 after unlimited full read poke/peek/pop 100000 out of 100000
+dttstack: dttstack_check:   default type 0x02 after unlimited full read underflow at -1 (got code 2)
+dttstack: dttstack_check:   default type 0x02 after push overflow at nels=100000 (got code 1)
+dttstack: dttstack_check:   default type 0x02 after push poke/peek/pop 100000 out of 100000
+dttstack: dttstack_check:   default type 0x02 after push underflow at -1 (got code 2)
+dttstack: dttstack_paged:   default type 0x02 after limited full read code 0 (0), eof 0 (0)
+dttstack: dttstack_check:   default type 0x02 after limited full read overflow at nels=100000 (got code 1)
+dttstack: dttstack_check:   default type 0x02 after limited full read poke/peek/pop 100000 out of 100000
+dttstack: dttstack_check:   default type 0x02 after limited full read underflow at -1 (got code 2)
+dttstack: dttstack_paged:   default type 0x02 after unlimited full read code 0 (0), eof 0 (0)
+dttstack: dttstack_check:   default type 0x02 after unlimited full read poke/peek/pop 100000 out of 100000
+dttstack: dttstack_check:   default type 0x02 after unlimited full read underflow at -1 (got code 2)
+dttstack: dttstack_check:   default type 0x02 after push overflow at nels=100000 (got code 1)
+dttstack: dttstack_check:   default type 0x02 after push poke/peek/pop 100000 out of 100000
+dttstack: dttstack_check:   default type 0x02 after push underflow at -1 (got code 2)
+dttstack: dttstack_paged:   default type 0x02 after limited full read code 0 (0), eof 0 (0)
+dttstack: dttstack_check:   default type 0x02 after limited full read overflow at nels=100000 (got code 1)
+dttstack: dttstack_check:   default type 0x02 after limited full read poke/peek/pop 100000 out of 100000
+dttstack: dttstack_check:   default type 0x02 after limited full read underflow at -1 (got code 2)
+dttstack: dttstack_paged:   default type 0x02 after unlimited full read code 0 (0), eof 0 (0)
+dttstack: dttstack_check:   default type 0x02 after unlimited full read poke/peek/pop 100000 out of 100000
+dttstack: dttstack_check:   default type 0x02 after unlimited full read underflow at -1 (got code 2)
+dttstack: dttstack_check:   default type 0x02 after push overflow at nels=100000 (got code 1)
+dttstack: dttstack_check:   default type 0x02 after push poke/peek/pop 100000 out of 100000
+dttstack: dttstack_check:   default type 0x02 after push underflow at -1 (got code 2)
+dttstack: dttstack_paged:   default type 0x02 after limited full read code 0 (0), eof 0 (0)
+dttstack: dttstack_check:   default type 0x02 after limited full read overflow at nels=100000 (got code 1)
+dttstack: dttstack_check:   default type 0x02 after limited full read poke/peek/pop 100000 out of 100000
+dttstack: dttstack_check:   default type 0x02 after limited full read underflow at -1 (got code 2)
+dttstack: dttstack_paged:   default type 0x02 after unlimited full read code 0 (0), eof 0 (0)
+dttstack: dttstack_check:   default type 0x02 after unlimited full read poke/peek/pop 100000 out of 100000
+dttstack: dttstack_check:   default type 0x02 after unlimited full read underflow at -1 (got code 2)
+dttstack: dttstack_check:   default type 0x02 after push overflow at nels=100000 (got code 1)
+dttstack: dttstack_check:   default type 0x02 after push poke/peek/pop 100000 out of 100000
+dttstack: dttstack_check:   default type 0x02 after push underflow at -1 (got code 2)
+dttstack: dttstack_paged:   default type 0x02 after limited full read code 0 (0), eof 0 (0)
+dttstack: dttstack_check:   default type 0x02 after limited full read overflow at nels=100000 (got code 1)
+dttstack: dttstack_check:   default type 0x02 after limited full read poke/peek/pop 100000 out of 100000
+dttstack: dttstack_check:   default type 0x02 after limited full read underflow at -1 (got code 2)
+dttstack: dttstack_paged:   default type 0x02 after unlimited full read code 0 (0), eof 0 (0)
+dttstack: dttstack_check:   default type 0x02 after unlimited full read poke/peek/pop 100000 out of 100000
+dttstack: dttstack_check:   default type 0x02 after unlimited full read underflow at -1 (got code 2)
+dttstack: | 950712 | 100000 type 2 ( 5) | FG1 | compiler | cpu |  7.84 |  1.94 | 10.41
+dttstack:   all memory freed
+dtt1d: being started by dttiming.sh 12 Jul 95 06:13 
+dtt1d: | 950712 | random uniform (  7500) | FG1 | compiler | cpu |  0.10 | -0.00 |  0.10
+dtt1d: dtt1d_random_uniform_double_timing:   7500 random uniform generation complete
+dtt1d: | 950712 | random gauss (  7500) | FG1 | compiler | cpu |  0.35 | -0.00 |  0.35
+dtt1d: dtt1d_random_gauss_double_timing:   7500 random gauss generation complete
+dtt1d: | 950712 | inverted sort (  7500) | FG1 | compiler | cpu |  0.23 | -0.00 |  0.23
+dtt1d: dtt1d_sort_double_invert_timing:   vector size 7500 is properly sorted
+dtt1d: | 950712 | random sort (  7500) | FG1 | compiler | cpu |  0.25 | -0.00 |  0.25
+dtt1d: dtt1d_sort_double_random_timing:   vector size 7500 is properly sorted
+dtt1d:   all memory freed
+dttlog: being started by dttiming.sh 12 Jul 95 06:13 
+dttlog: | 950712 | log10 unscaled (50@128x120) | FG1 | compiler | cpu |  1.36 |  0.01 |  1.37
+dttlog: dttlog2:   log10 32-into-8 unscaled (top)
+dttlog: dttlog2:   log10 32-into-8 unscaled (middle)
+dttlog: dttlog2:   log10 32-into-8 unscaled (bottom)
+dttlog: | 950712 | log10 scaled (50@128x120) | FG1 | compiler | cpu | 14.28 |  0.07 | 14.35
+dttlog: dttlog3:   log10 32-into-8 unscaled (top)
+dttlog: dttlog3:   log10 32-into-8 unscaled (middle)
+dttlog: dttlog3:   log10 32-into-8 unscaled (bottom)
+dttlog: | 950712 | log unscaled (50@128x120) | FG1 | compiler | cpu |  1.36 |  0.00 |  1.36
+dttlog: dttlog4:   log 32-into-8 unscaled (top)
+dttlog: dttlog4:   log 32-into-8 unscaled (middle)
+dttlog: dttlog4:   log 32-into-8 unscaled (bottom)
+dttlog: | 950712 | log scaled (50@128x120) | FG1 | compiler | cpu | 12.22 |  0.12 | 12.35
+dttlog: dttlog5:   log 32-into-8 unscaled (top)
+dttlog: dttlog5:   log 32-into-8 unscaled (middle)
+dttlog: dttlog5:   log 32-into-8 unscaled (bottom)
+dttlog:   all memory freed
+dttcast: being started by dttiming.sh 12 Jul 95 06:14 
+dttcast: | 950712 | b08->b01 (50) | FG1 | compiler | cpu |  1.04 | -0.00 |  1.04
+dttcast: | 950712 | b01->b08 (50) | FG1 | compiler | cpu |  1.26 |  0.02 |  1.29
+dttcast: dttcast_time_one:   image comparison (256)
+dttcast: | 950712 | b08->b08 (50) | FG1 | compiler | cpu |  0.21 | -0.00 |  0.21
+dttcast: | 950712 | b08->b08 (50) | FG1 | compiler | cpu |  0.27 |  0.01 |  0.28
+dttcast: dttcast_time_one:   image comparison (256)
+dttcast: | 950712 | b08->b16 (50) | FG1 | compiler | cpu |  2.66 |  0.01 |  2.67
+dttcast: | 950712 | b16->b08 (50) | FG1 | compiler | cpu |  2.46 |  0.02 |  2.47
+dttcast: dttcast_time_one:   image comparison (256)
+dttcast: | 950712 | b08->b32 (50) | FG1 | compiler | cpu |  2.34 |  0.02 |  2.35
+dttcast: | 950712 | b32->b08 (50) | FG1 | compiler | cpu |  4.35 |  0.01 |  4.36
+dttcast: dttcast_time_one:   image comparison (256)
+dttcast: | 950712 | b08->s1  (50) | FG1 | compiler | cpu |  2.03 |  0.00 |  2.03
+dttcast: | 950712 | s1 ->b08 (50) | FG1 | compiler | cpu |  2.04 |  0.03 |  2.07
+dttcast: dttcast_time_one:   image comparison (256)
+dttcast: | 950712 | b08->s2  (50) | FG1 | compiler | cpu |  2.46 |  0.01 |  2.47
+dttcast: | 950712 | s2 ->b08 (50) | FG1 | compiler | cpu |  2.33 |  0.01 |  2.34
+dttcast: dttcast_time_one:   image comparison (256)
+dttcast: | 950712 | b08->s4  (50) | FG1 | compiler | cpu |  2.38 |  0.07 |  2.46
+dttcast: | 950712 | s4 ->b08 (50) | FG1 | compiler | cpu |  2.96 |  0.01 |  2.97
+dttcast: dttcast_time_one:   image comparison (256)
+dttcast: | 950712 | b08->f1  (10) | FG1 | compiler | cpu |  0.93 |  0.02 |  0.94
+dttcast: | 950712 | f1 ->b08 (10) | FG1 | compiler | cpu |  1.15 |  0.10 |  1.40
+dttcast: dttcast_time_one:   image comparison (256)
+dttcast: | 950712 | b08->f2  (10) | FG1 | compiler | cpu |  0.94 |  0.03 |  0.98
+dttcast: | 950712 | f2 ->b08 (10) | FG1 | compiler | cpu |  1.32 | -0.00 |  1.32
+dttcast: dttcast_time_one:   image comparison (256)
+dttcast:   all memory freed
+dttconv: being started by dttiming.sh 12 Jul 95 06:15 
+dttconv: | 950712 | dttconv_h1d | FG1 | compiler | cpu |  1.78 |  0.06 |  1.84
+dttconv: | 950712 | dttconv_ave | FG1 | compiler | cpu |  0.51 | -0.00 |  0.51
+dttconv: | 950712 | dttconv_laplace | FG1 | compiler | cpu |  0.39 | -0.00 |  0.39
+dttconv: | 950712 | dttconv_cross | FG1 | compiler | cpu |  1.26 | -0.00 |  1.26
+dttconv:   all memory freed
+dttrun: being started by dttiming.sh 12 Jul 95 06:15 
+dttrun: dttrun_time:   empty blobs 0 (0)
+dttrun: | 950712 | empty ( 5) | FG1 | compiler | cpu |  0.27 | -0.00 |  0.27
+dttrun: dttrun_time:   solid blobs 1 (1)
+dttrun: | 950712 | solid ( 5) | FG1 | compiler | cpu |  0.27 |  0.00 |  0.27
+dttrun: dttrun_time:   checquer blobs 65536 (65536)
+dttrun: | 950712 | checquer ( 5) | FG1 | compiler | cpu |  3.76 |  0.15 |  3.92
+dttrun: dttrun_time:   tiny_blobs blobs 16384 (16384)
+dttrun: | 950712 | tiny_blobs ( 5) | FG1 | compiler | cpu |  0.91 | -0.00 |  0.91
+dttrun: dttrun_time:   tiny_holes blobs 1 (1)
+dttrun: | 950712 | tiny_holes ( 5) | FG1 | compiler | cpu |  1.30 |  0.00 |  1.30
+dttrun: dttrun_time:   tree blobs 2 (2)
+dttrun: | 950712 | tree ( 5) | FG1 | compiler | cpu |  0.85 |  0.00 |  0.85
+dttrun: dttrun_time:   spiral blobs 2 (2)
+dttrun: | 950712 | spiral ( 5) | FG1 | compiler | cpu |  2.10 |  0.01 |  2.11
+dttrun:   all memory freed
+dttadj: being started by dttiming.sh 12 Jul 95 06:15 
+dttadj: dttadj_time:   empty run  blob count 0 (0)
+dttadj: | 950712 | runs empty ( 5) | FG1 | compiler | cpu |  0.22 | -0.00 |  0.25
+dttadj: dttadj_time:   empty fill blob count 0 (0)
+dttadj: | 950712 | fill empty ( 5) | FG1 | compiler | cpu |  0.26 |  0.02 |  0.28
+dttadj: dttadj_time:   solid run  blob count 1 (1)
+dttadj: | 950712 | runs solid ( 5) | FG1 | compiler | cpu |  0.30 |  0.00 |  0.30
+dttadj: dttadj_time:   solid fill blob count 1 (1)
+dttadj: | 950712 | fill solid ( 5) | FG1 | compiler | cpu |  2.61 |  0.02 |  2.63
+dttadj: dttadj_time:   checquer run  blob count 65536 (65536)
+dttadj: | 950712 | runs checquer ( 5) | FG1 | compiler | cpu | 13.91 |  0.66 | 15.42
+dttadj: dttadj_time:   checquer fill blob count 65536 (65536)
+dttadj: | 950712 | fill checquer ( 5) | FG1 | compiler | cpu | 12.74 |  0.06 | 12.83
+dttadj: dttadj_time:   tiny_blobs run  blob count 16384 (16384)
+dttadj: | 950712 | runs tiny_blobs ( 5) | FG1 | compiler | cpu |  2.40 |  0.01 |  2.41
+dttadj: dttadj_time:   tiny_blobs fill blob count 16384 (16384)
+dttadj: | 950712 | fill tiny_blobs ( 5) | FG1 | compiler | cpu |  3.42 | -0.00 |  3.43
+dttadj: dttadj_time:   tiny_holes run  blob count 1 (1)
+dttadj: | 950712 | runs tiny_holes ( 5) | FG1 | compiler | cpu |  3.27 |  0.02 |  3.30
+dttadj: dttadj_time:   tiny_holes fill blob count 1 (1)
+dttadj: | 950712 | fill tiny_holes ( 5) | FG1 | compiler | cpu |  3.56 |  0.09 |  3.69
+dttadj: dttadj_time:   tree run  blob count 2 (2)
+dttadj: | 950712 | runs tree ( 5) | FG1 | compiler | cpu |  2.66 |  0.02 |  2.68
+dttadj: dttadj_time:   tree fill blob count 2 (2)
+dttadj: | 950712 | fill tree ( 5) | FG1 | compiler | cpu |  3.38 |  0.02 |  3.39
+dttadj: dttadj_time:   spiral run  blob count 2 (2)
+dttadj: | 950712 | runs spiral ( 5) | FG1 | compiler | cpu |  8.71 |  0.03 |  8.74
+dttadj: dttadj_time:   spiral fill blob count 2 (2)
+dttadj: | 950712 | fill spiral ( 5) | FG1 | compiler | cpu |  4.76 |  0.00 |  4.77
+dttadj: dttadj_time:   dice128.bpe run  blob count 12487 (-1)
+dttadj: | 950712 | runs dice128.bpe ( 5) | FG1 | compiler | cpu |  8.65 |  0.04 |  8.69
+dttadj: dttadj_time:   dice128.bpe fill blob count 12487 (-1)
+dttadj: | 950712 | fill dice128.bpe ( 5) | FG1 | compiler | cpu |  2.69 |  0.00 |  2.69
+dttadj: dttadj_time:   dice256.bpe run  blob count 46510 (-1)
+dttadj: | 950712 | runs dice256.bpe ( 5) | FG1 | compiler | cpu | 42.80 |  0.17 | 42.99
+dttadj: dttadj_time:   dice256.bpe fill blob count 46510 (-1)
+dttadj: | 950712 | fill dice256.bpe ( 5) | FG1 | compiler | cpu | 10.40 |  0.03 | 10.44
+dttadj: dttadj_time:   dice/white.pgm run  blob count 183771 (-1)
+dttadj: | 950712 | runs dice/white.pgm ( 5) | FG1 | compiler | cpu |232.81 | 11.17 |400.61
+dttadj: dttadj_time:   dice/white.pgm fill blob count 183771 (-1)
+dttadj: | 950712 | fill dice/white.pgm ( 5) | FG1 | compiler | cpu | 41.84 |  0.27 | 42.78
+dttadj:   all memory freed
+dtinst.sh: 12 Jul 95 06:25 bsd1 MK_TARGET=fg1 complete 

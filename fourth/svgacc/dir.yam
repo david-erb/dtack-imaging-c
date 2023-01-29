@@ -1,0 +1,16 @@
+define(TOP, UP2)
+define(DIR, fourth/svgacc)
+__prolog
+
+pushdef(`CCSHARABLE', `CCSHARABLE_ON')
+
+ifdef(`PRJ_SVGACC_FAKE', `
+
+__src(svgacc,                             dnl fake svgacc entry points
+  PRJ_INCLUDES`'PRJ_SVGACC_INCLUDE, 
+  PRJ_DEFINES`'PRJ_SVGACC_DEFINE)
+
+__shlib(prj_fourth_lib(svgacc), svgacc)
+')
+__finish
+

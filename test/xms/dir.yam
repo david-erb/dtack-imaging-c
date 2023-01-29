@@ -1,0 +1,21 @@
+define(TOP, UP2)
+define(DIR, test/xms)
+
+ifdef(`DTTXMSIF', `
+__src(dttxmsif, PRJ_XMSIF_INCLUDE)
+__shexe(prj_test_bin(dttxmsif),   dttxmsif, , PRJ_XMSIF_LIB)
+')
+
+ifdef(`DTTXMSLB', `
+__src(dttxmslb, PRJ_XMSLB_INCLUDE)
+__shexe(prj_test_bin(dttxmslb),   dttxmslb, , PRJ_XMSLB_LIB)
+')
+
+ifdef(`DTTTXMS', `
+__src(dtttxms, PRJ_TXMS_INCLUDE)
+__shexe(prj_test_bin(dtttxms),    dtttxms,  , PRJ_TXMS_LIB)
+')
+
+__finish
+
+

@@ -1,0 +1,49 @@
+define(TOP, UP2)
+define(DIR, source/inter)
+__prolog
+
+pushdef(`CCSHARABLE', `CCSHARABLE_ON')
+
+__src(textcur1, 
+  PRJ_INCLUDES+PRJ_CURSES_INCLUDE,
+  PRJ_DEFINES+PRJ_CURSES_DEFINE)
+
+__src(textdos1, 
+  PRJ_INCLUDES,
+  PRJ_DEFINES+PRJ_INT10_DEFINE)
+
+__src(textqnx1, 
+  PRJ_INCLUDES,
+  PRJ_DEFINES+PRJ_QNXTERM_DEFINE)
+
+__src(texttcap, 
+  PRJ_INCLUDES+PRJ_TERMCAP_INCLUDE,
+  PRJ_DEFINES+PRJ_TERMCAP_DEFINE)
+
+__shlib(prj_lib(dtinter),
+  alpha+
+  dialog+diatext+diavba+
+  iact+
+  interact+interdia+interhlp+
+  note+
+  text+
+  textcur1+
+  texttcap+
+  textdos1+
+  textqnx1+
+  libmain, , , 
+  prj_lib(dtkeybd)+
+  prj_lib(dtbigmem)+
+  prj_lib(dtlow)+
+  prj_lib(dt1d))
+
+popdef(`CCSHARABLE')
+
+__finish
+
+
+
+
+
+
+

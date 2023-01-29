@@ -1,0 +1,144 @@
+
+\input texinfo   @c -*-texinfo-*-
+@c %**start of header
+@setfilename /usr/erb/prj/dtdoc/./dt.txi.info
+@settitle Dtack Imaging Software
+@paragraphindent 0
+@c %**end of header
+@tex
+\newbox\dtbox
+\gdef\dtuncatcodespecials{
+\def\do##1{\catcode`##1=12 }\dospecials}
+\gdef\dtsetupverbatim{\tt \obeylines
+\dtuncatcodespecials \obeyspaces \parskip0pt}
+{\obeyspaces\global\let =\ }
+\gdef\dtverbatim{
+\begingroup\dtsetupverbatim\dtdoverbatim}
+\gdef\dtdoverbatim#1{
+\def\next##1#1{##1\endgroup}\next}
+@end tex
+@ifinfo
+........................................
+
+Copyright (c) 1995 Dtack Imaging Software
+P.O. Box 45195
+Madison, WI 53744-5195 U.S.A.
+
+this file produced by dx
+........................................
+@end ifinfo
+@defindex my
+@titlepage
+@title Dtack Imaging Software
+Copyright @copyright{} 1995 Dtack Imaging Software
+P.O. Box 45195
+Madison, WI 53744-5195 U.S.A.
+@page
+@end titlepage
+@ifinfo
+@node Top, Overview, (dir), (dir)
+@top Dtack Imaging Software
+@noindent
+@end ifinfo
+@ifinfo
+
+This document contains the following major sections:
+@menu
+* Overview::
+* Documentation::
+* References::
+@end menu
+@end ifinfo
+@node Overview, Documentation, Top, Top
+@chapter Overview
+@noindent
+Dtack Imaging Software consists of libraries and programs
+for doing image processing on general purpose computers.
+
+@noindent
+Systems supported are:
+
+@itemize
+@item
+Unix (SunOS, FreeBsd, Linux)
+@item
+Microsoft Windows
+@item
+DOS (real mode and 32-bit extenders)
+@end itemize
+
+@node Documentation, References, Overview, Top
+@chapter Documentation
+@noindent
+The highest level of the Dtack Documentation hierarchy
+is illustrated by Figure 1.
+
+@noindent
+@example
+@c ............................... including "doctree1.txt"
+
+
+                          Documentation
+                               |
+                               |
+          +--------------------+-------------------+
+          |                    |                   |
+          |                    |                   |
+          |                    |                   |
+          |                    |                   |
+      Overview               Base             Algorithms
+      Material             Library
+
+@c ............................... end include "doctree1.txt"
+@end example
+@center Figure 1: Documentation Tree
+@c ;
+
+@noindent
+The Dtack Documentation Set includes the following:
+@menu
+* Overview Material::
+* Base Library Documentation::
+* Algorithm Documentation::
+@end menu
+@node Overview Material, Base Library Documentation, , Documentation
+@section Overview Material
+@noindent
+@menu
+* Dtack Imaging Software Overview: (dtintro.inf).
+@quotation
+Organization, supported systems, licensing.
+@end quotation
+@end menu
+@node Base Library Documentation, Algorithm Documentation, Overview Material, Documentation
+@section Base Library Documentation
+@noindent
+@menu
+* bpe Function Group: (dtbpe.inf).
+@quotation
+Lossless compression.
+@end quotation
+
+* mem Function Group: (dtmem.inf).
+@quotation
+Big memory blocks, potentially bigger than RAM.
+@end quotation
+@end menu
+@node Algorithm Documentation, , Base Library Documentation, Documentation
+@section Algorithm Documentation
+@noindent
+@menu
+* lev85 Algorithm: (dtlev85.inf).
+@quotation
+Segmentation performance measurement.
+@end quotation
+@end menu
+@node References, , Documentation, Top
+@unnumbered References
+@noindent
+@
+@include dt.rfi
+@end 
+@shortcontents
+@contents
+@bye

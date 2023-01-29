@@ -1,0 +1,12 @@
+/*..........................................................................
+| TITLE dtsales
+| Dtack Sales Information
+dtinclude(prolog1.dx)
+dtinclude(legal1.dx)
+| 
+|!Dtack Sales Information
+dxinclude(sales.dx)
+| 
+| END
+ *..........................................................................*/
+

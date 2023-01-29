@@ -1,0 +1,132 @@
+
+
+
+
+
+
+References
+
+[pri84].
+     K.  Price,  "Image  Segmentation:  a  Comment on Studies in Global and
+     Local Histogram Guided Relaxation Algorithms,"  IEEE  Transactions  on
+     Pattern Analysis and Machine Intelligence, 6, 2, pp. 247-249 (1984).
+
+[zuc78].
+     Zucker  and  Krishnamurthy  and  Haar, "Relaxation Processes for Scene
+     Labeling: Convergence, Speed, and  Stability,"  IEEE  Transactions  on
+     Systems, Man, and Cybernetics, 8, pp. 41-48 (1978).
+
+[zuc81].
+     S.W. Zucker and Y.G. Leclere and J.L. Mohammed, "Continuous Relaxation
+     and Local Maxima Selection: Conditions for Equivalence," IEEE Transac-
+     tions  on  Pattern  Analysis  and Machine Intelligence, 3, pp. 117-128
+     (Mar 1981).
+
+[pel78].
+     S. Peleg and Azriel Rosenfeld, "Determining Compatibility Coefficients
+     for Curve Enhancement Relaxation Processes," IEEE Transactions on Sys-
+     tems, Man, and Cybernetics, 8, pp. 548-555 (1978).
+
+[ros78].
+     Azriel Rosenfeld,  "Iterative  Methods  in  Image  Analysis,"  Pattern
+     Recognition, 10, pp. 181-187 (1978).
+
+[pel80].
+     S.  Peleg,  "A New Probabilistic Relaxation Scheme," IEEE Transactions
+     on Pattern Analysis and Machine Intelligence, 2, pp. 362-369 (1980).
+
+[bha87].
+     Bir Bhanu and Bahram A. Parvin, "Segmentation of Natural Scenes," Pat-
+     tern Recognition, 20, 5, pp. 487-496 (1987).
+
+[bha82].
+     Bir Bhanu and Olivier D. Faugeras, "Segmentation of Images Having Uni-
+     modal  Distributions,"  IEEE  Transactions  on  Pattern  Analysis  and
+     Machine Intelligence, 4, 4, pp. 408-419 (Jul 1982).
+
+[nag82].
+     Paul  A.  Nagin and Allen R. Hanson and Edward M. Riseman, "Studies in
+     Global and Local Histogram-Guided Relaxation Algorithms," IEEE  Trans-
+     actions  on  Pattern  Analysis  and  Machine  Intelligence,  4, 3, pp.
+     263-277 (May 1982).
+
+[ros76].
+     Azriel Rosenfeld and Robert A. Hummel and  Steven  W.  Zucker,  "Scene
+     Labeling by Relaxation Operations," IEEE Transactions on Systems, Man,
+     and Cybernetics, 6, 6, pp. 420-433 (Jun 1976).
+
+[dan81a].
+     Alan J. Danker and Azriel Rosenfeld, "Blob Detection  by  Relaxation,"
+     IEEE  Transactions on Pattern Analysis and Machine Intelligence, 3, 1,
+
+
+
+
+
+
+
+
+
+                                    -2-
+
+
+     pp. 79-92 (Jan 1981).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

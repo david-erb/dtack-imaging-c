@@ -1,0 +1,41 @@
+product	dthuman
+title1	dtdoclist(dthumanq, title)
+title2	dtdoclist(dthuman, title2)
+doc	dthuman
+doc	dthumanq
+
+product	dtimage
+title1	dtdoclist(dtimageq, title)
+title2	dtdoclist(dtimage, title2)
+doc	dtimageq
+
+product	dtenv
+title1	dtdoclist(dtenv, title)
+title2	dtdoclist(dtenv, title2)
+doc	dtenv
+doc	dtenvq
+
+product	dtutil
+title1	dtdoclist(dtutil, title)
+title2	dtdoclist(dtutil, title2)
+doc	dtutil
+doc	dtutilq
+
+product	dthist
+title1	dtdoclist(dthist, title)
+title2	dtdoclist(dthist, title2)
+doc	dthist
+doc	dthistq
+
+product	dtmem
+title1	dtdoclist(dtmem, title)
+title2	dtdoclist(dtmem, title2)
+doc	dtmem
+doc	dtmemq
+
+product	dtstack
+title1	dtdoclist(dtstack, title)
+title2	dtdoclist(dtstack, title2)
+doc	dtstack
+doc	dtstackq
+

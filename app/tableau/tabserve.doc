@@ -1,0 +1,110 @@
+/*..........................................................................
+| TITLE tabserve
+| Video Caesar Server-side Setup Instructions for Win32
+| 
+|!Video Caesar Server-side Setup Instructions for Win32
+| Thanks for buying from Tableau!
+|
+| These instructions will tell you how to install the Tableau Server-side.
+| The Server-side receives images from Tableau on the capture computer and stores
+| them to hard disk.
+| Its function is very much like an FTP server.
+| However, the Tableau Server-side is much faster than FTP.
+| 
+| The Tableau Server-side is the same program as the Tableau
+| Video Caesar capture program.
+| What makes it different is its configuration file.
+|
+| It is our sincere wish that your experience with the Video Caesar
+| web cam system is pleasant and rewarding.
+|
+| Please call us at 1.800.221.7583 with any questions.
+| 
+|.Install software
+|_index installation
+| Follow these instructions to install Tableau
+| on both the capture and server computers.
+|
+| #Note you must have version 01-01 or later of the Tableau Software.#
+| Versions 00-YY will not work as the Server-side.
+| 
+|_Aside Get it from the Internet.
+| 1.	Download the distribution file #tabXX-YY.exe# from Tableau's web site.
+| 		It can be found at #http://www.tableau.com/download.html#.
+|		Place the file in #C:\\WINDOWS\\TEMP# 
+| 		or some other suitable directory.
+| 2.	Open a DOS Box by clicking ~Start->Programs->MS-DOS Prompt~.
+| 3.	Type #CD \\WINDOWS\\TEMP# to change to the temporary directory
+| 		from step1.
+| 4.	Type #TABXX-YY.EXE# to run the self-extracting install program.
+|		When asked, you MUST accept the default destination directory 
+|		#C:\\TABLEAU#.
+| The installation program unpacks some temporary files in the current
+| directory which it removes when finished.
+| All files are installed into the destination directory tree #C:\\TABLEAU#.
+| No files are installed in any Windows system directories.
+| 
+|.Customizing (Capture side)
+| Follow the Customization instructions given in the document entitled
+| ~Video Caesar Documentation~
+| to set up the capture computer.
+|
+| In the file #c:\tableau\config\tableau.arg# on the capture computer
+| use a -screen line like:
+|
+|:   -screen rocket,192.9.200.4:5710
+|
+| Use the IP address of your server computer instead of :192.9.200.4:.
+| 
+|.Customizing (Server side)
+| Follow the Customization instructions given in the document entitled
+| ~Video Caesar Documentation~
+| to set up the server computer.
+|
+| Replace the entire contents of the file #c:\tableau\config\tableau.arg#
+| with the following:
+| 
+|:   -connect rocket,0:5710!
+|:   -path \webcam
+|:   -screen roll,unit1
+|:   -variant passthrough
+|:   -errto c:\tableau\logs\tabserve.log
+|:   -dbgto c:\tableau\logs\tabserve.log
+|:   -sayto c:\tableau\logs\tabserve.log
+|
+| Substitute the following:
+| :\webcam:		a directory on your system
+| :unit:		a subdirectory of :\webcam:
+|
+| Files stored into the directory :\webcam\unit1:
+| will have names of the form :cam0.00000001.rgb888.enc:.
+| These names are not changeable at the current time.
+| 
+| The CGI program :dtspush.exe: conveniently understands these filenames.
+| From these files, :dtspush.exe: puts out standard multi-part mime
+| which Netscape interprets as smooth continuous video.
+| Java applets are available from Tableau which
+| decode the multi-part mime for Microsoft Internet Explorer.
+| 
+| Both :dtspush.exe: and the Java applets are available in
+| source code and compiled form from Tableau.
+|
+|.Starting
+| To start Tableau, choose #Start->Programs->Tableau XX-YY->Tabstart#.
+| This will start both Tabchief and Tableau on both computers.
+| It will also cause a restart either of these programs should they
+| terminate for any reason.
+|
+| To have Tableau start at Windows boot-time,
+| place the Tabstart shortcut into your Startup folder
+| on both the capture and server computers.
+| 
+|.Troubleshooting
+| The most useful way to determine the origin of any problems
+| is to look at the log files in #c:\tableau\logs# on both 
+| the capture and server computers.
+|
+| #Good luck!#
+| 
+| END
+ *..........................................................................*/

@@ -1,0 +1,145 @@
+/*..........................................................................
+| TITLE input
+| Input sources
+| 
+|!Input sources
+| Tableau acquires video frames from several possible sources.
+| You tell tableau which source to use with the -input line in the arg file.
+| The general format of the -input line is:
+|
+|:   -input source,spec,mod1,mod2,...
+|
+| Where:
+| The commas must be there to separate the other fields.
+| There must be no spaces in keyword value.
+| The fields are:
+|
+| source	is one of the strings from the table below
+| spec		identifies which source
+| modn		modifier, exact number and meaning is source dependent
+|
+| Allowed values for source are:
+| vfw		Video for Windows framegrabber
+| bt		Bttv framegrabber for Linux
+| rocket	ipc connection to another tableau
+| gen		synthesize
+| roll		frames as they arrive from capture
+| ser		prepared frames from playlist or files from a directory
+| file		shared file
+|
+|.Video for Windows input
+| Use this type of input on Windows 95 or Windows NT with a framegrabber.
+| You should have a Video for Windows driver installed for your framegrabber.
+|
+| Keyword format:
+|:   -input vfw,name,width,height
+|:   -input vfw,name,width,height,flag1+flag2...
+| 
+| The value for name should be the unambiguous abbreviation
+| of a valid framegrabber in your system.
+| Width and height should be valid for your framegrabber.
+| 
+| Possible values for flagn are:
+| setsize	force setting of given width and height
+| fmtdlg	run VfW Format Dialog at startup
+| srcdlg	run VfW Source Dialog at startup
+|
+|.Bttv for Linux input
+| Use this type of input on Linux with a Bt848-based framegrabber.
+| You should have the shareware bttv driver installed.
+|
+| Keyword formatS:
+|:   -input bt,name,width,height
+|:   -input bt,name,width,height,flag1+flag2...
+| 
+| The value for name should be a device name such as /dev/bttv.
+| Width and height should be reasonable values.
+| 
+| Possible values for flagn are:
+| skip		grab only even lines of twice-tall image
+| dup		grab all lines but ignore odd lines
+| interlace	run board in interlace mode
+|
+|.Rocket input
+| Use this type of input when talking directly to another tableau.
+| This type uses the rocket protocol.
+|
+| Keyword format:
+|:   -input rocket,host:port
+|
+| Example scenario:
+| Dedicated tableau server listens on port for rocket connection.
+| Client makes connection via -input rocket.
+| Server gets frames from framegrabber or wherever and sends to client.
+|
+|.Synthesized input
+| Use this type of input when you have no framegrabber
+| yet still want to generate video frames.
+| 
+| Keyword format:
+|:   -input gen,count,width,height
+|:   -input gen,sweep,width,height
+| 
+| The "sweep" synthesized frames have a single line pivoting around the center.
+| The "count" frames have an incrementing number.
+| If neither type is given, "count" is used.
+|
+|.Arriving frame input
+| Use this type of input when picking up new files being deposited
+| by another tableau.
+| The other tableau will be writing new files and updating the roll file.
+| This tableau will be waiting for the roll file to change
+| and reading files when it does.
+| 
+| Keyword format:
+|:   -input roll,directory
+|
+| The directory name is appended to the -path keyword.
+|
+| This type of input is slightly more efficient than
+| the form -input,ser which can do the same thing without the roll file.
+|
+|.Prepared frames input
+| Use this type of input to play a list of prepared frames.
+| This form can also pick up arriving files.
+| 
+| Keyword format:
+|:   -input ser,filename
+| 
+| Filename should be an ASCII file.
+| If the first line of the file contains a '%' character,
+| tableau assumes this is a filename pattern.
+| Tableau scans the given directory and outputs the matching files.
+| If the first line does not contain a '%' character,
+| tableau assumes that all lines in the file contain
+| either a image filename or the word "loop".
+| If "loop" is found, the tableau rereads the file from the beginning.
+|
+| This type of input can be used when files are arriving from ftp.
+| Since ftp creates no roll file -input roll cannot be used.
+|
+|.Shared file input
+| Use this type of input in conjunction with the tabgrab program.
+| Tabgrab gets input from a framegrabber and writes it to the same shared
+| file or memory over and over.
+| Tableau sends a message to tabgrab for each frame then reads the frame
+| from the shared file or memory.
+| 
+| Keyword format:
+|:   -input file,spec
+|
+| Spec should give the ipc spec of a networked tabgrab.
+|
+| This type of input is useful when you want multiple tableaux to get frames
+| from the same framegrabber.
+| Tabgrab asynchronously writes frames to a file which many tableaux can read.
+| For example, one tableau might serve the images to a tableau server
+| while another tableau serves frames directly to a client.
+| 
+| This type of input cannot currently be used in a multi-camera
+| installation.
+| 
+| END
+ *..........................................................................*/
+
+

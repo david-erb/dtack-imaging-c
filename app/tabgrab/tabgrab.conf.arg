@@ -1,0 +1,6 @@
+-connect rocket,0:5720
+-input vfw,Winnov,320,240,setsize+fmtdlg+srcdlg
+-output tabgrab.dat
+-errto tabgrab.log
+-dbgto tabgrab.log
+-sayto tabgrab.log

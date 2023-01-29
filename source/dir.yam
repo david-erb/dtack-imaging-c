@@ -1,0 +1,31 @@
+define(TOP, UP1)
+define(DIR, source)
+__prolog
+
+__guide(prj_lib_guide(libix),
+  libix.doc, PRJ_LIB_SERIES_SHORT)
+
+__guide(prj_lib_guide(imagedt),
+  imagedt.doc, PRJ_PRODUCT_SERIES)
+
+__sub(1d)
+__sub(low)
+__sub(dg)
+__sub(bigmem)
+ifelse(len(PRJ_NOINTER_DEFINE), 0, `__sub(keybd)')
+
+ifelse(len(PRJ_NOINTER_DEFINE),  0, `__sub(inter)')
+
+ifelse(len(PRJ_NOSCREEN_DEFINE), 0, `__sub(screen)')
+
+ifelse(len(PRJ_NOWIN_DEFINE),    0, `__sub(win)')
+
+__sub(color)
+
+__sub(high)
+
+__sub(xchg)
+
+__sub(fb)
+
+__finish

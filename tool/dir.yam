@@ -1,0 +1,62 @@
+define(TOP, UP1)
+define(DIR, tool)
+
+pushdef(`CCSHARABLE', `CCSHARABLE_ON')
+
+__proto(dttool, parse)
+__usage(dttool, main)
+__usage(box, box)
+__usage(convolve, convolve)
+__usage(copy, copy)
+
+__shlib(prj_lib(dttoolx),
+  box+
+  color+
+  convolve+
+  cooc+
+  copy+
+  enclose+
+  find+
+  fft+
+  gen+
+  hist+
+  linear+
+  logical+
+  lookup+
+  lut+
+  median+
+  morph+
+  mult+
+  nonlin+
+  paste+
+  profile+
+  sum+
+  run+
+  regray+
+  resample+
+  slice+
+  snr+
+  stats+
+  subabs+
+  text+
+  winstop+
+  multithr+
+  thresh+
+  parse+
+  libmain, , , 
+  prj_lib(dtcolor),
+  PRJ_APP1_LIBS)
+
+__shexe(prj_tool_bin(dttool),
+  main, ,
+  prj_lib(dttoolx)+
+  PRJ_APP1_LIBS,
+  PRJ_APP1_LOADS)
+dumpdef(`PRJ_APP1_LIBS')
+
+popdef(`CCSHARABLE')
+
+__finish
+
+
+

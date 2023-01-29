@@ -1,0 +1,32 @@
+# for usage, see stuff1.dat
+
+forward: 	100000
+starve:		1000
+fforward: 	100000
+starve:		500
+
+forward: 	100000
+starve:		1000
+fforward: 	100000
+starve:		500
+
+forward: 	100000
+starve:		1000
+fforward: 	100000
+starve:		500
+
+forward: 	100000
+starve:		1000
+fforward: 	100000
+starve:		500
+
+forward: 	100000
+starve:		1000
+fforward: 	100000
+starve:		500
+
+forward: 	100000
+starve:		1000
+fforward: 	100000
+starve:		500
+stop

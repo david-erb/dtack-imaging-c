@@ -1,0 +1,83 @@
+
+%L kan80
+%K kan80
+%A Takeo Kanade
+%T Region Segmentation: Signal vs Semantics
+%J cgip
+%D 1980
+%V 13
+%P 279-297
+
+%L ada94
+%K ada94
+%A Rolf Adams
+%A Leanne Bischof
+%T Seeded Region Growing
+%J t-pami
+%D Jun 1994
+%V 16
+%N 6
+%P 641-647
+
+%L che86
+%K che86
+%A Fusak Cheevasuvit
+%A Henri Maitre
+%A Daniel Vidal-Madjar
+%T A Robust Method for Picture Segmentation Based on Split-and-Merge Procedure
+%J cvgip
+%D 1986
+%V 34
+%P 268-281
+
+%L cha94
+%K cha94
+%A Yian-Leng Chang
+%A Xiaobo Li
+%T Adaptive Image Region-Growing
+%J t-ip
+%D Nov 1994
+%V 3
+%N 6
+%P 868-872
+
+%L wu93
+%K wu93
+%A Zhenyu Wu
+%T Homogeneity Testing for Unlabeled Data: a Performance Evaluation
+%J gmip
+%D Sep 1993
+%V 55
+%N 5
+%P 370-380
+
+%L zuc76
+%K zuc76
+%A Steven W. Zucker
+%T Region Growing: Childhood and Adolescence
+%J cgip
+%D 1976
+%V 5
+%P 382-399
+
+%L ohl78
+%K ohl78
+%A R. Ohlander
+%A K. Price
+%A D.R. Reddy
+%T Picture Segmentation Using a Recursive Region Splitting Method
+%J cgip
+%D 1978
+%V 8
+%P 313-333
+
+%L dav74
+%K dav74
+%A Larry S. Davis
+%A Azriel Rosenfeld
+%A Joan S. Weszka
+%T Region Extraction by Averaging and Thresholding
+%J unknown
+%D unknown
+%P 
+

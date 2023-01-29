@@ -1,0 +1,26 @@
+define(TOP, UP2)
+define(DIR, app/uclient)
+
+__usage(umsg, umsg)
+__usage(uclient, uclient)
+__usage(userver, userver)
+
+__shexe(prj_test_bin(uclient),   
+  uclient, ,
+  prj_lib(dtdg)+
+  PRJ_LIBS, 
+  PRJ_LOADS)
+
+dnl __shexe(prj_test_bin(umsg),   
+dnl  umsg, ,
+dnl  PRJ_LIBS, 
+dnl  PRJ_LOADS)
+
+dnl __shexe(prj_test_bin(userver),   
+dnl  userver, ,
+dnl  PRJ_LIBS, 
+dnl  PRJ_LOADS)
+
+__finish
+
+

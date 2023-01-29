@@ -1,0 +1,3 @@
+#!/bin/sh
+set -x
+make SRC=/d/2/prj/dt OUT=/usr/erb/prj/dtqw1 MK_TARGET=qw1 qw1 $@

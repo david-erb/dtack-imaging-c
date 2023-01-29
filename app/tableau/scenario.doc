@@ -1,0 +1,138 @@
+/*..........................................................................
+| TITLE scenario
+| Usage scenarios
+| 
+|!Usage scenarios
+| Tableau can operate in a variety of scenarios.
+| This section outlines some of the more important scenarios.
+| 
+| To summarize:
+| thumbnail			periodically recompress the latest frame
+| capture to disk		framegrab and save frames to disk
+| capture to ftp		framegrab and send frames to ftp server
+| capture to rocket		framegrab and send frames to rocket server
+| capture to rocket via CGI	framegrab and send frames to CGI rocket server
+| dedicated rocket server	act as rocket server and save frames to dist
+| forking rocket server		forking rocket server
+| relay server			rocket server which passes to other rocket
+|
+| There certainly are other scenarios in which tableau can be used.
+|
+|.Capture to disk scenario
+| In this scenario tableau saves frames to the local or networked disk.
+| 
+| Important keywords:
+| -input vfw,...	input from framegrabber
+| -path			directory prefix
+| -screen roll,subdir	destination type and directory suffix
+| -dz N			delete Nth oldest frame
+| -dt milliseconds	how long to delay between frames
+|
+| Use this scenario if you have the ability to save files
+| to a disk which is shared with the web server.
+| Note, however, that the rocket scenario is always faster, even on a LAN.
+| 
+| You may also wish to capture a sequence and make a playlist.
+| In this case make sure to set -dz high.
+| Use -dt to slow things down if necessary.
+| 
+|.Capture to ftp scenario
+| In this scenario, tableau sends frames to any standard ftp server.
+| 
+| Important keywords:
+| -input vfw,...	input from framegrabber
+| -screen ftp,...	destination type and directory suffix
+| -dz N			delete Nth oldest frame
+|
+| In addition to tableau.arg, you must edit the ftp.cfg file.
+| Enter your ftp server and login information there.
+|
+|.Capture to rocket scenario
+| In this scenario, tableau sends frames to a rocket server.
+| 
+| Important keywords:
+| -input vfw,...	input from framegrabber
+| -screen rocket,...	destination type and rocket receiver spec
+| 
+| The rocket server is expected to be listening on the server computer.
+|
+|.Capture to rocket via CGI scenario
+| In this scenario, tableau sends frames to a rocket server.
+| 
+| Important keywords:
+| -input vfw,...	input from framegrabber
+| -screen http://...	destination type and remote CGI URL
+| 
+| Before frame transfer starts, tableau tells a remote web server
+| to instantiate a rocket receiver has a CGI program.
+|
+|.Relay scenario
+| In this scenario, tableau picks up files as they arrive on disk.
+| It sends them to a tableau rocket server.
+| 
+| Important keywords:
+| -input ser,filename		input from disk directory
+| -screen rocket,...		destination type to rocket server
+| -variant passthrough		don't decode the incoming frames
+|
+| Use this scenario to relay frames.
+| For example consider a 6-tableau setup.
+| Let a framegrabber tableau(1) send files to a tableau(2) rocket server
+| who stores them on disk.
+| Let a relay tableau(3) pick them up off disk and send them
+| to yet another tableau(4) rocket server on the west coast.
+| Let a second relay tableau(5) also pick frames up off disk and send them
+| to the last tableau(6) rocket server on the east coast.
+|
+|.Thumbnail scenario
+| In this scenario, tableau wakes up infrequently to read the latest frame.
+| It decodes and recompresses the frame into a thumbnail.
+| 
+| Important keywords:
+| -input ser,filename		input from disk directory
+| -screen roll,...		output to disk
+| -path directory		output directory prefix
+| -op trim/0/0/0/16/2		cut off timestamp and shrink by factor of 2
+| -n 1				do only one frame
+| 
+| Since this example uses roll output, output filename will have the goofy
+| :.rgb888.enc: extension.
+| A shell script can easily be wrapped around tableau to rename
+| the filename to whatever is desired.
+| 
+|.Dedicated rocket server scenario
+| In this scenario, tableau runs as a server.
+| It waits for another tableau to connect to it and send frames.
+| It stores the frames on the hard disk.
+| 
+| -connect rocket,host:port!	run in dedicated server mode
+| -path directory		directory prefix
+| -screen roll			destination type
+| -dz N				delete Nth oldest frame
+| -variant passthrough		don't decode the incoming frames
+|
+| This tableau must be started from the command line or a system init file.
+| This tableau exits once a conversation is complete.
+| It must be restarted by some external means.
+|
+|.Forking rocket server
+| In this scenario, tableau runs as a server.
+| It waits for another tableau to connect to it.
+| Upon a connect request, it forks a child tableau to handle incoming frames.
+| The child tableau stores the frames on the hard disk.
+| 
+| -connect rocket,host:port	run in forking server mode
+| -path directory		directory prefix
+| -screen roll			destination type
+| -dz N				delete Nth oldest frame
+| -variant passthrough		don't decode the incoming frames
+|
+| This tableau must be started from the command line or a system init file.
+| The child tableau exits once a conversation is complete.
+| The momma tableau continues to accept connection requests from clients.
+| This scenario can handle any number of clients simultaneously.
+| 
+| END
+ *..........................................................................*/
+
+

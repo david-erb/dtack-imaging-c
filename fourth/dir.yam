@@ -1,0 +1,15 @@
+define(TOP, UP1)
+define(DIR, fourth)
+__prolog
+
+dnl __sub(emsif)
+dnl __sub(xmsif)
+dnl __sub(fastg)
+dnl __sub(svgacc)
+dnl __sub(btpcv3)
+__sub(xv310a)
+__sub(jpeg6a)
+__sub(zlib)
+dnl __sub(mpegssg)
+
+__finish

@@ -1,0 +1,999 @@
+/*
+umplay - MPEG player
+Copyright (C) 1997 Dtack Imaging Software, All Rights Reserved
+
+SYNOPSIS
+  umplay -op [fifo | stuff | server | control | file] [params]
+
+SUMMARY
+  Mpeg playback client and server.  Can also do interactive 
+  file playback.  
+
+PARAMETERS
+  -op             operation 
+  -input          MPEG input file 
+  -connect        ipc spec to adopt or seek 
+  -variant        umdec spec 
+  -path           fifo names in form datafifo,cmdfifo,repfifo 
+  -config         optional config file 
+  -screen         screen spec for software display 
+  -keyboard       keyboard spec (default is operating system 
+                  specific) 
+  -reps           number of times to repeat (default 1) 
+  -help           say short help and quit 
+  -HELP           say long help and quit 
+  -D <masks>      debug options separated by plus (+) signs 
+                  (default none) 
+  -mem <memspec>  big memory sources (default depends on 
+                  system) 
+  -win <winspec>  display server (default none) 
+  -dbgto <file>   output file for debug messages (default 
+                  stderr) 
+  -errto <file>   output file for error messages (default 
+                  stderr) 
+  -sayto <file>   output file for information messages (default
+                  console) 
+  -yield <hints>  yield mode (default normal) 
+
+  The program searches for an environment variable for each 
+  omitted parameter.  For example, -mem could be specified 
+  alternatively by the environment variable DT_MEM.  
+
+DESCRIPTION
+  The program does one operation per invocation.  The 
+  operations are:  
+
+  -op fifo     become the 3-fifo server (rundos uplay 
+               replacement) 
+  -op stuff    test fifo server by stuffing data and commands 
+               into it 
+  -op deccmd   test fifo server by stuffing commands into it 
+  -op decdata  test fifo server by stuffing data into it 
+  -op server   become an ipc-based server 
+  -op control  send commands to an ipc-based server 
+  -op file     interactively play a file 
+  -op probe    just check for hardware 
+  -op rev      print version and quit 
+
+FIFO OPERATION
+  In this operation, the program opens two fifos for reading 
+  and one for writing.  It then functions as Uniquant's mpeg 
+  player server.  This server can be tested with umplay -op 
+  stuff.  
+
+  The required other parameters for this operation are:  
+  -connect  listen ipc spec 
+  -path     fifo names in form datafifo,cmdfifo,repfifo 
+  -variant  the umdec spec 
+
+STUFF, DECCMD AND DECDATA OPERATIONS
+  In these operation, the program opens the complementary fifos
+  to -op fifo.  It then stuffs commands and data into the fifos
+  which cause the server to perform specific operations which 
+  can be verified visually.  The script umplay.sh runs these 
+  operations in the right way.  
+
+SERVER OPERATION
+  In this operation, the program listens at an ipc address for 
+  commands.  A corresponding client to this server is umplay 
+  -op control.  
+
+  The required other parameters for this operation are:  
+  -connect  listen ipc address 
+  -variant  the umdec spec 
+
+CONTROL OPERATION
+  In this operation, the program acts as client to umplay -op 
+  server.  The client gets commands from the command line, the 
+  keyboard, or a file.  Each command is given to the server as 
+  a separate conversation.  This makes it possible to send 
+  commands sequentially from a shell script.  
+
+  The required other parameters for this operation are:  
+  -connect  ipc address where server is listening 
+  -input    if "key" use keyboard;  if a known command send it;
+            otherwise interpret as a file with lines containing
+            commands 
+
+  The known commands are:  
+  input     tell server name of file to read 
+  forward   play forward normally 
+  fforward  play forward fast 
+  sforward  play forward slow 
+  pause     pause or single step 
+  quit      stop and close input stream 
+  exit      server should exit 
+  status    return current status string 
+
+  If -input is "key" and -keyboard is not "none", you may 
+  interact during the playing.  Each command for the server is 
+  indicated by a single keystroke.  
+  i  tell server name of file to read 
+  f  play forward normally 
+  +  play forward fast 
+  -  play forward slow 
+  p  pause or single step 
+  q  stop and close input stream 
+  x  server should exit 
+  s  return current status string 
+  .  quit client but leave server running 
+
+FILE OPERATION
+  In this operation, the program simply reads and plays an mpeg
+  file.  The required other parameters for this operation are:
+  
+  -input    name of the file 
+  -variant  the umdec spec 
+
+  If -keyboard is not "none", you may interact during the 
+  playing.  Each command is indicated by a single keystroke.  
+  f  play forward normally 
+  +  play forward fast 
+  -  play forward slow 
+  p  pause or single step 
+  q  stop and close input stream 
+  s  return current status string 
+
+UMDEC SPEC
+  Whenever this program must actually decode an mpeg string, it
+  requires a umdec spec.  This spec is always given as a 
+  -variant parameter.  The umdec document gives the full syntax
+  of this spec.  However, here are some common examples:  
+  -variant vp           Videoplex
+  -variant ssg,raw      software I frames only on standard display
+  -variant ssg,P,hws,x  software I and P frames on X Window display
+
+CONFIG FILE
+  An optional config file may be specified with the -config 
+  parameter.  This file consists of lines of the form 
+  key:value.  Empty lines and lines beginning with pound-sign 
+  are ignored.  White space before and after the keys and 
+  values is stripped off.  
+
+  The program responds only to certain keys.  The others it 
+  ignores.  The set of valid keys is:  
+  umplay.overlay.text.string        text string to be placed in
+                                    overlay 
+  umplay.overlay.text.x0            upper left column for 
+                                    string 
+  umplay.overlay.text.y0            upper left row for string 
+  umplay.overlay.text.height        text height in pixels 
+  umplay.overlay.text.foreground    text foreground like 
+                                    0x00RRGGBB 
+  umplay.overlay.text.background    text background like 
+                                    0x00RRGGBB 
+  umplay.overlay.image.vp.filename  name of .osd file for 
+                                    Videoplex 
+  umplay.overlay.image.x0           upper left column for image
+                                    
+  umplay.overlay.image.y0           upper left row for image 
+
+EXAMPLES
+  umplay -op fifo -path fifo/dat,fifo/cmd,fifo/rep -variant vp
+  umplay -op stuff -path fifo/data,fifo/cmd,fifo/rep
+  umplay -op server -conn rocket,localhost:6111 -variant vp
+  umplay -op control -conn rocket,localhost:6111 -input key
+  umplay -op control -conn rocket,localhost:6111 -input forward
+  umplay -op file -input myfile.mpeg -variant vp
+
+DEBUGGING PARAMETER
+  The -D parameter must be followed by one or more suboptions 
+  separated by plus signs (+), for example -D img+complex.  Any
+  suboption may be abbreviated to the shortest form which is 
+  not ambiguous with other suboptions.  All possible suboptions
+  are listed in two columns below:  
+
+  alimits - system limits            memstats - memory summary at end
+  all     - all debug masks          memtrace - memory allocation
+  alt     - program alternatives     memx     - big memory interface
+  arg     - command line args        object   - object values
+  assert  - program assertions       page     - memory paging
+  async   - asynchronous events      pixel    - pixel values
+  bigio   - big blocks of I/O        stats    - statistics
+  complex - execution complexity     time     - execution times
+  img     - image operations         trace    - execution trace
+  intermd - intermediate values      usr1     - user's use
+  io      - all file I/O             usr2     - user's use
+  ipc     - interprocess comm        win      - client/server window
+*/
+static const char usage[7982] = {
+'u', 'm', 'p', 'l', 'a', 'y', ' ', '-', ' ', 'M', 
+'P', 'E', 'G', ' ', 'p', 'l', 'a', 'y', 'e', 'r', 
+'\n','C', 'o', 'p', 'y', 'r', 'i', 'g', 'h', 't', 
+' ', '(', 'C', ')', ' ', '1', '9', '9', '7', ' ', 
+'D', 't', 'a', 'c', 'k', ' ', 'I', 'm', 'a', 'g', 
+'i', 'n', 'g', ' ', 'S', 'o', 'f', 't', 'w', 'a', 
+'r', 'e', ',', ' ', 'A', 'l', 'l', ' ', 'R', 'i', 
+'g', 'h', 't', 's', ' ', 'R', 'e', 's', 'e', 'r', 
+'v', 'e', 'd', '\n','\n','S', 'Y', 'N', 'O', 'P', 
+'S', 'I', 'S', '\n',' ', ' ', 'u', 'm', 'p', 'l', 
+'a', 'y', ' ', '-', 'o', 'p', ' ', '[', 'f', 'i', 
+'f', 'o', ' ', '|', ' ', 's', 't', 'u', 'f', 'f', 
+' ', '|', ' ', 's', 'e', 'r', 'v', 'e', 'r', ' ', 
+'|', ' ', 'c', 'o', 'n', 't', 'r', 'o', 'l', ' ', 
+'|', ' ', 'f', 'i', 'l', 'e', ']', ' ', '[', 'p', 
+'a', 'r', 'a', 'm', 's', ']', '\n','\n','S', 'U', 
+'M', 'M', 'A', 'R', 'Y', '\n',' ', ' ', 'M', 'p', 
+'e', 'g', ' ', 'p', 'l', 'a', 'y', 'b', 'a', 'c', 
+'k', ' ', 'c', 'l', 'i', 'e', 'n', 't', ' ', 'a', 
+'n', 'd', ' ', 's', 'e', 'r', 'v', 'e', 'r', '.', 
+' ', ' ', 'C', 'a', 'n', ' ', 'a', 'l', 's', 'o', 
+' ', 'd', 'o', ' ', 'i', 'n', 't', 'e', 'r', 'a', 
+'c', 't', 'i', 'v', 'e', ' ', '\n',' ', ' ', 'f', 
+'i', 'l', 'e', ' ', 'p', 'l', 'a', 'y', 'b', 'a', 
+'c', 'k', '.', ' ', ' ', '\n','\n','P', 'A', 'R', 
+'A', 'M', 'E', 'T', 'E', 'R', 'S', '\n',' ', ' ', 
+'-', 'o', 'p', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 
+' ', ' ', ' ', ' ', ' ', ' ', 'o', 'p', 'e', 'r', 
+'a', 't', 'i', 'o', 'n', ' ', '\n',' ', ' ', '-', 
+'i', 'n', 'p', 'u', 't', ' ', ' ', ' ', ' ', ' ', 
+' ', ' ', ' ', ' ', ' ', 'M', 'P', 'E', 'G', ' ', 
+'i', 'n', 'p', 'u', 't', ' ', 'f', 'i', 'l', 'e', 
+' ', '\n',' ', ' ', '-', 'c', 'o', 'n', 'n', 'e', 
+'c', 't', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 
+'i', 'p', 'c', ' ', 's', 'p', 'e', 'c', ' ', 't', 
+'o', ' ', 'a', 'd', 'o', 'p', 't', ' ', 'o', 'r', 
+' ', 's', 'e', 'e', 'k', ' ', '\n',' ', ' ', '-', 
+'v', 'a', 'r', 'i', 'a', 'n', 't', ' ', ' ', ' ', 
+' ', ' ', ' ', ' ', ' ', 'u', 'm', 'd', 'e', 'c', 
+' ', 's', 'p', 'e', 'c', ' ', '\n',' ', ' ', '-', 
+'p', 'a', 't', 'h', ' ', ' ', ' ', ' ', ' ', ' ', 
+' ', ' ', ' ', ' ', ' ', 'f', 'i', 'f', 'o', ' ', 
+'n', 'a', 'm', 'e', 's', ' ', 'i', 'n', ' ', 'f', 
+'o', 'r', 'm', ' ', 'd', 'a', 't', 'a', 'f', 'i', 
+'f', 'o', ',', 'c', 'm', 'd', 'f', 'i', 'f', 'o', 
+',', 'r', 'e', 'p', 'f', 'i', 'f', 'o', ' ', '\n',
+' ', ' ', '-', 'c', 'o', 'n', 'f', 'i', 'g', ' ', 
+' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'o', 'p', 
+'t', 'i', 'o', 'n', 'a', 'l', ' ', 'c', 'o', 'n', 
+'f', 'i', 'g', ' ', 'f', 'i', 'l', 'e', ' ', '\n',
+' ', ' ', '-', 's', 'c', 'r', 'e', 'e', 'n', ' ', 
+' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 's', 'c', 
+'r', 'e', 'e', 'n', ' ', 's', 'p', 'e', 'c', ' ', 
+'f', 'o', 'r', ' ', 's', 'o', 'f', 't', 'w', 'a', 
+'r', 'e', ' ', 'd', 'i', 's', 'p', 'l', 'a', 'y', 
+' ', '\n',' ', ' ', '-', 'k', 'e', 'y', 'b', 'o', 
+'a', 'r', 'd', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 
+'k', 'e', 'y', 'b', 'o', 'a', 'r', 'd', ' ', 's', 
+'p', 'e', 'c', ' ', '(', 'd', 'e', 'f', 'a', 'u', 
+'l', 't', ' ', 'i', 's', ' ', 'o', 'p', 'e', 'r', 
+'a', 't', 'i', 'n', 'g', ' ', 's', 'y', 's', 't', 
+'e', 'm', ' ', '\n',' ', ' ', ' ', ' ', ' ', ' ', 
+' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 
+' ', ' ', 's', 'p', 'e', 'c', 'i', 'f', 'i', 'c', 
+')', ' ', '\n',' ', ' ', '-', 'r', 'e', 'p', 's', 
+' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 
+' ', 'n', 'u', 'm', 'b', 'e', 'r', ' ', 'o', 'f', 
+' ', 't', 'i', 'm', 'e', 's', ' ', 't', 'o', ' ', 
+'r', 'e', 'p', 'e', 'a', 't', ' ', '(', 'd', 'e', 
+'f', 'a', 'u', 'l', 't', ' ', '1', ')', ' ', '\n',
+' ', ' ', '-', 'h', 'e', 'l', 'p', ' ', ' ', ' ', 
+' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 's', 'a', 
+'y', ' ', 's', 'h', 'o', 'r', 't', ' ', 'h', 'e', 
+'l', 'p', ' ', 'a', 'n', 'd', ' ', 'q', 'u', 'i', 
+'t', ' ', '\n',' ', ' ', '-', 'H', 'E', 'L', 'P', 
+' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 
+' ', 's', 'a', 'y', ' ', 'l', 'o', 'n', 'g', ' ', 
+'h', 'e', 'l', 'p', ' ', 'a', 'n', 'd', ' ', 'q', 
+'u', 'i', 't', ' ', '\n',' ', ' ', '-', 'D', ' ', 
+'<', 'm', 'a', 's', 'k', 's', '>', ' ', ' ', ' ', 
+' ', ' ', ' ', 'd', 'e', 'b', 'u', 'g', ' ', 'o', 
+'p', 't', 'i', 'o', 'n', 's', ' ', 's', 'e', 'p', 
+'a', 'r', 'a', 't', 'e', 'd', ' ', 'b', 'y', ' ', 
+'p', 'l', 'u', 's', ' ', '(', '+', ')', ' ', 's', 
+'i', 'g', 'n', 's', ' ', '\n',' ', ' ', ' ', ' ', 
+' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 
+' ', ' ', ' ', ' ', '(', 'd', 'e', 'f', 'a', 'u', 
+'l', 't', ' ', 'n', 'o', 'n', 'e', ')', ' ', '\n',
+' ', ' ', '-', 'm', 'e', 'm', ' ', '<', 'm', 'e', 
+'m', 's', 'p', 'e', 'c', '>', ' ', ' ', 'b', 'i', 
+'g', ' ', 'm', 'e', 'm', 'o', 'r', 'y', ' ', 's', 
+'o', 'u', 'r', 'c', 'e', 's', ' ', '(', 'd', 'e', 
+'f', 'a', 'u', 'l', 't', ' ', 'd', 'e', 'p', 'e', 
+'n', 'd', 's', ' ', 'o', 'n', ' ', '\n',' ', ' ', 
+' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 
+' ', ' ', ' ', ' ', ' ', ' ', 's', 'y', 's', 't', 
+'e', 'm', ')', ' ', '\n',' ', ' ', '-', 'w', 'i', 
+'n', ' ', '<', 'w', 'i', 'n', 's', 'p', 'e', 'c', 
+'>', ' ', ' ', 'd', 'i', 's', 'p', 'l', 'a', 'y', 
+' ', 's', 'e', 'r', 'v', 'e', 'r', ' ', '(', 'd', 
+'e', 'f', 'a', 'u', 'l', 't', ' ', 'n', 'o', 'n', 
+'e', ')', ' ', '\n',' ', ' ', '-', 'd', 'b', 'g', 
+'t', 'o', ' ', '<', 'f', 'i', 'l', 'e', '>', ' ', 
+' ', ' ', 'o', 'u', 't', 'p', 'u', 't', ' ', 'f', 
+'i', 'l', 'e', ' ', 'f', 'o', 'r', ' ', 'd', 'e', 
+'b', 'u', 'g', ' ', 'm', 'e', 's', 's', 'a', 'g', 
+'e', 's', ' ', '(', 'd', 'e', 'f', 'a', 'u', 'l', 
+'t', ' ', '\n',' ', ' ', ' ', ' ', ' ', ' ', ' ', 
+' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 
+' ', 's', 't', 'd', 'e', 'r', 'r', ')', ' ', '\n',
+' ', ' ', '-', 'e', 'r', 'r', 't', 'o', ' ', '<', 
+'f', 'i', 'l', 'e', '>', ' ', ' ', ' ', 'o', 'u', 
+'t', 'p', 'u', 't', ' ', 'f', 'i', 'l', 'e', ' ', 
+'f', 'o', 'r', ' ', 'e', 'r', 'r', 'o', 'r', ' ', 
+'m', 'e', 's', 's', 'a', 'g', 'e', 's', ' ', '(', 
+'d', 'e', 'f', 'a', 'u', 'l', 't', ' ', '\n',' ', 
+' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 
+' ', ' ', ' ', ' ', ' ', ' ', ' ', 's', 't', 'd', 
+'e', 'r', 'r', ')', ' ', '\n',' ', ' ', '-', 's', 
+'a', 'y', 't', 'o', ' ', '<', 'f', 'i', 'l', 'e', 
+'>', ' ', ' ', ' ', 'o', 'u', 't', 'p', 'u', 't', 
+' ', 'f', 'i', 'l', 'e', ' ', 'f', 'o', 'r', ' ', 
+'i', 'n', 'f', 'o', 'r', 'm', 'a', 't', 'i', 'o', 
+'n', ' ', 'm', 'e', 's', 's', 'a', 'g', 'e', 's', 
+' ', '(', 'd', 'e', 'f', 'a', 'u', 'l', 't', '\n',
+' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 
+' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'c', 'o', 
+'n', 's', 'o', 'l', 'e', ')', ' ', '\n',' ', ' ', 
+'-', 'y', 'i', 'e', 'l', 'd', ' ', '<', 'h', 'i', 
+'n', 't', 's', '>', ' ', ' ', 'y', 'i', 'e', 'l', 
+'d', ' ', 'm', 'o', 'd', 'e', ' ', '(', 'd', 'e', 
+'f', 'a', 'u', 'l', 't', ' ', 'n', 'o', 'r', 'm', 
+'a', 'l', ')', ' ', '\n','\n',' ', ' ', 'T', 'h', 
+'e', ' ', 'p', 'r', 'o', 'g', 'r', 'a', 'm', ' ', 
+'s', 'e', 'a', 'r', 'c', 'h', 'e', 's', ' ', 'f', 
+'o', 'r', ' ', 'a', 'n', ' ', 'e', 'n', 'v', 'i', 
+'r', 'o', 'n', 'm', 'e', 'n', 't', ' ', 'v', 'a', 
+'r', 'i', 'a', 'b', 'l', 'e', ' ', 'f', 'o', 'r', 
+' ', 'e', 'a', 'c', 'h', ' ', '\n',' ', ' ', 'o', 
+'m', 'i', 't', 't', 'e', 'd', ' ', 'p', 'a', 'r', 
+'a', 'm', 'e', 't', 'e', 'r', '.', ' ', ' ', 'F', 
+'o', 'r', ' ', 'e', 'x', 'a', 'm', 'p', 'l', 'e', 
+',', ' ', '-', 'm', 'e', 'm', ' ', 'c', 'o', 'u', 
+'l', 'd', ' ', 'b', 'e', ' ', 's', 'p', 'e', 'c', 
+'i', 'f', 'i', 'e', 'd', ' ', '\n',' ', ' ', 'a', 
+'l', 't', 'e', 'r', 'n', 'a', 't', 'i', 'v', 'e', 
+'l', 'y', ' ', 'b', 'y', ' ', 't', 'h', 'e', ' ', 
+'e', 'n', 'v', 'i', 'r', 'o', 'n', 'm', 'e', 'n', 
+'t', ' ', 'v', 'a', 'r', 'i', 'a', 'b', 'l', 'e', 
+' ', 'D', 'T', '_', 'M', 'E', 'M', '.', ' ', ' ', 
+'\n','\n','D', 'E', 'S', 'C', 'R', 'I', 'P', 'T', 
+'I', 'O', 'N', '\n',' ', ' ', 'T', 'h', 'e', ' ', 
+'p', 'r', 'o', 'g', 'r', 'a', 'm', ' ', 'd', 'o', 
+'e', 's', ' ', 'o', 'n', 'e', ' ', 'o', 'p', 'e', 
+'r', 'a', 't', 'i', 'o', 'n', ' ', 'p', 'e', 'r', 
+' ', 'i', 'n', 'v', 'o', 'c', 'a', 't', 'i', 'o', 
+'n', '.', ' ', ' ', 'T', 'h', 'e', ' ', '\n',' ', 
+' ', 'o', 'p', 'e', 'r', 'a', 't', 'i', 'o', 'n', 
+'s', ' ', 'a', 'r', 'e', ':', ' ', ' ', '\n','\n',
+' ', ' ', '-', 'o', 'p', ' ', 'f', 'i', 'f', 'o', 
+' ', ' ', ' ', ' ', ' ', 'b', 'e', 'c', 'o', 'm', 
+'e', ' ', 't', 'h', 'e', ' ', '3', '-', 'f', 'i', 
+'f', 'o', ' ', 's', 'e', 'r', 'v', 'e', 'r', ' ', 
+'(', 'r', 'u', 'n', 'd', 'o', 's', ' ', 'u', 'p', 
+'l', 'a', 'y', ' ', '\n',' ', ' ', ' ', ' ', ' ', 
+' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 
+'r', 'e', 'p', 'l', 'a', 'c', 'e', 'm', 'e', 'n', 
+'t', ')', ' ', '\n',' ', ' ', '-', 'o', 'p', ' ', 
+'s', 't', 'u', 'f', 'f', ' ', ' ', ' ', ' ', 't', 
+'e', 's', 't', ' ', 'f', 'i', 'f', 'o', ' ', 's', 
+'e', 'r', 'v', 'e', 'r', ' ', 'b', 'y', ' ', 's', 
+'t', 'u', 'f', 'f', 'i', 'n', 'g', ' ', 'd', 'a', 
+'t', 'a', ' ', 'a', 'n', 'd', ' ', 'c', 'o', 'm', 
+'m', 'a', 'n', 'd', 's', ' ', '\n',' ', ' ', ' ', 
+' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 
+' ', ' ', 'i', 'n', 't', 'o', ' ', 'i', 't', ' ', 
+'\n',' ', ' ', '-', 'o', 'p', ' ', 'd', 'e', 'c', 
+'c', 'm', 'd', ' ', ' ', ' ', 't', 'e', 's', 't', 
+' ', 'f', 'i', 'f', 'o', ' ', 's', 'e', 'r', 'v', 
+'e', 'r', ' ', 'b', 'y', ' ', 's', 't', 'u', 'f', 
+'f', 'i', 'n', 'g', ' ', 'c', 'o', 'm', 'm', 'a', 
+'n', 'd', 's', ' ', 'i', 'n', 't', 'o', ' ', 'i', 
+'t', ' ', '\n',' ', ' ', '-', 'o', 'p', ' ', 'd', 
+'e', 'c', 'd', 'a', 't', 'a', ' ', ' ', 't', 'e', 
+'s', 't', ' ', 'f', 'i', 'f', 'o', ' ', 's', 'e', 
+'r', 'v', 'e', 'r', ' ', 'b', 'y', ' ', 's', 't', 
+'u', 'f', 'f', 'i', 'n', 'g', ' ', 'd', 'a', 't', 
+'a', ' ', 'i', 'n', 't', 'o', ' ', 'i', 't', ' ', 
+'\n',' ', ' ', '-', 'o', 'p', ' ', 's', 'e', 'r', 
+'v', 'e', 'r', ' ', ' ', ' ', 'b', 'e', 'c', 'o', 
+'m', 'e', ' ', 'a', 'n', ' ', 'i', 'p', 'c', '-', 
+'b', 'a', 's', 'e', 'd', ' ', 's', 'e', 'r', 'v', 
+'e', 'r', ' ', '\n',' ', ' ', '-', 'o', 'p', ' ', 
+'c', 'o', 'n', 't', 'r', 'o', 'l', ' ', ' ', 's', 
+'e', 'n', 'd', ' ', 'c', 'o', 'm', 'm', 'a', 'n', 
+'d', 's', ' ', 't', 'o', ' ', 'a', 'n', ' ', 'i', 
+'p', 'c', '-', 'b', 'a', 's', 'e', 'd', ' ', 's', 
+'e', 'r', 'v', 'e', 'r', ' ', '\n',' ', ' ', '-', 
+'o', 'p', ' ', 'f', 'i', 'l', 'e', ' ', ' ', ' ', 
+' ', ' ', 'i', 'n', 't', 'e', 'r', 'a', 'c', 't', 
+'i', 'v', 'e', 'l', 'y', ' ', 'p', 'l', 'a', 'y', 
+' ', 'a', ' ', 'f', 'i', 'l', 'e', ' ', '\n',' ', 
+' ', '-', 'o', 'p', ' ', 'p', 'r', 'o', 'b', 'e', 
+' ', ' ', ' ', ' ', 'j', 'u', 's', 't', ' ', 'c', 
+'h', 'e', 'c', 'k', ' ', 'f', 'o', 'r', ' ', 'h', 
+'a', 'r', 'd', 'w', 'a', 'r', 'e', ' ', '\n',' ', 
+' ', '-', 'o', 'p', ' ', 'r', 'e', 'v', ' ', ' ', 
+' ', ' ', ' ', ' ', 'p', 'r', 'i', 'n', 't', ' ', 
+'v', 'e', 'r', 's', 'i', 'o', 'n', ' ', 'a', 'n', 
+'d', ' ', 'q', 'u', 'i', 't', ' ', '\n','\n','F', 
+'I', 'F', 'O', ' ', 'O', 'P', 'E', 'R', 'A', 'T', 
+'I', 'O', 'N', '\n',' ', ' ', 'I', 'n', ' ', 't', 
+'h', 'i', 's', ' ', 'o', 'p', 'e', 'r', 'a', 't', 
+'i', 'o', 'n', ',', ' ', 't', 'h', 'e', ' ', 'p', 
+'r', 'o', 'g', 'r', 'a', 'm', ' ', 'o', 'p', 'e', 
+'n', 's', ' ', 't', 'w', 'o', ' ', 'f', 'i', 'f', 
+'o', 's', ' ', 'f', 'o', 'r', ' ', 'r', 'e', 'a', 
+'d', 'i', 'n', 'g', ' ', '\n',' ', ' ', 'a', 'n', 
+'d', ' ', 'o', 'n', 'e', ' ', 'f', 'o', 'r', ' ', 
+'w', 'r', 'i', 't', 'i', 'n', 'g', '.', ' ', ' ', 
+'I', 't', ' ', 't', 'h', 'e', 'n', ' ', 'f', 'u', 
+'n', 'c', 't', 'i', 'o', 'n', 's', ' ', 'a', 's', 
+' ', 'U', 'n', 'i', 'q', 'u', 'a', 'n', 't', '\'',
+'s', ' ', 'm', 'p', 'e', 'g', ' ', '\n',' ', ' ', 
+'p', 'l', 'a', 'y', 'e', 'r', ' ', 's', 'e', 'r', 
+'v', 'e', 'r', '.', ' ', ' ', 'T', 'h', 'i', 's', 
+' ', 's', 'e', 'r', 'v', 'e', 'r', ' ', 'c', 'a', 
+'n', ' ', 'b', 'e', ' ', 't', 'e', 's', 't', 'e', 
+'d', ' ', 'w', 'i', 't', 'h', ' ', 'u', 'm', 'p', 
+'l', 'a', 'y', ' ', '-', 'o', 'p', ' ', '\n',' ', 
+' ', 's', 't', 'u', 'f', 'f', '.', ' ', ' ', '\n',
+'\n',' ', ' ', 'T', 'h', 'e', ' ', 'r', 'e', 'q', 
+'u', 'i', 'r', 'e', 'd', ' ', 'o', 't', 'h', 'e', 
+'r', ' ', 'p', 'a', 'r', 'a', 'm', 'e', 't', 'e', 
+'r', 's', ' ', 'f', 'o', 'r', ' ', 't', 'h', 'i', 
+'s', ' ', 'o', 'p', 'e', 'r', 'a', 't', 'i', 'o', 
+'n', ' ', 'a', 'r', 'e', ':', ' ', ' ', '\n',' ', 
+' ', '-', 'c', 'o', 'n', 'n', 'e', 'c', 't', ' ', 
+' ', 'l', 'i', 's', 't', 'e', 'n', ' ', 'i', 'p', 
+'c', ' ', 's', 'p', 'e', 'c', ' ', '\n',' ', ' ', 
+'-', 'p', 'a', 't', 'h', ' ', ' ', ' ', ' ', ' ', 
+'f', 'i', 'f', 'o', ' ', 'n', 'a', 'm', 'e', 's', 
+' ', 'i', 'n', ' ', 'f', 'o', 'r', 'm', ' ', 'd', 
+'a', 't', 'a', 'f', 'i', 'f', 'o', ',', 'c', 'm', 
+'d', 'f', 'i', 'f', 'o', ',', 'r', 'e', 'p', 'f', 
+'i', 'f', 'o', ' ', '\n',' ', ' ', '-', 'v', 'a', 
+'r', 'i', 'a', 'n', 't', ' ', ' ', 't', 'h', 'e', 
+' ', 'u', 'm', 'd', 'e', 'c', ' ', 's', 'p', 'e', 
+'c', ' ', '\n','\n','S', 'T', 'U', 'F', 'F', ',', 
+' ', 'D', 'E', 'C', 'C', 'M', 'D', ' ', 'A', 'N', 
+'D', ' ', 'D', 'E', 'C', 'D', 'A', 'T', 'A', ' ', 
+'O', 'P', 'E', 'R', 'A', 'T', 'I', 'O', 'N', 'S', 
+'\n',' ', ' ', 'I', 'n', ' ', 't', 'h', 'e', 's', 
+'e', ' ', 'o', 'p', 'e', 'r', 'a', 't', 'i', 'o', 
+'n', ',', ' ', 't', 'h', 'e', ' ', 'p', 'r', 'o', 
+'g', 'r', 'a', 'm', ' ', 'o', 'p', 'e', 'n', 's', 
+' ', 't', 'h', 'e', ' ', 'c', 'o', 'm', 'p', 'l', 
+'e', 'm', 'e', 'n', 't', 'a', 'r', 'y', ' ', 'f', 
+'i', 'f', 'o', 's', '\n',' ', ' ', 't', 'o', ' ', 
+'-', 'o', 'p', ' ', 'f', 'i', 'f', 'o', '.', ' ', 
+' ', 'I', 't', ' ', 't', 'h', 'e', 'n', ' ', 's', 
+'t', 'u', 'f', 'f', 's', ' ', 'c', 'o', 'm', 'm', 
+'a', 'n', 'd', 's', ' ', 'a', 'n', 'd', ' ', 'd', 
+'a', 't', 'a', ' ', 'i', 'n', 't', 'o', ' ', 't', 
+'h', 'e', ' ', 'f', 'i', 'f', 'o', 's', '\n',' ', 
+' ', 'w', 'h', 'i', 'c', 'h', ' ', 'c', 'a', 'u', 
+'s', 'e', ' ', 't', 'h', 'e', ' ', 's', 'e', 'r', 
+'v', 'e', 'r', ' ', 't', 'o', ' ', 'p', 'e', 'r', 
+'f', 'o', 'r', 'm', ' ', 's', 'p', 'e', 'c', 'i', 
+'f', 'i', 'c', ' ', 'o', 'p', 'e', 'r', 'a', 't', 
+'i', 'o', 'n', 's', ' ', 'w', 'h', 'i', 'c', 'h', 
+' ', '\n',' ', ' ', 'c', 'a', 'n', ' ', 'b', 'e', 
+' ', 'v', 'e', 'r', 'i', 'f', 'i', 'e', 'd', ' ', 
+'v', 'i', 's', 'u', 'a', 'l', 'l', 'y', '.', ' ', 
+' ', 'T', 'h', 'e', ' ', 's', 'c', 'r', 'i', 'p', 
+'t', ' ', 'u', 'm', 'p', 'l', 'a', 'y', '.', 's', 
+'h', ' ', 'r', 'u', 'n', 's', ' ', 't', 'h', 'e', 
+'s', 'e', ' ', '\n',' ', ' ', 'o', 'p', 'e', 'r', 
+'a', 't', 'i', 'o', 'n', 's', ' ', 'i', 'n', ' ', 
+'t', 'h', 'e', ' ', 'r', 'i', 'g', 'h', 't', ' ', 
+'w', 'a', 'y', '.', ' ', ' ', '\n','\n','S', 'E', 
+'R', 'V', 'E', 'R', ' ', 'O', 'P', 'E', 'R', 'A', 
+'T', 'I', 'O', 'N', '\n',' ', ' ', 'I', 'n', ' ', 
+'t', 'h', 'i', 's', ' ', 'o', 'p', 'e', 'r', 'a', 
+'t', 'i', 'o', 'n', ',', ' ', 't', 'h', 'e', ' ', 
+'p', 'r', 'o', 'g', 'r', 'a', 'm', ' ', 'l', 'i', 
+'s', 't', 'e', 'n', 's', ' ', 'a', 't', ' ', 'a', 
+'n', ' ', 'i', 'p', 'c', ' ', 'a', 'd', 'd', 'r', 
+'e', 's', 's', ' ', 'f', 'o', 'r', ' ', '\n',' ', 
+' ', 'c', 'o', 'm', 'm', 'a', 'n', 'd', 's', '.', 
+' ', ' ', 'A', ' ', 'c', 'o', 'r', 'r', 'e', 's', 
+'p', 'o', 'n', 'd', 'i', 'n', 'g', ' ', 'c', 'l', 
+'i', 'e', 'n', 't', ' ', 't', 'o', ' ', 't', 'h', 
+'i', 's', ' ', 's', 'e', 'r', 'v', 'e', 'r', ' ', 
+'i', 's', ' ', 'u', 'm', 'p', 'l', 'a', 'y', ' ', 
+'\n',' ', ' ', '-', 'o', 'p', ' ', 'c', 'o', 'n', 
+'t', 'r', 'o', 'l', '.', ' ', ' ', '\n','\n',' ', 
+' ', 'T', 'h', 'e', ' ', 'r', 'e', 'q', 'u', 'i', 
+'r', 'e', 'd', ' ', 'o', 't', 'h', 'e', 'r', ' ', 
+'p', 'a', 'r', 'a', 'm', 'e', 't', 'e', 'r', 's', 
+' ', 'f', 'o', 'r', ' ', 't', 'h', 'i', 's', ' ', 
+'o', 'p', 'e', 'r', 'a', 't', 'i', 'o', 'n', ' ', 
+'a', 'r', 'e', ':', ' ', ' ', '\n',' ', ' ', '-', 
+'c', 'o', 'n', 'n', 'e', 'c', 't', ' ', ' ', 'l', 
+'i', 's', 't', 'e', 'n', ' ', 'i', 'p', 'c', ' ', 
+'a', 'd', 'd', 'r', 'e', 's', 's', ' ', '\n',' ', 
+' ', '-', 'v', 'a', 'r', 'i', 'a', 'n', 't', ' ', 
+' ', 't', 'h', 'e', ' ', 'u', 'm', 'd', 'e', 'c', 
+' ', 's', 'p', 'e', 'c', ' ', '\n','\n','C', 'O', 
+'N', 'T', 'R', 'O', 'L', ' ', 'O', 'P', 'E', 'R', 
+'A', 'T', 'I', 'O', 'N', '\n',' ', ' ', 'I', 'n', 
+' ', 't', 'h', 'i', 's', ' ', 'o', 'p', 'e', 'r', 
+'a', 't', 'i', 'o', 'n', ',', ' ', 't', 'h', 'e', 
+' ', 'p', 'r', 'o', 'g', 'r', 'a', 'm', ' ', 'a', 
+'c', 't', 's', ' ', 'a', 's', ' ', 'c', 'l', 'i', 
+'e', 'n', 't', ' ', 't', 'o', ' ', 'u', 'm', 'p', 
+'l', 'a', 'y', ' ', '-', 'o', 'p', ' ', '\n',' ', 
+' ', 's', 'e', 'r', 'v', 'e', 'r', '.', ' ', ' ', 
+'T', 'h', 'e', ' ', 'c', 'l', 'i', 'e', 'n', 't', 
+' ', 'g', 'e', 't', 's', ' ', 'c', 'o', 'm', 'm', 
+'a', 'n', 'd', 's', ' ', 'f', 'r', 'o', 'm', ' ', 
+'t', 'h', 'e', ' ', 'c', 'o', 'm', 'm', 'a', 'n', 
+'d', ' ', 'l', 'i', 'n', 'e', ',', ' ', 't', 'h', 
+'e', ' ', '\n',' ', ' ', 'k', 'e', 'y', 'b', 'o', 
+'a', 'r', 'd', ',', ' ', 'o', 'r', ' ', 'a', ' ', 
+'f', 'i', 'l', 'e', '.', ' ', ' ', 'E', 'a', 'c', 
+'h', ' ', 'c', 'o', 'm', 'm', 'a', 'n', 'd', ' ', 
+'i', 's', ' ', 'g', 'i', 'v', 'e', 'n', ' ', 't', 
+'o', ' ', 't', 'h', 'e', ' ', 's', 'e', 'r', 'v', 
+'e', 'r', ' ', 'a', 's', ' ', '\n',' ', ' ', 'a', 
+' ', 's', 'e', 'p', 'a', 'r', 'a', 't', 'e', ' ', 
+'c', 'o', 'n', 'v', 'e', 'r', 's', 'a', 't', 'i', 
+'o', 'n', '.', ' ', ' ', 'T', 'h', 'i', 's', ' ', 
+'m', 'a', 'k', 'e', 's', ' ', 'i', 't', ' ', 'p', 
+'o', 's', 's', 'i', 'b', 'l', 'e', ' ', 't', 'o', 
+' ', 's', 'e', 'n', 'd', ' ', '\n',' ', ' ', 'c', 
+'o', 'm', 'm', 'a', 'n', 'd', 's', ' ', 's', 'e', 
+'q', 'u', 'e', 'n', 't', 'i', 'a', 'l', 'l', 'y', 
+' ', 'f', 'r', 'o', 'm', ' ', 'a', ' ', 's', 'h', 
+'e', 'l', 'l', ' ', 's', 'c', 'r', 'i', 'p', 't', 
+'.', ' ', ' ', '\n','\n',' ', ' ', 'T', 'h', 'e', 
+' ', 'r', 'e', 'q', 'u', 'i', 'r', 'e', 'd', ' ', 
+'o', 't', 'h', 'e', 'r', ' ', 'p', 'a', 'r', 'a', 
+'m', 'e', 't', 'e', 'r', 's', ' ', 'f', 'o', 'r', 
+' ', 't', 'h', 'i', 's', ' ', 'o', 'p', 'e', 'r', 
+'a', 't', 'i', 'o', 'n', ' ', 'a', 'r', 'e', ':', 
+' ', ' ', '\n',' ', ' ', '-', 'c', 'o', 'n', 'n', 
+'e', 'c', 't', ' ', ' ', 'i', 'p', 'c', ' ', 'a', 
+'d', 'd', 'r', 'e', 's', 's', ' ', 'w', 'h', 'e', 
+'r', 'e', ' ', 's', 'e', 'r', 'v', 'e', 'r', ' ', 
+'i', 's', ' ', 'l', 'i', 's', 't', 'e', 'n', 'i', 
+'n', 'g', ' ', '\n',' ', ' ', '-', 'i', 'n', 'p', 
+'u', 't', ' ', ' ', ' ', ' ', 'i', 'f', ' ', '"', 
+'k', 'e', 'y', '"', ' ', 'u', 's', 'e', ' ', 'k', 
+'e', 'y', 'b', 'o', 'a', 'r', 'd', ';', ' ', ' ', 
+'i', 'f', ' ', 'a', ' ', 'k', 'n', 'o', 'w', 'n', 
+' ', 'c', 'o', 'm', 'm', 'a', 'n', 'd', ' ', 's', 
+'e', 'n', 'd', ' ', 'i', 't', ';', '\n',' ', ' ', 
+' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 
+'o', 't', 'h', 'e', 'r', 'w', 'i', 's', 'e', ' ', 
+'i', 'n', 't', 'e', 'r', 'p', 'r', 'e', 't', ' ', 
+'a', 's', ' ', 'a', ' ', 'f', 'i', 'l', 'e', ' ', 
+'w', 'i', 't', 'h', ' ', 'l', 'i', 'n', 'e', 's', 
+' ', 'c', 'o', 'n', 't', 'a', 'i', 'n', 'i', 'n', 
+'g', '\n',' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 
+' ', ' ', ' ', ' ', 'c', 'o', 'm', 'm', 'a', 'n', 
+'d', 's', ' ', '\n','\n',' ', ' ', 'T', 'h', 'e', 
+' ', 'k', 'n', 'o', 'w', 'n', ' ', 'c', 'o', 'm', 
+'m', 'a', 'n', 'd', 's', ' ', 'a', 'r', 'e', ':', 
+' ', ' ', '\n',' ', ' ', 'i', 'n', 'p', 'u', 't', 
+' ', ' ', ' ', ' ', ' ', 't', 'e', 'l', 'l', ' ', 
+'s', 'e', 'r', 'v', 'e', 'r', ' ', 'n', 'a', 'm', 
+'e', ' ', 'o', 'f', ' ', 'f', 'i', 'l', 'e', ' ', 
+'t', 'o', ' ', 'r', 'e', 'a', 'd', ' ', '\n',' ', 
+' ', 'f', 'o', 'r', 'w', 'a', 'r', 'd', ' ', ' ', 
+' ', 'p', 'l', 'a', 'y', ' ', 'f', 'o', 'r', 'w', 
+'a', 'r', 'd', ' ', 'n', 'o', 'r', 'm', 'a', 'l', 
+'l', 'y', ' ', '\n',' ', ' ', 'f', 'f', 'o', 'r', 
+'w', 'a', 'r', 'd', ' ', ' ', 'p', 'l', 'a', 'y', 
+' ', 'f', 'o', 'r', 'w', 'a', 'r', 'd', ' ', 'f', 
+'a', 's', 't', ' ', '\n',' ', ' ', 's', 'f', 'o', 
+'r', 'w', 'a', 'r', 'd', ' ', ' ', 'p', 'l', 'a', 
+'y', ' ', 'f', 'o', 'r', 'w', 'a', 'r', 'd', ' ', 
+'s', 'l', 'o', 'w', ' ', '\n',' ', ' ', 'p', 'a', 
+'u', 's', 'e', ' ', ' ', ' ', ' ', ' ', 'p', 'a', 
+'u', 's', 'e', ' ', 'o', 'r', ' ', 's', 'i', 'n', 
+'g', 'l', 'e', ' ', 's', 't', 'e', 'p', ' ', '\n',
+' ', ' ', 'q', 'u', 'i', 't', ' ', ' ', ' ', ' ', 
+' ', ' ', 's', 't', 'o', 'p', ' ', 'a', 'n', 'd', 
+' ', 'c', 'l', 'o', 's', 'e', ' ', 'i', 'n', 'p', 
+'u', 't', ' ', 's', 't', 'r', 'e', 'a', 'm', ' ', 
+'\n',' ', ' ', 'e', 'x', 'i', 't', ' ', ' ', ' ', 
+' ', ' ', ' ', 's', 'e', 'r', 'v', 'e', 'r', ' ', 
+'s', 'h', 'o', 'u', 'l', 'd', ' ', 'e', 'x', 'i', 
+'t', ' ', '\n',' ', ' ', 's', 't', 'a', 't', 'u', 
+'s', ' ', ' ', ' ', ' ', 'r', 'e', 't', 'u', 'r', 
+'n', ' ', 'c', 'u', 'r', 'r', 'e', 'n', 't', ' ', 
+'s', 't', 'a', 't', 'u', 's', ' ', 's', 't', 'r', 
+'i', 'n', 'g', ' ', '\n','\n',' ', ' ', 'I', 'f', 
+' ', '-', 'i', 'n', 'p', 'u', 't', ' ', 'i', 's', 
+' ', '"', 'k', 'e', 'y', '"', ' ', 'a', 'n', 'd', 
+' ', '-', 'k', 'e', 'y', 'b', 'o', 'a', 'r', 'd', 
+' ', 'i', 's', ' ', 'n', 'o', 't', ' ', '"', 'n', 
+'o', 'n', 'e', '"', ',', ' ', 'y', 'o', 'u', ' ', 
+'m', 'a', 'y', ' ', '\n',' ', ' ', 'i', 'n', 't', 
+'e', 'r', 'a', 'c', 't', ' ', 'd', 'u', 'r', 'i', 
+'n', 'g', ' ', 't', 'h', 'e', ' ', 'p', 'l', 'a', 
+'y', 'i', 'n', 'g', '.', ' ', ' ', 'E', 'a', 'c', 
+'h', ' ', 'c', 'o', 'm', 'm', 'a', 'n', 'd', ' ', 
+'f', 'o', 'r', ' ', 't', 'h', 'e', ' ', 's', 'e', 
+'r', 'v', 'e', 'r', ' ', 'i', 's', ' ', '\n',' ', 
+' ', 'i', 'n', 'd', 'i', 'c', 'a', 't', 'e', 'd', 
+' ', 'b', 'y', ' ', 'a', ' ', 's', 'i', 'n', 'g', 
+'l', 'e', ' ', 'k', 'e', 'y', 's', 't', 'r', 'o', 
+'k', 'e', '.', ' ', ' ', '\n',' ', ' ', 'i', ' ', 
+' ', 't', 'e', 'l', 'l', ' ', 's', 'e', 'r', 'v', 
+'e', 'r', ' ', 'n', 'a', 'm', 'e', ' ', 'o', 'f', 
+' ', 'f', 'i', 'l', 'e', ' ', 't', 'o', ' ', 'r', 
+'e', 'a', 'd', ' ', '\n',' ', ' ', 'f', ' ', ' ', 
+'p', 'l', 'a', 'y', ' ', 'f', 'o', 'r', 'w', 'a', 
+'r', 'd', ' ', 'n', 'o', 'r', 'm', 'a', 'l', 'l', 
+'y', ' ', '\n',' ', ' ', '+', ' ', ' ', 'p', 'l', 
+'a', 'y', ' ', 'f', 'o', 'r', 'w', 'a', 'r', 'd', 
+' ', 'f', 'a', 's', 't', ' ', '\n',' ', ' ', '-', 
+' ', ' ', 'p', 'l', 'a', 'y', ' ', 'f', 'o', 'r', 
+'w', 'a', 'r', 'd', ' ', 's', 'l', 'o', 'w', ' ', 
+'\n',' ', ' ', 'p', ' ', ' ', 'p', 'a', 'u', 's', 
+'e', ' ', 'o', 'r', ' ', 's', 'i', 'n', 'g', 'l', 
+'e', ' ', 's', 't', 'e', 'p', ' ', '\n',' ', ' ', 
+'q', ' ', ' ', 's', 't', 'o', 'p', ' ', 'a', 'n', 
+'d', ' ', 'c', 'l', 'o', 's', 'e', ' ', 'i', 'n', 
+'p', 'u', 't', ' ', 's', 't', 'r', 'e', 'a', 'm', 
+' ', '\n',' ', ' ', 'x', ' ', ' ', 's', 'e', 'r', 
+'v', 'e', 'r', ' ', 's', 'h', 'o', 'u', 'l', 'd', 
+' ', 'e', 'x', 'i', 't', ' ', '\n',' ', ' ', 's', 
+' ', ' ', 'r', 'e', 't', 'u', 'r', 'n', ' ', 'c', 
+'u', 'r', 'r', 'e', 'n', 't', ' ', 's', 't', 'a', 
+'t', 'u', 's', ' ', 's', 't', 'r', 'i', 'n', 'g', 
+' ', '\n',' ', ' ', '.', ' ', ' ', 'q', 'u', 'i', 
+'t', ' ', 'c', 'l', 'i', 'e', 'n', 't', ' ', 'b', 
+'u', 't', ' ', 'l', 'e', 'a', 'v', 'e', ' ', 's', 
+'e', 'r', 'v', 'e', 'r', ' ', 'r', 'u', 'n', 'n', 
+'i', 'n', 'g', ' ', '\n','\n','F', 'I', 'L', 'E', 
+' ', 'O', 'P', 'E', 'R', 'A', 'T', 'I', 'O', 'N', 
+'\n',' ', ' ', 'I', 'n', ' ', 't', 'h', 'i', 's', 
+' ', 'o', 'p', 'e', 'r', 'a', 't', 'i', 'o', 'n', 
+',', ' ', 't', 'h', 'e', ' ', 'p', 'r', 'o', 'g', 
+'r', 'a', 'm', ' ', 's', 'i', 'm', 'p', 'l', 'y', 
+' ', 'r', 'e', 'a', 'd', 's', ' ', 'a', 'n', 'd', 
+' ', 'p', 'l', 'a', 'y', 's', ' ', 'a', 'n', ' ', 
+'m', 'p', 'e', 'g', '\n',' ', ' ', 'f', 'i', 'l', 
+'e', '.', ' ', ' ', 'T', 'h', 'e', ' ', 'r', 'e', 
+'q', 'u', 'i', 'r', 'e', 'd', ' ', 'o', 't', 'h', 
+'e', 'r', ' ', 'p', 'a', 'r', 'a', 'm', 'e', 't', 
+'e', 'r', 's', ' ', 'f', 'o', 'r', ' ', 't', 'h', 
+'i', 's', ' ', 'o', 'p', 'e', 'r', 'a', 't', 'i', 
+'o', 'n', ' ', 'a', 'r', 'e', ':', '\n',' ', ' ', 
+'\n',' ', ' ', '-', 'i', 'n', 'p', 'u', 't', ' ', 
+' ', ' ', ' ', 'n', 'a', 'm', 'e', ' ', 'o', 'f', 
+' ', 't', 'h', 'e', ' ', 'f', 'i', 'l', 'e', ' ', 
+'\n',' ', ' ', '-', 'v', 'a', 'r', 'i', 'a', 'n', 
+'t', ' ', ' ', 't', 'h', 'e', ' ', 'u', 'm', 'd', 
+'e', 'c', ' ', 's', 'p', 'e', 'c', ' ', '\n','\n',
+' ', ' ', 'I', 'f', ' ', '-', 'k', 'e', 'y', 'b', 
+'o', 'a', 'r', 'd', ' ', 'i', 's', ' ', 'n', 'o', 
+'t', ' ', '"', 'n', 'o', 'n', 'e', '"', ',', ' ', 
+'y', 'o', 'u', ' ', 'm', 'a', 'y', ' ', 'i', 'n', 
+'t', 'e', 'r', 'a', 'c', 't', ' ', 'd', 'u', 'r', 
+'i', 'n', 'g', ' ', 't', 'h', 'e', ' ', '\n',' ', 
+' ', 'p', 'l', 'a', 'y', 'i', 'n', 'g', '.', ' ', 
+' ', 'E', 'a', 'c', 'h', ' ', 'c', 'o', 'm', 'm', 
+'a', 'n', 'd', ' ', 'i', 's', ' ', 'i', 'n', 'd', 
+'i', 'c', 'a', 't', 'e', 'd', ' ', 'b', 'y', ' ', 
+'a', ' ', 's', 'i', 'n', 'g', 'l', 'e', ' ', 'k', 
+'e', 'y', 's', 't', 'r', 'o', 'k', 'e', '.', ' ', 
+' ', '\n',' ', ' ', 'f', ' ', ' ', 'p', 'l', 'a', 
+'y', ' ', 'f', 'o', 'r', 'w', 'a', 'r', 'd', ' ', 
+'n', 'o', 'r', 'm', 'a', 'l', 'l', 'y', ' ', '\n',
+' ', ' ', '+', ' ', ' ', 'p', 'l', 'a', 'y', ' ', 
+'f', 'o', 'r', 'w', 'a', 'r', 'd', ' ', 'f', 'a', 
+'s', 't', ' ', '\n',' ', ' ', '-', ' ', ' ', 'p', 
+'l', 'a', 'y', ' ', 'f', 'o', 'r', 'w', 'a', 'r', 
+'d', ' ', 's', 'l', 'o', 'w', ' ', '\n',' ', ' ', 
+'p', ' ', ' ', 'p', 'a', 'u', 's', 'e', ' ', 'o', 
+'r', ' ', 's', 'i', 'n', 'g', 'l', 'e', ' ', 's', 
+'t', 'e', 'p', ' ', '\n',' ', ' ', 'q', ' ', ' ', 
+'s', 't', 'o', 'p', ' ', 'a', 'n', 'd', ' ', 'c', 
+'l', 'o', 's', 'e', ' ', 'i', 'n', 'p', 'u', 't', 
+' ', 's', 't', 'r', 'e', 'a', 'm', ' ', '\n',' ', 
+' ', 's', ' ', ' ', 'r', 'e', 't', 'u', 'r', 'n', 
+' ', 'c', 'u', 'r', 'r', 'e', 'n', 't', ' ', 's', 
+'t', 'a', 't', 'u', 's', ' ', 's', 't', 'r', 'i', 
+'n', 'g', ' ', '\n','\n','U', 'M', 'D', 'E', 'C', 
+' ', 'S', 'P', 'E', 'C', '\n',' ', ' ', 'W', 'h', 
+'e', 'n', 'e', 'v', 'e', 'r', ' ', 't', 'h', 'i', 
+'s', ' ', 'p', 'r', 'o', 'g', 'r', 'a', 'm', ' ', 
+'m', 'u', 's', 't', ' ', 'a', 'c', 't', 'u', 'a', 
+'l', 'l', 'y', ' ', 'd', 'e', 'c', 'o', 'd', 'e', 
+' ', 'a', 'n', ' ', 'm', 'p', 'e', 'g', ' ', 's', 
+'t', 'r', 'i', 'n', 'g', ',', ' ', 'i', 't', '\n',
+' ', ' ', 'r', 'e', 'q', 'u', 'i', 'r', 'e', 's', 
+' ', 'a', ' ', 'u', 'm', 'd', 'e', 'c', ' ', 's', 
+'p', 'e', 'c', '.', ' ', ' ', 'T', 'h', 'i', 's', 
+' ', 's', 'p', 'e', 'c', ' ', 'i', 's', ' ', 'a', 
+'l', 'w', 'a', 'y', 's', ' ', 'g', 'i', 'v', 'e', 
+'n', ' ', 'a', 's', ' ', 'a', ' ', '\n',' ', ' ', 
+'-', 'v', 'a', 'r', 'i', 'a', 'n', 't', ' ', 'p', 
+'a', 'r', 'a', 'm', 'e', 't', 'e', 'r', '.', ' ', 
+' ', 'T', 'h', 'e', ' ', 'u', 'm', 'd', 'e', 'c', 
+' ', 'd', 'o', 'c', 'u', 'm', 'e', 'n', 't', ' ', 
+'g', 'i', 'v', 'e', 's', ' ', 't', 'h', 'e', ' ', 
+'f', 'u', 'l', 'l', ' ', 's', 'y', 'n', 't', 'a', 
+'x', '\n',' ', ' ', 'o', 'f', ' ', 't', 'h', 'i', 
+'s', ' ', 's', 'p', 'e', 'c', '.', ' ', ' ', 'H', 
+'o', 'w', 'e', 'v', 'e', 'r', ',', ' ', 'h', 'e', 
+'r', 'e', ' ', 'a', 'r', 'e', ' ', 's', 'o', 'm', 
+'e', ' ', 'c', 'o', 'm', 'm', 'o', 'n', ' ', 'e', 
+'x', 'a', 'm', 'p', 'l', 'e', 's', ':', ' ', ' ', 
+'\n',' ', ' ', '-', 'v', 'a', 'r', 'i', 'a', 'n', 
+'t', ' ', 'v', 'p', ' ', ' ', ' ', ' ', ' ', ' ', 
+' ', ' ', ' ', ' ', ' ', 'V', 'i', 'd', 'e', 'o', 
+'p', 'l', 'e', 'x', '\n',' ', ' ', '-', 'v', 'a', 
+'r', 'i', 'a', 'n', 't', ' ', 's', 's', 'g', ',', 
+'r', 'a', 'w', ' ', ' ', ' ', ' ', ' ', ' ', 's', 
+'o', 'f', 't', 'w', 'a', 'r', 'e', ' ', 'I', ' ', 
+'f', 'r', 'a', 'm', 'e', 's', ' ', 'o', 'n', 'l', 
+'y', ' ', 'o', 'n', ' ', 's', 't', 'a', 'n', 'd', 
+'a', 'r', 'd', ' ', 'd', 'i', 's', 'p', 'l', 'a', 
+'y', '\n',' ', ' ', '-', 'v', 'a', 'r', 'i', 'a', 
+'n', 't', ' ', 's', 's', 'g', ',', 'P', ',', 'h', 
+'w', 's', ',', 'x', ' ', ' ', 's', 'o', 'f', 't', 
+'w', 'a', 'r', 'e', ' ', 'I', ' ', 'a', 'n', 'd', 
+' ', 'P', ' ', 'f', 'r', 'a', 'm', 'e', 's', ' ', 
+'o', 'n', ' ', 'X', ' ', 'W', 'i', 'n', 'd', 'o', 
+'w', ' ', 'd', 'i', 's', 'p', 'l', 'a', 'y', '\n',
+'\n','C', 'O', 'N', 'F', 'I', 'G', ' ', 'F', 'I', 
+'L', 'E', '\n',' ', ' ', 'A', 'n', ' ', 'o', 'p', 
+'t', 'i', 'o', 'n', 'a', 'l', ' ', 'c', 'o', 'n', 
+'f', 'i', 'g', ' ', 'f', 'i', 'l', 'e', ' ', 'm', 
+'a', 'y', ' ', 'b', 'e', ' ', 's', 'p', 'e', 'c', 
+'i', 'f', 'i', 'e', 'd', ' ', 'w', 'i', 't', 'h', 
+' ', 't', 'h', 'e', ' ', '-', 'c', 'o', 'n', 'f', 
+'i', 'g', ' ', '\n',' ', ' ', 'p', 'a', 'r', 'a', 
+'m', 'e', 't', 'e', 'r', '.', ' ', ' ', 'T', 'h', 
+'i', 's', ' ', 'f', 'i', 'l', 'e', ' ', 'c', 'o', 
+'n', 's', 'i', 's', 't', 's', ' ', 'o', 'f', ' ', 
+'l', 'i', 'n', 'e', 's', ' ', 'o', 'f', ' ', 't', 
+'h', 'e', ' ', 'f', 'o', 'r', 'm', ' ', '\n',' ', 
+' ', 'k', 'e', 'y', ':', 'v', 'a', 'l', 'u', 'e', 
+'.', ' ', ' ', 'E', 'm', 'p', 't', 'y', ' ', 'l', 
+'i', 'n', 'e', 's', ' ', 'a', 'n', 'd', ' ', 'l', 
+'i', 'n', 'e', 's', ' ', 'b', 'e', 'g', 'i', 'n', 
+'n', 'i', 'n', 'g', ' ', 'w', 'i', 't', 'h', ' ', 
+'p', 'o', 'u', 'n', 'd', '-', 's', 'i', 'g', 'n', 
+' ', '\n',' ', ' ', 'a', 'r', 'e', ' ', 'i', 'g', 
+'n', 'o', 'r', 'e', 'd', '.', ' ', ' ', 'W', 'h', 
+'i', 't', 'e', ' ', 's', 'p', 'a', 'c', 'e', ' ', 
+'b', 'e', 'f', 'o', 'r', 'e', ' ', 'a', 'n', 'd', 
+' ', 'a', 'f', 't', 'e', 'r', ' ', 't', 'h', 'e', 
+' ', 'k', 'e', 'y', 's', ' ', 'a', 'n', 'd', ' ', 
+'\n',' ', ' ', 'v', 'a', 'l', 'u', 'e', 's', ' ', 
+'i', 's', ' ', 's', 't', 'r', 'i', 'p', 'p', 'e', 
+'d', ' ', 'o', 'f', 'f', '.', ' ', ' ', '\n','\n',
+' ', ' ', 'T', 'h', 'e', ' ', 'p', 'r', 'o', 'g', 
+'r', 'a', 'm', ' ', 'r', 'e', 's', 'p', 'o', 'n', 
+'d', 's', ' ', 'o', 'n', 'l', 'y', ' ', 't', 'o', 
+' ', 'c', 'e', 'r', 't', 'a', 'i', 'n', ' ', 'k', 
+'e', 'y', 's', '.', ' ', ' ', 'T', 'h', 'e', ' ', 
+'o', 't', 'h', 'e', 'r', 's', ' ', 'i', 't', ' ', 
+'\n',' ', ' ', 'i', 'g', 'n', 'o', 'r', 'e', 's', 
+'.', ' ', ' ', 'T', 'h', 'e', ' ', 's', 'e', 't', 
+' ', 'o', 'f', ' ', 'v', 'a', 'l', 'i', 'd', ' ', 
+'k', 'e', 'y', 's', ' ', 'i', 's', ':', ' ', ' ', 
+'\n',' ', ' ', 'u', 'm', 'p', 'l', 'a', 'y', '.', 
+'o', 'v', 'e', 'r', 'l', 'a', 'y', '.', 't', 'e', 
+'x', 't', '.', 's', 't', 'r', 'i', 'n', 'g', ' ', 
+' ', ' ', ' ', ' ', ' ', ' ', ' ', 't', 'e', 'x', 
+'t', ' ', 's', 't', 'r', 'i', 'n', 'g', ' ', 't', 
+'o', ' ', 'b', 'e', ' ', 'p', 'l', 'a', 'c', 'e', 
+'d', ' ', 'i', 'n', '\n',' ', ' ', ' ', ' ', ' ', 
+' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 
+' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 
+' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 
+' ', 'o', 'v', 'e', 'r', 'l', 'a', 'y', ' ', '\n',
+' ', ' ', 'u', 'm', 'p', 'l', 'a', 'y', '.', 'o', 
+'v', 'e', 'r', 'l', 'a', 'y', '.', 't', 'e', 'x', 
+'t', '.', 'x', '0', ' ', ' ', ' ', ' ', ' ', ' ', 
+' ', ' ', ' ', ' ', ' ', ' ', 'u', 'p', 'p', 'e', 
+'r', ' ', 'l', 'e', 'f', 't', ' ', 'c', 'o', 'l', 
+'u', 'm', 'n', ' ', 'f', 'o', 'r', ' ', '\n',' ', 
+' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 
+' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 
+' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 
+' ', ' ', ' ', ' ', ' ', 's', 't', 'r', 'i', 'n', 
+'g', ' ', '\n',' ', ' ', 'u', 'm', 'p', 'l', 'a', 
+'y', '.', 'o', 'v', 'e', 'r', 'l', 'a', 'y', '.', 
+'t', 'e', 'x', 't', '.', 'y', '0', ' ', ' ', ' ', 
+' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'u', 
+'p', 'p', 'e', 'r', ' ', 'l', 'e', 'f', 't', ' ', 
+'r', 'o', 'w', ' ', 'f', 'o', 'r', ' ', 's', 't', 
+'r', 'i', 'n', 'g', ' ', '\n',' ', ' ', 'u', 'm', 
+'p', 'l', 'a', 'y', '.', 'o', 'v', 'e', 'r', 'l', 
+'a', 'y', '.', 't', 'e', 'x', 't', '.', 'h', 'e', 
+'i', 'g', 'h', 't', ' ', ' ', ' ', ' ', ' ', ' ', 
+' ', ' ', 't', 'e', 'x', 't', ' ', 'h', 'e', 'i', 
+'g', 'h', 't', ' ', 'i', 'n', ' ', 'p', 'i', 'x', 
+'e', 'l', 's', ' ', '\n',' ', ' ', 'u', 'm', 'p', 
+'l', 'a', 'y', '.', 'o', 'v', 'e', 'r', 'l', 'a', 
+'y', '.', 't', 'e', 'x', 't', '.', 'f', 'o', 'r', 
+'e', 'g', 'r', 'o', 'u', 'n', 'd', ' ', ' ', ' ', 
+' ', 't', 'e', 'x', 't', ' ', 'f', 'o', 'r', 'e', 
+'g', 'r', 'o', 'u', 'n', 'd', ' ', 'l', 'i', 'k', 
+'e', ' ', '\n',' ', ' ', ' ', ' ', ' ', ' ', ' ', 
+' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 
+' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 
+' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '0', 
+'x', '0', '0', 'R', 'R', 'G', 'G', 'B', 'B', ' ', 
+'\n',' ', ' ', 'u', 'm', 'p', 'l', 'a', 'y', '.', 
+'o', 'v', 'e', 'r', 'l', 'a', 'y', '.', 't', 'e', 
+'x', 't', '.', 'b', 'a', 'c', 'k', 'g', 'r', 'o', 
+'u', 'n', 'd', ' ', ' ', ' ', ' ', 't', 'e', 'x', 
+'t', ' ', 'b', 'a', 'c', 'k', 'g', 'r', 'o', 'u', 
+'n', 'd', ' ', 'l', 'i', 'k', 'e', ' ', '\n',' ', 
+' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 
+' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 
+' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 
+' ', ' ', ' ', ' ', ' ', '0', 'x', '0', '0', 'R', 
+'R', 'G', 'G', 'B', 'B', ' ', '\n',' ', ' ', 'u', 
+'m', 'p', 'l', 'a', 'y', '.', 'o', 'v', 'e', 'r', 
+'l', 'a', 'y', '.', 'i', 'm', 'a', 'g', 'e', '.', 
+'v', 'p', '.', 'f', 'i', 'l', 'e', 'n', 'a', 'm', 
+'e', ' ', ' ', 'n', 'a', 'm', 'e', ' ', 'o', 'f', 
+' ', '.', 'o', 's', 'd', ' ', 'f', 'i', 'l', 'e', 
+' ', 'f', 'o', 'r', ' ', '\n',' ', ' ', ' ', ' ', 
+' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 
+' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 
+' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 
+' ', ' ', 'V', 'i', 'd', 'e', 'o', 'p', 'l', 'e', 
+'x', ' ', '\n',' ', ' ', 'u', 'm', 'p', 'l', 'a', 
+'y', '.', 'o', 'v', 'e', 'r', 'l', 'a', 'y', '.', 
+'i', 'm', 'a', 'g', 'e', '.', 'x', '0', ' ', ' ', 
+' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'u', 
+'p', 'p', 'e', 'r', ' ', 'l', 'e', 'f', 't', ' ', 
+'c', 'o', 'l', 'u', 'm', 'n', ' ', 'f', 'o', 'r', 
+' ', 'i', 'm', 'a', 'g', 'e', '\n',' ', ' ', ' ', 
+' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 
+' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 
+' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 
+' ', ' ', ' ', '\n',' ', ' ', 'u', 'm', 'p', 'l', 
+'a', 'y', '.', 'o', 'v', 'e', 'r', 'l', 'a', 'y', 
+'.', 'i', 'm', 'a', 'g', 'e', '.', 'y', '0', ' ', 
+' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 
+'u', 'p', 'p', 'e', 'r', ' ', 'l', 'e', 'f', 't', 
+' ', 'r', 'o', 'w', ' ', 'f', 'o', 'r', ' ', 'i', 
+'m', 'a', 'g', 'e', ' ', '\n','\n','E', 'X', 'A', 
+'M', 'P', 'L', 'E', 'S', '\n',' ', ' ', 'u', 'm', 
+'p', 'l', 'a', 'y', ' ', '-', 'o', 'p', ' ', 'f', 
+'i', 'f', 'o', ' ', '-', 'p', 'a', 't', 'h', ' ', 
+'f', 'i', 'f', 'o', '/', 'd', 'a', 't', ',', 'f', 
+'i', 'f', 'o', '/', 'c', 'm', 'd', ',', 'f', 'i', 
+'f', 'o', '/', 'r', 'e', 'p', ' ', '-', 'v', 'a', 
+'r', 'i', 'a', 'n', 't', ' ', 'v', 'p', '\n',' ', 
+' ', 'u', 'm', 'p', 'l', 'a', 'y', ' ', '-', 'o', 
+'p', ' ', 's', 't', 'u', 'f', 'f', ' ', '-', 'p', 
+'a', 't', 'h', ' ', 'f', 'i', 'f', 'o', '/', 'd', 
+'a', 't', 'a', ',', 'f', 'i', 'f', 'o', '/', 'c', 
+'m', 'd', ',', 'f', 'i', 'f', 'o', '/', 'r', 'e', 
+'p', '\n',' ', ' ', 'u', 'm', 'p', 'l', 'a', 'y', 
+' ', '-', 'o', 'p', ' ', 's', 'e', 'r', 'v', 'e', 
+'r', ' ', '-', 'c', 'o', 'n', 'n', ' ', 'r', 'o', 
+'c', 'k', 'e', 't', ',', 'l', 'o', 'c', 'a', 'l', 
+'h', 'o', 's', 't', ':', '6', '1', '1', '1', ' ', 
+'-', 'v', 'a', 'r', 'i', 'a', 'n', 't', ' ', 'v', 
+'p', '\n',' ', ' ', 'u', 'm', 'p', 'l', 'a', 'y', 
+' ', '-', 'o', 'p', ' ', 'c', 'o', 'n', 't', 'r', 
+'o', 'l', ' ', '-', 'c', 'o', 'n', 'n', ' ', 'r', 
+'o', 'c', 'k', 'e', 't', ',', 'l', 'o', 'c', 'a', 
+'l', 'h', 'o', 's', 't', ':', '6', '1', '1', '1', 
+' ', '-', 'i', 'n', 'p', 'u', 't', ' ', 'k', 'e', 
+'y', '\n',' ', ' ', 'u', 'm', 'p', 'l', 'a', 'y', 
+' ', '-', 'o', 'p', ' ', 'c', 'o', 'n', 't', 'r', 
+'o', 'l', ' ', '-', 'c', 'o', 'n', 'n', ' ', 'r', 
+'o', 'c', 'k', 'e', 't', ',', 'l', 'o', 'c', 'a', 
+'l', 'h', 'o', 's', 't', ':', '6', '1', '1', '1', 
+' ', '-', 'i', 'n', 'p', 'u', 't', ' ', 'f', 'o', 
+'r', 'w', 'a', 'r', 'd', '\n',' ', ' ', 'u', 'm', 
+'p', 'l', 'a', 'y', ' ', '-', 'o', 'p', ' ', 'f', 
+'i', 'l', 'e', ' ', '-', 'i', 'n', 'p', 'u', 't', 
+' ', 'm', 'y', 'f', 'i', 'l', 'e', '.', 'm', 'p', 
+'e', 'g', ' ', '-', 'v', 'a', 'r', 'i', 'a', 'n', 
+'t', ' ', 'v', 'p', '\n','\n','D', 'E', 'B', 'U', 
+'G', 'G', 'I', 'N', 'G', ' ', 'P', 'A', 'R', 'A', 
+'M', 'E', 'T', 'E', 'R', '\n',' ', ' ', 'T', 'h', 
+'e', ' ', '-', 'D', ' ', 'p', 'a', 'r', 'a', 'm', 
+'e', 't', 'e', 'r', ' ', 'm', 'u', 's', 't', ' ', 
+'b', 'e', ' ', 'f', 'o', 'l', 'l', 'o', 'w', 'e', 
+'d', ' ', 'b', 'y', ' ', 'o', 'n', 'e', ' ', 'o', 
+'r', ' ', 'm', 'o', 'r', 'e', ' ', 's', 'u', 'b', 
+'o', 'p', 't', 'i', 'o', 'n', 's', ' ', '\n',' ', 
+' ', 's', 'e', 'p', 'a', 'r', 'a', 't', 'e', 'd', 
+' ', 'b', 'y', ' ', 'p', 'l', 'u', 's', ' ', 's', 
+'i', 'g', 'n', 's', ' ', '(', '+', ')', ',', ' ', 
+'f', 'o', 'r', ' ', 'e', 'x', 'a', 'm', 'p', 'l', 
+'e', ' ', '-', 'D', ' ', 'i', 'm', 'g', '+', 'c', 
+'o', 'm', 'p', 'l', 'e', 'x', '.', ' ', ' ', 'A', 
+'n', 'y', '\n',' ', ' ', 's', 'u', 'b', 'o', 'p', 
+'t', 'i', 'o', 'n', ' ', 'm', 'a', 'y', ' ', 'b', 
+'e', ' ', 'a', 'b', 'b', 'r', 'e', 'v', 'i', 'a', 
+'t', 'e', 'd', ' ', 't', 'o', ' ', 't', 'h', 'e', 
+' ', 's', 'h', 'o', 'r', 't', 'e', 's', 't', ' ', 
+'f', 'o', 'r', 'm', ' ', 'w', 'h', 'i', 'c', 'h', 
+' ', 'i', 's', ' ', '\n',' ', ' ', 'n', 'o', 't', 
+' ', 'a', 'm', 'b', 'i', 'g', 'u', 'o', 'u', 's', 
+' ', 'w', 'i', 't', 'h', ' ', 'o', 't', 'h', 'e', 
+'r', ' ', 's', 'u', 'b', 'o', 'p', 't', 'i', 'o', 
+'n', 's', '.', ' ', ' ', 'A', 'l', 'l', ' ', 'p', 
+'o', 's', 's', 'i', 'b', 'l', 'e', ' ', 's', 'u', 
+'b', 'o', 'p', 't', 'i', 'o', 'n', 's', '\n',' ', 
+' ', 'a', 'r', 'e', ' ', 'l', 'i', 's', 't', 'e', 
+'d', ' ', 'i', 'n', ' ', 't', 'w', 'o', ' ', 'c', 
+'o', 'l', 'u', 'm', 'n', 's', ' ', 'b', 'e', 'l', 
+'o', 'w', ':', ' ', ' ', '\n','\n',' ', ' ', 'a', 
+'l', 'i', 'm', 'i', 't', 's', ' ', '-', ' ', 's', 
+'y', 's', 't', 'e', 'm', ' ', 'l', 'i', 'm', 'i', 
+'t', 's', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 
+' ', ' ', ' ', ' ', 'm', 'e', 'm', 's', 't', 'a', 
+'t', 's', ' ', '-', ' ', 'm', 'e', 'm', 'o', 'r', 
+'y', ' ', 's', 'u', 'm', 'm', 'a', 'r', 'y', ' ', 
+'a', 't', ' ', 'e', 'n', 'd', '\n',' ', ' ', 'a', 
+'l', 'l', ' ', ' ', ' ', ' ', ' ', '-', ' ', 'a', 
+'l', 'l', ' ', 'd', 'e', 'b', 'u', 'g', ' ', 'm', 
+'a', 's', 'k', 's', ' ', ' ', ' ', ' ', ' ', ' ', 
+' ', ' ', ' ', ' ', 'm', 'e', 'm', 't', 'r', 'a', 
+'c', 'e', ' ', '-', ' ', 'm', 'e', 'm', 'o', 'r', 
+'y', ' ', 'a', 'l', 'l', 'o', 'c', 'a', 't', 'i', 
+'o', 'n', '\n',' ', ' ', 'a', 'l', 't', ' ', ' ', 
+' ', ' ', ' ', '-', ' ', 'p', 'r', 'o', 'g', 'r', 
+'a', 'm', ' ', 'a', 'l', 't', 'e', 'r', 'n', 'a', 
+'t', 'i', 'v', 'e', 's', ' ', ' ', ' ', ' ', ' ', 
+'m', 'e', 'm', 'x', ' ', ' ', ' ', ' ', ' ', '-', 
+' ', 'b', 'i', 'g', ' ', 'm', 'e', 'm', 'o', 'r', 
+'y', ' ', 'i', 'n', 't', 'e', 'r', 'f', 'a', 'c', 
+'e', '\n',' ', ' ', 'a', 'r', 'g', ' ', ' ', ' ', 
+' ', ' ', '-', ' ', 'c', 'o', 'm', 'm', 'a', 'n', 
+'d', ' ', 'l', 'i', 'n', 'e', ' ', 'a', 'r', 'g', 
+'s', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'o', 
+'b', 'j', 'e', 'c', 't', ' ', ' ', ' ', '-', ' ', 
+'o', 'b', 'j', 'e', 'c', 't', ' ', 'v', 'a', 'l', 
+'u', 'e', 's', '\n',' ', ' ', 'a', 's', 's', 'e', 
+'r', 't', ' ', ' ', '-', ' ', 'p', 'r', 'o', 'g', 
+'r', 'a', 'm', ' ', 'a', 's', 's', 'e', 'r', 't', 
+'i', 'o', 'n', 's', ' ', ' ', ' ', ' ', ' ', ' ', 
+' ', 'p', 'a', 'g', 'e', ' ', ' ', ' ', ' ', ' ', 
+'-', ' ', 'm', 'e', 'm', 'o', 'r', 'y', ' ', 'p', 
+'a', 'g', 'i', 'n', 'g', '\n',' ', ' ', 'a', 's', 
+'y', 'n', 'c', ' ', ' ', ' ', '-', ' ', 'a', 's', 
+'y', 'n', 'c', 'h', 'r', 'o', 'n', 'o', 'u', 's', 
+' ', 'e', 'v', 'e', 'n', 't', 's', ' ', ' ', ' ', 
+' ', ' ', ' ', 'p', 'i', 'x', 'e', 'l', ' ', ' ', 
+' ', ' ', '-', ' ', 'p', 'i', 'x', 'e', 'l', ' ', 
+'v', 'a', 'l', 'u', 'e', 's', '\n',' ', ' ', 'b', 
+'i', 'g', 'i', 'o', ' ', ' ', ' ', '-', ' ', 'b', 
+'i', 'g', ' ', 'b', 'l', 'o', 'c', 'k', 's', ' ', 
+'o', 'f', ' ', 'I', '/', 'O', ' ', ' ', ' ', ' ', 
+' ', ' ', ' ', ' ', 's', 't', 'a', 't', 's', ' ', 
+' ', ' ', ' ', '-', ' ', 's', 't', 'a', 't', 'i', 
+'s', 't', 'i', 'c', 's', '\n',' ', ' ', 'c', 'o', 
+'m', 'p', 'l', 'e', 'x', ' ', '-', ' ', 'e', 'x', 
+'e', 'c', 'u', 't', 'i', 'o', 'n', ' ', 'c', 'o', 
+'m', 'p', 'l', 'e', 'x', 'i', 't', 'y', ' ', ' ', 
+' ', ' ', ' ', 't', 'i', 'm', 'e', ' ', ' ', ' ', 
+' ', ' ', '-', ' ', 'e', 'x', 'e', 'c', 'u', 't', 
+'i', 'o', 'n', ' ', 't', 'i', 'm', 'e', 's', '\n',
+' ', ' ', 'i', 'm', 'g', ' ', ' ', ' ', ' ', ' ', 
+'-', ' ', 'i', 'm', 'a', 'g', 'e', ' ', 'o', 'p', 
+'e', 'r', 'a', 't', 'i', 'o', 'n', 's', ' ', ' ', 
+' ', ' ', ' ', ' ', ' ', ' ', ' ', 't', 'r', 'a', 
+'c', 'e', ' ', ' ', ' ', ' ', '-', ' ', 'e', 'x', 
+'e', 'c', 'u', 't', 'i', 'o', 'n', ' ', 't', 'r', 
+'a', 'c', 'e', '\n',' ', ' ', 'i', 'n', 't', 'e', 
+'r', 'm', 'd', ' ', '-', ' ', 'i', 'n', 't', 'e', 
+'r', 'm', 'e', 'd', 'i', 'a', 't', 'e', ' ', 'v', 
+'a', 'l', 'u', 'e', 's', ' ', ' ', ' ', ' ', ' ', 
+' ', 'u', 's', 'r', '1', ' ', ' ', ' ', ' ', ' ', 
+'-', ' ', 'u', 's', 'e', 'r', '\'','s', ' ', 'u', 
+'s', 'e', '\n',' ', ' ', 'i', 'o', ' ', ' ', ' ', 
+' ', ' ', ' ', '-', ' ', 'a', 'l', 'l', ' ', 'f', 
+'i', 'l', 'e', ' ', 'I', '/', 'O', ' ', ' ', ' ', 
+' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 
+'u', 's', 'r', '2', ' ', ' ', ' ', ' ', ' ', '-', 
+' ', 'u', 's', 'e', 'r', '\'','s', ' ', 'u', 's', 
+'e', '\n',' ', ' ', 'i', 'p', 'c', ' ', ' ', ' ', 
+' ', ' ', '-', ' ', 'i', 'n', 't', 'e', 'r', 'p', 
+'r', 'o', 'c', 'e', 's', 's', ' ', 'c', 'o', 'm', 
+'m', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'w', 
+'i', 'n', ' ', ' ', ' ', ' ', ' ', ' ', '-', ' ', 
+'c', 'l', 'i', 'e', 'n', 't', '/', 's', 'e', 'r', 
+'v', 'e', 'r', ' ', 'w', 'i', 'n', 'd', 'o', 'w', 
+'\n','\0'
+};

@@ -1,0 +1,35 @@
+#==========================================================================;
+#
+#  THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
+#  KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+#  IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR
+#  PURPOSE.
+#
+#  Copyright (c) 1992 - 1996  Microsoft Corporation.  All Rights Reserved.
+#
+#--------------------------------------------------------------------------;
+
+INC_FILES = stdwin.h                   \
+            $(AXSDK)\include\strmif.h  \
+            $(AXSDK)\include\control.h \
+            $(AXSDK)\include\evcode.h  \
+            $(AXSDK)\include\uuids.h
+
+$(DBG_RTL)\cplay.obj : $(INC_FILES) cplay.h about.h file.h media.h toolbar.h
+
+$(DBG_RTL)\about.obj : $(INC_FILES) about.h
+
+$(DBG_RTL)\file.obj  : $(INC_FILES) file.h
+
+$(DBG_RTL)\media.obj : $(INC_FILES)                       \
+                       $(AXSDK)\include\evcode.h          \
+                       cplay.h file.h media.h toolbar.h
+
+$(DBG_RTL)\assert.obj : $(INC_FILES)
+
+$(DBG_RTL)\toolbar.obj : $(INC_FILES) media.h toolbar.h
+
+$(DBG_RTL)\player.res : player.rc           \
+                        ..\res\player.ico   \
+                        ..\res\bitmap1.bmp  \
+                        ..\res\idr_main.bmp \

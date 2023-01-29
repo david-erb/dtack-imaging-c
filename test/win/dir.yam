@@ -1,0 +1,58 @@
+define(TOP, UP2)
+define(DIR, test/win)
+
+__usage(dttwin, dttwinx)
+
+__shexe(prj_test_bin(dttwin),   dttwin+dttwinx, ,
+  prj_lib(dtwins)+
+  prj_lib(dttaa)+
+  prj_lib(dtxchg)+
+  prj_lib(dtxchgs)+
+  prj_lib(dtcolor)+
+  prj_lib(dthigh)+
+  prj_lib(dtwinc)+
+  prj_lib(dtscr)+
+  prj_lib(dtcand)+
+  prj_lib(dthws)+
+  PRJ_LIBS,
+  PRJ_LOADS PRJ_SCR_LOADS)
+
+ifelse(len(PRJ_FASTGRAPH_DEFINE), 0, , `
+__shexe(prj_test_bin(dttwinf),  dttwinf+dttwinx, ,
+  prj_lib(dtwins)+
+  prj_lib(dttaa)+
+  prj_lib(dtxchg)+
+  prj_lib(dtxchgs)+
+  prj_lib(dtcolor)+
+  prj_lib(dthigh)+
+  prj_lib(dtwinc)+
+  prj_lib(dtscr)+
+  prj_lib(dtcan)+
+  prj_lib(dthwsd)+
+  PRJ_FASTGRAPH_LIB+
+  prj_lib(dtsvgacd)+
+  PRJ_LIBS,
+  PRJ_LOADS PRJ_SCR_LOADS)
+')
+
+ifelse(len(PRJ_SVGACC_DEFINE), 0, , `
+__shexe(prj_test_bin(dttwins),  dttwins+dttwinx, ,
+  prj_lib(dtwins)+
+  prj_lib(dttaa)+
+  prj_lib(dtxchg)+
+  prj_lib(dtxchgs)+
+  prj_lib(dtcolor)+
+  prj_lib(dthigh)+
+  prj_lib(dtwinc)+
+  prj_lib(dtscr)+
+  prj_lib(dtcan)+
+  prj_lib(dthwsd)+
+  prj_lib(dtfastgd)+
+  PRJ_SVGACC_LIB+
+  PRJ_LIBS,
+  PRJ_LOADS PRJ_SCR_LOADS)
+')
+
+__finish
+
+

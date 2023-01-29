@@ -1,0 +1,28 @@
+define(TOP, UP2)
+define(DIR, test/bigmem)
+
+pushdef(`CCSHARABLE', `CCSHARABLE_ON')
+__shlib(prj_lib(dttmex),
+  dttmem2+
+  dttmem+
+  dttstack+
+  libmain, , ,
+  prj_lib(dttzz)+
+  prj_lib(dtbigmem)+
+  prj_lib(dtlow)+
+  prj_lib(dt1d))
+popdef(`CCSHARABLE')
+
+__shexe(prj_test_bin(dttmem),   
+  mem, ,
+  prj_lib(dttmex)+
+  prj_lib(dttzz)+
+  prj_lib(dtbigmem)+
+  prj_lib(dtlow)+
+  prj_lib(dt1d)+
+  PRJ_LIBS,
+  PRJ_LOADS) 
+
+__finish
+
+

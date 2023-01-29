@@ -1,0 +1,11 @@
+-parent %s
+-connect rocket,192.9.200.6:%d^
+-input ser,%s
+-D usr1+usr2+ipc+object
+-path /img/tableau/test1
+-variant passthrough 
+-op "stamp,test %%d %%b %%y %%H:%%M:%%S"
+-errto /usr/erb/prj/dt/app/wrangler/drone.log
+-dbgto /usr/erb/prj/dt/app/wrangler/drone.log
+-sayto /usr/erb/prj/dt/app/wrangler/drone.log
+

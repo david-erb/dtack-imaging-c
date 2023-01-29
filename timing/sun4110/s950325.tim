@@ -1,0 +1,110 @@
+===========================================
+dttiming: 25 Mar 95 05:06 SG1 
+dttmem: | 950325 | disk 63000 (20) | SG1 | GNU-2.5.8 | SUN |  0.16 |  3.49 | 12.05
+dttmem: | 950325 | disk 16384 (20) | SG1 | GNU-2.5.8 | SUN |  0.56 |  4.04 | 13.43
+dttmem: | 950325 | disk 4000 (10) | SG1 | GNU-2.5.8 | SUN |  1.23 |  3.06 |  7.17
+dttmem: | 950325 | disk 512 (2) | SG1 | GNU-2.5.8 | SUN |  2.16 |  2.43 |  4.59
+dttmem: | 950325 | ram 63000 (100000) | SG1 | GNU-2.5.8 | SUN | 28.17 |  0.01 | 28.26
+dttmem: | 950325 | ram 16384 (20000) | SG1 | GNU-2.5.8 | SUN | 19.26 |  0.00 | 19.35
+dttmem: | 950325 | ram 4000 (5000) | SG1 | GNU-2.5.8 | SUN | 20.25 |  0.00 | 20.34
+dttmem: | 950325 | ram 512 (500) | SG1 | GNU-2.5.8 | SUN | 21.48 |  0.00 | 21.48
+dttmem: | 950325 | ems 63000 (100) | SG1 | GNU-2.5.8 | SUN | 23.12 |  0.56 | 23.78
+dttmem: | 950325 | ems 16384 (100) | SG1 | GNU-2.5.8 | SUN | 23.69 |  0.04 | 23.81
+dttmem: | 950325 | ems 4000 (100) | SG1 | GNU-2.5.8 | SUN | 27.35 |  0.00 | 27.43
+dttmem: | 950325 | ems 512 (50) | SG1 | GNU-2.5.8 | SUN | 31.02 |  0.01 | 31.13
+dttmem: | 950325 | xms 63000 (100) | SG1 | GNU-2.5.8 | SUN | 23.30 |  0.04 | 23.42
+dttmem: | 950325 | xms 16384 (100) | SG1 | GNU-2.5.8 | SUN | 23.68 |  0.00 | 23.70
+dttmem: | 950325 | xms 4000 (100) | SG1 | GNU-2.5.8 | SUN | 27.37 |  0.00 | 27.46
+dttmem: | 950325 | xms 512 (50) | SG1 | GNU-2.5.8 | SUN | 31.21 |  0.00 | 31.30
+dttmem:   all memory freed
+dttcast: | 950325 | b08->b01 (50) | SG1 | GNU-2.5.8 | SUN |  2.71 |  0.00 |  2.71
+dttcast: | 950325 | b01->b08 (50) | SG1 | GNU-2.5.8 | SUN |  3.19 |  0.01 |  3.29
+dttcast: dttcast_time_one:   image comparison (256)
+dttcast: | 950325 | b08->b08 (50) | SG1 | GNU-2.5.8 | SUN |  1.26 |  0.00 |  1.26
+dttcast: | 950325 | b08->b08 (50) | SG1 | GNU-2.5.8 | SUN |  1.20 |  0.01 |  1.21
+dttcast: dttcast_time_one:   image comparison (256)
+dttcast: | 950325 | b08->b16 (50) | SG1 | GNU-2.5.8 | SUN |  3.81 |  0.01 |  3.82
+dttcast: | 950325 | b16->b08 (50) | SG1 | GNU-2.5.8 | SUN |  3.77 |  0.00 |  3.77
+dttcast: dttcast_time_one:   image comparison (256)
+dttcast: | 950325 | b08->b32 (50) | SG1 | GNU-2.5.8 | SUN |  3.81 |  0.00 |  3.81
+dttcast: | 950325 | b32->b08 (50) | SG1 | GNU-2.5.8 | SUN |  3.73 |  0.00 |  3.74
+dttcast: dttcast_time_one:   image comparison (256)
+dttcast: | 950325 | b08->s1  (50) | SG1 | GNU-2.5.8 | SUN |  3.47 |  0.00 |  3.47
+dttcast: | 950325 | s1 ->b08 (50) | SG1 | GNU-2.5.8 | SUN |  3.48 |  0.00 |  3.49
+dttcast: dttcast_time_one:   image comparison (256)
+dttcast: | 950325 | b08->s2  (50) | SG1 | GNU-2.5.8 | SUN |  3.81 |  0.01 |  3.91
+dttcast: | 950325 | s2 ->b08 (50) | SG1 | GNU-2.5.8 | SUN |  3.76 |  0.00 |  3.76
+dttcast: dttcast_time_one:   image comparison (256)
+dttcast: | 950325 | b08->s4  (50) | SG1 | GNU-2.5.8 | SUN |  3.80 |  0.00 |  3.80
+dttcast: | 950325 | s4 ->b08 (50) | SG1 | GNU-2.5.8 | SUN |  3.76 |  0.00 |  3.76
+dttcast: dttcast_time_one:   image comparison (256)
+dttcast: | 950325 | b08->f1  (10) | SG1 | GNU-2.5.8 | SUN |  1.43 |  0.01 |  1.45
+dttcast: | 950325 | f1 ->b08 (10) | SG1 | GNU-2.5.8 | SUN |  1.53 |  0.00 |  1.53
+dttcast: dttcast_time_one:   image comparison (256)
+dttcast: | 950325 | b08->f2  (10) | SG1 | GNU-2.5.8 | SUN |  1.59 |  0.03 |  1.62
+dttcast: | 950325 | f2 ->b08 (10) | SG1 | GNU-2.5.8 | SUN |  1.63 |  0.00 |  1.63
+dttcast: dttcast_time_one:   image comparison (256)
+dttcast:   all memory freed
+dttconv: | 950325 | dttconv_h1d | SG1 | GNU-2.5.8 | SUN |  9.29 |  0.06 |  9.44
+dttconv: | 950325 | dttconv_ave | SG1 | GNU-2.5.8 | SUN |  0.83 |  0.00 |  0.83
+dttconv: | 950325 | dttconv_laplace | SG1 | GNU-2.5.8 | SUN |  1.21 |  0.00 |  1.21
+dttconv: | 950325 | dttconv_cross | SG1 | GNU-2.5.8 | SUN |  3.22 |  0.00 |  3.22
+dttconv:   all memory freed
+dttstack: dttstack_paged:   default type 2 overflow at 100000 (got code 1)
+dttstack: dttstack_paged:   default type 2 poke/peek/pop 100000 out of 100000
+dttstack: dttstack_paged:   default type 2 underflow at -1 (got code 2)
+dttstack: dttstack_paged:   default type 2 overflow at 100000 (got code 1)
+dttstack: dttstack_paged:   default type 2 poke/peek/pop 100000 out of 100000
+dttstack: dttstack_paged:   default type 2 underflow at -1 (got code 2)
+dttstack: dttstack_paged:   default type 2 overflow at 100000 (got code 1)
+dttstack: dttstack_paged:   default type 2 poke/peek/pop 100000 out of 100000
+dttstack: dttstack_paged:   default type 2 underflow at -1 (got code 2)
+dttstack: dttstack_paged:   default type 2 overflow at 100000 (got code 1)
+dttstack: dttstack_paged:   default type 2 poke/peek/pop 100000 out of 100000
+dttstack: dttstack_paged:   default type 2 underflow at -1 (got code 2)
+dttstack: dttstack_paged:   default type 2 overflow at 100000 (got code 1)
+dttstack: dttstack_paged:   default type 2 poke/peek/pop 100000 out of 100000
+dttstack: dttstack_paged:   default type 2 underflow at -1 (got code 2)
+dttstack: | 950325 | 100000 type 2 ( 5) | SG1 | GNU-2.5.8 | SUN | 25.73 |  0.59 | 26.43
+dttstack:   all memory freed
+dttrun: dttrun_time:   empty blobs 0 (0)
+dttrun: | 950325 | dttrun/empty | SG1 | GNU-2.5.8 | SUN |  0.40 |  0.00 |  0.40
+dttrun: dttrun_time:   solid blobs 1 (1)
+dttrun: | 950325 | dttrun/solid | SG1 | GNU-2.5.8 | SUN |  0.48 |  0.00 |  0.48
+dttrun: dttrun_time:   checquer blobs 65536 (65536)
+dttrun: | 950325 | dttrun/checquer | SG1 | GNU-2.5.8 | SUN | 10.94 |  1.95 | 12.91
+dttrun: dttrun_time:   tiny_blobs blobs 16384 (16384)
+dttrun: | 950325 | dttrun/tiny_blobs | SG1 | GNU-2.5.8 | SUN |  1.63 |  0.00 |  1.63
+dttrun: dttrun_time:   tiny_holes blobs 1 (1)
+dttrun: | 950325 | dttrun/tiny_holes | SG1 | GNU-2.5.8 | SUN |  3.41 |  0.00 |  3.41
+dttrun: dttrun_time:   tree blobs 2 (2)
+dttrun: | 950325 | dttrun/tree | SG1 | GNU-2.5.8 | SUN |  2.85 |  0.04 |  2.98
+dttrun: dttrun_time:   spiral blobs 2 (2)
+dttrun: | 950325 | dttrun/spiral | SG1 | GNU-2.5.8 | SUN |  7.29 |  0.00 |  7.29
+dttrun:   all memory freed
+dtt1d: | 950325 | random uniform (  7500) | SG1 | GNU-2.5.8 | SUN |  0.60 |  0.01 |  0.61
+dtt1d: dtt1d_random_uniform_double_timing:   7500 random uniform generation complete
+dtt1d: | 950325 | random gauss (  7500) | SG1 | GNU-2.5.8 | SUN |  1.08 |  7.40 |  8.49
+dtt1d: dtt1d_random_gauss_double_timing:   7500 random gauss generation complete
+dtt1d: | 950325 | inverted sort (  7500) | SG1 | GNU-2.5.8 | SUN |  0.42 |  0.00 |  0.42
+dtt1d: dtt1d_sort_double_invert_timing:   vector size 7500 is properly sorted
+dtt1d: | 950325 | random sort (  7500) | SG1 | GNU-2.5.8 | SUN |  0.45 |  0.00 |  0.45
+dtt1d: dtt1d_sort_double_random_timing:   vector size 7500 is properly sorted
+dtt1d:   all memory freed
+dttlog: | 950325 | log10 unscaled (50@128x120) | SG1 | GNU-2.5.8 | SUN |  1.58 |  0.01 |  1.59
+dttlog: dttlog2:   log10 32-into-8 unscaled (top)
+dttlog: dttlog2:   log10 32-into-8 unscaled (middle)
+dttlog: dttlog2:   log10 32-into-8 unscaled (bottom)
+dttlog: | 950325 | log10 scaled (50@128x120) | SG1 | GNU-2.5.8 | SUN | 41.25 |  0.04 | 41.50
+dttlog: dttlog3:   log10 32-into-8 unscaled (top)
+dttlog: dttlog3:   log10 32-into-8 unscaled (middle)
+dttlog: dttlog3:   log10 32-into-8 unscaled (bottom)
+dttlog: | 950325 | log unscaled (50@128x120) | SG1 | GNU-2.5.8 | SUN |  1.59 |  0.00 |  1.59
+dttlog: dttlog4:   log 32-into-8 unscaled (top)
+dttlog: dttlog4:   log 32-into-8 unscaled (middle)
+dttlog: dttlog4:   log 32-into-8 unscaled (bottom)
+dttlog: | 950325 | log scaled (50@128x120) | SG1 | GNU-2.5.8 | SUN | 25.38 |  0.01 | 25.47
+dttlog: dttlog5:   log 32-into-8 unscaled (top)
+dttlog: dttlog5:   log 32-into-8 unscaled (middle)
+dttlog: dttlog5:   log 32-into-8 unscaled (bottom)
+dttlog:   all memory freed

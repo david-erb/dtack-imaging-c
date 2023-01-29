@@ -1,0 +1,166 @@
+/*..........................................................................
+| TITLE dtreadme
+| Dtack Base Library README
+|
+|!Introduction
+| This is the Dtack Base Library.
+| It is a library for general purpose image processing and analysis.
+| The library implements a C-language API.
+| The implementation is portable to several platforms including Unix and Win32.
+| 
+| Dtack's web page at http://www.dtack.com provides more information.
+| 
+|!Copyright
+| Copyright (C) 1998 Dtack Inc. All Rights Reserved.
+| To use this package, you must have signed a license agreement with Dtack Inc.
+| Under no circumstances may you redistribute files from this package.
+| This software is provided AS IS with no warranty expressed or implied.
+| Dtack Inc. accepts no liability for use or misuse of this file.
+| http://www.dtack.com  dtack@dtack.com  telephone +360.417.6700
+| Dtack Inc, P.O. Box 3061, Port Angeles, WA USA 98362
+| 
+|!General installation notes
+| To begin using the libraries, first choose an installation directory.
+| This is where all Dtack software will reside.
+| This directory will be denoted $DTACK in this documentation.
+| $DTACK may be anything, but it must end in lowercase "/dtack". 
+| Some examples of $DTACK are /home/dtack, /usr/john/dtack, /shared/dtack.
+| 
+| There are several software components to the Dtack Base Libary.
+| All are optional but "base".  All components are installed in a similar way.
+| In this documentation, COMPONENT will be used to mean any of:
+| 
+| COMPONENT	Description
+| base		the Dtack Base Library
+| zlib		general purpose compression library 
+| ijg		Independent Jpeg Group library
+| 
+| Each COMPONENT in the list above has its own version number.
+| In this documentation, XX-YY will be used to represent a COMPONENT's version.
+| As of this writing, the latest version numbers are:
+| 
+| COMPONENT		Latest XX-YY
+| base			01-06
+| zlib			10-4a
+| ijg			6a-02
+| 
+| All components can all be compiled for multiple operating systems (OS's).
+| To distinguish between the different OS's, each is assigned a unique abbreviation.
+| In this documentation, OSNAME will be used to represent the OS abbreviation.
+| You may add your own OSNAME's as necessary.
+| As of this writing, the predefined OSNAME's are:
+| 
+| OSNAME	System
+| lg1		Linux ELF i86
+| sg1		SunOS 4.1.4, GNU compiler
+| sp1		Solaris 2.5, native compiler
+| wv5		Win32, Microsoft Visual C++ 5.0
+| wv0		Win16, Microsoft Visual C++ 1.52
+| 
+| Compressed source distribution filenames are of the following form:
+| 
+|:   dtack.COMPONENT.XX-YY.tgz
+|
+| For example:
+| 
+|:   dtack.base.01-06.tgz
+| 
+| is the compressed source distribution for the base component, version 01-06.
+| 
+| Directory names are of the following form:
+| 
+|:   $DTACK/COMPONENT/XX-YY         source code
+|:   $DTACK/COMPONENT/XX-YY.OSNAME  compiled objects and executables
+| 
+| For example, the following directory might hold the compiled
+| binaries for the base library component for Linux:
+| 
+|:   /home/dtack/base/01-06.lg1
+| 
+|!Installation from precompiled binaries on CDROM
+| The CDROM contains the proper binary files for some supported systems.
+| If your system is supported, copy the binary files from the CDROM to $DTACK.
+| 
+|:   mkdir $DTACK
+|:   mkdir $DTACK/COMPONENT
+|:   cp -r /cdrom/dtack/COMPONENT/XX-YY.OSNAME $DTACK/COMPONENT
+| 
+| Also copy the include files needed for your application:
+| 
+|:   mkdir $DTACK/COMPONENT/XX-YY
+|:   cp -r $DTACK/COMPONENT/XX-YY/include $DTACK/COMPONENT/XX-YY
+| 
+| For example:
+| 
+|:   mkdir /home/dtack
+|:   mkdir /home/dtack/base
+|:   cp -r /cdrom/dtack/base/01-06.lg1 /home/dtack/base
+|:   mkdir /home/dtack/base/01-06
+|:   cp -r /home/dtack/base/01-06/include $DTACK/base/01-06
+| 
+|!Installation from source code
+| If you have the CDROM, copy the source files from the CDROM to $DTACK.
+| 
+|:   mkdir $DTACK
+|:   mkdir $DTACK/COMPONENT
+|:   cp -r /cdrom/dtack/COMPONENT/XX-YY $DTACK/COMPONENT
+| 
+| If you have the compressed source distribution file, unpack it:
+| 
+|:   mkdir $DTACK
+|:   cd $DTACK
+|:   cd ..
+|:   gzip -d < /tmp/dtack.COMPONENT/XX-YY.tgz | tar tvf -
+| 
+| Choose an appropriate example .set file from $DTACK/config.
+| Rename it OSNAME.set and customize it using your favorite text editor.
+| 
+| Compile and link everything.  Do the following for each COMPONENT:
+| 
+|:   cd $DTACK/COMPONENT/XX-YY
+|:   sh/mkdirs.sh ../XX-YY.OSNAME
+|:   sh/dtmake.sh OSNAME
+| 
+| For example:
+| 
+|:   mkdir /home/dtack
+|:   cd /home
+|:   gzip -d < /tmp/dtack.base.01-06.tgz | tar tvf -
+|:   cd /home/dtack/base/01-06
+|:   sh/mkdirs.sh ../01-06.lg1
+|:   sh/dtmake.sh lg1
+| 
+| In general, you should do the "base" COMPONENT last since it depends on the others.
+| 
+|!Testing the Base Library
+| To run all the Dtack Base Library's built-in tests:
+| 
+|:   cd $DTACK/base/XX-YY
+|:   sh/dttest.sh ../XX-YY.OSNAME
+| 
+| The results will be stored in ../XX-YY.OSNAME/test.out.
+| 
+| To check for errors:
+| 
+|:   cd $DTACK/base/XX-YY
+|:   sh/dtcheck.sh ../XX-YY.OSNAME
+| 
+| For example:
+| 
+|:   cd $DTACK/base/XX-YY
+|:   sh/dttest.sh ../XX-YY.OSNAME
+|:   sh/dtcheck.sh ../XX-YY.OSNAME
+| 
+| The output from dttest.sh will look something like:
+| 
+|:   dtt1d: being started by dttest.sh 02 Jul 98 11:41 
+|:   dttstr: being started by dttest.sh 02 Jul 98 11:41 
+|:   more lines like this
+| 
+| The output from dtcheck.sh will look something like:
+| 
+|:   dtcheck.sh: scanning ../XX-YY.OSNAME/test.out ...................
+|:   dtcheck.sh: scanning ../XX-YY.OSNAME/test.out ...................
+|
+| END
+ *..........................................................................*/

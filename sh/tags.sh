@@ -1,0 +1,19 @@
+#! /bin/bash
+etags \
+include/dtack/*.[chip] \
+source/1d/*.[chi] \
+source/low/*.[chi] \
+source/dg/*.[chi] \
+source/bigmem/*.[chi] \
+source/color/*.[chi] \
+source/high/*.[chi] \
+source/xchg/*.[chi] \
+source/fb/*.[chi] \
+tool/*.[chi] \
+server/*.[chi] \
+app/uclient/*.[chi] \
+app/tabchief/*.[chi] \
+app/tableau/*.[chi] \
+app/tabrobot/*.[chi] \
+app/wrangler/*.[chi] \
+app/tabdrone

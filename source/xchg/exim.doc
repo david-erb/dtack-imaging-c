@@ -1,0 +1,148 @@
+/*..........................................................................
+| TITLE dtimage()
+|dxinclude(liblink1.dx)
+|
+|!INTRODUCTION
+| This Function Group controls the exporting and importing
+| of images in a :dtimage_t: structure to and from external forms.
+| 
+|!SUMMARY
+| Converts between an internal image structure and an external form
+| such as a file.
+|
+| Knows how to convert between an internal :dtimage_t: structure and:
+|_Aside External form is not always a file.
+| -	an image file such as pgm and others
+| -	a raw binary file
+| -	an ascii file
+| -	a printer-ready file
+| -	a window on a display
+| - imput to a server program
+|
+|.Salient Concepts
+| You give an image structure and a string called the spec
+| to the export function.
+| It converts and outputs the image to the destination.
+| 
+| You give a spec to the import function:
+|_aside Import allocates space.
+| it obtains the data from the source and allocates an image structure
+| to hold it.
+| 
+| Sources and destinations include files, windows and server programs.
+| 
+|.Specification Syntax
+| The ~spec~ argument to dtimage_export() and dtimage_import()
+|_Aside ~spec~ string gets parsed here.
+| shall indicate the external image format.
+| It shall also indicate the source or destination media or server.
+| 
+| ~spec~	shall be of the form ~type,server,id.suffix~, where:
+| ~type~	is generally the image type such as pgm or a server-bound image.
+|			A list of valid types is given in the table below.
+| ~server~	generally indicates a server's registered name
+| ~id~		identifies a particular image in the server's name space
+| ~suffix~	an alternative way of specifying the image type
+|
+| An empty ~type~ shall indicate an pgm (Portable Graymap) file.
+| An empty ~server~ shall be construed as a normal file.
+| The ~id~ may not be empty.
+| The ~suffix~ is ignored if it is empty or unrecognized,
+| or if ~type~ is not empty.
+|
+| If the first character of ~spec~ is a colon,
+|_aside Leading ':' indicates a window.
+| then ~type~ and ~server~ must come from the default server
+| as stored in the member ~ctl->win~.
+| Separate ~type~ from ~server~ in this string by
+| the first appearing comma character.
+| Set ~id~ to contain all of ~spec~ except its leading comma.
+|
+| Otherwise, if ~spec~ has one or more comma characters in it,
+| set the type string to everything before the first comma.
+| Set ~id~ to everything after the last comma.
+| Set ~server~ to everything in between or empty if there is only one comma.
+|
+| If either of the two cases above is true, ignore any ~suffix~.
+| 
+| Otherwise, set ~id~ to ~spec~ and set ~server~ to empty.
+|_Aside Suffix can indicate type.
+| The ~type~ shall then be the ~suffix~ which is
+| everything after the last dot character.
+| If ~suffix~ is missing or unrecognized, then type shall be pgm.
+|
+| Here is the list of allowed types:
+|_aside External image forms.
+| pgm		portable graymap
+| pbm		portable bitmap
+| bmp		Microsoft Windows Bitmap File
+|
+|.Syntax Examples
+| In these examples, assume that ~ctl->win~ has been set to :win,hws,x:.
+| 
+| Simple case, :pgm: type assumed because no leading type and no suffix.
+| myfile			~type~=pgm ~server~=empty ~id~=myfile
+| 
+| Use suffix to decide type is bmp.
+| myfile.bmp		~type~=bmp ~server~=empty ~id~=myfile.bmp
+| 
+| The leading colon indicates x is the name of a window on server hws,x.
+| :xxx				~type~=window ~server~=hws,x ~id~=xxx
+| 
+| Explicitly set the type to pgm even though the suffix is bmp.
+| pgm,x.bmp			~type~=pgm ~server~=empty ~id~=x.bmp
+|
+|.Runtime Environment
+| May use ~ctl->win~ as the name of a windowing server.
+| May write or read a file.
+| May use interprocess communications to talk with an external server.
+| 
+| Uses no environment variables or signals directly.
+| However, may use some fourth party software
+| which has its own conventions.
+|
+|!Example dtexim1.c - Show image export and import
+|:// Example Program dtexim1
+|:// Illustrates high level image export and import.
+|:// Program takes a spec as the one required command line argument, like:
+|://   dtexim1 x.pgm
+|:// Generate an test pattern image, export it to the name, then import it.
+|:// Prints out simple result like:                                          
+|://   dtexim1: exported 64x64, imported 64x64
+|:// Does not delete the external image it created.
+|:// All error checking left out for clarity.                                
+|:
+|:#include <dtack/base.h>
+|:#include <dtack/os.h>
+|:
+|:int main(int argc, char *argv[])
+|:{
+|:  dtimage_t image1;
+|:  dtimage_t image2;
+|:
+|:  dtimage_create(NULL, &image1,	  	// space for a small image
+|_Aside Create 64 x 64 byte image.
+|:    64, 64, DT_NTYPE_B08);
+|:
+|:  dtimage_gen_color256(NULL, 			// generate some image contents
+|_aside 256 equal-size squares.
+|:    &image1);
+|:
+|:  dtimage_export(NULL, &image1,		// export the image
+|:    argv[1], 0, 0);
+|:
+|:  dtimage_import(NULL, &image2,		// import the image
+|_aside Import image we just exported.
+|:    argv[1]);
+|:
+|:  printf("dtexim1: "					// print results
+|:    "exported %ux%u, "
+|:    "imported %ux%u\n",
+|:    image1.xe, image1.ye,
+|:    image2.xe, image2.ye);
+|:
+|:  return 0;
+|:}
+| 
+| END
+ *..........................................................................*/

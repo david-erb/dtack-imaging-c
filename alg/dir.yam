@@ -1,0 +1,15 @@
+define(TOP, UP1)
+define(DIR, alg)
+
+__guide(prj_gen_guide(alg), alg.doc, PRJ_GEN_SERIES)
+
+dnl __sub(abu89)
+dnl __sub(kap85)
+__sub(lev85)
+dnl __sub(per87)
+__sub(sez90)
+dnl __sub(flo76)
+dnl __sub(esc91)
+__sub(esc94)
+
+__finish

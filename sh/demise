@@ -1,0 +1,186 @@
+# -n       number of frames
+# -dz      roll discard size
+# -op      cook
+# -epsilon threshold minimum
+# -psi     internet sponge
+# -sigma   frame averaging
+# -variant encoding type
+# -t       encoding quality
+# -min     min blob size
+# -max     max blob size
+# -offset  first frame, -1 for newest
+
+# -datadir is where config files and local roll file are
+
+
+_simulate()
+{
+#  -screen rocket,www.web2010.com:5710+test 
+#  -screen ftp,./test.%s.jpg \
+cp  /usr/erb/prj/dtfg1/bin/tableau2.static  /usr/dtack/root/web/tab00-27
+tableau2.static \
+  -input dir,/img/tableau/gary2.raw/%03d,256,256,0 \
+  -config /tableau/config \
+  -screen http://d:80/nph-tabserve.cgi?ident=test \
+  -D usr1+usr2 \
+  -op "stamp,test %d %b %y %H:%M:%S" \
+  -dz 5 \
+  -n 80 \
+  -offset 0 \
+  -t 25 \
+  -errto stdout \
+  -dbgto stdout \
+  -sayto stdout
+}
+
+_encode()
+{
+tableau \
+  -input dir,/img/tableau/gary2.raw/%03d,256,256,0 \
+  -screen roll,gary2 \
+  -config /tableau/config \
+  -D usr1+usr2+ipc \
+  -op "stamp,sec %d %b %y %H:%M:%S" \
+  -dz 100 \
+  -n 2 \
+  -offset 0 \
+  -t 40
+}
+
+_serve()
+{
+tableau2.static \
+  -input ser \
+  -screen roll \
+  -connect rocket,d.dtackc.com:5711 \
+  -config /tableau/config \
+  -psi 30000 \
+  -variant passthrough \
+  -D usr1+usr2+ipc
+}
+
+_play()
+{
+set -x
+tableau \
+  -input rocket,d.dtackc.com:5711+test/live \
+  -screen hws,x \
+  -config /tableau/config \
+  -D usr1+usr2
+}
+
+_upload()
+{
+tableau \
+  -input dir,/img/tableau/gary2.raw/%03d,256,256,0 \
+  -screen socket,156.46.122.16:5710+be.x \
+  -D usr1+usr2 \
+  -variant jpeg \
+  -color rgb888 \
+  -op stamp \
+  -n 3 \
+  -offset 0 \
+  -t 25
+}
+
+_qnx()
+{
+/usr/erb/prj/dtqw1/bin/tableau \
+  -input dir,/img/tableau/gary2.raw/%03d,256,256,0 \
+  -screen socket,d:5711+tmp.x \
+  -D usr1+usr2+ipc \
+  -variant jpeg \
+  -color ycbcr \
+  -op stamp \
+  -n 5 \
+  -offset 0 \
+  -t 25
+}
+
+_monitor()
+{
+tableau \
+  -connect socket,d:5714 \
+  -in roll \
+  -screen hws,x,e:0.0 \
+  -D usr1+usr2+trace \
+  -variant passthrough \
+  -op ge
+}
+
+if [ $# -ne 1 ] 
+then
+  exit 1
+fi
+
+eval _$1
+
+exit 1
+
+
+
+>     I've been doing a little experimenting with your software. I work for
+> Resort Sports Network, www.rsn.com, and my boss Tom Gale asked me to try
+> your demo. I think it's all working but I'm timing out, error 10060, when
+> tableau tries to access 192.9.200.4. I'm assuming this is the server. Is
+> there a demo server I can try or am I just way off base. I'm using a winnov
+> videum card and I get a flash of video if I'm not connected to the net and
+> the dialing program is started up. Otherwise I just get a grey video box.
+>
+
+hi Ian,
+Thanks for trying our software.  There are two ways to upload video:
+  1) FTP
+  2) our own protocol
+
+You have apparently been trying the second, which is the faster of the two.
+Feel free to use our server where I have just set up a directory for you.
+Let the -screen line in c:\tableau\config\tableau.arg look like:
+
+  -screen rocket,156.46.122.21:5710+rsn.x
+
+The images will go into the http://www.tableau.com/video/rsn.x/ directory.
+
+To view the stream via server push (Netscape only), add this to your html:
+
+<img src="http://www.tableau.com/cgi-bin/nph-push.sh?   
+  camera=rsn.x&prefix=cam0.&n=999>
+
+Note the two lines above must BOTH BE ON ONE LINE in your html!
+
+If you want to FTP the images to your own server instead, I think the
+documentation covers it, but if you have any questions I'll be glad to help.
+
+Hope this helps.
+Dave
+this is a short test out how fast the system can business
+it seems just about as fast fast as when the echo do ran was in here
+maybe a little slower
+-----------------
+
+Hi Bill,
+I have gone back to 1.9.2 to try YUV8 to get rid of the blurriness.
+I am having the following problem with WNTV.  It might be related
+to the other problem of no-sync video using the 1.10.6 and 1.10.9
+drivers.  Here is I do in WNTV at 320x240:
+
+In Video Properties, I set Compression to YUV8 1:1.  Picture looks good
+in preview window.  Click OK to go back to WNTV.  Picture in window
+"loses sync", i.e. goes to an unrecognizable bunch of flashing
+horizontal lines.  Go back to Video Properties, preview window now looks
+bad.  Compression is still YUV8 but has somehow been reset to 2:1.  I change 
+it back to 1:1, the preview window goes back to good, but again when I
+leave the dialog and go back to WNTV, it slips back into flashing
+lines.  Sure enough, back in video properties the compression is 2:1
+again.
+
+The "flashing lines" I just described look exactly like the no-sync
+video I experience with the beta drivers.
+
+I wanted to use your suggestion of grabbing at YUV8 and converting to
+YUY2 using ICM so I can get a reasonably sharp picture at 320x240.
+
+Any thoughts?
+
+Dave
+

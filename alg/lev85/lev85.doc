@@ -1,0 +1,833 @@
+/*..........................................................................
+| TITLE dtlev85()
+|dxinclude(alglink1.dx)
+| 
+| ABSTRACT
+| This is an implementation of a segmentation performance measuring algorithm.
+| The algorithm is due to Levine and Nazif.
+| It is described completely in [lev85].
+| Input consists of two images.
+| The first image is the original gray level image.
+| The second image is a segmented image.
+| It contains pixels whose values are labels which
+| indicate membership in a connected region.
+| One or more regions may be considered together as an area.
+| For each area, the algorithm produces a single numeric uniformity measure.
+| Uniformity values near 1.0 signify that the pixels within the regions of the area
+| are similar in gray level.
+| The algorithm is implemented as a C-callable library of routines.
+| A simple main program provides command-line execution of the routines.
+| The main program has an option for verifying the correctness
+| of the implementation.
+| The source code is modular and platform- and hardware-independent.
+| Compilation instructions in the form of makefiles are provided for
+| several platforms including Unix, DOS, Microsoft Windows and others. 
+|
+|!Overview
+|_figure half, gray5, Billiard Balls Gray Level
+| 
+|_figure half, seg5b, Billiard Balls Naive Segmentation, Uniformity xxxx
+|_figure half, seg5a, Billiard Balls Better Segmentation, Uniformity xxxx
+|
+|.~What are the goals of the algorithm?~
+| Given a gray level image and its segmentation,
+| the algorithm attempts to provide a single number called the uniformity.
+| The uniformity may be considered a measure
+| of the goodness of the segmentation.
+| 
+|.~How would you use the algorithm?~
+| First you produce a segmented image by any desired means.
+|_aside Use your favorite segmentation.
+| Binary thresholding is one of the many possibilities.
+| Then you simply feed the original gray level image along with
+| the segmented image into the algorithm.
+| You may use the resulting uniformity as input to a decision process.
+| For example, if the uniformity is not high enough,
+| you may want to rerun the segmentation with modified parameters.
+|
+|.~What does the output look like?~
+| The output is normally just a single number between 0.0 and 1.0
+| for each designated area.
+| However, printed numbers can be fairly boring.
+|_aside Output a color image for fun.
+| Therefore, the sample program can optionally use the numbers
+| as color indices in an output image.
+| The visual feedback obtained in this way may actually be useful.
+| 
+|.~What should you be aware of?~
+| This algorithm does not perform segmentation.
+| Rather, it requires a segmented image as input.
+|
+| The measure is variance based.
+| For high uniformity, the segmented objects must have similar gray levels.
+|
+| Careful blob conditioning may be required.  
+| For example, the uniformity measure is normalized, in part, 
+| by the range of pixel values.
+| A single pixel with an extreme gray value may artificially skew
+| the uniformity toward higher a value.
+|
+| The uniformity measure was designed by its creators in conjunction
+| with several other measures.
+| There is no discussion of its suitability when used by itself.
+| You must take care to clearly understand the algorithm before
+| placing any importance on its outcome.
+| 
+|.~What is the interface to the implementation?~
+| The implementation has both a run-ready main program 
+| and a C-callable library.
+|_aside The library does the work.
+| The main program uses the library to do all its tasks.
+| It has a number of command-line options.
+|_aside The main program is mainly a demo.
+| It will read a pair input images and print out the uniformity numbers.
+| Optionally, it will make an output image where each blob is
+| colored according to the uniformity value of its region.
+| 
+|.~What inputs do the C-callable routines require?~
+| You must provide a pair of data structures describing two input images.
+|_aside You provide the input images.
+| For more control over the algorithm,
+| you may want to provide callback routines to handle
+| the uniformity numbers on a label-by label or blob-by-blob basis.
+| 
+|.~What do the library routines output?~
+| The easiest routine returns a single uniformity number.
+| However, if you provide a callback routine, you will have complete
+| control over what is output.
+| 
+|.~Does the implementation test itself?~
+|dtinclude(testdsc1.dx)
+| 
+|.~Can you modify it?~
+|dtinclude(srcdist1.dx)
+| 
+|.~What documentation exists for it?~
+|dtinclude(doclist1.dx)
+| 
+|.~How do you install it?~
+| Installation of this algorithm requires the prior installation of the
+|_aside No fee for Base Library licenses.
+| Dtack Imaging Software Base Libraries.
+| All installation may be done in a single directory by a simple script.
+| An accompanying document entitled ~Algorithm dtlev85: Installation~
+| gives detailed instructions for each major operating system.
+| 
+| To use the software after installation, only the following are required:
+|_aside Actual names may vary slightly depending on operating system.
+| :dtlev85.h:		algorithm header file
+| :dt.h:	 		Dtack Base Image Processing Library header file
+| :dtlev85.lib: 	algorithm library
+| :dthigh.lib:	 	high level Base Library
+| :dtlow.lib:	 	low level Base Library
+| :dtlev85:			main program executable 
+|					(not required if you write your own program)
+|
+|!About the Algorithm
+| This section provides a brief background which helps put
+| this algorithm into context of the science of image processing.
+| It outlines the purpose of the algorithm itself.
+| It then defines some terms from the source article which carry over into
+| the implementation.
+| Finally, this section highlights some major concepts
+| not in the original algorithm formulation,
+| but introduced by the implementation.
+| 
+|.Background
+| Segmentation in image processing is the process
+| by which objects in a source image are distinguished from
+| each other and from their background.
+| The science of segmentation has no single basis in theory,
+|_aside No single theory of segmentation.
+| but depends highly on the application ([har85], [fu81], [kan80]).
+| From this it follows that there is little theoretical treament
+| of procedures for evaluating
+| the performance of one segmentation algorithm
+| with respect to another ([ree93], [zha92]).
+| 
+| It is perhaps indicative of this difficulty in producing
+|_aside Most segmentation comparison is visual.
+| an analytical solution to the performance comparison problem
+| that most scientific papers simply present their
+| segmentation results in printed form ([per87], [tax89], [pal93]).
+| They rely on the reader to make a visual comparative judgment
+| of the goodness of the segmentation.
+| 
+| Further reliance on the human visual judgment
+| often shows up even when quantification 
+| of segmentation performance is attempted.
+|_aside Human usually gives "true" segmentation.
+| Manual segmentation done by a human is often required
+| to establish a ground truth ([yas77], [yam80], [lee90], [bha86]).
+| Departure of the computer generated segmentation from the
+| "true" human generated segmentation is considered erroneous
+| and reduces the overall goodness score of the performance.
+| 
+| Although most performance assessment in the literature involves 
+| guidance or interpretation by a human,
+|_aside Automatic measures which don't need human.
+| some work has been done in the area of
+| producing a quantitative segmentation performance measure which 
+| can be applied automatically.
+| Having automated techniques is critical in many situations
+| in which measurements must be made very often or vary quickly.
+| The [lev85] algorithm implemented by this software is such an
+| automated technique.
+| A brief review of some other automated techniques follows.
+| 
+| [wes78b] proposes two methods for automatically measuring the goodness
+| of a thresholded image.
+| One is based on the busyness and is computed using a co-occurrence matrix
+| technique.  
+| The other is called a discrepancy measure and reflects the
+| degree of classification error probably assuming a gray level distribution.
+| 
+| [abd79] uses an automatic quantitative
+| figure of merit measure from [pra78] for
+| evaluation of edge detectors.
+| However, the figure of merit requires the original ideal image,
+| which in the article are synthetic images.
+| 
+| [dub90] also uses synthetic images in the formulation of
+| an automatic texture segmentation measure called
+| the mean boundary error.
+| The synthetic pictures are created by mosaicing several
+| known textures together with simple or random boundaries between them.
+| 
+| In their survey paper,
+| [sah88] introduce an automatic performance measure based on region shape
+| to compare performance of some global thresholding methods.
+| 
+| [bha94] use five different measures to evaluate the relative
+| performance of a segmentation algorithm while varying its input parameters.
+| The performance measurement is integral to the total process
+| whose aim is to find the optimum parameters.
+| 
+| Some segmentation processes have built-in measurement
+| ([ots79], [ros81], [tsa85]).
+| The measures under consideration become the decision points
+| on which iterative processes guide themselves and ultimately terminate.
+|
+| In general, segmentation may be evaluated by observing
+| the behavior of features extracted as a result of the segmentation
+| ([bha86], [zha92]).
+| To this end,
+| the [lev85] uniformity may be thought of as a feature-space measurement.
+| The features in this case are the gray level values.
+|
+| The following articles make use of [lev85] algorithm
+| in quantitative segmentation performance analysis:
+| [sah88], [lee90], [won89], [zha92].
+| 
+|.Purpose of the Algorithm
+| This algorithm provides a numeric measure
+| of the goodness of a segmentation.
+| The algorithm produces the measure in an automatic way,
+| not requiring human intervention at any point.
+| However, the algorithm produces results which would be
+| similar to a human's.
+| 
+| Computing this measure on multiple segmentations
+| will provide a means of comparison of their performances.
+| 
+| This measure of performance
+| may be used as feedback in an iterative process.
+| After completing one segmentation pass,
+| the process would compute the uniformity of the result.
+| Based on the level of the uniformity,
+| the process may elect to re-execute the segmentation using
+| different input parameters.
+|
+| [lev85] discusses four automatic segmentation measures
+|_aside The source article.
+| which attempt to meet both criteria:
+| they are automatic yet they simulate a human's judgment.
+| They were developed to serve as the feedback mechanisms
+| to guide improvement in a
+| complex rule based low level image segmentation system.
+| The measures are:
+| 1.	region uniformity
+| 2.	region contrast
+| 3.	line contrast
+| 4.	texture measures
+|
+| This implementation covers the region uniformity measure only.
+| 
+| The uniformity measure returns high values
+| when the regions in the area are similar in gray level.
+| That is, the uniformity of a region varies inversely with the variance
+| of the gray levels in the region.
+| This means that if a region contains only pixels whose values
+| are close to the average value, it will have a uniformity close to 1.0.
+| In the limit, a region of constant value will have a uniformity of
+| exactly 1.0.
+| 
+| The uniformity measure takes into account the relative size of the regions.
+| The size of a region linearly affects how much that region's
+|_aside Bigger regions carry more weight.
+| uniformity contributes to the uniformity of the area.
+| The justification is that uniformity can be thought of as
+| being more noticeable in large regions.
+| 
+| The uniformity measure is weighted such that its range is between 0.0 and 1.0.
+|
+| The uniformity measure is designed to be efficiently computable
+| in a dynamic situation where regions are frequently being split and merged.
+| 
+|.Terminology
+| area			Any group of pixels on which uniformity is to be computed.
+|				Typically an area consists of multiple regions.
+| blob			The term blob is used interchangeably with region in this
+|				documentation.
+| gray level	Value of pixels in the original image.
+|				The gray level is commonly a response of a camera to the
+|				brightness in a scene, but it may just as easily be 
+|				any other numeric quantity
+|				associated with a point position in the 2D plane.
+| label			The value of a pixel in the segmented image.
+|				This is not normally a brightness value, but rather
+|				a value which indicates the pixel's membership in a region.
+| region		Any group of connected pixels.  Connectivity is defined by the
+|				4- or 8-connectedness of the pixels having the same label value
+|				in the segmented image.
+|				The term region is used interchangeably with blob in this
+|				documentation.
+| uniformity	Number between 0.0 and 1.0 given by equation 7 of [lev85].
+|
+|.Combining Regions into Areas
+| [fig:draw6] illustrates the concept of regions and areas.
+|_figure half, draw6, Six simple regions
+| Counting the background and based strictly on pixel connectivity,
+| there are seven regions in the picture.
+| Three of the internal regions are rectangular and three are circular.
+|
+| Remember that a uniformity number can only be computed on an area,
+| and that an area is made up of regions.
+| Some of the many ways in which regions may be combined into areas are:
+| 1.	all regions in one monolithic area
+| 2.	each region as its own area
+| 3.	all square regions in one area and all circular in another
+| 4.	all small regions in one area and all large in another
+| 5.	all dark regions in one area and all light in another
+| 6.	all regions near the top in one area and all near the bottom in another
+| There are many other possiblies.
+| Each application will have its own requirements for
+|_aside Your application has unique needs.
+| associating regions with areas.
+| The flexibility to combine multiple, possibly dispersed, 
+| regions into a single
+| uniformity measure is one of the features of this implementation.
+| 
+| One function, dtlev85_total(),
+|_aside Foreground is object.
+| treats the entire image as a single region,
+| excluding pixels with a single background value.
+| 
+| Another function, dtlev85_label(),
+|_aside Objects are labelled. 
+| treats all regions with the same label as belonging to a single area.
+| This function returns as many uniformity numbers as
+| there are different labels found in the segmented image.
+| 
+| If neither of these functions meet your requirements,
+|_aside Each blob an object.
+| you may choose which regions contribute to which areas
+| on a region-by-region (blob-by-blob) basis.
+| Once the blob is extracted, and the decision to use it in an area is made,
+| dtlev85_blob() does the uniformity contribution.
+| 
+| Finally, if you have your own method of computing the histogram of each region,
+|_aside You provide region histogram.
+| dtlev85_hist() will contribute the histogram to the uniformity.
+|
+| Used together or separately, this group of functions should
+| meet almost all applications' requirements.
+| 
+|!Implementation Interface
+| The  programs and subroutines in this implementation
+| work together to produce
+| uniformity measures for selectable image areas.
+|
+| :dtlev85:					main program parses command line
+|							and calls the functions
+| :dtlev85a:				sample program showing total uniformity
+| :dtlev85b:				sample program showing label-by-label uniformity
+| :dtlev85c:				sample program showing basic uniformity procedure
+| :dtlev85d:				sample program showing direct blob-by-blob uniformity
+| dtlev85_total()			produces total uniformity for an area which consists
+|							of all non-background pixels
+| dtlev85_label()			produces a separate uniformity for each area
+|							distinguished by a unique label in the segmented
+|							image
+| dtlev85_init()			initializes an array of dtlev85 structures
+| dtlev85_blob()			adds a region's gray levels to the uniformity
+|							being accumulated for an area
+| dtlev85_hist()			adds a region's histogram to the uniformity
+|							being accumulated for an area
+| dtlev85_compute()			computes the uniformity measure for an area 
+| dtlev85_combine()			combine two areas
+|
+|dtinclude(image_t1.dx)
+| 
+| The principal data structure used in computing and returning
+| the uniformity includes the following members:
+| 
+|:typedef struct {
+|_aside Data structure for this algorithm.
+|:  double u;							// computed uniformity 		  
+|:  long n;								// number of regions		  
+|:  double fmax, fmin;					// max data range found		  
+|:  long Aa;							// total area accumulator	  
+|:} dtlev85_t;
+| 
+|!Implementation Notes
+| This section describes assumptions made by the implementation,
+| and deviations by the implementation from the original
+| algorithm as described in [lev85].
+| 
+| This implementation follows the article's Section III very closely.
+| The main contribution made by the implementation are the various
+| ways of grouping regions into areas.
+| The ordering of computation is changed to support this.
+| In particular, the division by the total area
+| in equation (x) is deferred
+| until final uniformity computation by dtlev85_compute().
+|
+| The source article does not specify how regions should be
+| grouped into areas.
+| Each application will have different criteria for selecting
+| regions which contribute to be area whose uniformity is of interest.
+| To maximize flexibility,
+| this implementation provides several procedures to
+| group and select regions for inclusion into areas.
+| These are:
+| total image excluding background		dtlev85_total()
+| each label defines unique area		dtlev85_label()
+| each blob handled separately			dtlev85_blob()
+| region histogram computed externally	dtlev85_hist()
+| These procedures and the basic sequence of steps they all use
+| are described below in more detail in the next section.
+| 
+| Gray level images may be any data type 
+|_aside Gray image labels may be any data type.
+| from single bit to double precision.
+| In the :total:, :label: and :blob: methods,
+| the pixel values are obtained directly with no loss of precision.
+| In the :hist: method, as described below,
+| the accuracy of the resultant uniformity is limited by the
+| precision of the histogram.
+| The original article did not have any mention of histograms
+| as representations of regions.
+|
+| The segmented images may be any data type
+|_aside Segmented image labels may be any data type except 1-bit.
+| from single byte to double precision.
+| It is especially important to handle data values which can hold more than
+| 256 labels since many segmentation processes produce
+| many more blobs than this.
+| The ability to handle any data type is provided by the
+| underlying connected components engine in the
+| Dtack Imaging Software Base Library.
+| 
+|.Basic Sequence of Steps
+| All four procedures for selecting and grouping regions
+|_aside Uniformity cookbook.
+| have in common that they use the same basic sequence of steps:
+| 
+| 1.	initialize housekeeping structure: dtlev85_init()
+| 2.	one or more calls to one or more of:
+| 2a.	add blob to area: dtlev85_blob()
+| 2b.	add histogram to area: dtlev85_hist()
+| 2c.	combine area to area: dtlev85_combine()
+| 3.	compute final uniformity: dtlev85_compute()
+| 
+| The dtlev85_total() and dtlev85_label() functions
+| use the above steps internally.
+| This makes them easy to use.
+| However, to handle regions on a blob-by-blob basis,
+| your program will make use of the above steps explicitly.
+|
+| The two steps 2a and 2b above may be freely intermixed.
+| Both can achieve the same results, but using different means of input.
+| Step 2c is for combining areas to make bigger areas.
+| This is useful in a dynamic environment where regions are constantly
+| being combined in different ways.
+| Each area to be combined must have originated by a contribution of
+| one of the other steps 2a (blob) or 2b (histogram).
+| 
+|.Total Uniformity
+| Total uniformity is computed by a single function call to dtlev85_total().
+| This is the simplest and fastest function of the implementation.
+|
+| Total uniformity is a concept whereby the segmented image
+| is considered as only two areas:
+| the foreground and the background.
+| The background is not necessarily 0,
+| but may be any selected value.
+| All pixels with the background label value are ignored.
+|_aside For total uniformity, background is ignored.
+| Regions with all other pixel labels are grouped into a single area.
+| 
+| If you wish to compute the uniformity of all pixels in an image,
+| simply select a background label which does not occur in the
+| segmented image.
+|
+| The concept of a background label value has been introduced by
+| this implementation.
+| It is not part of the original article.
+|
+|.Label Uniformity
+| This method is good when label values in segmented image already specify areas.
+| 
+| One use for this method is in a multi-threshold situation.
+| The labels in this situation are the assigned threshold values.
+|
+| In this type of calculation, there is no concept of background.
+| All blobs are treated equally.
+|
+|.Direct-blob Uniformity
+| This method is useful when neither the total nor the label methods
+| are suitable.
+| For example, you may want to exclude blobs which are too large or too small.
+| In the direct-blob method,
+| your program has complete control over which blobs
+|_Aside Most comprehensive method.
+| are added to which areas.
+| 
+| With this method,
+| your can provide a callback function
+| which is called once for each 4- or 8-connected blob.
+| Your callback function will normally examine the blob
+| and/or compute some statistics for it.
+| Based on the examination and statistics,
+| the callback function decides which area, if any,
+| the blob belongs to.
+| 
+| As with the label method,
+| this method has no concept of background pixels.
+| No pixels in the segmented image are ignored.
+| 
+| This method may be used for any segmented image data type.
+| The segmented image pixels are not binned as they are with the
+| histogram method.
+|
+|.Histogram Uniformity
+| However, the histogram approach has a serious drawback
+| for higher precision gray level images.
+| Namely, accuracy of the uniformity is reduced
+| when a range of gray level values must be lumped together
+| into the same histogram bin.
+| The blob approach does not suffer from this precision loss since
+| gray level pixel values are used directly in the computation.
+|_aside The blob approach is the most general.
+| So unless you have a fast histogram generator and you have 8-bit data,
+| the blob approach is probably the best.
+|
+| The histogram approach may be slightly faster especially when large blobs
+|_aside The histogram approach may be faster.
+| are involved or if you have a hardware histogram generator.
+| It may also be more convenient to use
+| in cases when histograms of your regions are readily available.
+| Used when convenient means for histogram computation is already available.
+| Perhaps hardware.
+| Cannot be used with perfect accuracy for binned histograms.
+| Care must be taken so that precision lost
+| due to the intrinsic binning associated
+| with the histogram creation is not significant.
+| 
+| The implementation uses the concept of using a histogram
+|_aside Histogram is a convenient vehicle.
+| of a region to represent the region
+| in the uniformity computation.
+| This concept was not part of the original article.
+| It has been introduced by the implementation as a convenient
+| means of summarizing the gray levels of a section of image.
+|
+|!Application Examples
+| This section gives practical examples of the use of this algorithm.
+|
+|.Total Uniformity
+| In some applications the segmented image will naturally consist
+| of only two distinguishable areas.
+| Such an image is often represented as
+| a bivalued image where one value represents the object
+| and the other the background.
+| A binary threshold operation produces this kind of image.
+| Similarly for a multi-valued image, one value (perhaps zero)
+| represents the background,
+| and all other values represent the object or objects.
+| 
+| For such applications the simplest solution is to use
+| the convenience function dtlev85_total().
+| This function does not select specific regions.
+| In other words, all non-background regions are considered
+| part of a single area on which a single uniformity is calculated.
+| 
+| For example, consider [fig:gray5x2].
+| Using the binary segmentation illustrated by [fig:seg5bx2],
+|_aside Just the objects.
+| the total uniformity for all the balls is xxxx.
+| You get this by specifying ~background~=200
+| which causes all light gray areas to be ignored.
+| 
+|_figure half, gray5x2, Billiard Balls Gray Level
+| 
+|_figure half, seg5bx2, Billiard Balls Naive Binary Segmentation
+|_figure half, seg5ax2, Billiard Balls Better Binary Segmentation
+| 
+| If, however, you were interested in the uniformity of 
+| all parts of the picture #except# the balls,
+|_aside Just the background.
+| you would specify ~background~=0.
+| This would cause the black blobs to be ignored, 
+| getting a uniformity of xxxx.
+| 
+| It is also possible to compute the uniformity of the entire picture,
+|_aside Objects and background all together.
+| including both balls and non-ball area.
+| Simply specify ~background~=1.
+| Since the label value 1 does not occur in the segmented image,
+| no parts of the image are ignored,
+| and you get a uniformity of xxxx.
+|
+| To summarize, the three uniformity numbers using the square-shaped blobs are:
+| background 255	uniformity of balls xxxx
+| background 0		uniformity of non-ball parts of the image xxxx
+| background 1		uniformity of entire picture xxxx
+| 
+| Using the same background values as above,
+| except this time with the binary [fig:seg5ax2],
+| (circularly-shaped blobs) as the segmentation, you get:
+| background 255	uniformity of balls xxxx
+| background 0		uniformity of non-ball parts of the image xxxx
+| background 1		uniformity of entire picture xxxx
+| 
+| As expected from the better segmentation in [fig:seg5ax2],
+| the uniformity numbers are higher
+| than those for [fig:seg5bx2].
+| 
+| Note that dtlev85_total() cannot give the uniformity for just
+| one of the balls using the segmentation in either [fig:seg5bx2]
+| or [fig:seg5ax2].
+| For that, you could use dtlev85_label().
+|
+|.Uniformity Based on Labels
+| Suppose you have an application where your segmented
+| image has more than two regions in it.
+| Consider [fig:gray5x3] and its corresponding segmentation
+| [fig:seg5d].
+| The segmentation is not a bivalued image.
+| It has four different pixel values (i.e. labels):
+| the background plus
+| the three blobs marked by the numerals.
+|_figure half, gray5x3, Billiard Balls Gray Level
+| 
+|_figure half, seg5d, Billiard Balls Naive Multi-labeled Segmentation
+|_figure half, seg5c, Billiard Balls Better Multi-labeled Segmentation
+| To compute a uniformity for each labeled region separately,
+| a suitable function is dtlev85_label().
+| For [fig:seg5d], the regions produce uniformity numbers:
+| label 1	uniformity xxxx
+| label 2	uniformity xxxx
+| label 3	uniformity xxxx
+| label 4	uniformity xxxx
+| 
+| Contrast the uniformity numbers produced from the better segmentation
+| in [fig:seg5c]:
+| label 1	uniformity xxxx
+| label 2	uniformity xxxx
+| label 3	uniformity xxxx
+| label 4	uniformity xxxx
+| 
+| It is interesting to note that the squarish
+| segmentation (first table)
+| actually produces a higher uniformity number for ball 3
+| than the roundish segmentation (second table).
+| This is probably due to the blurry nature of this ball.
+| 
+| The function dtlev85_label() can group several regions
+| in the same area for uniformity purposes.
+| This is illustrated by the segmentation [fig:seg5c].
+| Although all three balls are separate regions,
+| the two lighter balls have been given the same label, label 1.
+| Here are the uniformity numbers:
+| label 1	uniformity xxxx, nregions 2
+| label 3	uniformity xxxx, nregions 1
+| label 4	uniformity xxxx, nregions 1
+| 
+| Note that label 2 does not exist.
+| Labels 3 and 4 under this segmentation corresponds exactly
+| to labels 3 and 4 of [fig:seg5c]
+| and therefore has exactly the same uniformity.
+|
+|.Application: Dominoes image
+| This example tries to show various ways of getting
+| uniformity numbers for different parts of the image.
+| [fig:gray2] has been segmented into the 3-valued image [fig:seg2b].
+|_figure half, gray2, Dominoes Gray Level
+|_figure half, seg2b, Dominoes 3-Valued Segmentation
+| 
+| The labels given to the segmented image correspond roughly to:
+| xxx	dark parts of domino bodies
+| xxx	shadow areas around domino bodies and rimming dots
+| xxx	white background and dots
+| 
+| Here are some uniformity numbers:
+| whole image			xxxx dtlev85_total() with ~background~=0
+| domino bodies			xxxx dtlev85_label()
+| shadows				xxxx dtlev85_label()
+| background and dots	xxxx dtlev85_label()
+| bodies and shadows	xxxx custom callback selecting only labels xxx and xxx
+| just dots				xxxx custom callback selecting only small bright blobs
+| 
+|.Application: Letters image
+| This example attempts to give a feel for
+| the visual correlation between the original gray level image
+| [fig:gray3]
+| and total uniformity under various segmentations.
+| 
+|_figure half, gray3, Hazy Letters Gray Level
+| 
+|_figure half, seg3a, Hazy Letters Binary Threshold 150
+|_figure half, seg3b, Hazy Letters Binary Threshold 180
+| 
+| The total uniformity as been calculated using ~background~=1.
+| Since the value 1 does not occur in any of these segmentations,
+| we have effectively computed the uniformity
+| of the entire image in each case.
+| [fig:seg3a]	uniformity xxxx, nregions xxxx
+| [fig:seg3b]	uniformity xxxx, nregions xxxx
+| 
+|.Application: Synthetic image
+| This example shows the effects of quantitative contamination
+| when a segmentation does not perfectly match the original image.
+| 
+| [fig:gray4a] is a synthetic gray level image.
+| The vertical line represents the border between
+| the two halves of the arbitrary segmentation in [fig:seg4a].
+| 
+|_figure half, gray4a, Synthetic Gray Level Image
+|_figure half, seg4a, Synthetic Gray Level Aribrary Segmentation
+| 
+| The uniformity numbers are:
+| total	uniformity xxxx
+| area1	uniformity xxxx
+| area2	uniformity xxxx
+| 
+| Due contamination of each gray level into the other's segment,
+| neither has a perfect uniformity.
+| Since the intrusion of the area1 side into the area2 side
+| is of greater geometric extent,
+| the area2 side as a lower uniformity.
+| 
+| [fig:gray4b] is the same synthetic gray level image,
+| however the vertical line represents a slightly different
+| segmentation border.
+| The segmentation is shown in [fig:seg4b].
+| 
+|_figure half, gray4b, Synthetic Gray Level Image Again
+|_figure half, seg4b, Alternate Synthetic Gray Level Aribrary Segmentation
+| 
+| The uniformity numbers are:
+| total uniformity xxxx
+| area1	uniformity 1.0
+| area2	uniformity xxxx
+| 
+| This time the area1 side of the gray level image
+| has a perfect uniformity because no area2 pixels
+| creep into it under the segmentation.
+| However, many area1 pixels contaminate the area2 side,
+| giving it an even worse segmentation than for [fig:gray4a].
+| 
+|!EXAMPLE lev85d.c - Direct Blob Uniformity
+|_index dtlev85_init(),, example of
+|_index dtlev85_blob(),, example of
+|_index dtlev85_compute(),, example of
+| The dtlev85_label() function discussed above computes uniformity
+| numbers based on distinct labels found in the segmented image.
+| But what if you need the uniformity of each blob in your image,
+| yet your segmented image does not assign a different label to
+| each one?
+| Or what if you need to select only certain blobs
+| at run time,
+| say based on blob size?
+| You can program a solution to these applications by writing
+| one of two different types of
+| simple callback routines.
+|_aside You have to write your own custom callback function.
+|
+| In this approach, the callback
+| receives a linked list containing the geometric locations of
+| all the pixels in the blob.
+| The callback routine should make use of dtlev85_init(),
+| dtlev85_contribute(), and dtlev85_compute() to produce uniformity
+| measures on each blob as desired.
+| 
+|:// Example Program dtlev85d
+|:// Illustrates blob-by-blob direct-pixel uniformity computation.
+|:// The two arguments are: 1) gray level image filename, and
+|:// 2) segmented image filename, for example:
+|://     dtlev85d  data/dice64.pgm  data/dice64s.pgm
+|:// Uniformity of each blob is computed and printed.
+|:// Bounding box size of each blob is also printed just for fun.
+|:// Segmented image should not be larger than gray image.
+|:// All error checking left out for clarity.
+|:
+|:#include <dt.h>
+|:#include <dtlev85.h>
+|:
+|:static dtimage_t gray;				// global also seen by callback
+|:
+|://..........................................................................
+|:dt_rc_e
+|_aside You should write a callback function like this.
+|:mydeliver(	
+|:  dt_ctl_t *ctl,
+|:  dtrun_t *run,						// connected components housekeeping
+|:  dtrun_blob_t *blob,
+|:  void *arg)
+|:{
+|:  dtlev85_t lev85;
+|:  dt_stats_t stats = {				// specify stats we want on blob
+|_aside Compute some stats just for fun.
+|:    DT_STATS_WIDTH | 
+|:    DT_STATS_HEIGHT};
+|:  dtimage_blob_stats(NULL, &gray,		// compute stats on blob
+|:     run, blob, &stats);
+|:
+|:  dtlev85_init(NULL, &lev85);			// init lev85 structure
+|:  dtlev85_blob(NULL,          		// simply add blob to it
+|:    &lev85, &gray, run, blob,
+|:    &stats);
+|:  dtlev85_compute(NULL, &lev85);		// compute blob's uniformity		
+|:  printf("dtlev85d:  blob"			// print out interesting stuff
+|:    " label %6g, "
+|:    " area %6ld, "
+|:    " width %3u height %3u,"
+|:    " uniformity %0.5f\n",
+|:	  blob->label, lev85.Aa,
+|:    stats.width, stats.height,
+|:    lev85.u);
+|:  return DT_RC_GOOD;					// keep doing blobs				    
+|:}
+|://..........................................................................
+|:void main(int argc, char *argv[])
+|:{
+|:  dtimage_t segmented;
+|:
+|:  dtimage_import(NULL,		 		// read and allocate gray image
+|_aside Read the two input images.
+|:    &gray, argv[1]);
+|:  dtimage_import(NULL,		 		// read and allocate segmented image
+|:    &segmented, argv[2]);
+|:
+|:  dtimage_adj_blob(NULL, 				// do connected components
+|:    &segmented,						// on segmented image
+|:    0, 0, gray.xe, gray.ye,			// use whole input image 
+|:    0.0, 0,							// ignoring no pixels, 4-connected
+|:    mydeliver, NULL);					// deliver blobs into our function
+|:  printf("dtlev85d: normal exit\n");
+|:}
+| 
+| END
+ *..........................................................................*/

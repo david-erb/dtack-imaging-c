@@ -1,0 +1,223 @@
+=========================================  
+dtall:                                     
+=========================================== 
+dttime: 04 Feb 95 12:53 dv0 
+dttcast: | 950205 | b08->b01 (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  2.86 |  2.86 |  2.86
+dttcast: | 950205 | b01->b08 (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  3.79 |  3.79 |  3.79
+dttcast: | 950205 | b08->b08 (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  1.16 |  1.16 |  1.16
+dttcast: | 950205 | b08->b08 (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  1.10 |  1.10 |  1.10
+dttcast: | 950205 | b08->b16 (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 10.55 | 10.55 | 10.55
+dttcast: | 950205 | b16->b08 (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  8.62 |  8.62 |  8.62
+dttcast: | 950205 | b08->b32 (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 15.66 | 15.66 | 15.66
+dttcast: | 950205 | b32->b08 (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 10.71 | 10.71 | 10.71
+dttcast: | 950205 | b08->s1  (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  5.00 |  5.00 |  5.00
+dttcast: | 950205 | s1 ->b08 (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  5.00 |  5.00 |  5.00
+dttcast: | 950205 | b08->s2  (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 10.27 | 10.27 | 10.27
+dttcast: | 950205 | s2 ->b08 (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  8.51 |  8.51 |  8.51
+dttcast: | 950205 | b08->s4  (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 15.71 | 15.71 | 15.71
+dttcast: | 950205 | s4 ->b08 (50) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 10.60 | 10.60 | 10.60
+dttcast: | 950205 | b08->f1  (10) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  5.27 |  5.27 |  5.27
+dttcast: | 950205 | f1 ->b08 (10) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  9.06 |  9.06 |  9.06
+dttcast: | 950205 | b08->f2  (10) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  7.14 |  7.14 |  7.14
+dttcast: | 950205 | f2 ->b08 (10) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 10.16 | 10.16 | 10.16
+dttconv: | 950205 | dttconv_h1d | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  9.89 |  9.89 |  9.89
+dttconv: | 950205 | dttconv_ave | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  1.65 |  1.65 |  1.65
+dttconv: | 950205 | dttconv_laplace | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  1.70 |  1.70 |  1.70
+dttconv: | 950205 | dttconv_cross | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  5.99 |  5.99 |  5.99
+dttcan: | 950205 | canvas fastg,,640 put (200) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  6.97 |  6.97 |  6.97
+dttcan: | 950205 | canvas fastg,,640 get (200) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  8.46 |  8.46 |  8.46
+dttcan: | 950205 | canvas svgac,,640 put (200) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 11.15 | 11.15 | 11.15
+dttcan: | 950205 | canvas svgac,,640 get (200) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 13.45 | 13.45 | 13.45
+dttfastg: | 950205 | fastgraph buffer put (200) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  6.92 |  6.92 |  6.92
+dttfastg: | 950205 | fastgraph buffer get (200) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  8.46 |  8.46 |  8.46
+dttsvgacc: | 950205 | svgacc block put (200) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 10.60 | 10.60 | 10.60
+dttsvgacc: | 950205 | svgacc block get (200) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 | 12.85 | 12.85 | 12.85
+dtt1d: | 950205 | random uniform (  7500) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  0.66 |  0.66 |  0.66
+dtt1d: | 950205 | random gauss (  7500) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  1.21 |  1.21 |  1.21
+dtt1d: | 950205 | inverted sort (  7500) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  1.48 |  1.48 |  1.48
+dtt1d: | 950205 | random sort (  7500) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  1.48 |  1.48 |  1.48
+dttlog: | 950205 | log10 unscaled (5@128x120) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  0.44 |  0.44 |  0.44
+dttlog: | 950205 | log10 scaled (5@128x120) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  4.88 |  4.88 |  4.88
+dttlog: | 950205 | log unscaled (5@128x120) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  0.44 |  0.44 |  0.44
+dttlog: | 950205 | log scaled (5@128x120) | DV0 | VisualC++1.5(DOS16) | Alpha-DX33 |  4.83 |  4.83 |  4.83
+dtinst: 04 Feb 95 12:58 dv0 complete 
+=========================================== 
+dttime: 04 Feb 95 13:34 db0 
+dttcast: | 950205 | b08->b01 (50) | DB0 | BorlandC++3.0(DOS16) | Alpha-DX33 |  6.21 |  6.21 |  6.21
+dttcast: | 950205 | b01->b08 (50) | DB0 | BorlandC++3.0(DOS16) | Alpha-DX33 |  6.64 |  6.64 |  6.64
+dttcast: | 950205 | b08->b08 (50) | DB0 | BorlandC++3.0(DOS16) | Alpha-DX33 |  1.05 |  1.05 |  1.05
+dttcast: | 950205 | b08->b08 (50) | DB0 | BorlandC++3.0(DOS16) | Alpha-DX33 |  1.04 |  1.04 |  1.04
+dttcast: | 950205 | b08->b16 (50) | DB0 | BorlandC++3.0(DOS16) | Alpha-DX33 | 12.69 | 12.69 | 12.69
+dttcast: | 950205 | b16->b08 (50) | DB0 | BorlandC++3.0(DOS16) | Alpha-DX33 | 10.65 | 10.65 | 10.65
+dttcast: | 950205 | b08->b32 (50) | DB0 | BorlandC++3.0(DOS16) | Alpha-DX33 | 18.40 | 18.40 | 18.40
+dttcast: | 950205 | b32->b08 (50) | DB0 | BorlandC++3.0(DOS16) | Alpha-DX33 | 14.61 | 14.61 | 14.61
+dttcast: | 950205 | b08->s1  (50) | DB0 | BorlandC++3.0(DOS16) | Alpha-DX33 |  6.37 |  6.37 |  6.37
+dttcast: | 950205 | s1 ->b08 (50) | DB0 | BorlandC++3.0(DOS16) | Alpha-DX33 |  7.14 |  7.14 |  7.14
+dttcast: | 950205 | b08->s2  (50) | DB0 | BorlandC++3.0(DOS16) | Alpha-DX33 | 12.58 | 12.58 | 12.58
+dttcast: | 950205 | s2 ->b08 (50) | DB0 | BorlandC++3.0(DOS16) | Alpha-DX33 | 11.65 | 11.65 | 11.65
+dttcast: | 950205 | b08->s4  (50) | DB0 | BorlandC++3.0(DOS16) | Alpha-DX33 | 17.85 | 17.85 | 17.85
+dttcast: | 950205 | s4 ->b08 (50) | DB0 | BorlandC++3.0(DOS16) | Alpha-DX33 | 14.55 | 14.55 | 14.55
+dttcast: | 950205 | b08->f1  (10) | DB0 | BorlandC++3.0(DOS16) | Alpha-DX33 |  5.49 |  5.49 |  5.49
+dttcast: | 950205 | f1 ->b08 (10) | DB0 | BorlandC++3.0(DOS16) | Alpha-DX33 |  9.23 |  9.23 |  9.23
+dttcast: | 950205 | b08->f2  (10) | DB0 | BorlandC++3.0(DOS16) | Alpha-DX33 |  7.41 |  7.41 |  7.41
+dttcast: | 950205 | f2 ->b08 (10) | DB0 | BorlandC++3.0(DOS16) | Alpha-DX33 | 10.27 | 10.27 | 10.27
+dttconv: | 950205 | dttconv_h1d | DB0 | BorlandC++3.0(DOS16) | Alpha-DX33 | 10.55 | 10.55 | 10.55
+dttconv: | 950205 | dttconv_ave | DB0 | BorlandC++3.0(DOS16) | Alpha-DX33 |  2.03 |  2.03 |  2.03
+dttconv: | 950205 | dttconv_laplace | DB0 | BorlandC++3.0(DOS16) | Alpha-DX33 |  2.53 |  2.53 |  2.53
+dttconv: | 950205 | dttconv_cross | DB0 | BorlandC++3.0(DOS16) | Alpha-DX33 |  5.22 |  5.22 |  5.22
+dttcan: | 950205 | canvas fastg,,640 put (200) | DB0 | BorlandC++3.0(DOS16) | Alpha-DX33 |  6.70 |  6.70 |  6.70
+dttcan: | 950205 | canvas fastg,,640 get (200) | DB0 | BorlandC++3.0(DOS16) | Alpha-DX33 |  8.19 |  8.19 |  8.19
+dttcan: | 950205 | canvas svgac,,640 put (200) | DB0 | BorlandC++3.0(DOS16) | Alpha-DX33 | 10.88 | 10.88 | 10.88
+dttcan: | 950205 | canvas svgac,,640 get (200) | DB0 | BorlandC++3.0(DOS16) | Alpha-DX33 | 13.29 | 13.29 | 13.29
+dttfastg: | 950205 | fastgraph buffer put (200) | DB0 | BorlandC++3.0(DOS16) | Alpha-DX33 |  6.65 |  6.65 |  6.65
+dttfastg: | 950205 | fastgraph buffer get (200) | DB0 | BorlandC++3.0(DOS16) | Alpha-DX33 |  8.07 |  8.07 |  8.07
+dttsvgacc: | 950205 | svgacc block put (200) | DB0 | BorlandC++3.0(DOS16) | Alpha-DX33 | 10.43 | 10.43 | 10.43
+dttsvgacc: | 950205 | svgacc block get (200) | DB0 | BorlandC++3.0(DOS16) | Alpha-DX33 | 12.75 | 12.75 | 12.75
+dtt1d: | 950205 | random uniform (  7500) | DB0 | BorlandC++3.0(DOS16) | Alpha-DX33 |  1.81 |  1.81 |  1.81
+dtt1d: | 950205 | random gauss (  7500) | DB0 | BorlandC++3.0(DOS16) | Alpha-DX33 |  2.86 |  2.86 |  2.86
+dtt1d: | 950205 | inverted sort (  7500) | DB0 | BorlandC++3.0(DOS16) | Alpha-DX33 |  1.70 |  1.70 |  1.70
+dtt1d: | 950205 | random sort (  7500) | DB0 | BorlandC++3.0(DOS16) | Alpha-DX33 |  1.76 |  1.76 |  1.76
+dttlog: | 950205 | log10 unscaled (5@128x120) | DB0 | BorlandC++3.0(DOS16) | Alpha-DX33 |  0.55 |  0.55 |  0.55
+dttlog: | 950205 | log10 scaled (5@128x120) | DB0 | BorlandC++3.0(DOS16) | Alpha-DX33 |  6.75 |  6.75 |  6.75
+dttlog: | 950205 | log unscaled (5@128x120) | DB0 | BorlandC++3.0(DOS16) | Alpha-DX33 |  0.55 |  0.55 |  0.55
+dttlog: | 950205 | log scaled (5@128x120) | DB0 | BorlandC++3.0(DOS16) | Alpha-DX33 |  6.70 |  6.70 |  6.70
+dtinst: 04 Feb 95 13:39 db0 complete 
+=========================================== 
+dttime: 04 Feb 95 14:15 dt0 
+dttcast: | 950205 | b08->b01 (50) | DT0 | TurboC++3.0(DOS16) | Alpha-DX33 |  6.15 |  6.15 |  6.15
+dttcast: | 950205 | b01->b08 (50) | DT0 | TurboC++3.0(DOS16) | Alpha-DX33 |  6.48 |  6.48 |  6.48
+dttcast: | 950205 | b08->b08 (50) | DT0 | TurboC++3.0(DOS16) | Alpha-DX33 |  0.99 |  0.99 |  0.99
+dttcast: | 950205 | b08->b08 (50) | DT0 | TurboC++3.0(DOS16) | Alpha-DX33 |  1.05 |  1.05 |  1.05
+dttcast: | 950205 | b08->b16 (50) | DT0 | TurboC++3.0(DOS16) | Alpha-DX33 | 12.96 | 12.96 | 12.96
+dttcast: | 950205 | b16->b08 (50) | DT0 | TurboC++3.0(DOS16) | Alpha-DX33 | 10.66 | 10.66 | 10.66
+dttcast: | 950205 | b08->b32 (50) | DT0 | TurboC++3.0(DOS16) | Alpha-DX33 | 18.46 | 18.46 | 18.46
+dttcast: | 950205 | b32->b08 (50) | DT0 | TurboC++3.0(DOS16) | Alpha-DX33 | 13.40 | 13.40 | 13.40
+dttcast: | 950205 | b08->s1  (50) | DT0 | TurboC++3.0(DOS16) | Alpha-DX33 |  5.71 |  5.71 |  5.71
+dttcast: | 950205 | s1 ->b08 (50) | DT0 | TurboC++3.0(DOS16) | Alpha-DX33 |  5.99 |  5.99 |  5.99
+dttcast: | 950205 | b08->s2  (50) | DT0 | TurboC++3.0(DOS16) | Alpha-DX33 | 12.41 | 12.41 | 12.41
+dttcast: | 950205 | s2 ->b08 (50) | DT0 | TurboC++3.0(DOS16) | Alpha-DX33 | 10.49 | 10.49 | 10.49
+dttcast: | 950205 | b08->s4  (50) | DT0 | TurboC++3.0(DOS16) | Alpha-DX33 | 18.40 | 18.40 | 18.40
+dttcast: | 950205 | s4 ->b08 (50) | DT0 | TurboC++3.0(DOS16) | Alpha-DX33 | 13.29 | 13.29 | 13.29
+dttcast: | 950205 | b08->f1  (10) | DT0 | TurboC++3.0(DOS16) | Alpha-DX33 |  5.49 |  5.49 |  5.49
+dttcast: | 950205 | f1 ->b08 (10) | DT0 | TurboC++3.0(DOS16) | Alpha-DX33 |  9.34 |  9.34 |  9.34
+dttcast: | 950205 | b08->f2  (10) | DT0 | TurboC++3.0(DOS16) | Alpha-DX33 |  7.47 |  7.47 |  7.47
+dttcast: | 950205 | f2 ->b08 (10) | DT0 | TurboC++3.0(DOS16) | Alpha-DX33 | 10.49 | 10.49 | 10.49
+dttconv: | 950205 | dttconv_h1d | DT0 | TurboC++3.0(DOS16) | Alpha-DX33 | 10.65 | 10.65 | 10.65
+dttconv: | 950205 | dttconv_ave | DT0 | TurboC++3.0(DOS16) | Alpha-DX33 |  1.98 |  1.98 |  1.98
+dttconv: | 950205 | dttconv_laplace | DT0 | TurboC++3.0(DOS16) | Alpha-DX33 |  2.31 |  2.31 |  2.31
+dttconv: | 950205 | dttconv_cross | DT0 | TurboC++3.0(DOS16) | Alpha-DX33 |  5.11 |  5.11 |  5.11
+dttcan: | 950205 | canvas fastg,,640 put (200) | DT0 | TurboC++3.0(DOS16) | Alpha-DX33 |  6.76 |  6.76 |  6.76
+dttcan: | 950205 | canvas fastg,,640 get (200) | DT0 | TurboC++3.0(DOS16) | Alpha-DX33 |  8.18 |  8.18 |  8.18
+dttcan: | 950205 | canvas svgac,,640 put (200) | DT0 | TurboC++3.0(DOS16) | Alpha-DX33 | 10.87 | 10.87 | 10.87
+dttcan: | 950205 | canvas svgac,,640 get (200) | DT0 | TurboC++3.0(DOS16) | Alpha-DX33 | 13.30 | 13.30 | 13.30
+dttfastg: | 950205 | fastgraph buffer put (200) | DT0 | TurboC++3.0(DOS16) | Alpha-DX33 |  6.70 |  6.70 |  6.70
+dttfastg: | 950205 | fastgraph buffer get (200) | DT0 | TurboC++3.0(DOS16) | Alpha-DX33 |  8.07 |  8.07 |  8.07
+dttsvgacc: | 950205 | svgacc block put (200) | DT0 | TurboC++3.0(DOS16) | Alpha-DX33 | 10.43 | 10.43 | 10.43
+dttsvgacc: | 950205 | svgacc block get (200) | DT0 | TurboC++3.0(DOS16) | Alpha-DX33 | 12.80 | 12.80 | 12.80
+dtt1d: | 950205 | random uniform (  7500) | DT0 | TurboC++3.0(DOS16) | Alpha-DX33 |  1.76 |  1.76 |  1.76
+dtt1d: | 950205 | random gauss (  7500) | DT0 | TurboC++3.0(DOS16) | Alpha-DX33 |  2.74 |  2.74 |  2.74
+dtt1d: | 950205 | inverted sort (  7500) | DT0 | TurboC++3.0(DOS16) | Alpha-DX33 |  1.76 |  1.76 |  1.76
+dtt1d: | 950205 | random sort (  7500) | DT0 | TurboC++3.0(DOS16) | Alpha-DX33 |  1.81 |  1.81 |  1.81
+dttlog: | 950205 | log10 unscaled (5@128x120) | DT0 | TurboC++3.0(DOS16) | Alpha-DX33 |  0.55 |  0.55 |  0.55
+dttlog: | 950205 | log10 scaled (5@128x120) | DT0 | TurboC++3.0(DOS16) | Alpha-DX33 |  6.70 |  6.70 |  6.70
+dttlog: | 950205 | log unscaled (5@128x120) | DT0 | TurboC++3.0(DOS16) | Alpha-DX33 |  0.55 |  0.55 |  0.55
+dttlog: | 950205 | log scaled (5@128x120) | DT0 | TurboC++3.0(DOS16) | Alpha-DX33 |  6.70 |  6.70 |  6.70
+dtinst: 04 Feb 95 14:20 dt0 complete 
+=========================================== 
+dttime: 04 Feb 95 15:19 dw0 
+dttcast: | 950205 | b08->b01 (50) | DW0 | WatcomC/C++10.0A(DOS16) | Alpha-DX33 |  2.86 |  2.86 |  2.86
+dttcast: | 950205 | b01->b08 (50) | DW0 | WatcomC/C++10.0A(DOS16) | Alpha-DX33 |  3.57 |  3.57 |  3.57
+dttcast: | 950205 | b08->b08 (50) | DW0 | WatcomC/C++10.0A(DOS16) | Alpha-DX33 |  1.20 |  1.20 |  1.20
+dttcast: | 950205 | b08->b08 (50) | DW0 | WatcomC/C++10.0A(DOS16) | Alpha-DX33 |  1.16 |  1.16 |  1.16
+dttcast: | 950205 | b08->b16 (50) | DW0 | WatcomC/C++10.0A(DOS16) | Alpha-DX33 |  9.94 |  9.94 |  9.94
+dttcast: | 950205 | b16->b08 (50) | DW0 | WatcomC/C++10.0A(DOS16) | Alpha-DX33 |  7.30 |  7.30 |  7.30
+dttcast: | 950205 | b08->b32 (50) | DW0 | WatcomC/C++10.0A(DOS16) | Alpha-DX33 | 14.61 | 14.61 | 14.61
+dttcast: | 950205 | b32->b08 (50) | DW0 | WatcomC/C++10.0A(DOS16) | Alpha-DX33 |  9.45 |  9.45 |  9.45
+dttcast: | 950205 | b08->s1  (50) | DW0 | WatcomC/C++10.0A(DOS16) | Alpha-DX33 |  3.79 |  3.79 |  3.79
+dttcast: | 950205 | s1 ->b08 (50) | DW0 | WatcomC/C++10.0A(DOS16) | Alpha-DX33 |  3.68 |  3.68 |  3.68
+dttcast: | 950205 | b08->s2  (50) | DW0 | WatcomC/C++10.0A(DOS16) | Alpha-DX33 |  9.95 |  9.95 |  9.95
+dttcast: | 950205 | s2 ->b08 (50) | DW0 | WatcomC/C++10.0A(DOS16) | Alpha-DX33 |  7.30 |  7.30 |  7.30
+dttcast: | 950205 | b08->s4  (50) | DW0 | WatcomC/C++10.0A(DOS16) | Alpha-DX33 | 14.72 | 14.72 | 14.72
+dttcast: | 950205 | s4 ->b08 (50) | DW0 | WatcomC/C++10.0A(DOS16) | Alpha-DX33 |  9.45 |  9.45 |  9.45
+dttcast: | 950205 | b08->f1  (10) | DW0 | WatcomC/C++10.0A(DOS16) | Alpha-DX33 |  4.83 |  4.83 |  4.83
+dttcast: | 950205 | f1 ->b08 (10) | DW0 | WatcomC/C++10.0A(DOS16) | Alpha-DX33 |  9.23 |  9.23 |  9.23
+dttcast: | 950205 | b08->f2  (10) | DW0 | WatcomC/C++10.0A(DOS16) | Alpha-DX33 |  6.75 |  6.75 |  6.75
+dttcast: | 950205 | f2 ->b08 (10) | DW0 | WatcomC/C++10.0A(DOS16) | Alpha-DX33 | 10.33 | 10.33 | 10.33
+dttconv: | 950205 | dttconv_h1d | DW0 | WatcomC/C++10.0A(DOS16) | Alpha-DX33 |  8.85 |  8.85 |  8.85
+dttconv: | 950205 | dttconv_ave | DW0 | WatcomC/C++10.0A(DOS16) | Alpha-DX33 |  2.03 |  2.03 |  2.03
+dttconv: | 950205 | dttconv_laplace | DW0 | WatcomC/C++10.0A(DOS16) | Alpha-DX33 |  1.92 |  1.92 |  1.92
+dttconv: | 950205 | dttconv_cross | DW0 | WatcomC/C++10.0A(DOS16) | Alpha-DX33 |  4.12 |  4.12 |  4.12
+dttcan: | 950205 | canvas fastg,,640 put (200) | DW0 | WatcomC/C++10.0A(DOS16) | Alpha-DX33 |  6.92 |  6.92 |  6.92
+dttcan: | 950205 | canvas fastg,,640 get (200) | DW0 | WatcomC/C++10.0A(DOS16) | Alpha-DX33 |  8.46 |  8.46 |  8.46
+dttcan: | 950205 | canvas svgac,,640 put (200) | DW0 | WatcomC/C++10.0A(DOS16) | Alpha-DX33 | 11.21 | 11.21 | 11.21
+dttcan: | 950205 | canvas svgac,,640 get (200) | DW0 | WatcomC/C++10.0A(DOS16) | Alpha-DX33 | 13.51 | 13.51 | 13.51
+dttfastg: | 950205 | fastgraph buffer put (200) | DW0 | WatcomC/C++10.0A(DOS16) | Alpha-DX33 |  6.98 |  6.98 |  6.98
+dttfastg: | 950205 | fastgraph buffer get (200) | DW0 | WatcomC/C++10.0A(DOS16) | Alpha-DX33 |  8.40 |  8.40 |  8.40
+dttsvgacc: | 950205 | svgacc block put (200) | DW0 | WatcomC/C++10.0A(DOS16) | Alpha-DX33 | 10.71 | 10.71 | 10.71
+dttsvgacc: | 950205 | svgacc block get (200) | DW0 | WatcomC/C++10.0A(DOS16) | Alpha-DX33 | 13.02 | 13.02 | 13.02
+dtt1d: | 950205 | random uniform (  7500) | DW0 | WatcomC/C++10.0A(DOS16) | Alpha-DX33 |  0.99 |  0.99 |  0.99
+dtt1d: | 950205 | random gauss (  7500) | DW0 | WatcomC/C++10.0A(DOS16) | Alpha-DX33 |  1.54 |  1.54 |  1.54
+dtt1d: | 950205 | inverted sort (  7500) | DW0 | WatcomC/C++10.0A(DOS16) | Alpha-DX33 |  1.04 |  1.04 |  1.04
+dtt1d: | 950205 | random sort (  7500) | DW0 | WatcomC/C++10.0A(DOS16) | Alpha-DX33 |  1.10 |  1.10 |  1.10
+dttlog: | 950205 | log10 unscaled (5@128x120) | DW0 | WatcomC/C++10.0A(DOS16) | Alpha-DX33 |  0.43 |  0.43 |  0.43
+dttlog: | 950205 | log10 scaled (5@128x120) | DW0 | WatcomC/C++10.0A(DOS16) | Alpha-DX33 |  3.79 |  3.79 |  3.79
+dttlog: | 950205 | log unscaled (5@128x120) | DW0 | WatcomC/C++10.0A(DOS16) | Alpha-DX33 |  0.50 |  0.50 |  0.50
+dttlog: | 950205 | log scaled (5@128x120) | DW0 | WatcomC/C++10.0A(DOS16) | Alpha-DX33 |  3.79 |  3.79 |  3.79
+dtinst: 04 Feb 95 15:24 dw0 complete 
+=========================================== 
+dttime: 04 Feb 95 16:14 dw1 
+dttcast: | 950205 | b08->b01 (50) | DW1 | WatcomC/C++10.0A(DOS32) | Alpha-DX33 |  2.58 |  2.58 |  2.58
+dttcast: | 950205 | b01->b08 (50) | DW1 | WatcomC/C++10.0A(DOS32) | Alpha-DX33 |  2.80 |  2.80 |  2.80
+dttcast: | 950205 | b08->b08 (50) | DW1 | WatcomC/C++10.0A(DOS32) | Alpha-DX33 |  0.77 |  0.77 |  0.77
+dttcast: | 950205 | b08->b08 (50) | DW1 | WatcomC/C++10.0A(DOS32) | Alpha-DX33 |  0.72 |  0.72 |  0.72
+dttcast: | 950205 | b08->b16 (50) | DW1 | WatcomC/C++10.0A(DOS32) | Alpha-DX33 |  4.17 |  4.17 |  4.17
+dttcast: | 950205 | b16->b08 (50) | DW1 | WatcomC/C++10.0A(DOS32) | Alpha-DX33 |  3.57 |  3.57 |  3.57
+dttcast: | 950205 | b08->b32 (50) | DW1 | WatcomC/C++10.0A(DOS32) | Alpha-DX33 |  3.96 |  3.96 |  3.96
+dttcast: | 950205 | b32->b08 (50) | DW1 | WatcomC/C++10.0A(DOS32) | Alpha-DX33 |  3.57 |  3.57 |  3.57
+dttcast: | 950205 | b08->s1  (50) | DW1 | WatcomC/C++10.0A(DOS32) | Alpha-DX33 |  3.36 |  3.36 |  3.36
+dttcast: | 950205 | s1 ->b08 (50) | DW1 | WatcomC/C++10.0A(DOS32) | Alpha-DX33 |  3.40 |  3.40 |  3.40
+dttcast: | 950205 | b08->s2  (50) | DW1 | WatcomC/C++10.0A(DOS32) | Alpha-DX33 |  4.00 |  4.00 |  4.00
+dttcast: | 950205 | s2 ->b08 (50) | DW1 | WatcomC/C++10.0A(DOS32) | Alpha-DX33 |  3.63 |  3.63 |  3.63
+dttcast: | 950205 | b08->s4  (50) | DW1 | WatcomC/C++10.0A(DOS32) | Alpha-DX33 |  4.06 |  4.06 |  4.06
+dttcast: | 950205 | s4 ->b08 (50) | DW1 | WatcomC/C++10.0A(DOS32) | Alpha-DX33 |  3.41 |  3.41 |  3.41
+dttcast: | 950205 | b08->f1  (10) | DW1 | WatcomC/C++10.0A(DOS32) | Alpha-DX33 |  2.59 |  2.59 |  2.59
+dttcast: | 950205 | f1 ->b08 (10) | DW1 | WatcomC/C++10.0A(DOS32) | Alpha-DX33 |  6.32 |  6.32 |  6.32
+dttcast: | 950205 | b08->f2  (10) | DW1 | WatcomC/C++10.0A(DOS32) | Alpha-DX33 |  2.74 |  2.74 |  2.74
+dttcast: | 950205 | f2 ->b08 (10) | DW1 | WatcomC/C++10.0A(DOS32) | Alpha-DX33 |  6.54 |  6.54 |  6.54
+dttconv: | 950205 | dttconv_h1d | DW1 | WatcomC/C++10.0A(DOS32) | Alpha-DX33 |  3.35 |  3.35 |  3.35
+dttconv: | 950205 | dttconv_ave | DW1 | WatcomC/C++10.0A(DOS32) | Alpha-DX33 |  0.94 |  0.94 |  0.94
+dttconv: | 950205 | dttconv_laplace | DW1 | WatcomC/C++10.0A(DOS32) | Alpha-DX33 |  1.26 |  1.26 |  1.26
+dttconv: | 950205 | dttconv_cross | DW1 | WatcomC/C++10.0A(DOS32) | Alpha-DX33 |  2.85 |  2.85 |  2.85
+dttcan: | 950205 | canvas fastg,,640 put (200) | DW1 | WatcomC/C++10.0A(DOS32) | Alpha-DX33 |  4.72 |  4.72 |  4.72
+dttcan: | 950205 | canvas fastg,,640 get (200) | DW1 | WatcomC/C++10.0A(DOS32) | Alpha-DX33 |  6.04 |  6.04 |  6.04
+dttfastg: | 950205 | fastgraph buffer put (200) | DW1 | WatcomC/C++10.0A(DOS32) | Alpha-DX33 |  4.67 |  4.67 |  4.67
+dttfastg: | 950205 | fastgraph buffer get (200) | DW1 | WatcomC/C++10.0A(DOS32) | Alpha-DX33 |  6.10 |  6.10 |  6.10
+dtt1d: | 950205 | random uniform (  7500) | DW1 | WatcomC/C++10.0A(DOS32) | Alpha-DX33 |  0.16 |  0.16 |  0.16
+dtt1d: | 950205 | random gauss (  7500) | DW1 | WatcomC/C++10.0A(DOS32) | Alpha-DX33 |  0.44 |  0.44 |  0.44
+dtt1d: | 950205 | inverted sort (  7500) | DW1 | WatcomC/C++10.0A(DOS32) | Alpha-DX33 |  0.82 |  0.82 |  0.82
+dtt1d: | 950205 | random sort (  7500) | DW1 | WatcomC/C++10.0A(DOS32) | Alpha-DX33 |  0.82 |  0.82 |  0.82
+dttlog: | 950205 | log10 unscaled (5@128x120) | DW1 | WatcomC/C++10.0A(DOS32) | Alpha-DX33 |  0.28 |  0.28 |  0.28
+dttlog: | 950205 | log10 scaled (5@128x120) | DW1 | WatcomC/C++10.0A(DOS32) | Alpha-DX33 |  3.30 |  3.30 |  3.30
+dttlog: | 950205 | log unscaled (5@128x120) | DW1 | WatcomC/C++10.0A(DOS32) | Alpha-DX33 |  0.28 |  0.28 |  0.28
+dttlog: | 950205 | log scaled (5@128x120) | DW1 | WatcomC/C++10.0A(DOS32) | Alpha-DX33 |  3.30 |  3.30 |  3.30
+dtinst: 04 Feb 95 16:16 dw1 complete 
+=========================================== 
+dttime: 04 Feb 95 16:58 wb0 
+This program must be run under Microsoft Windows.
+This program must be run under Microsoft Windows.
+This program must be run under Microsoft Windows.
+This program must be run under Microsoft Windows.
+This program must be run under Microsoft Windows.
+This program must be run under Microsoft Windows.
+This program must be run under Microsoft Windows.
+dtinst: 04 Feb 95 16:58 wb0 complete 
+=========================================== 
+dttime: 04 Feb 95 18:01 ww0 
+this is a Windows 16-bit executable
+this is a Windows 16-bit executable
+this is a Windows 16-bit executable
+this is a Windows 16-bit executable
+this is a Windows 16-bit executable
+this is a Windows 16-bit executable
+this is a Windows 16-bit executable
+dtinst: 04 Feb 95 18:01 ww0 complete 

@@ -1,0 +1,138 @@
+/*..........................................................................
+| TITLE output
+| Frame destinations
+| 
+|!Frame destinations
+| Tableau can send output frames to any of several destinations.
+| A single instance of tableau can only be outputting to one destination.
+| 
+| You tell tableau which destination to use with the -screen line in the arg file.
+| The general format of the -screen line is:
+|
+|:   -screen destination,spec,mod1,mod2,...
+|
+| Where:
+| The commas must be there to separate the other fields.
+| There must be no spaces in keyword value.
+| The fields are:
+|
+| destination	is one of the strings from the table below
+| spec		identifies which destination
+| modn		modifier, exact number and meaning is destination dependent
+|
+| Allowed values for destination are:
+| ftp		output to ftp server
+| rocket	output directly to listening rocket server
+| http		start rocket server as CGI then output to it
+| roll		output to local disk
+| hws		output to display window
+|
+|.Ftp output
+| Use this type of destination to send the frames to any ftp server.
+| 
+| Keyword format:
+|:   -screen ftp,directory/pattern
+|
+| Where:
+| directory	name of directory on remote host to "cd" to
+| pattern	filename pattern to generate
+| 
+| The pattern must have one optional :%s: subfield 
+| followed by one optional :%ld: subfield.
+| These subfields are replaced by the camera name and frame number, respectively.
+| For example, camera "mycam" at frame 4858:
+| 
+| :my/image/dir/%s.%08ld.jpg:		my/image/dir/mycam.00004858.jpg
+| :my/image/dir/%s.jpg:				my/image/dir/mycam.jpg
+| :my/image/dir/somename.jpg:		my/image/dir/somename.jpg
+|
+| This type of destination requires a separate ftp config file.
+| This file is called ftp.cfg.
+| It contains the ftp host, port, user, and password.
+| The format of ftp.cfg is fully covered in the Tableau 
+| Video Caesar Documentation.
+| 
+|.Rocket direct output
+| Use this type of destination to send frames to a rocket server.
+| The rocket server must be ready and listening.
+|
+| Keyword format:
+|:   -screen rocket,host:port
+|:   -screen rocket,host:port+directory
+|
+| Where host and port are the computer and tableau server's port.
+| The optional directory tells the tableau server where to put
+| the incoming frames.
+| The server commands the given directory onto its -path keyword
+| to make a complete path name.
+| 
+| Some Internet web servers allow you to keep a tableau rocket server running.
+| Typically this involves having a watchdog program restart the server.
+| If the rocket server cannot be kept running,
+| you should use the -screen http destination type.
+| 
+|.Rocket CGI output
+| Use this type of destination if the tableau rocket server needs to be
+| started.
+| Tableau initiates this type of destination by first making a CGI request.
+| The web server on the specified host must launch a tableau rocket server instance.
+| The client tableau then connects to the rocket server.
+| 
+| Keyword format:
+|:   -screen http://host:port?nph-cgi/ident=directory&arg1&arg2...
+| 
+| The words "http" and "ident=" and the punctuation are literal.
+| The port must be given even if it is 80.
+| The variable fields are:
+| 
+| host		web server host name or IP address
+| port		web server port, required even if 80
+| nph-cgi	name of CGI script which starts the tableau rocket server
+| directory	tells rocket server where to put the images
+| argN		extra CGI arguments understood by the CGI script
+| 
+| Starting a tableau rocket server is not supported by all operating systems.
+| In particular, Windows NT and Linux may not use it.
+|
+|.Local disk output
+| Use this type of destination to save image files to a hard disk.
+| This is not really a network destination unless the hard disk is remote.
+|
+| Keyword format:
+|:   -screen roll,directory
+| 
+| The directory name is appended to the current -path keyword.
+| Together they form a full path name to the directory where frames are saved.
+| Each time a frame is saved, the roll file is update with the frame number.
+| The frame filenames are of the form:
+| 
+|:    camname.00000000.color.enc
+| 
+| Camname is replaced by the camera's name from the cam.lst file.
+| The number 0000000 is replaced by the current frame number.
+| Color is replaced by the color format, either :rgb888: or :luminamce:.
+| The suffix :.enc: is fixed and cannot be changed.
+|
+| The -dz keyword controls how many files are saved before deleting the oldest.
+| 
+|.Screen output
+| Use this type of destination to show the frames in a local window.
+| 
+| Keyword format:
+|:   -screen hws,fgw            (windows)
+|:   -screen hws,x,display,DRS  (Unix)
+|
+| All fields are literal except "display" which should be replaced
+| with the destination X server spec.
+| Display may be left blank (i.e. :-screen hes,x,,DRS:)
+| 
+| This is normally unnecessary with VfW framegrabbers since the driver itself
+| displays the video in an overlay window.
+| However, on Unix systems, the driver does not.
+| This type of destination allows the console operator to see the video
+| without running a web server or using a browser.
+| 
+| END
+ *..........................................................................*/
+
+

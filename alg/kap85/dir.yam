@@ -1,0 +1,22 @@
+define(TOP, PRJ_ALG_TOP)
+
+__proto(prj_alg_proto(kap85), cmd+kap85)
+
+pushdef(`CCOPTIMIZE', `CCOPTIMIZE_HIGH')
+popdef(`CCOPTIMIZE')
+
+__src(kap85)
+
+__lib(prj_alg_lib(kap85), cmd+kap85)
+
+__exe(prj_alg_exe(kap85), 
+  main,
+  prj_alg_lib(kap85)+
+  prj_base_lib(dthigh)+
+  prj_base_lib(WINLIB)+
+  prj_base_lib(dtlow))
+
+__finish
+
+
+

@@ -1,0 +1,8 @@
+# tabchief arguments for in-house testing
+# config is config directory where cam.lst and cameras.sch files are
+
+-config /tableau/config
+-connect 192.9.200.4:5780
+-D usr1+usr2
+-op mockup
+

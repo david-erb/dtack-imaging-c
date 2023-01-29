@@ -1,0 +1,55 @@
+/*..........................................................................
+| TITLE debug
+| Debug and error output
+| 
+|!Debug and error output
+| Several .arg file keywords control where output is written:
+| 
+| -dbgto	debug messages
+| -errto	error messages
+| -sayto	special messages
+|
+| The value for each keyword should be a filename.
+| All keywords can specify the same filename.
+| 
+| Output is always appended to the given file.
+| Tableau creates the output file if it does not exist.
+| Tableau keeps the output file open the entire time it is running.
+| On some operating systems, you cannot delete the file while tableau is running.
+|
+| If there is no value for one of these keywords,
+| output is written to the stdout (on unix) or the console (on Win32).
+| 
+| For output to appear on the console in Win32, the console must be enabled.
+| This is done by specifying non-zero as the "second number" on the command line.
+| For example:
+| 
+|:    tableau 0 1 0 @../config/tableau.arg
+|
+| The console opens up as a black DOS box.
+| It opens the first time a message is issued.
+|
+| The behavior of the console window at program exit is controlled by
+| the "second number" on the command line as follows:
+| 
+| =0	no black DOS box appears and all output is discarded
+| =1	black DOS box remains on until you hit any key
+| 2-15	black DOS box remains for that many seconds
+| >15	SendMessage to window with that HWND
+| 
+| When the second number is 1, as in the example above,
+| the DOS box remains on the screen until you hit any key.
+| 
+| When the second number is less than 16, 
+| the DOS box remains on the screen for a few seconds then self destructs.
+| 
+| Otherwise, the number should be a window handle
+| of a window ready for EM_SETSEL and EM_REPLACESEL messages.
+| A multi-line text window in Visual Basic is a good example.
+| It is possible to write a Visual Basic GUI front-end
+| which can dynamically display tableau's output messages.
+| 
+| END
+ *..........................................................................*/
+
+

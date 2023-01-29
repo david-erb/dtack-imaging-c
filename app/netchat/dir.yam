@@ -1,0 +1,57 @@
+define(TOP, UP2)
+define(DIR, app/netchat)
+
+__usage(netchat, netchat)
+
+__proto(netchat,
+  ask+
+  cmd+
+  converse+
+  dialog+
+  graphics+
+  gui+
+  ident+
+  init+
+  log+
+  request+
+  rev+
+  state+
+  update)
+
+pushdef(`CCSHARABLE', `CCSHARABLE_ON')
+
+__src(graphics, 
+  PRJ_INCLUDES+PRJ_NCI_INCLUDES, 
+  PRJ_DEFINES+PRJ_NCI_DEFINES)
+
+define(`__common', 
+  prj_lib(dtdg)+
+  PRJ_LIBS)
+
+__shlib(prj_lib(netchatx),
+  ask+
+  cmd+
+  converse+
+  dialog+
+  graphics+
+  gui+
+  ident+
+  init+
+  log+
+  request+
+  rev+
+  state+
+  update)
+
+popdef(`CCSHARABLE')
+
+__shexe(prj_test_bin(netchat),   
+  netchat, ,
+  prj_lib(netchatx)+
+  prj_lib(ustatex)+
+  PRJ_INTER_LIBS+
+  __common, 
+  PRJ_INTER_LOADS PRJ_NCI_LOADS PRJ_LOADS PRJ_QW4_LOAD)
+
+__finish
+

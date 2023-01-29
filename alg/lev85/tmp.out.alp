@@ -1,0 +1,134 @@
+series
+Manual Pages
+
+Copyright (c) 1996, All Rights Reserved
+
+company
+address1
+address2
+phone phone800
+phone phone
+
+January 14, 1996
+
+This document contains the following sections:
+   1. USAGE
+   2. References
+
+---------------------------------------------
+
+
+NAME
+dtlev85 - algorithm executive 
+
+SYNOPSIS
+dtlev85 [parameters] gray segmented [output]
+
+SUMMARY
+Characterize the goodness of a segmentation.  A uniformity number for each 
+area is printed to the console.  Can be used to produce an output image 
+where each pixel value is proportional to the uniformity of the pixel's 
+blob.  Algorithm due to Levine and Nazif, 1985.  
+
+ARGUMENTS
+gray       name of the original gray-level image (required) 
+segmented  name of the image which has been segmented (required) 
+output     name of output image (optional, ignored if not -op blob) 
+
+PARAMETERS
+-op total          all non-background pixels are one area (this is the 
+                   default if -op is omitted) 
+-op label          each label is a separate area 
+-op blob           each blob is a separate area 
+-op test           self-tests, prints nothing if all pass 
+-op time           benchmark and display execution times 
+-background <bv>   segmented pixels to be considered background (default 0,
+                   ignored if not -op total) 
+-min <min>         minimum area for blob to be considered (default 0, 
+                   ignored if not -op blob) 
+-max <max>         maximum area for blob to be considered (default 
+                   unlimited, ignored if not -op blob) 
+-precision <type>  precision of output image (default float, ignored if not
+                   -op blob) 
+-connect <4 or 8>  4-connectivity or 8-connectivity (default 4) 
+tinclude(params1.dx) 
+
+DESCRIPTION
+Presumes that <gray> image has been segmented in some way to produce the 
+corresponding <segmented> image in which the value of each pixel is a 
+region label.  All 4- or 8-connected pixels in with the same label are 
+considered to be part of the same region.  Regions are grouped into areas 
+according to the -op parameter.  A uniformity number is printed for each 
+area.  
+
+The uniformity numbers printed by this program go through the dt_say() 
+interface.  This interface normally forces the output text to go straight 
+to the console.  Since stdout is bypassed, redirecting it will not capture 
+the text output.  To capture the text in a file, use the -sayto <filename> 
+parameter.  
+
+For the operations total, label, and blob, regions are formed by connected 
+components analysis.  All pixels which are 4- or 8-connected and have 
+identical values in the <segmented> image are considered part of the same 
+region.  The value of the -connect parameter decides the connectivity.  
+
+For -op total, all non-background pixels are assumed part of a single area.
+Only one uniformity number is printed.  Background pixels are those whose 
+value in the <segmented> image are <bv>.  The parameters -min, -max, and 
+-precision are ignored for this operation.  <output> is ignored and no 
+output image is produced.  
+
+For -op label, regions are grouped into areas according to their label 
+values.  The label for each pixel is its value in the <segmented> image.  
+All regions consisting of pixels having the same label are considered part 
+of the same area.  One uniformity is printed for each unique label.  The 
+parameters -background, -min, -max, and -precision are ignored for this 
+operation.  <output> is ignored and no output image is produced.  
+
+For -op blob, each region is considered an area of its own.  That is, each 
+area has only one region in it.  One uniformity number is printed for each 
+blob, except any blob whose size is less than <min> or greater than or 
+equal <max> is silently omitted.  The parameter -background is ignored for 
+this operation.  
+
+If <output> is given, then an output image is produced.  This output image 
+will have a size according to the smallest dimensions of <gray> and 
+<segmented>.  
+
+The data type of the output image will be set according to <type>.  The 
+values of the pixels in the output image are set according to the 
+uniformity of the blob in which the pixel resides.  If the data <type> is 
+float or double, then the uniformity values are stored directly into the 
+pixels.  Otherwise the uniformity values are scaled to use the full dynamic
+range of the data type.  For example, a uniformity of 1.0 is given a value 
+of 255 give the <type> is uchar.  
+
+The blob operation interprets the value of the -background as the 
+uniformity value to use for pixels in blobs which are too small or too 
+large, according to <min> and <max>.  The value is clipped to the range 0.0
+to 1.0.  If not given, 1.0 is assumed.  
+
+On unix-like systems, the name for <output> may be a filename or a window 
+name.  If the name is the special value "stdout", then the image may be 
+piped into another program.  
+
+For -op test, the program runs its self-test diagnostics.  It normally 
+prints nothing if all tests are successful.  To have it print even 
+successful test results, use -D assert.  The parameters -background, -min, 
+-max, and -precision are ignored for this operation.  <output> is ignored 
+and no output image is produced.  
+
+For -op time, the program runs its benchmark timing tests.  The resulting 
+execution times are printed as debug.  The parameters -background, -min, 
+-max, and -precision are ignored for this operation.  <output> is ignored 
+and no output image is produced.  
+
+This program normally exits with a value of 0.  However, if an error was 
+found during execution, or one of the test or timing operations had failed 
+assertions, then the program returns a value of 1.  
+
+tinclude(params2.dx) 
+
+---------------------------------------------
+2. References
+dxinclude(tmp.rfi)

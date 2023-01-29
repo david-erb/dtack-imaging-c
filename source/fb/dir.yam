@@ -1,0 +1,55 @@
+define(TOP, UP2)
+define(DIR, source/fb)
+__prolog
+
+pushdef(`CCSHARABLE', `CCSHARABLE_ON')
+
+__src(fbcortex, PRJ_INCLUDES, PRJ_DEFINES+PRJ_CORTEX_DEFINE)
+
+pushdef(`CCOPTIMIZE', `CCOPTIMIZE_HIGH')
+pushdef(`CCDEBUGGER', `CCDEBUGGER_OFF')
+
+__src(fbmeteor, PRJ_INCLUDES, PRJ_DEFINES+PRJ_METEOR_DEFINE)
+__src(fbbt, PRJ_INCLUDES, PRJ_DEFINES+PRJ_BTTV_DEFINE)
+__src(fbvbmci, PRJ_INCLUDES, PRJ_DEFINES+PRJ_VBMCI_DEFINE)
+dnl __src(fbvmc, PRJ_INCLUDES, PRJ_DEFINES+PRJ_VMC_DEFINE)
+dnl __src(fbpsi, PRJ_INCLUDES, PRJ_DEFINES+PRJ_VMC_DEFINE)
+__src(fbutil)
+
+popdef(`CCDEBUGGER')
+popdef(`CCOPTIMIZE')
+
+__src(fbvfw, 
+  PRJ_INCLUDES+PRJ_WINNOV_INCLUDE,
+  PRJ_DEFINES+PRJ_VFW_DEFINE+PRJ_WINNOV_DEFINE)
+
+__src(fbsnap, 
+  PRJ_INCLUDES,
+  PRJ_DEFINES+PRJ_SNAP_DEFINE)
+
+__shlib(prj_lib(dtfb),
+  fb+
+  fbvidmux+
+  fbcortex+
+  fbdir+
+  fbgen+
+  fbmeteor+
+  fbbt+
+  fbvbmci+
+dnl  fbvmc+
+dnl  fbpsi+
+  fbvfw+
+  fbsnap+
+  fbutil+
+  libmain, , , 
+  prj_lib(dtxchg)+
+  prj_lib(dthigh)+
+  prj_lib(dtbigmem)+
+  prj_lib(dtlow)+
+  prj_lib(dt1d),
+  PRJ_WINNOV_LOAD)
+
+popdef(`CCSHARABLE')
+
+__finish
+

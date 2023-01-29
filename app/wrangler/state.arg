@@ -1,0 +1,5 @@
+# these are for uclient
+
+-conn rocket,0:5770 
+-input "state"
+-D reply

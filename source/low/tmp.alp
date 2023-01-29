@@ -1,0 +1,138 @@
+The Utility Function Groups
+
+Copyright (c) 1996, All Rights Reserved
+
+company
+address1
+address2
+phone phone800
+phone phone
+
+March 26, 1996
+
+  Other documents of interest:  
+
+Dtack Base Library Introduction (ASCII text file dtbase.txt)\\
+List of all Base Library Function Groups.
+
+The Environment Function Groups (ASCII text file dtenv.txt)\\
+Program environment control.
+
+This document contains the following sections:
+   1. Function Group dtfd
+
+---------------------------------------------
+1. Function Group dtfd
+  The dtfd functions work together to open, read and/or write, and close 
+  files.  This group of functions provides a thin insulating layer between 
+  the main body of Dtack software and the native operating system file 
+  interface.  
+
+  The dtfd_t data structure used by all these functions contains no public 
+  members.  
+
+---------------------------------------------
+1.1. dtfd_close() - close and keep file
+  As yet undocumented.  
+
+  dt_rc_e
+  dtfd_close(                             // close end keep file
+    dt_ctl_t *ctl,                        // environment control
+    dtfd_t *fd)                           // dt file descriptor object
+
+---------------------------------------------
+1.2. dtfd_delete() - close and delete file
+  As yet undocumented.  
+
+  dt_rc_e
+  dtfd_delete(                            // close and delete file
+    dt_ctl_t *ctl,                        // environment control
+    dtfd_t *fd)                           // dt file descriptor object
+
+---------------------------------------------
+1.3. dtfd_fd() - wrap object around existing fd
+  As yet undocumented.  
+
+  dt_rc_e
+  dtfd_fd(                                // wrap object around existing fd
+    dt_ctl_t *ctl,                        // environment control
+    dtfd_t *fd,                           // dt file descriptor object
+    const char *filename,                 // filename associated with fd
+    int sysfd)                            // the system file descriptor
+
+---------------------------------------------
+1.4. dtfd_open - open a file
+  As yet undocumented.  
+
+  dt_rc_e
+  dtfd_open(                              // open a file
+    dt_ctl_t *ctl,                        // environment control
+    dtfd_t *fd,                           // dt file descriptor object
+    const char *filename,                 // name of file to open
+    const char *mode)                     // file open mode string
+
+---------------------------------------------
+1.5. dtfd_read() - read buffer from file
+  Reads data from file.  Only makes one try.  Zero bytes returned in <*got>
+  probably means end of file.  Not an error when <*got> is returned less 
+  than <want>.  
+
+  dt_rc_e
+  dtfd_read(                              // read buffer from file
+    dt_ctl_t *ctl,                        // environment control
+    dtfd_t *fd,                           // dt file descriptor object
+    void *buf,                            // buffer to put data into
+    long want,                            // maximum number of bytes wanted
+    long *got)                            // returned number of bytes gotten
+
+---------------------------------------------
+1.6. dtfd_read_all() - fill buffer from file
+  Reads data from file.  Will continue to read until all <want> bytes have 
+  been read.  Returns an error if end of file is reached before buffer is 
+  full.  
+
+  dt_rc_e
+  dtfd_read_all(                          // fill buffer from file
+    dt_ctl_t *ctl,                        // environment control
+    dtfd_t *fd,                           // dt file descriptor object
+    void *buf,
+    long want)
+
+---------------------------------------------
+1.7. dtfd_seek() - set file position for read or write
+  As yet undocumented.  
+
+  dt_rc_e
+  dtfd_seek(                              // seek to position
+    dt_ctl_t *ctl,                        // environment control
+    dtfd_t *fd,                           // dt file descriptor object
+    long offset,                          // offset byte number
+    dtfd_whence_e whence,                 // type of seek
+    long *position)                       // returned absolute position
+
+---------------------------------------------
+1.8. dtfd_write() - write buffer to file
+  Writes data to file.  Only makes one try.  Returns actual number of bytes
+  successfully written.  Does not return an error if not all <want> bytes 
+  can be written.  
+
+  dt_rc_e
+  dtfd_write(                             // write buffer to file
+    dt_ctl_t *ctl,                        // environment control
+    dtfd_t *fd,                           // dt file descriptor object
+    const void *buf,                      // buffer holding data
+    long want,                            // number of bytes to write
+    long *got)                            // returned number of bytes written
+
+---------------------------------------------
+1.9. dtfd_write_all() - write data to file
+  Writes data to file.  Will continue to write until all <want> bytes have 
+  been written.  Returns an error if a system error is found before all 
+  bytes are written.  
+
+  dt_rc_e
+  dtfd_write_all(                         // write all data to file
+    dt_ctl_t *ctl,                        // environment control
+    dtfd_t *fd,                           // dt file descriptor object
+    const void *buf,                      // buffer holding data
+    long want)                            // number of bytes to write

@@ -1,0 +1,388 @@
+/*..........................................................................
+| TITLE arg
+| Arg file
+| 
+|!Arg file
+| All of the following keywords may appear in the .arg file.
+| Each keyword must appear on a line by itself.
+| The first character on each line must be the '-'.
+| If the keyword appears in the file more than once, only the last occurrence
+| is honored.
+| Each keyword must be followed by exactly one blank-delimited token.
+| If the token contains blanks, it must be surrounded by quotes.
+| Blank lines and lines beginning with '#' are ignored.
+| 
+| Warning: tableau does not gracefully handle an invalid .arg file.
+| At best you may get a GPF.
+| At worst, tableau exits with no warning or other message.
+|
+| This table summarizes the keywords.
+| The value in parentheses is the default.
+| 
+| -background	frames between color computation (0)
+| -cache	ipc listen spec (NULL)
+| -color	color format to encode (rgb888)
+| -config	directory containing other config files (NULL)
+| -connect	listen port (NULL)
+| -dbg		debug flags (empty)
+| -dbgto	debug file (console)
+| -dt		wait time between frames in milliseconds (0)
+| -dx		display x zoom (1)
+| -dy		display y zoom (1)
+| -dz		number of frames to keep (100)
+| -epsilon	ipc wait in milliseconds (-1)
+| -errto	error file (console)
+| -ident	reverb server spec (NULL)
+| -input	source of video pump (vfw,Creative,320,240)
+| -max		max time to wait in milliseconds (180000)
+| -n		number of frames to do (0)
+| -offset	first frame (0)
+| -op		timestamp and clipping operation (raw)
+| -path		roll file path (/img/tableau)
+| -psi		sponge factor (100000)
+| -sayto	special message file (console)
+| -screen	destination of video pump (rocket,156.46.122.16:5710+be.x)
+| -sigma	number of frames to average (1)
+| -t		jpeg quality (25)
+| -variant	type of encoding (jpeg)
+| 
+|.-background
+| frames between color computation (0)
+| 
+| This numeric value specifies how often the color lookup table is recomputed.
+| On X windows, there will be a screen flash whenever this occurs.
+| However, the lookup table is optimized for the frame on which it is computed.
+| Therefore, if -background is too high, color degradation will occur.
+| A good value is 20 or so.
+|
+| This keyword is used only when -screen is "hws,".
+| That is, when tableau is outputting directly to a display window.
+| 
+|.-cache
+| ipc listen spec (NULL)
+|
+| Tableau can listen for Dynamic commands while it is running.
+| For example, the jpeg quality can be changed on the fly.
+| The -cache keyword specifies ipc spec on which to listen for dynamic commands.
+| A special client must be used to send the dynamic commands.
+|
+| This keyword should be used only in special circumstances.
+| It is not well tested.
+| It could impact performance.
+| 
+|.-color
+| color format to encode (rgb888)
+|
+| This keyword specifies the color format to which images
+| are converted before encoding.
+| Possible values are:
+| 
+| :y:		luminance
+| :ycbycr:	4-4-4 band interleaved
+| :ycbcr:	4-2-2 band interleaved
+| :y_cb_cr:	4-4-4 band sequential
+| :y_cb_cr_411:	4-1-1 band sequential
+| :cb:		blue chromatic component
+| :cr:		red chromaatic component
+| :yuyv:	4-2-2 band interleaved
+| :rgb888:	24-bit RGB band interleaved
+| :r_g_b:	24-bit RGB band sequential
+| :rgb565:	16-bit RGB band interleaved
+| :rgb555:	15-bit RGB band interleaved
+| :pseudo:	pseudo color with generated map
+| :map:		forced psuedo color
+|
+| This keyword should be used only in special circumstances.
+| Not all values for -color will work with all values of -variant.
+| 
+|.-config
+| directory containing other config files (NULL)
+|
+| This keyword specifies the directory which contains auxiliary config files.
+| For example, the camera list, the camera schedules, and the ftp login
+| information files are all kept in this directory.
+| 
+| The value for this keyword depends completely on the directory
+| structure convention created by the installation package.
+| This keyword is required only in non-server mode.
+| 
+|.-connect
+| listen spec (NULL)
+|
+| The listen spec follows the format: 
+|:   rocket,host:port
+| 
+| Where the ',' and ':' are literal and
+| rocket	literal
+| host		host name or IP address
+| port		TCP/IP port (note: MUST be given, even if 80)
+| 
+| Use of this keyword puts tableau into server mode.
+| In server mode, tableau shovels data in one of two ways:
+| 1.	from -input source to ipc connection
+| 2.	from ipc connection to -screen destination
+| 
+| In the first case, tableau acts like a push server.
+| It gets data from a framegrabber, fileset, or another tableau
+| and sends it to the client.
+| 
+| In the second case, tableau acts like capture server.
+| It gets data from the client and sends it it to a fileset or another tableau.
+|
+| In production cases, tableau only runs as a server
+| when it receives frames from a capture computer and puts them in files.
+| In experimental cases, tableau can be used as a dedicated video server.
+| 
+| It can also be used to relay video to another networked tableau.
+| In this way a chain of tableaux can be created.
+| 
+|.-D
+| debug flags (empty)
+|
+| This keyword tells how much debug should be generated.
+| All debug is sent to the location specified by -dbgto.
+| The debug flags should be separated by '+' signs and no spaces.
+| for example :-D img+complex:.
+| Any suboption may be abbreviated to the shortest form
+| which is not ambiguous with other suboptions.
+| All possible suboptions are listed in two columns below:
+| 
+|:alimits - system limits            memstats - memory summary at end
+|:all     - all debug masks          memtrace - memory allocation
+|:alt     - program alternatives     memx     - big memory interface
+|:arg     - command line args        object   - object values
+|:assert  - program assertions       page     - memory paging
+|:async   - asynchronous events      pixel    - pixel values
+|:bigio   - big blocks of I/O        stats    - statistics
+|:complex - execution complexity     time     - execution times
+|:img     - image operations         trace    - execution trace
+|:intermd - intermediate values      usr1     - user's use
+|:io      - all file I/O             usr2     - user's use
+|:ipc     - interprocess comm        win      - client/server window|
+| 
+| An invalid value for this keyword can cause tableau to quit with no errors.
+| 
+|.-dbgto
+| debug file (console)
+|
+| This keyword tells where to write the debug.
+| It should be a filename.
+|
+| The amount and type of debug is control by the -D keyword.
+| Some debug flags can create a large amount of output.
+| This can slow tableau down and fill up your disk.
+|
+| See the "Debug and error output" section for more details.
+|
+|.-dt
+| wait time between frames in milliseconds (0)
+|
+| This numeric value should be a number of milliseconds.
+| After sending or writing a frame, tableau will sleep for this long.
+| This delay applies to all streams, irregardless of their schedules.
+| 
+| Use this keyword to slow tableau down if necessary.
+| You can also use the tableau scheduler to slow individual streams.
+| 
+|.-dx
+| display x zoom (1)
+| 
+| This numeric value specifies the display zoom factor.
+| The bigger the number, the bigger the window.
+| Interpolation is used.
+|
+| This keyword is used only when -screen is "hws,".
+| That is, when tableau is outputting directly to a display window.
+| 
+|.-dy
+| display y zoom (1)
+|
+| See -dx.
+| 
+|.-dz
+| number of frames to keep (100)
+|
+| This numeric value tells tableau how many frames to keep.
+| After tableau writes frame number N,
+| it deletes frame number N-dz.
+|
+| Tableau ignores this keyword unless it is in server mode and
+| one of the two cases is true:
+| 1.	-screen specifies roll output
+| 2.	-screen specifies ftp output
+| 
+|.-epsilon
+| ipc wait in milliseconds (-1)
+|
+| Tableau will only wait this long when expecting for an ack from an ipc peer.
+| It is a fatal error if the peer does not communicate within this time.
+| 
+| This keyword is used in the rocket protocol (-connect rocket).
+| It is also used when tableau is using HTTP to start a rocket peer
+| (-screen http).
+| 
+|.-errto
+| error file (console)
+|
+| This keyword tells where to write error messages.
+| It should be a filename.
+|
+| See the "Debug and error output" section for more details.
+|
+|.-ident
+| reverb server spec (NULL)
+|
+| If this keyword is given, then tableau will periodically contact
+| the given reverb server.
+|
+| The reverb server is only used for dynamic name-to-IP address mapping.
+| It is completely unnecessary when you have a fixed IP address.
+| The only known reverb server runs on dtack.com and is not completely
+| reliable.
+| 
+| This keyword is not well tested.
+| If the given reverb server is not behaving correctly,
+| then tableau's performance will suffer.
+| 
+|.-input
+| source of video frames is Bttv framegrabber
+|
+| This keyword lets you tell tableau where to get input frames from.
+| Input frames can come from:
+| -	framebuffer
+| -	synthesizer
+| -	tableau server
+| -	file playlist
+| -	files as they arrive from capture
+|
+| See the "Input sources" section for more details.
+| 
+|.-max
+| max time to wait in milliseconds (180000)
+|
+| This keyword specifies how long to wait for the next file in sequence.
+| 
+| This keyword is ignored unless serial-file input is specified
+| (-input ser).
+| 
+|.-n
+| number of frames to do (0)
+|
+| Tableau pumps this many frames and then stops.
+| If 0, an unlimited number of frames is transferred.
+|
+| Use this keyword if you want to limit the number of frames transferred.
+| It is especially useful in a thumbnail situation if you just want to
+| thumbnail the latest image alone.
+| 
+|.-offset
+| first frame (0)
+|
+| This number tells tableau what frame number should be transferred first.
+|
+| It can be used by a ipc client to give the first frame number.
+| It can be used in push mode (-input roll) to specify the 
+| first file sequence number.
+|
+| This keyword should be used only in special circumstances.
+| This is not recommended.
+| 
+|.-op
+| timestamp and clipping operation (raw)
+|
+| This keyword lets you specify an image operation
+| on the full image after it has been grabbed or decoded.
+| Tableau performs the image before encoding it.
+|
+| The possible operations are:
+| raw		do nothing
+| stamp		add timestamp to bottom
+| trim		clip edges of image, shrink it and add timestamp
+| 
+| See the "Image operations" section for more details.
+| 
+|.-path
+| roll file path (/img/tableau)
+|
+| The value of this keyword is prepended before any input
+| or output frame filename.
+| Several other keywords allow you to specify what comes after the path.
+| 
+| Splitting up the output path in this way allows one server
+| to handle multiple streams.
+| Each stream only needs to give the second part of the path.
+| The server chooses the first part using this keyword.
+| 
+|.-psi
+| sponge factor (100000)
+|
+| Tableau will not send any more frames if the number of bytes
+| sent exceeds the number of bytes acked by this amount.
+| 
+| For quicker response to commands such as PTZ or quality changes,
+| use a lower number.
+| For a higher frame rate, use a higher number.
+| The Internet will typically not provide faster throughput above 50000.
+| 
+|.-sayto
+| special message file (console)
+|
+| This keyword tells where to write special messages.
+| It should be a filename.
+|
+| Special messages are currently only used for unusual warnings.
+| We recommend you send these messages to the error output.
+| 
+| See the "Debug and error output" section for more details.
+| 
+|.-screen
+| destination of video pump (rocket,156.46.122.16:5710+be.x)
+|
+| Tableau can do any of several things with the encoded frame, including
+| sending it to:
+| 
+| -	ftp server
+| -	tableau server
+| -	tableau rocket server started as CGI
+| -	display window
+| 
+| See the "Frame destinations" section for more details.
+| 
+|.-sigma
+| number of frames to average (1)
+|
+| Tableau will capture this many frames and take the arithmetic average
+| of each pixel.
+| Use it to smooth spiky noise which helps some encoders.
+| 
+|.-t
+| jpeg quality (25)
+|
+| This keyword controls the jpeg quality.
+| A value of 100 is the best and is virtually lossless.
+| However, the file size is larger.
+| It can be up to 60K for a 320x240 image (4:1 compression).
+|
+| A very low value will give a highly pixelized and color-banded,
+| but small, image.
+|
+| Each scene and application will need to adjust this value to suit.
+| 
+|.-variant
+| type of encoding (jpeg)
+|
+| The possible values for this keyword are:
+| uncompressed	save image as raw pixels
+| jpeg		perform jpeg compression
+| passthrough	pass input encoding through to output without change
+|
+| The uncompressed variant can be used to save a lossless image stream.
+| Jpeg is normally used on the capture tableau.
+| Passthrough is normally used by a tableau server
+| which receives frames from an ipc peer and saves them to disk
+| without change.
+| 
+| END
+ *..........................................................................*/
+
+

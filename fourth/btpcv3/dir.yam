@@ -1,0 +1,39 @@
+define(TOP, UP2)
+define(DIR, fourth/btpcv3)
+__prolog
+
+pushdef(`CC', `CPP')
+pushdef(`CCSHARABLE', `CCSHARABLE_ON')
+
+pushdef(`CCOPTIMIZE', `CCOPTIMIZE_HIGH')
+pushdef(`CCDEBUGGER', `CCDEBUGGER_OFF')
+ifdef(`CCWARNINGS_MEDIUM', 
+`pushdef(`CCWARNINGS', `CCWARNINGS_MEDIUM')')
+
+__shlib(prj_fourth_lib(btpcv3), 
+  declevel+cfileio+colmap+compact+decode+encode+enclevel+
+  libmain)
+
+popdef(`CCDEBUGGER')
+popdef(`CCOPTIMIZE')
+
+pushdef(`LD', `LDPP')
+
+dnl __shexe(prj_app_bin(dtbtpc_e, 1), 
+dnl   cbtpc2,    , prj_fourth_lib(btpcv3), PRJ_LOADS)
+
+dnl __shexe(prj_app_bin(dtbtpc_d, 1), 
+dnl   dbtpc2,    , prj_fourth_lib(btpcv3), PRJ_LOADS)
+
+popdef(`LD')
+
+popdef(`CCSHARABLE')
+
+__finish
+
+
+
+
+
+
+

@@ -1,0 +1,438 @@
+/*..........................................................................
+| TITLE dtmem()
+|dxinclude(liblink1.dx)
+|
+|!:mem: Function Group
+|_index mem Function Group, :mem: Function Group
+|_index Function Group,, :mem:
+|_index big memory,, functions for manipulating
+| The :mem: Function Group provides functions for
+| allocating, accessing, and freeing big memory.
+| 
+| A big memory lock is a logical block of memory which may be
+| larger than the size of your computer's RAM.
+| The block of memory will be kept in indirect storage
+| such as XMS or disk files.
+| Only part of the block the be directly addressable via pointer
+| at any given time.
+|
+| Some computers, notably Unix and other virtual memory computers,
+|_aside Virtual memory computers usually have enough RAM.
+| have virtually no limit on the amount of memory programs can malloc().
+| If a program needs more malloc() memory than the computer has silicon,
+| then the operating system takes care of swapping memory to and from disk.
+| The swapping is completely invisible to your program.
+| 
+| If you are lucky enough to be using such a computer,
+| and you never expect your program to run on any other kind of computer,
+| then you don't need these functions.
+| The only reason to read on is to understand the scheme
+| because it is used extensively throughout the Dtack Imaging Software
+| libraries for images, auto-growing stacks, and message output buffers.
+| 
+| However, if you expect your program to be usable on a computer
+|_Aside Non-virtual memory computers often run out of RAM.
+| where the malloc() memory
+| is somehow limited, then there is a big advantage to coding
+| your program using big memory instead of using malloc() and free()
+| directly.
+| You will be able to use larger objects,
+| such as images, than you could without big memory.
+|
+| For virtual computer users, there is practically no execution
+| performance penalty to using the big memory scheme.
+|_Aside Code using big memory is more complex than using malloc().
+| Using big memory admittedly makes your code slightly more complex.
+| This complexity is about the only drawback to using big memory
+| instead of malloc() and free() directly.
+| This complexity is certainly well worth it
+| if it makes your program portable to non-virtual memory computers.
+|
+| The :mem: Function Group consists of the following functions.
+| 
+| #Administrative Functions#
+| :dtmem_configure():	configure big memory sources
+| :dtmem_unconfigure():	unconfigure big memory sources
+| 
+| #Allocation Functions#
+| :dtmem_alloc():		allocate a big memory block	
+| :dtmem_realloc():		reallocate a big memory block at a new size	
+| :dtmem_prealloc():	wrap a big memory block around your own memory
+| :dtmem_free():		free a big memory block
+| #Direct Access Functions#
+| :dtmem_map():			map portion of big memory to direct-access buffer
+| :dtmem_get():			bring portion of big memory to direct-access buffer
+| :dtmem_unmap():		release portion of big memory without saving
+| :dtmem_put():			release and save portion of big memory
+| #Input/Output Functions#
+| :dtmem_write():		write big memory to file				
+| :dtmem_read():		read big memory from file
+| #Miscellaneous Functions#
+| :dtmem_putpatch():	copy two-dimensional malloc() into big memory
+| :dtmem_getpatch():	copy big memory to two-dimensional malloc() memory
+| :dtmem_copy():		copy big memory to big memory
+| :dtmem_cmp():			compare big memory to big memory
+| :dtmem_clear():		clear all of a big memory block to zero				
+| :dtmem_set():			set all of a big memory block to constant			
+| :dtmem_set2():		set some of a big memory block to constant
+|
+| The #administrative functions# control which big memory sources
+| are available to your program.
+| dtmem_configure() takes a string describing what types of
+| big memory the allocation functions are allowed to use
+| to honor your program's requests.
+| dtmem_unconfigure() releases all resources,
+| such as tables and buffers, which have been grabbed.
+| 
+| The #allocation functions# actually create big memory blocks.
+| dtmem_alloc() makes brand new block.
+| dtmem_realloc() takes an existing big memory and resizes it.
+| The new size may be either greater or smaller than the old size.
+| Data from the old memory is copied to the new.
+| dtmem_prealloc() creates the trappings of big memory around
+| some malloc() memory which you supply.
+| Use this function when a Dtack routine requires big memory,
+| but your object exists in malloc() memory.
+| Finally dtmem_free() releases all resources associated with
+| a memory block allocated with any of the above routines.
+|
+| The #direct access functions# are your principal means of access
+| to the big memory contents.
+| These functions implement the piecewise direct strategy described below.
+| dtmem_map() binds a portion of a big memory block
+| into a direct-access buffer.
+| It provides you with a pointer to this buffer.
+| The contents of the direct-access buffer are undefined with this function.
+| Use it when you are planning to set the entire contents
+| of the big memory.
+| It is slightly faster than dtmem_get(),
+| which is similar in that it also binds a portion of a big
+| memory block into a direct-access buffer.
+| The difference is that the existing contents of the big memory portion
+| are placed in the direct-access buffer.
+| Use this function when you are examining a big memory block,
+| or are just changing part of it.
+| dtmem_unmap() unbinds the portion of a big memory block
+| from its direct-access buffer.
+| It does not save the contents of the direct-access buffer back into
+| the appropriate place in the big memory block's external storage.
+| Use it when you have not made changes to the direct direct-access buffer.
+| It is slightly faster than its counterpart, dtmem_put(),
+| which makes sure the direct-access buffer is written to the big memory block
+| before unbinding it.
+|
+| By setting the compile-time option :DTPRJ_NOMEM=DT_1:
+| the #direct access functions# will be compiled as simple macros.
+| Your source code retains :mem: Function Group compatibility,
+| however, the run-time executable will operate with malloc() memory only.
+| This may result in a very slight performance increase.
+|
+| The #input/output functions# are a convenient means of
+| reading or writing all or part of a big memory block
+| to or from an opened disk file.
+| They use the :dtfd: Function Group to do the actual file access.
+|_index dtfd Function Group, :dtfd: Function Group, use of
+| 
+| The #miscellaneous functions#
+| are convenience functions for setting, clearing, and
+| copying big memory from one place to another.
+| Of particular interest are dtmem_putpatch() and dtmem_getpatch().
+| You give these two functions a contiguous,
+| two-dimensional array of bytes in normal memory.
+| It is denoted two-dimensional by virtue of the fact that it
+| has a width and a height.
+| Its total size is its width times its height.
+| All of its bytes are contiguous in linear address space.
+| This means the first byte of one row immediately follows
+| the last byte of the previous row.
+| The big memory block is assumed to be two-dimensional as well.
+| Its row width is the unit size that it was given when it was allocated.
+| The two-dimensional normal rows are copied into successive units
+| of the big memory.
+| It is rather like copying a subimage inside a larger image.
+|
+|.Big Memory Sources
+| When dtmem_alloc() goes to allocate a big memory block,
+|_index big memory,, source specification string
+| it examines a list of memory sources which it can use.
+| This list is specified in a string argument
+| to a prior call to dtmem_configure().
+|_index dtmem_configure()
+| The string contains a sequence of memory source specifications.
+| dtmem_alloc() tries each memory source specification,
+| one after the other, until it finds one with enough bytes
+| to satisfy the allocation request.
+|dtinclude(memexam1.dx)
+|_index extended memory
+| 
+| A complete description of the syntax of the big memory source
+| specification string can be found in the dtmem_configure()
+| function description.
+| 
+| The standard Dtack command-line parsing functions,
+| dt_enter() and dt_interactive_enter(), both call dtmem_configure().
+|_index dt_enter(),, memory configuration
+|_index dt_interactive_enter(),, memory configuration
+| They give it the memory source specification string which they
+| have obtained from either the :-mem: command-line argument,
+| or the :DT_MEM: environment variable.
+|
+| If you don't call dtmem_configure(),
+| and it is not called by dt_enter() or dt_interactive_enter(),
+| then dtmem_alloc() will attempt to use the :DT_MEM: environment variable.
+| If the environment variable is not set or is empty,
+| then the only available memory source will be malloc() memory.
+|
+|.Piecewise Direct Access
+| You always access your big memory directly,
+| but you only have access to a piece of it at a time.
+| You must request that each piece be brought into buffer
+| for direct access.
+| [fig:memacc1] shows the mapping of a piece of
+| a big memory block into an internal direct access buffer.
+| 
+|_figure picture, memacc1, Piecewise Direct Access
+| 
+| The two functions, dtmem_get() and dtmem_map(),
+| take an offset identifying the piece of memory
+| to access.
+| They give back a memory pointer and a size.
+| The memory pointer is actually pointing to one of the direct-access buffers
+| allocated on behalf of the big memory.
+| The direct-access buffer is filled with the contents of the big memory
+| at the offset location you specified.
+| The size returned is how much of the big memory was able
+| to squeeze into the direct-access buffer after the offset you wanted.
+| The size will never be less than the unit size
+| of the big memory defined by the dtmem_alloc() call.
+|
+|.Big Memory Form Factor
+| The big memory form factor consists of two dimensions:
+| the :size: of a unit and the number of :units:.
+| These two numbers are required arguments to dtmem_alloc().
+| :size: multiplied by :units: is the total allocation.
+| 
+| Each time you request that a piece of your big memory
+| be bound into a buffer for direct access,
+| you will never get less than one unit of size :size:.
+| The buffer size used for the direct-access buffer
+| will be an integral multiple of :size:.
+| This may be as small as one byte.
+| In the image processing world, :size: relates to the width
+| of one row of the image.
+| Your program will always have direct access to at least one complete 
+| image row
+| in the direct-access buffer.
+|
+| The big memory is chopped up into one or more equal-sized pages.
+| The last page may be smaller than the rest.
+| The page size is always an integral multiple of the unit size.
+| The page size is limited by the memory spec parsed by dtmem_config().
+|
+| Each big memory allocation comes with one or more buffers
+| to be used for direct access.
+| The direct-access buffers are always as big as the page size.
+| [fig:memform1] illustrates this.
+| The external big memory contents of a page are copied upon a
+| dtmem_get() request into a direct-access buffer.
+| Upon a dtmem_put() request,
+| the contents of the direct-access buffer are copied back to
+| the external big memory.
+| Your program, in accessing the direct-access buffer,
+| is effectively accessing the big memory directly.
+| 
+|_figure picture, memform1, Big Memory Form Factor
+| 
+|.Big Memory Performance Considerations
+| On virtual memory systems, performance is easy:
+| it equates with using malloc() memory directly.
+| There is no limit on page size
+| and there is only one page.
+| The page size is always equal to total allocation.
+| The dtmem_get() and dtmem_map() functions
+| just translate your offset to the start of the memory block and return
+| you the pointer.
+| dtmem_unmap() and the mem_put() are no-ops.
+|
+| To eliminate even the function-call overhead,
+| you can choose the compile-time :DTPRJ_NOMEM=DT_1: option which causes the
+| four functions dtmem_get(), dtmem_map(), dtmem_put() and dtmem_unmap(),
+| to be implemented as macros.
+| The macros presume ram memory only
+| and use simple arithmetic to compute addresses from offsets.
+| These macros will perform the same operations as their
+| like-named function counterparts, 
+| except that no external memory source is available.
+|
+| On real-mode DOS systems, you have the option of using XMS
+| (extended memory) to hold big memory blocks.
+| dtmem_get() must use DOS system calls to copy a page buffer
+| full from XMS to the direct-access buffer when necessary.
+| The Function Group does the necessary bookkeeping
+| to prevent unnecessary copy operations.
+| 
+| All systems have the option of using disk to hold big memory blocks.
+| This time, dtmem_get() must do a file system seek to the correct
+| offset into the file, then read the direct-access buffer contents
+| from the file.
+| When a page has been marked as having been modified by dtmem_put(),
+| then the direct-access buffer contents must be written into
+| the file at the correct offset before the direct-access buffer is reused.
+|
+|dxinclude(formats.dx)
+|
+|!Example dtmem1.c - Show basic big memory operations
+|:// Example Program dtmem1
+|:// Illustrates basic big memory operations
+|:// Program takes no command line arguments.
+|:// Fill source memory with pattern, copy to second memory, sum result.
+|:// Prints out simple result like:
+|://   dtmem1: sum 290000, correct
+|:// All error checking left out for clarity.
+|:
+|:#include <dtack/base.h>
+|:#include <dtack/mem.h>
+|:
+|:int main(void)
+|:{
+|:  void *mem1, *mem2;					// big memory objects
+|:  unsigned int datasize;				// size of direct-access buffer
+|:  long offset;
+|:  long sum = 0;
+|:
+|:  dtmem_alloc(NULL, &mem1, 			// big allocate 10000 bytes
+|:    0, 0, 100, 100, NULL, NULL);
+|:  dtmem_clear(NULL, mem1);			// clear big memory to 0
+|:
+|:  for (offset = 0;					// loop over whole big memory
+|:       offset < 100L*100L;
+|:       offset += datasize)
+|:  {
+|:    char *ramptr;
+|:    unsigned int i;
+|:
+|:    dtmem_get(NULL, mem1, offset,		// get next offset
+|:      (void **)&ramptr, &datasize);
+|:
+|:    for (i=0; i<datasize; i+=2)		// set every other byte to 14
+|:      ramptr[i] = 14;
+|:
+|:    dtmem_put(NULL, mem1,				// unbind offset, mark changed
+|:       offset);
+|:  }
+|:
+|:  dtmem_alloc(NULL, &mem2, 			// big allocate 20000 bytes
+|:    0, 0, 100, 200, NULL, NULL);
+|:  dtmem_set(NULL, mem2, 22);			// set every byte to 22
+|:
+|:  dtmem_copy(NULL, mem1, mem2);		// copy smaller memory to large one
+|:
+|:  for (offset = 0;					// loop over whole big memory
+|:       offset < 100L*200L;
+|:       offset += datasize)
+|:  {
+|:    char *ramptr;
+|:    unsigned int i;
+|:
+|:    dtmem_get(NULL, mem2, offset,		// get next offset
+|:      (void **)&ramptr, &datasize);
+|:
+|:    for (i=0; i<datasize; i++)		// sum all data
+|:      sum += ramptr[i];
+|:
+|:    dtmem_unmap(NULL, mem2, 			// unbind offset, mark unchanged
+|:       offset);
+|:  }
+|:
+|:  printf("dtmem1: sum %ld, %s\n",
+|:    sum,
+|:    sum == 10000L*22 + 5000L*14?
+|:      "correct": "incorrect");
+|:
+|:  dtmem_free(NULL, mem2, NULL, NULL);	// free second big memory
+|:
+|:  dtmem_free(NULL, mem1, NULL, NULL);	// free first big memory
+|:
+|:  return 0;
+|:}
+|
+|!Example dtmem2.c - Show advanced big memory operations
+|:// Example Program dtmem2
+|:// Illustrates advanced big memory operations
+|:// Program takes one command line argument: name of a temporary output file.
+|:// Fill source memory with pattern, write it, read it back, compare.
+|:// Prints out simple result like:
+|://   dtmem2: patch at 1011, correct
+|:// All error checking left out for clarity.
+|:
+|:#include <dtack/base.h>
+|:#include <dtack/mem.h>
+|:#include <dtack/os.h>
+|:
+|:int main(int argc, char *argv[])
+|:{
+|:  dtfd_t fd;							// file structure
+|:  void *mem1, *mem2;					// big memory objects
+|:  long cmp;
+|:  void *data;
+|:
+|:  dtfd_open(NULL, &fd, argv[1], 		// open file for writing and reading
+|_aside Make temporary file.
+|:    "wr");
+|:
+|:  dtos_malloc(NULL, &data, 20*20);	// get some ram
+|:  memset(data, 11, 20*20);			// set ram bytes to 11
+|:
+|:  dtmem_alloc(NULL, &mem1,	 		// big allocate 10000 bytes
+|:    0, 0, 100, 100, NULL, NULL);
+|:  dtmem_clear(NULL, mem1);			// clear big memory to 0
+|:
+|:  dtmem_putpatch(NULL, mem1,			// put 20x20 patch into big memory
+|:    data, 10, 10, 20, 20);
+|:
+|:  dtmem_realloc(NULL, mem1, 			// increase big memory size
+|:    0, 0, 100, 200, NULL, NULL);
+|:
+|:  dtmem_set2(NULL, mem1, 100L*100L,	// set bytes in new part to 0
+|:    100L*100L, 0);
+|:
+|:  memset(data, 22, 20*20);			// set ram bytes to 22
+|:  dtmem_putpatch(NULL, mem1,			// put 20x20 patch into new part
+|:    data, 10, 110, 20, 20);
+|:
+|:  dtmem_write(NULL, mem1, 100L*100L,	// write second half of big memory
+|:    100L*100L, &fd);
+|:
+|:  dtmem_alloc(NULL, &mem2,	 		// big allocate another 10000 bytes
+|:    0, 0, 100, 100, NULL, NULL);
+|:  dtmem_set(NULL, mem2, 99);			// set big memory bytes to 99
+|:
+|:  dtfd_seek(NULL, &fd, 0,				// go back to start of file
+|:    DTFD_WHENCE_SET, NULL);
+|:
+|:  dtmem_read(NULL, mem2, 0,			// read new big memory
+|:    100L*100L, &fd, NULL, NULL);
+|:
+|:  dtmem_cmp(NULL, mem1, mem2, 0,		// compare memories
+|:    &cmp);
+|:
+|:  printf("dtmem2: patch at %ld, %s\n",
+|:    cmp,
+|:    cmp == 1011?
+|:      "correct": "incorrect");
+|:
+|:  dtmem_free(NULL, mem2, NULL, NULL);	// free second big memory
+|:
+|:  dtmem_free(NULL, mem1, NULL, NULL);	// free first big memory
+|:
+|:  dtos_free(NULL, data);				// free ram
+|:
+|:  dtfd_delete(NULL, &fd);				// close and delete file
+|:
+|:  return 0;
+|:}
+| 
+| END
+ *..........................................................................*/
+
+

@@ -1,0 +1,50 @@
+define(TOP, UP2)
+define(DIR, test/low)
+
+pushdef(`CCSHARABLE', `CCSHARABLE_ON')
+__shlib(prj_lib(dttlox),
+  dttheap+
+  dttipc+
+  dttlist+
+  dttliner+
+  dttos+
+  dttparam+
+  dttstr+
+  libmain, , ,
+  prj_lib(dtt)+
+  prj_lib(dtlow)+
+  prj_lib(dt1d))
+popdef(`CCSHARABLE')
+
+__shexe(prj_test_bin(dttlow),   low, ,   
+  prj_lib(dttlox)+  
+  prj_lib(dttzz)+
+  prj_lib(dtlow)+
+  prj_lib(dt1d)+
+  PRJ_SUPPORT_LIBS,
+  PRJ_LOADS)
+
+__shexe(prj_test_bin(dttshm),   dttshm, ,   
+  prj_lib(dttlox)+  
+  prj_lib(dttzz)+
+  prj_lib(dtbigmem)+
+  prj_lib(dtlow)+
+  prj_lib(dt1d)+
+  PRJ_SUPPORT_LIBS,
+  PRJ_LOADS)
+
+__shexe(prj_test_bin(dttcipher), dttcipher, ,   
+  prj_lib(dttzz)+
+  prj_lib(dtlow)+
+  prj_lib(dt1d)+
+  PRJ_SUPPORT_LIBS,
+  PRJ_LOADS)
+
+ifdef(`DTTMEMCHECK', `
+__src(dttmemch, PRJ_MEMCHECK_INCLUDE)
+__shexe(prj_test_bin(dttmemch),   dttmemch, , PRJ_MEMCHECK_LIB)
+')
+
+__finish
+
+

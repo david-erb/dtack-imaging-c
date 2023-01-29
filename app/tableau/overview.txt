@@ -1,0 +1,66 @@
+
+
+
+
+
+
+           Video Caesar
+
+                   launch                   T
+                 ++++++++++++tabchief--------------browser
+                ++                          C
+               ++
+              tabstart   |                  P
+               ++        |schedule
+                 +       +------|           /
+                 ++
+                  +++++++++++      ---------I-------
+                   launch    tableau                web server
+                                            P
+
+                   framegrabber
+
+
+          video
+          signal
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

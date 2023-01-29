@@ -1,0 +1,26 @@
+path=/img/tableau
+work=/web/tableau
+date=`date +%Y%m%d.%H%M`
+log=$work/log.$date
+
+if [ $# -ne 0 ]
+then
+  echo "usage: wrong number of arguments"
+  exit 1
+fi
+
+export LD_LIBRARY_PATH=/usr/lib
+
+set -x
+$work/tableau \
+  -path $path \
+  -connect socket,video.tableau.com:5711 \
+  -input roll \
+  -screen roll \
+  -psi 50000 \
+  -variant passthrough \
+  -dz 100.100 \
+  -D usr1+usr2+ipc \
+  -errto $log \
+  -dbgto $log \
+  -sayto $log &

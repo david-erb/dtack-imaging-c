@@ -1,0 +1,47 @@
+define(TOP, UP2)
+define(DIR, fourth/dicom3)
+__prolog
+
+pushdef(`CC', `CPP')
+pushdef(`CCWARNINGS', `CCWARNINGS_LOW')
+
+__shlib(prj_fourth_lib(dicom3), 
+  tattr+
+  tattrget+
+  tattrrd+
+  tddict+
+  tlist+
+  tattrtrn+
+  tsyn+
+  ttag+
+  tfstream+
+  tmodulet+
+  tvfyval+
+  tbinval+
+  tstrval+
+  tmodule+
+  tmodulep+
+  tcond+
+  tiodcmp+
+  tiodcmps+
+  tiodcmpp+
+  GetOpt+
+  Month+
+  vgerror+
+  assocpdu+
+  command+
+  uplayer+
+  dgtypes+
+  vaxtype+
+  pacetype+
+  sun3type+
+  syttype)
+
+__finish
+
+
+
+
+
+
+

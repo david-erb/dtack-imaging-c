@@ -1,0 +1,1 @@
++$(SRC)/include/dtack/config.h+$(SRC)/include/dtack/ntype.h+$(SRC)/include/dtack/stats.h+$(SRC)/include/dtack/1d.h+$(SRC)/include/dtack/1d.p

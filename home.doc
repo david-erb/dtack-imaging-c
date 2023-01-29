@@ -1,0 +1,54 @@
+/*..........................................................................
+| TITLE dthome
+| Dtack Imaging Software Home Page
+|
+|_link dtcorp/,inline \<img align=top src="/gifs/ABOUT.gif" alt=About Dtack""\>
+| \<img src="/gifs/space16.gif" alt=""\>
+|_link dtlinks/,inline \<img align=top src="/gifs/LINKS.gif" alt="Links"\>
+| \<img src="/gifs/space16.gif" alt=""\>
+|_link dtprice/,inline \<img align=top src="/gifs/PRICE.gif" alt="Price List"\>
+| \<img src="/gifs/space16.gif" alt=""\>
+|_link dtsales/,inline \<img align=top src="/gifs/SALES.gif" alt=Sales Lit""\>
+| \<img src="/gifs/space16.gif" alt=""\>
+|_link dtdoc/,inline \<img align=top src="/gifs/TECHREF.gif" alt="Tech Docs"\>
+| \<img src="/gifs/space16.gif" alt=""\>
+|_link dtdown/,inline \<img align=top src="/gifs/DOWNLOAD.gif" alt="Down Load"\>
+| \<img src="/gifs/space16.gif" alt=""\>
+|_link dtlegal/,inline \<img align=top src="/gifs/LEGAL.gif" alt=Legal""\>
+|
+|!Dtack Imaging Software Home Page
+| Welcome to 
+|_link dtcorp/,inline #Dtack#.
+| 
+| We are a commercial company engaged in producing image processing software.
+| 
+| We maintain a 
+|_link dtbase/,inline #Base Library#
+| of image processing functions
+| which we license at no cost.
+| 
+| We also offer a variety of 
+|_link dtsales/,inline #Algorithm Implementations#
+| which we license for fees listed in our
+|_link dtprice/,inline #Price List#.
+|
+| All of our 
+|_link dtdoc/,inline #Technical Documentation#
+| is available on-line.
+|
+| For a complete list of all our offerings, please visit our
+|_link dtlinks/,inline #Links Page#.
+|
+| You may also
+|_link dtdown/,inline #Download#
+| selected Dtack software from this web site.
+|
+| #For any inquiries, please to not hesitate to#
+| \<a href="mailto:sales@dtack.com"\> #e-mail,# \</a\>
+| #telephone or fax us.#
+| 
+| Thanks for visiting!
+|
+| END
+ *..........................................................................*/
+

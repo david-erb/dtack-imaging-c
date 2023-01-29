@@ -1,0 +1,3 @@
+Options ExecCGI Indexes FollowSymLinks
+AddType application/x-httpd-cgi .cgi
+AddType text/html               .htm

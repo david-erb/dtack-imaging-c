@@ -1,0 +1,15 @@
+# arg file for Mj filter graph program, as called from mjserver
+# a different arg file is needed when nph-mj.exe is called by a real web server
+# mjserver replaces first %s with executable filename
+
+%s
+0
+0
+0
+-input nph-mj.grf
+-op play
+#-variant textpush
+-errto ../logs/nph-mj.log
+-dbgto ../logs/nph-mj.log
+-sayto ../logs/nph-mj.log
+

@@ -1,0 +1,90 @@
+define(TOP, UP2)
+define(DIR, test/screen)
+
+define(`LIBS', `prj_lib(dttaa)+prj_lib(dtxchgs)+prj_lib(dtxchg)+prj_lib(dtcolor)+prj_lib(dthigh)')
+define(`LOADS', PRJ_LOADS)
+
+__usage(dttscr, dttscr)
+__guide(prj_test_guide(dttscr), dttscr.c)
+
+
+__shexe(prj_test_bin(dttscr),   dttscr+dttscrx, ,
+  LIBS+
+  prj_lib(dtscr)+
+  prj_lib(dtcand)+
+  prj_lib(dthws)+
+  PRJ_WIN_LIBS+
+  PRJ_LIBS,
+  PRJ_LOADS PRJ_SCR_LOADS)
+
+ifelse(len(PRJ_FASTGRAPH_DEFINE), 0, , `
+__shexe(prj_test_bin(dttscrf),  dttscrf+dttscrx, ,
+  LIBS+
+  prj_lib(dtscr)+
+  prj_lib(dtcan)+
+  prj_lib(dthwsd)+
+  PRJ_FASTGRAPH_LIB+
+  prj_lib(dtsvgacd)+
+  PRJ_LIBS,
+  PRJ_LOADS PRJ_SCR_LOADS)
+')
+
+ifelse(len(PRJ_SVGACC_DEFINE), 0, , `
+__shexe(prj_test_bin(dttscrs),  dttscrs+dttscrx, ,
+  LIBS+
+  prj_lib(dtscr)+
+  prj_lib(dtcan)+
+  prj_lib(dthwsd)+
+  prj_lib(dtfastgd)+
+  PRJ_SVGACC_LIB+
+  PRJ_LIBS,
+  PRJ_LOADS PRJ_SCR_LOADS)
+')
+
+
+dnl __shexe(prj_test_bin(dttcan),    dttcan, ,  
+dnl   LIBS+
+dnl   prj_lib(dtcand)+
+dnl   PRJ_WIN_LIBS+
+dnl   PRJ_LIBS,
+dnl   LOADS PRJ_SCR_LOADS)
+
+
+ifelse(len(PRJ_FASTGRAPH_DEFINE), 0, , `
+__src(dttfastg,           
+  PRJ_INCLUDES+
+  PRJ_FASTGRAPH_INCLUDE,
+  PRJ_DEFINES+
+  PRJ_FASTGRAPH_DEFINE)
+__shexe(prj_test_bin(dttfastg),  dttfastg, ,
+  LIBS+
+  PRJ_FASTGRAPH_LIB+
+  PRJ_LIBS,
+  LOADS)
+')
+
+ifelse(len(PRJ_SVGACC_DEFINE), 0, , `
+__src(dttsvgac,           
+  PRJ_INCLUDES+
+  PRJ_SVGACC_INCLUDE,
+  PRJ_DEFINES+
+  PRJ_SVGACC_DEFINE)
+__shexe(prj_test_bin(dttsvgac),  dttsvgac, ,
+  LIBS+
+  PRJ_SVGACC_LIB+
+  PRJ_LIBS, 
+  LOADS)
+')
+
+ifelse(len(PRJ_NCSA_DTM_DEFINE), 0, , `
+__src(dttdtm,           
+  PRJ_INCLUDES+
+  PRJ_NCSA_DTM_INCLUDE)
+__shexe(prj_test_bin(dttdtm),    dttdtm, ,
+  LIBS+PRJ_LIBS, 
+  LOADS)
+')
+
+__finish
+
+

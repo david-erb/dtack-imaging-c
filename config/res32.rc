@@ -1,0 +1,11 @@
+; to compile for win32:
+; rc k:iqsign\config\iqsign32.rc
+
+
+dtack_ico     ICON   dtack.ico
+dtack_gravel  BITMAP gravel.bmp
+dtack_twirl   BITMAP twirl.bmp
+dtack_twirlne BITMAP twirlne.bmp
+dtack_twirlnw BITMAP twirlnw.bmp
+dtack_twirlse BITMAP twirlse.bmp
+dtack_twirlsw BITMAP twirlsw.bmp

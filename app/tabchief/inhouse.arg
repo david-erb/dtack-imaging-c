@@ -1,0 +1,5 @@
+# tabchief arguments for in-house testing
+
+-config /tableau/config
+-connect 192.9.200.4:5780
+-D trace

@@ -1,0 +1,9 @@
+# for legend, see deccmd1.dat
+
+forward: 	3000
+starve:		1000
+forward: 	3000
+starve:		1000
+forward: 	3000
+starve:		1000
+exit

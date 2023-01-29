@@ -1,0 +1,25 @@
+define(TOP, UP2)
+define(DIR, app/except)
+
+pushdef(`CC', `CPP')
+pushdef(`LD', `LDPP')
+
+pushdef(`CCSHARABLE', `CCSHARABLE_ON')
+pushdef(`CCEXCEPTION', `CCEXCEPTION_OFF')
+pushdef(`CCEXCEPTION', `CCEXCEPTION_ON')
+
+__shlib(prj_lib(call2x),
+  call2+
+  libmain)
+
+__shlib(prj_lib(call1x),
+  call1, , ,
+  prj_lib(call2x))
+
+__shexe(prj_test_bin(except),   
+  except, ,
+  prj_lib(call1x)+
+  prj_lib(call2x),
+  PRJ_LOADS)
+
+__finish

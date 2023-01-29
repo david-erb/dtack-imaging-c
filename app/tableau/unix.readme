@@ -1,0 +1,57 @@
+README for Unix flavors (FreeBSD and SunOS)
+
+Thanks for using Tableau!
+
+This software package comes with one program called tableau.
+
+This program streams video from the Tableau Internet server to your screen.
+
+The Tableau Internet server is located on host video.tableau.com.
+
+Before running these programs, you need to connect to the Internet.
+Do this in the same way you would if you were going to surf.
+However, you do not need to run a WWW browser to use Tableau.
+
+Please don't hesitate to contact us if you have questions or suggestions.
+
+Have Fun!
+
+Tableau Unlimited 
+c/o Dtack Imaging Software
+P.O. Box 45195
+Madison, WI 53744-5195 USA
+
+USA toll free 800.221.7583
+voice +608.767.4000
+fax +608.767.4000
+
+-----------------------------------------------------------------
+INSTALLATION:
+1. use your WWW browser to go to http://www.tableau.com
+2. download the .tar.gz file for your operating system into some directory
+   (remember to hold the SHIFT key while clicking the link to the .tar.gz file).
+3. cd to the directory where you downloaded the file
+4. un-gzip and unpack by typing: zcat < tab00-01.os-type.tar.gz | tar xf -
+   (your system may use gzcat or similar instead of zcat)
+5. cd tab00-07
+
+-----------------------------------------------------------------
+QUICK RUN:
+1. play a movie by typing: ./tableau -input movie_name
+   where movie_name is one from the list on the web site
+
+For more information, use the -help or -HELP parameters with either program.
+
+-----------------------------------------------------------------
+tableau -help
+
+tableau: usage:   tableau [params]
+tableau:   Stream load and show full-motion video from the Tableau 
+tableau:   Internet server.  
+tableau: ARGUMENTS
+tableau: PARAMETERS
+tableau:   -input          movie name (required) 
+tableau:   -dx             display x zoom (default 1) 
+tableau:   -dy             display y zoom (default 1) 
+tableau:   -background     color table update frequency in frames 
+tableau:                   (default 0) 

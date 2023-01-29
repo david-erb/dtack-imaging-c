@@ -1,0 +1,21 @@
+define(TOP, UP2)
+define(DIR, app/ustate)
+
+__usage(ustate, ustate)
+
+pushdef(`CCSHARABLE', `CCSHARABLE_ON')
+
+__shlib(prj_lib(ustatex),
+  ustatelib+
+  rev)
+
+popdef(`CCSHARABLE')
+
+__shexe(prj_test_bin(ustate),   
+  ustate, ,
+  prj_lib(ustatex)+
+  PRJ_LIBS,
+  PRJ_LOADS)
+
+__finish
+

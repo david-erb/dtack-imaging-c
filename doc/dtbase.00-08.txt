@@ -1,0 +1,120 @@
+  DTACK BASE LIBRARY
+  Rev 00-08
+  4 August 1997
+
+  Note a (!) in the left column indicates documentation changed.
+  
+  The Dtack Base Library is a C library of image processing support routines.
+  
+  These brief instructions will help you download and install it
+  on a Solaris system.
+  
+  For any questions or comments, please call Dtack at 1.608.767.4000.
+  Thanks!
+  
+  
+  CHANGE HISTORY
+  --------------
+! base.00-08 4 August 1997
+! - ability to compile into different tree than source
+! - make procedure supports GNU make
+  base.00-07 31 July 1997
+  - new directory structure and makefiles
+  - all install instructions
+  base.00-06 28 July 1997
+  - added transpose function
+  - added new option to X support to enable color remapping which may
+    decrease color lut flashing in some workstations
+    run: dtview -output /tmp -screen hws,x,,RD &
+
+  
+  FETCH SOURCE AND UNPACK
+  -----------------------
+  If you wish to do an incremental build, then rename your existing
+  Dtack Base Library tree to be the one you are about to unpack.
+  For example:
+    mv /usr/local/dtack/base/00-06 /usr/local/dtack/base/00-08
+  
+  - obtain the secret code from Dtack, use in place of AAAA1111 below
+  - fetch Dtack Base Library source and/or pre-compiled binaries from:
+  
+    http://www.dtack.com/secure/AAAA1111/dtack.base.00-08.tgz
+
+  - cd to some permanent directory, for example /usr/local
+  
+    /usr/local/bin/gzip -dc </tmp/dtack.base.00-08.tgz | tar xf -
+
+
+  ONLINE DOCUMENTATION
+  --------------------
+  - not available at this time
+
+
+  
+  AUTOMATED BUILDING, TESTING AND TIMING OF THE DTACK BASE LIBRARY
+  ----------------------------------------------------------------
+  cd /usr/local/dtack/base/00-08
+! sh/mkdirs.sh $PWD.solaris		# create tree for compiled binaries
+  sh/dtinst.sh solaris
+
+  A succesful build and test output will look something like:
+      gcc -c -o /usr/local/bin/dtack/base/00-08/dtutil/dtutil.o  -ggdb3 ...
+      ld: Software Generation Utilities (SGU) SunOS/ELF (LK-1.4 (S/I))
+      dtinst.sh: 10 Jul 97 08:36 solaris making... 
+      dtinst.sh: 10 Jul 97 09:55 solaris stripping... 
+      dtinst.sh: 10 Jul 97 09:56 solaris testing... 
+      dtt1d: being started by dttest.sh 10 Jul 97 09:56 
+      [more like the above]
+      dtinst.sh: 10 Jul 97 09:58 solaris timing... 
+      dttmem: being started by dttiming.sh 10 Jul 97 09:58 
+      [more like the above]
+      dtcheck.sh: scanning ./make.out ...................
+      dtcheck.sh: scanning ./test.out ...................
+      dtcheck.sh: scanning ./timing.out .................
+      dtcheck.sh: scanning ./make.out ...................
+
+! sh/dtmake.sh solaris . static		# optionally create static executables
+
+      
+  DISPLAYING AN IMAGE
+  -------------------
+  Use Dtack's all-in-one environment script dtenv.sh (documented separately),
+  or set up your PATH and LD_LIBRARY_PATH manually:
+
+  export PATH
+  PATH=$PATH:/usr/local/bin/dtack/base/00-08/bin
+  export LD_LIBRARY_PATH
+  LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/bin/dtack/base/00-08/libso
+
+  Run the image display server:
+
+  dtview -output /tmp &
+
+  Generate a color image and display it:
+
+  dttool gen color256 :a
+  
+
+  
+  DIRECTORY STRUCTURE
+  -------------------
+  dtack/
+    base/
+      00-08/
+        sh/         utility shell scripts for compiling, testing, and checking
+        dtutil/     standalone utility program for testing and installation
+        config/     configuration files for building the source
+        include/    all include files
+        source/     all source files
+        test/       test programs
+        server/     interactive image viewer
+        tool/       command line tool
+        lib/        where the static library files go
+        libso/      where the shared-object library files go
+        bin/        where the executable files go
+        tmp/        files created during automated testing
+        data/       data files used during testing
+  
+  
+  
+  

@@ -1,0 +1,66 @@
+
+
+
+
+
+
+RReeffeerreenncceess
+
+[zuc78].
+     Zucker  and  Krishnamurthy  and  Haar, "Relaxation Pro­
+     cesses for Scene Labeling: Convergence, Speed, and Sta­
+     bility," _t_-_s_m_c_, 8 (1978).
+
+[zuc81].
+     S.W.  Zucker  and Y.G. Leclere and J.L. Mohammed, "Con­
+     tinuous Relaxation and Local Maxima  Selection:  Condi­
+     tions for Equivalence," _t_-_p_a_m_i_, 3 (mar1981).
+
+[pel78].
+     S. Peleg and Azriel Rosenfeld, "Determining Compatibil­
+     ity Coefficients for Curve Enhancement Relaxation  Pro­
+     cesses," _t_-_s_m_c_, 8 (1978).
+
+[ros78].
+     Azriel  Rosenfeld,  "Iterative  Methods in Image Analy­
+     sis," _p_r_, 10 (1978).
+
+[pel80].
+     S. Peleg, "A New Probabilistic Relaxation  Scheme,"  _t_-
+     _p_a_m_i_, 2 (1980).
+
+[bha87].
+     Bir  Bhanu and Bahram A. Parvin, "Segmentation of Natu­
+     ral Scenes," _p_r_, 20, 5 (1987).
+
+[bha82].
+     Bir Bhanu and Olivier  D.  Faugeras,  "Segmentation  of
+     Images  Having  Unimodal  Distributions,"  _t_-_p_a_m_i_, 4, 4
+     (jul1982).
+
+[nag82].
+     Paul A. Nagin and Allen R. Hanson and Edward  M.  Rise­
+     man,  "Studies  in  Global  and  Local Histogram-Guided
+     Relaxation Algorithms," _t_-_p_a_m_i_, 4, 3 (may1982).
+
+[ros76].
+     Azriel Rosenfeld and Robert A.  Hummel  and  Steven  W.
+     Zucker,  "Scene  Labeling by Relaxation Operations," _t_-
+     _s_m_c_, 6, 6 (jun1976).
+
+[dan81a].
+     Alan J. Danker and Azriel Rosenfeld, "Blob Detection by
+     Relaxation," _t_-_p_a_m_i_, 3, 1 (jan1981).
+
+
+
+
+
+
+
+
+
+
+
+
+

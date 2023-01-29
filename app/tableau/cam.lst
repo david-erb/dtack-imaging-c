@@ -1,0 +1,8 @@
+# this is cam.lst, a list of cameras and their descriptions
+# first token is camera name, will be used as a filename base
+# second token is spigot number as labeled on back of the computer
+# final tokens are the camera description
+# white space must be SPACES only, not TABS
+# last line must have newline at the end of it
+
+cam0   0   Camera Zero

@@ -1,0 +1,72 @@
+define(TOP, UP2)
+define(DIR, source/bigmem)
+__prolog
+
+__guide(prj_lib_guide(mem), 
+  mem.doc+
+  mem.c+
+  memconf.c+
+  memputp.c+
+  memgetp.c+
+  memio.c+
+  memcopy.c+
+  memcmp.c+
+  memset.c)
+
+__example(mem1, mem.doc)
+
+__shexe(prj_lib_samp(mem, 1), 
+  dtmem1,    , PRJ_LIBS, PRJ_LOADS)
+__shexe(prj_lib_samp(mem, 2), 
+  dtmem2,    , PRJ_LIBS, PRJ_LOADS)
+
+pushdef(`CCSHARABLE', `CCSHARABLE_ON')
+
+pushdef(`CCOPTIMIZE', `CCOPTIMIZE_HIGH')
+pushdef(`CCDEBUGGER', `CCDEBUGGER_OFF')
+__src(font)
+__src(memgetp)
+__src(memset)
+__src(memcmp)
+__src(memcopy)
+popdef(`CCDEBUGGER')
+popdef(`CCOPTIMIZE')
+
+__src(mem_ems,
+  PRJ_INCLUDES+PRJ_EMSIF_INCLUDE, 
+  PRJ_DEFINES+PRJ_EMSIF_DEFINE)
+
+__src(memxmsif,
+  PRJ_INCLUDES+PRJ_XMSIF_INCLUDE, 
+  PRJ_DEFINES+PRJ_XMSIF_DEFINE)
+
+__src(memxmslb,
+  PRJ_INCLUDES+PRJ_XMSLB_INCLUDE, 
+  PRJ_DEFINES+PRJ_XMSLB_DEFINE)
+
+__src(memtxms,
+  PRJ_INCLUDES+PRJ_TXMS_INCLUDE, 
+  PRJ_DEFINES+PRJ_TXMS_DEFINE)
+
+__shlib(prj_lib(dtbigmem),
+  font+
+  memsourc+
+  mem+memconf+memparse+
+  memcopy+memio+memcmp+memset+memclip+memputp+memgetp+
+  mem_std+mem_ram+mem_disk+
+  mem_ems+
+  memxmsif+memxmslb+memtxms+
+  stack+stack_io+
+  libmain, , , 
+  prj_lib(dtlow)+prj_lib(dt1d))
+
+popdef(`CCSHARABLE')
+
+__finish
+
+
+
+
+
+
+

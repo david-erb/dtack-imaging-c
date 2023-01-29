@@ -1,0 +1,42 @@
+dttadj: | 950601 | runs empty ( 5) | FG1 | optimized | I486-50 |  0.14 |  0.01 |  0.16
+dttadj: | 950601 | runf empty ( 5) | FG1 | optimized | I486-50 |  0.17 |  0.01 |  0.18
+dttadj: | 950601 | fill empty | FG1 | optimized | I486-50 |  0.09 |  0.01 |  0.10
+dttadj: | 950601 | runs solid ( 5) | FG1 | optimized | I486-50 |  0.20 |  0.00 |  0.20
+dttadj: | 950601 | runf solid ( 5) | FG1 | optimized | I486-50 |  0.18 |  0.00 |  0.18
+dttadj: | 950601 | fill solid | FG1 | optimized | I486-50 |  0.26 | -0.00 |  0.26
+dttadj: | 950601 | runs checquer ( 5) | FG1 | optimized | I486-50 |  8.80 |  0.26 |  9.09
+dttadj: | 950601 | runf checquer ( 5) | FG1 | optimized | I486-50 |  3.79 |  0.13 |  3.93
+dttadj: | 950601 | fill checquer | FG1 | optimized | I486-50 |  1.74 |  0.02 |  1.91
+dttadj: | 950601 | runs tiny_blobs ( 5) | FG1 | optimized | I486-50 |  1.89 | -0.00 |  1.89
+dttadj: | 950601 | runf tiny_blobs ( 5) | FG1 | optimized | I486-50 |  0.86 |  0.01 |  0.87
+dttadj: | 950601 | fill tiny_blobs | FG1 | optimized | I486-50 |  0.50 |  0.00 |  0.50
+dttadj: | 950601 | runs tiny_holes ( 5) | FG1 | optimized | I486-50 |  2.32 |  0.01 |  2.33
+dttadj: | 950601 | runf tiny_holes ( 5) | FG1 | optimized | I486-50 |  1.12 |  0.02 |  1.14
+dttadj: | 950601 | fill tiny_holes | FG1 | optimized | I486-50 |  0.37 |  0.02 |  0.39
+dttadj: | 950601 | runs tree ( 5) | FG1 | optimized | I486-50 |  1.70 |  0.00 |  1.70
+dttadj: | 950601 | runf tree ( 5) | FG1 | optimized | I486-50 |  0.72 |  0.01 |  0.73
+dttadj: | 950601 | fill tree | FG1 | optimized | I486-50 |  0.34 |  0.00 |  0.34
+dttadj: | 950601 | runs spiral ( 5) | FG1 | optimized | I486-50 |  5.01 |  0.01 |  5.02
+dttadj: | 950601 | runf spiral ( 5) | FG1 | optimized | I486-50 |  1.98 |  0.04 |  2.03
+dttadj: | 950601 | fill spiral | FG1 | optimized | I486-50 |  0.47 |  0.02 |  0.48
+dttadj: | 950601 | runs empty ( 5) | FG1 | unoptimized | I486-50 |  0.20 |  0.02 |  0.26
+dttadj: | 950601 | runf empty ( 5) | FG1 | unoptimized | I486-50 |  0.25 |  0.00 |  0.25
+dttadj: | 950601 | fill empty | FG1 | unoptimized | I486-50 |  0.09 |  0.01 |  0.10
+dttadj: | 950601 | runs solid ( 5) | FG1 | unoptimized | I486-50 |  0.27 |  0.01 |  0.28
+dttadj: | 950601 | runf solid ( 5) | FG1 | unoptimized | I486-50 |  0.25 |  0.01 |  0.26
+dttadj: | 950601 | fill solid | FG1 | unoptimized | I486-50 |  0.26 | -0.00 |  0.25
+dttadj: | 950601 | runs checquer ( 5) | FG1 | unoptimized | I486-50 | 10.85 |  0.21 | 11.62
+dttadj: | 950601 | runf checquer ( 5) | FG1 | unoptimized | I486-50 |  4.91 |  0.35 |  6.03
+dttadj: | 950601 | fill checquer | FG1 | unoptimized | I486-50 |  1.73 |  0.00 |  1.73
+dttadj: | 950601 | runs tiny_blobs ( 5) | FG1 | unoptimized | I486-50 |  2.28 |  0.02 |  2.29
+dttadj: | 950601 | runf tiny_blobs ( 5) | FG1 | unoptimized | I486-50 |  1.16 |  0.03 |  1.20
+dttadj: | 950601 | fill tiny_blobs | FG1 | unoptimized | I486-50 |  0.50 |  0.01 |  0.51
+dttadj: | 950601 | runs tiny_holes ( 5) | FG1 | unoptimized | I486-50 |  2.80 |  0.02 |  2.82
+dttadj: | 950601 | runf tiny_holes ( 5) | FG1 | unoptimized | I486-50 |  1.51 |  0.01 |  1.52
+dttadj: | 950601 | fill tiny_holes | FG1 | unoptimized | I486-50 |  0.39 | -0.00 |  0.39
+dttadj: | 950601 | runs tree ( 5) | FG1 | unoptimized | I486-50 |  2.23 | -0.00 |  2.23
+dttadj: | 950601 | runf tree ( 5) | FG1 | unoptimized | I486-50 |  0.97 |  0.01 |  0.98
+dttadj: | 950601 | fill tree | FG1 | unoptimized | I486-50 |  0.34 | -0.00 |  0.34
+dttadj: | 950601 | runs spiral ( 5) | FG1 | unoptimized | I486-50 |  6.77 |  0.02 |  6.80
+dttadj: | 950601 | runf spiral ( 5) | FG1 | unoptimized | I486-50 |  2.59 |  0.02 |  2.61
+dttadj: | 950601 | fill spiral | FG1 | unoptimized | I486-50 |  0.47 |  0.02 |  0.48

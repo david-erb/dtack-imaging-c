@@ -1,0 +1,16 @@
+# -screen possibilities are:
+#   ftp,/some/dir/%02ld.%08ld.jpg  
+#     directory part has no substitution
+#     filename has exatly two substitutions: cam and frame
+#
+-config /tableau/config
+-input dir,/img/tableau/gary2.raw/%03d,256,256
+-screen ftp,/d/2/img/tableau/tmp.x/%s.%08ld.jpg
+-variant jpeg
+-color rgb888
+-D command
+-op "stamp,update 5 sec %d %b %y %H:%M:%S"
+-dz 100
+-offset 0
+-t 25
+

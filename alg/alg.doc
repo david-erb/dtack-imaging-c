@@ -1,0 +1,96 @@
+/*..........................................................................
+| TITLE dtalg
+| Dtack Algorithms
+dtinclude(prolog2.dx)
+| 
+|!Dtack Algorithms
+| We are pleased to offer the following algorithm libraries:
+| 
+|.The :lev85: Algorithm
+| Segmentation performance
+| By-blob or by-label uniformity number.
+| 
+|_link dtlev85p,inline [Product Literature]
+| | 
+|_link dtlev85s,inline [Technical Summary]
+| | 
+|_link dtlev85/sect000.htm,inline [Technical Reference]
+| 
+|.The :esc94: Algorithm
+| Error diffusion dithering for laser printers.
+| 
+|_link dtesc94p,inline [Product Literature]
+| | 
+|_link dtesc94s,inline [Technical Summary]
+| | 
+|_link dtesc94,inline [Technical Reference]
+| 
+|.The :sez90: Algorithm
+| Histogram peak detection and multi-thresholding.
+| 
+|_link dtsez90p,inline [Product Literature]
+| | 
+|_link dtsez90s,inline [Technical Summary]
+| | 
+|_link dtsez90,inline [Technical Reference]
+| 
+|.The :bha94: Algorithm
+| Genetic adaptive image segmentation.
+| 
+|_link dtbha94p,inline [Product Literature]
+| | 
+|_link dtbha94s,inline [Technical Summary]
+| | 
+|_link dtbha94,inline [Technical Reference]
+| 
+|.The :wes78: Algorithm
+| Segmentation performance by
+| busyness analysis.
+| 
+|_link dtwes78p,inline [Product Literature]
+| | 
+|_link dtwes78s,inline [Technical Summary]
+| | 
+|_link dtwes78,inline [Technical Reference]
+| 
+|.The :che94: Algorithm
+| Neural network multi-thresholding.
+| 
+|_link dtche94p,inline [Product Literature]
+| | 
+|_link dtche94s,inline [Technical Summary]
+| | 
+|_link dtche94,inline [Technical Reference]
+| 
+|.The :per87: Algorithm
+| Iterative thresholding.
+| 
+|_link dtper87p,inline [Product Literature]
+| | 
+|_link dtper87s,inline [Technical Summary]
+| | 
+|_link dtper87,inline [Technical Reference]
+| 
+|.The :dob94: Algorithm
+| Watershed segmentation.
+| 
+|_link dtdob94p,inline [Product Literature]
+| | 
+|_link dtdob94s,inline [Technical Summary]
+| | 
+|_link dtdob94,inline [Technical Reference]
+| 
+|.The :hsi89: Algorithm
+| Unsupervised texture segmentation using probabilistic relaxation.
+| 
+|_link dthsi89p,inline [Product Literature]
+| | 
+|_link dthsi89s,inline [Technical Summary]
+| | 
+|_link dthsi89,inline [Technical Reference]
+|
+dtinclude(epilog2.dx) 
+| 
+| END
+ *..........................................................................*/
+

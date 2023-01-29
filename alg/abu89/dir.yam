@@ -1,0 +1,19 @@
+define(TOP, PRJ_ALG_TOP)
+
+__proto(prj_alg_proto(abu89), cmd+test+abu89)
+
+__src(abu89)
+
+__lib(prj_alg_lib(abu89), cmd+abu89)
+
+__exe(prj_alg_exe(abu89), 
+  main,
+  prj_alg_lib(abu89)+
+  prj_base_lib(dthigh)+
+  prj_base_lib(WINLIB)+
+  prj_base_lib(dtlow))
+
+__finish
+
+
+

@@ -1,0 +1,18 @@
+[Files]
+File1=C:\temp\dt\0.1\W31-16\DTdll.DLL
+File2=C:\windows\SYSTEM\CMDIALOG.VBX
+File3=C:\windows\SYSTEM\VBRUN300.DLL
+File4=C:\windows\COMMDLG.DLL
+
+[Flags]
+AppEXEName=C:\temp\dt\0.1\W31-16\DT.exe
+APPTITLE=DT
+DataControl=0
+OLE=0
+Btrieve=0
+ODBC=0
+DataAccess=0
+VB.Mak Full Path=k:\PRJ\DT\VB30\DT.MAK
+VB.Mak Path Only=k:\PRJ\DT\VB30\
+Disk Drive=a:
+Disk Type=1

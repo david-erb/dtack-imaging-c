@@ -1,0 +1,118 @@
+NCI VIDEOPLEX SUPPORT SOFTWARE INSTALLATION
+18 Feb 97
+
+INSTALLATION
+------------
+In the interim, the Videoplex support software is distributed as a pax file.
+To install it, copy it to /tmp, then type "unpax uumplay".
+This will replace all files listed in the MANIFEST section below.
+Particularly note that it replaces /devel/bin/mpeg_decode.
+
+
+UDB
+---
+The udb currently does not need to be told the decoder type.
+The mpeg_decode script detects whether a Videoplex is present.
+If not, it presumes that a PC Motion Pro is present and uses the
+old rundos scheme.
+
+However, we will soon require the use of the Model attribute so we
+can automatically put the show_pci2 command in sysinit.
+
+For example:
+  [1]dv_decoder Model=Videoplex;
+
+Until the udb is made Videoplex-aware, you must add the following to
+the Appstart string:
+
+  show_pci2 -v > /CONFIG/show_pci2.out
+
+
+
+STARTING/RESTARTING
+-------------------
+The umplay program is always started from the /devel/bin/mpeg_decode script.
+This script is called directly by sysinit, and indirectly by uadmin
+when the Restart Decoder button is pressed.
+
+VERSION
+-------
+To see the version number, just type "umplay -op rev".
+
+
+CORTEX ALIGNMENT
+----------------
+The video stream presented by the Videoplex to the cortex is shifted.
+This table illustrates the currently accepted values:
+
+theoretical standard digital 76 52
+theoretical standard analog  76 48
+PC Motion Pro                77 50
+Videoplex                    75 56
+
+Compensation for the videoplex is done in udb with lines of the form:
+
+Variable videoplex_vshift Name="xxxxxxxxxxxxxx" Value="75";
+Variable videoplex_hshift Name="xxxxxxxxxxxxxx" Value="56";
+[1] DOES videoplex_vshift videoplex_hshift;
+
+
+OVERLAY
+-------
+The Videoplex is capable of displaying up to two overlay blocks.
+The content and placement of these blocks is defined in /CONFIG/umplay.cfg.
+This ASCII file has comments in it describing its format.
+
+
+VERSION
+-------
+To see the version number, just type "umplay -op rev".
+
+
+OTHER DOCUMENTATION
+-------------------
+-	umplay -help
+-	umplay -HELP
+-	the header in umplay.sh describes the tests
+-	vidoeplex.notes describes the port from NT to QNX
+-	SDK Reference from Optibase
+
+
+PAX FILE MANIFEST
+-----------------
+/devel/dist/z.umplay
+/CONFIG/umplay.cfg					umplay's config file
+/CONFIG/nci3.osd					NCI logo for overlay
+/user/local/umplay					the main program
+/user/local/show_pci2				PCI configuration program
+/devel/bin/mpeg_decode				script called by sysinit
+/devel/bin/umplay.sh				master test script
+/devel/test/umplay/exit.deccmd		test commands
+/devel/test/umplay/normal.deccmd
+/devel/test/umplay/starve.deccmd
+/devel/test/umplay/starve_command.deccmd
+/devel/test/umplay/starve_loop.deccmd
+/devel/test/umplay/step.deccmd
+/devel/test/umplay/exit.stuff
+/devel/test/umplay/loop.stuff
+/devel/test/umplay/stuff.stuff
+/videoplex/ucode/cs4920_2.bin		microcode files
+/videoplex/ucode/d_1_7n31.bin
+/videoplex/ucode/i_1_7n31.bin
+/videoplex/ucode/kernel.opt
+/videoplex/ucode/main1.opt
+
+
+TESTING
+A test script runs various tests.
+# umplay.sh show			test software display
+# umplay.sh time			test software decode time
+# umplay.sh short			play short clip
+# umplay.sh long			play longer clip
+# umplay.sh stuff			test fifo server in 2-process mode
+# umplay.sh normal			simple 3-process play
+# umplay.sh starve			same as normal, except different script
+# umplay.sh starve_loop		long-lived server, multiple sequential clients
+# umplay.sh starve_command	give server commands while it's starving
+# umplay.sh step			test single frame stepping
+

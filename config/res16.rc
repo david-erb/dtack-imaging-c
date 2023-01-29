@@ -1,0 +1,4 @@
+; to compile for win31:
+; rc -r -ik:iqsign\config k:iqsign\config\iqsign16.rc
+
+dtack_ico     ICON   dtack.ico

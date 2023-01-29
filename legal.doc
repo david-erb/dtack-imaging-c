@@ -1,0 +1,16 @@
+/*..........................................................................
+| TITLE dtlegal
+| dtdoclist(filebase, title)
+| 
+|!Standard End User License Agreement Summary
+| dxinclude(license2.dx)
+| 
+|!Standard End User License Agreement Full Text
+dxinclude(doc/policy/license.doc)
+| 
+|!Warranty Disclaimer
+| dxinclude(disclaim.dx)
+| 
+| END
+ *..........................................................................*/
+

@@ -1,0 +1,18 @@
+define(TOP, UP2)
+define(DIR, test/ftp)
+
+pushdef(`CCOPTIMIZE', `CCOPTIMIZE_HIGH')
+pushdef(`CCDEBUGGER', `CCDEBUGGER_OFF')
+
+popdef(`CCDEBUGGER')
+popdef(`CCOPTIMIZE')
+
+__shexe(prj_test_bin(dttftp),   dttftp, ,
+  prj_lib(dttzz)+
+  PRJ_INTER_LIBS+
+  PRJ_LIBS,
+  PRJ_INTER_LOADS PRJ_LOADS)
+
+__finish
+
+

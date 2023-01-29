@@ -1,0 +1,24 @@
+/*..........................................................................
+| TITLE dtkeybd()
+|dxinclude(liblink1.dx)
+|
+| The dtkeybd() functions read raw bytes from the keyboard and translate
+| the bytes into standard actions.
+| 
+| The tables used in translating raw bytes into standard actions are:
+| termcap	dtkeymap_termcap_init()
+| qnxterm	dtkeymap_qnxterm_init()
+| ctlkeys	dtkeymap_ctlkeys_init()
+| dos		dtkeybd_builtin()
+| dumb		dtkeybd_builtin()
+|
+| When initializing a keybd object, you provide a server string.
+| This server string may have one of three values,
+| each of which implies a certain initial keyboard mapping:
+| 
+| unix-tcap	termcap, ctlkeys
+| qnxterm	qnxterm
+| dos		dos, dumb
+| 
+| END
+ *..........................................................................*/

@@ -1,0 +1,27 @@
+
+@string{ivc = "Image and Vision Computing"}
+@string{t-ip = "IEEE Transactions on Image Processing"}
+@string{proc-ieee = "Proceedings of the IEEE"}
+@string{t-cs = "IEEE Transactions on Circuits and Systems"}
+@string{pr = "Pattern Recognition"}
+@string{prl = "Pattern Recognition Letters"}
+@string{t-pami = "IEEE Transactions on Pattern Analysis and Machine Intelligence"}
+@string{iu = "Image Understanding"}
+@string{t-smc = "IEEE Transactions on Systems, Man, and Cybernetics"}
+@string{cvgip = "Computer Vision, Graphics, and Image Processing"}
+@string{cgip = "Computer Graphics and Image Processing"}
+@string{t-assp = "IEEE Transactions on Acoustics, Speech, and Signal Processing"}
+@string{t-sp = "IEEE Transactions on Signal Processing"}
+@string{t-c = "IEEE Transactions on Computers"}
+@string{cug = "C Users Journal"}
+@string{wiley = "Wiley"}
+@string{t-aes = "IEEE Transactions on Aerospace and Electronic Systems"}
+@string{t-cs = "IEEE Transactions on Circuits and Systems"}
+@string{academic = "Academic Press"}
+@string{prentice-hall = "Prentice-Hall"}
+@string{mcgraw-hill = "McGraw-Hill"}
+@string{addison-wesley = "Addison-Wesley"}
+@string{spie-ss = "SPIE Smart Sensors"}
+@string{spie-ipat = "SPIE Image Processing Algorithms and Techniques"}
+@string{ml = "Machine Learning"}
+@string{gmip = "Graphical Models and Image Processing"}

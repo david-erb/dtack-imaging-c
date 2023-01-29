@@ -1,0 +1,23 @@
+-config ../config
+-input ser,tabtiny1.dat
+-path c:/webcam
+-screen roll,tiny1
+
+# time between thumbnails
+-dt 10000
+
+# max time to wait for new incoming
+-max 30000
+
+# number of thumbnails to keep
+-dz 5
+
+# thumbnail shrink size
+-op resize2
+
+# thumbnail recompression quality
+-t 80
+
+-errto ../logs/tabtiny1.log
+-dbgto ../logs/tabtiny1.log
+-sayto ../logs/tabtiny1.log

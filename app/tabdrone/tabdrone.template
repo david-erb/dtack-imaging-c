@@ -1,0 +1,40 @@
+#%s
+#0
+#1
+#0
+
+# -connect listen address
+# -ident   sessid (not examined, passed through to start and done URLs)
+# -input   streamid (spec for tabgrab producing raw video)
+# -name    client (ipaddr allowed to connect)
+# -max     limit (seconds if positive or frames if negative)
+# -pre     start url (e.g. rocket,192.9.200.6:80/start?)
+# -output  done url (e.g. rocket,192.9.200.6:80/done?)
+
+-connect rocket,0:%d
+-ident %s
+-input %s
+-name %s
+-max %s
+
+#-pre %s
+#-output %s
+
+#-variant %s
+
+# -dt      milliseconds to wait for client to connect (-1=forever)
+# -t       jpeg quality
+# -w       100% delay in milliseconds
+# -D       debug, normally use usr1
+
+-dt -1
+-t 25
+-w 2000
+-D usr1+usr2+command+reply+trace
+
+
+
+#-errto tmp.out
+#-dbgto tmp.out
+#-sayto tmp.out
+

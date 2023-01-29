@@ -1,0 +1,117 @@
+/*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
+  ! Copyright (C) 1998 Dtack Inc. All Rights Reserved
+  ! To use this file, you must have signed a license agreement with Dtack Inc.
+  ! Under no circumstances may you redistribute this file.
+  ! This software is provided AS IS with no warranty expressed or implied.
+  ! Dtack Inc. accepts no liability for use or misuse of this file.
+  ! http://www.dtack.com  dtack@dtack.com  telephone +360.417.6700
+  ! Dtack Inc, P.O. Box 3061, Port Angeles, WA USA 98362
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+  
+  CHANGE HISTORY
+  --------------
+  base.01-07 2 July 1998
+  - minor fixes for Sun compiler fd.c, os_time.c, 1d_sort5.c
+  base.01-06 24 June 1998
+  - bug in resample not allocating in slow mode
+  - changed include file naming
+  - sort_struct now legal
+  - added proprietary headers
+  - got rid of 1d convolve(u8,s4,s4)
+  base.01-04 12 June 1998
+  - changed DTNTYPE_UINT32 to dtntype_b32_t also SINT32 to s4
+  - added dt1d_sub for subtraction
+  - bug in low/ntype.c:dtntype_promote for F1
+  - added arg to dt1d_diff
+  - added gz support for seek in low/fd.c
+  - added special resample+1 support
+  - added more ntypes to sum_cols
+  - generalized line drawing to support line profiling
+  - added s2 as fast case for lookup
+  - fixed bug in memram_prealloc for link init
+  - Sun compile error in tool/hist.c
+  base.01-03 15 May 1998
+  - better fix (background painting) for non-stretching in screen/hwsmsw.c
+  - added ability to read gzipped files automatically in fd.c and dtfd.h
+  - SunPro compiler fixes to high/lookup.c and 1d/1d_conv.c suggested by FF
+  - added fast options to high/lookup, high/hist1 and low/hist2
+  base.01-02 29 April 1998
+  - wrong ifdef for disabling stretching in screen/hwsmsw.c
+  - many changes from dt_ntype to dtntype
+  - dtstats created from dt_stats
+  - dthist changes to support other ntypes
+  base.01-01 27 April 1998
+  - added new stats to dt_stats_t
+  - added dtimage_stats, pointed dtimage_mean et al. at it
+  base.00-27 12 April 1998
+  - added hwsmsw and made it default for windows
+  - added support for lg6 (Linux on DEC Alpha 64 bit)
+  base.00-26 6 April 1998
+  - added unix printing to hws.c (had to change dtscr.h and dthws.h)
+  - cleanup up debug printing in low/msw.c:yield()
+  - fixed window-destroy bug when pidwin is not set in screen/hwsfgw.c
+  - changed vballoc() error messages in hwsfgw.c
+  - added extern C in dtxchg.h
+  - bug for win16 isdir in low/os_futil.c
+  base.00-25 28 March 1998
+  - bug if null ctl in low/msw.c
+  - data type in dtimage.h GETROW and MAPROW
+  base.00-24 6 March 1998 
+  - changed some functions to dtntype in low/ntype.c
+  - fixed bug in 1d_arith mult for b==0
+  - added source/high/assign.c
+  - some dt.h changes for imagedt cleanup
+  - added dtos_time_delay to os_time.c
+  - dtportio support for Linux
+  - support for bttv framegrabber on Linux
+  - change DT_DBG macro in dt.c
+  base.00-23 10 January 1998 
+  - support for SI2 (Silicon Graphics)
+  - fixed sigpipe weirdness in ipcrock
+  - fixed bug in dt_say, lengthened buffer in err and dbg
+  - added screen print for Fastgraph
+  base.00-22 9 January 1998 
+  - socket and dg improvements
+  base.00-21 4 January 1998 
+  - added mkdir function to ftp.c, also better timeout control
+  - fixed "waiting for" message in ipcrock.c
+  - added XIO error checking in hwsx.c
+  base.00-20 30 December 1997
+  - fixed bug in dtos_isdir() for Unix
+  base.00-16 6 November 1997
+  - added ftp test
+  - removed wv4 and added wv5
+  base.00-15 9 October 1997
+  - bug in sum_cols for ntypes f1 and f2
+  - new event types
+  - screen window destruction and event handling changes
+  - fastgraph event handling fixes
+  base.00-14 29 September 1997
+  - extended data type support for sum_rows and sum_cols
+  - list supports NULL name and user, new function dtlist_append
+  - added image rotation and general column operations
+  base.00-11 12 September 1997
+  - sunpro1.set and DTCONFIG_SP1 added
+  - minor change to source/hwsx.c to support old openwin
+  - changes to dtutil/dtutil.c to remove warnings
+  - added strerror function for SUNOS
+  base.00-10 9 September 1997
+  - Sunos (GE version) supported
+  - minor maintenance changes and bug fixes
+  base.00-09 13 August 1997
+  - Sunos supported
+  - no longer use shared XImage interface by default
+  - bug in horizontally assymetric convolution kernels
+  - dtview usage modified
+  - make clean no longer tries to remove 'tmp'
+  base.00-08 4 August 1997
+  - ability to compile into different tree than source
+  - make procedure supports GNU make
+  base.00-07 31 July 1997
+  - new directory structure and makefiles
+  - all install instructions
+  base.00-06 28 July 1997
+  - added transpose function
+  - added new option to X support to enable color remapping which may
+    decrease color lut flashing in some workstations
+    run: dtview -output /tmp -screen hws,x,,RD &

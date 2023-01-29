@@ -1,0 +1,93 @@
+define(TOP, UP2)
+define(DIR, app/tabrobot)
+
+__usage(tabrobot, tabrobot)
+__usage(tabptz, tabptz)
+__usage(ricodog, ricodog)
+__usage(tabroam, tabroam)
+
+__src(gui_qnx,
+  PRJ_INCLUDES+PRJ_QW4_INCLUDE, 
+  PRJ_DEFINES+PRJ_QW4_DEFINE)
+
+__proto(tabrobot,
+  rev+
+  log+
+  preset+
+  client+
+  roam+
+  gui_qnx+
+  server)
+
+__proto(dtserial,
+  serial)
+
+__proto(dtptz,
+  ptz+
+  ptzpela+
+  ptzipc)
+
+__src(ptzpela, 
+  PRJ_INCLUDES, 
+  PRJ_DEFINES+PRJ_PTZ_PELA_DEFINE)
+
+pushdef(`CCSHARABLE', `CCSHARABLE_ON')
+
+__shlib(prj_lib(dtptz),
+  ptz+
+  ptzpela+
+  ptzipc+
+  libmain, , ,
+  prj_lib(dtlow))
+
+__shlib(prj_lib(dtser),
+  serial+
+  libmain, , ,
+  prj_lib(dtlow))
+
+__shlib(prj_lib(tabrobox),
+  rev+
+  client+
+  gui_qnx+
+  preset+
+  server+
+  libmain, , ,
+  prj_lib(dtptz)+
+  prj_lib(dtlow))
+
+popdef(`CCSHARABLE')
+
+__shexe(prj_test_bin(tabrobot),   
+  tabrobot+log, ,
+  prj_lib(tabrobox)+
+  prj_lib(dtptz)+
+  prj_lib(dtser)+
+  prj_lib(dtlow)+
+  prj_lib(dt1d),
+  PRJ_FLEXLM_LOAD
+  PRJ_LOADS)
+
+__shexe(prj_test_bin(tabptz),   
+  tabptz+log, ,
+  prj_lib(dtptz)+
+  prj_lib(dtser)+
+  prj_lib(dtlow)+
+  prj_lib(dt1d),
+  PRJ_FLEXLM_LOAD
+  PRJ_LOADS)
+
+__shexe(prj_test_bin(tabroam),   
+  tabroam+roam+client+preset+log+rev, ,
+  prj_lib(dtlow)+
+  prj_lib(dt1d),
+  PRJ_FLEXLM_LOAD
+  PRJ_LOADS)
+
+__shexe(prj_test_bin(ricodog),   
+  ricodog+log, ,
+  prj_lib(dtser)+
+  prj_lib(dtlow)+
+  prj_lib(dt1d),
+  PRJ_LOADS)
+
+__finish

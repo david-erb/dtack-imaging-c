@@ -1,0 +1,392 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html>
+<head>
+<title>
+Video Caesar Operating Instructions for Unix
+</title>
+<link rev="made" href="MAILTO:webmaster@dtack.com">
+</head>
+<body bgcolor=e5e5d0>
+<table border=0 width=660><tr><td align=top>&#160;&#160;&#160;&#160;<br></td><td><!-- dxhead1.htm start -->
+<a href="/">
+<img align=top src="../gifs/tableau1.gif" 
+alt="to home">
+</a>
+<img align=top src="../gifs/space4.gif" alt=""> 
+<a name="sect000">
+<img align=top src="../gifs/tabhead.gif" 
+alt="Tableau Web">
+</a>
+<p>
+<!-- dxhead1.htm finish -->
+<h1>Video Caesar Operating Instructions for Unix</h1>
+<!-- Copyright (c) 1997  , All Rights Reserved -->
+<a name="video_caesar_operating_instructions_for_unix">&#160;</a>
+<!-- dxhtml_toc -->
+This document contains the following major sections:
+<ol>
+<li><a href="#sect001">Video Caesar Operating Instructions for Unix</a></li>
+<li><a href="#sect002">Summary</a></li>
+<li><a href="#sect003">External connection</a></li>
+<li><a href="#sect004">Initial configuration</a></li>
+<li><a href="#sect005">Procedures</a></li>
+<li><a href="#sect006">Security</a></li>
+<li><a href="#sect007">Troubleshooting</a></li>
+</ol>
+</td></tr></table>
+<!-- dxhr.htm start -->
+<br><img src="../gifs/tabunix-hr.gif" alt="------------------------------"><br>
+<!-- dxhr.htm finish -->
+<table border=0 width=660><tr><td align=top>&#160;&#160;&#160;&#160;<br></td><td><!-- dxhtml1_head: level 2, string Video Caesar Operating Instructions for Unix -->
+<a name="video_caesar_operating_instructions_for_unix">&#160;</a>
+<a name="sect001">&#160;</a>
+<a href="#sect000">
+[to contents]</a>&#160;
+<a href="#sect002">
+[to next section]</a>&#160;
+<h2>1. Video Caesar Operating Instructions for Unix</h2>
+Thanks for buying from Tableau!
+<p>
+These instructions will tell you how to operate your new
+Video Caesar capture computer.
+<p>
+It is our sincere wish that your experience with the Video Caesar
+web cam system is pleasant and rewarding.
+<p>
+Please call us at 1.800.221.7583 with any questions.
+</td></tr></table>
+<!-- dxhr.htm start -->
+<br><img src="../gifs/tabunix-hr.gif" alt="------------------------------"><br>
+<!-- dxhr.htm finish -->
+<table border=0 width=660><tr><td align=top>&#160;&#160;&#160;&#160;<br></td><td><!-- dxhtml1_head: level 2, string Summary -->
+<a name="summary">&#160;</a>
+<a name="sect002">&#160;</a>
+<a href="#sect000">
+[to contents]</a>&#160;
+<a href="#sect003">
+[to next section]</a>&#160;
+<a href="#sect001">
+[to previous section]</a>&#160;
+<h2>2. Summary</h2>
+<b>PROGRAMS</b>
+<dl>
+<dt>tabstart
+<dd>
+watchdog to start, monitor and restart other programs
+<dt>tabgrab
+<dd>
+grab raw image from frame grabber
+<dt>tabrocket
+<dd>
+compress raw image and send to rocket server
+<dt>tabserve
+<dd>
+rocket server to receive images from tabrocket
+<dt>tabshow
+<dd>
+display video on-screen
+</dl>
+<p>
+<b>CONFIGURATION</b>
+<p>
+Login root, click on <b>Network Configuration</b> button
+(scroll <b>Control Panel</b> window to see the button).
+<pre>
+ cd /home/pump/tableau/config
+ vi tabstart.arg
+ vi tabgrab.arg
+ vi tabrocket.arg
+ vi tabserve.arg
+ vi tabshow.arg
+</pre>
+<p>
+<b>COMMANDS</b>
+<dl>
+<dt>halt
+<dd>
+prepare for power down
+<dt>reboot
+<dd>
+reboot computer
+<dt>tabstop
+<dd>
+stop tableau operations
+<dt>tabstart
+<dd>
+start tableau operations
+<dt>tabshow
+<dd>
+show live video on-screen
+</dl>
+</td></tr></table>
+<!-- dxhr.htm start -->
+<br><img src="../gifs/tabunix-hr.gif" alt="------------------------------"><br>
+<!-- dxhr.htm finish -->
+<table border=0 width=660><tr><td align=top>&#160;&#160;&#160;&#160;<br></td><td><!-- dxhtml1_head: level 2, string External connection -->
+<a name="external_connection">&#160;</a>
+<a name="sect003">&#160;</a>
+<a href="#sect000">
+[to contents]</a>&#160;
+<a href="#sect004">
+[to next section]</a>&#160;
+<a href="#sect002">
+[to previous section]</a>&#160;
+<h2>3. External connection</h2>
+<ol>
+<li> Connect your computer to your 10Base2 or 10BaseT ethernet.
+Note: the system is shipped for 10Base2 (thin coax),
+and may require hardware setup to switch to 10BaseT (twisted pair).
+<li> Plug in the mouse and keyboard supplied with your system.
+<li> Connect any standard VGA monitor.
+<li> Hook up your NTSC video signal.
+<li> Plug in the power cord.
+</ol>
+</td></tr></table>
+<!-- dxhr.htm start -->
+<br><img src="../gifs/tabunix-hr.gif" alt="------------------------------"><br>
+<!-- dxhr.htm finish -->
+<table border=0 width=660><tr><td align=top>&#160;&#160;&#160;&#160;<br></td><td><!-- dxhtml1_head: level 2, string Initial configuration -->
+<a name="initial_configuration">&#160;</a>
+<a name="sect004">&#160;</a>
+<a href="#sect000">
+[to contents]</a>&#160;
+<a href="#sect005">
+[to next section]</a>&#160;
+<a href="#sect003">
+[to previous section]</a>&#160;
+<h2>4. Initial configuration</h2>
+Your computer may be shipped with an IP address which is meaningless on
+your network.
+If so, please refer to the Procedures section below
+for changing the IP address.
+<p>
+Your computer is configured to send jpeg via the rocket protocol to itself.
+It is capable of acting as a web server for its own live video.
+To see the live video, point an external browser to the url:
+<p>
+http://12.34.56.78/site1.html
+<p>
+Replace the <code>12.34.56.78</code> with the IP address of your system.
+<p>
+<img src="../gifs/tabunix-init.gif" alt="initial configuration">
+<p>
+This is an inefficient configuration,
+to be used for demonstration purposes only.
+You should probably send the jpeg files via the rocket protocol
+to your main web server computer.
+<p>
+Please contact Tableau for advice on customizing the configuration
+to your exact needs.
+</td></tr></table>
+<!-- dxhr.htm start -->
+<br><img src="../gifs/tabunix-hr.gif" alt="------------------------------"><br>
+<!-- dxhr.htm finish -->
+<table border=0 width=660><tr><td align=top>&#160;&#160;&#160;&#160;<br></td><td><!-- dxhtml1_head: level 2, string Procedures -->
+<a name="procedures">&#160;</a>
+<a name="sect005">&#160;</a>
+<a href="#sect000">
+[to contents]</a>&#160;
+<a href="#sect006">
+[to next section]</a>&#160;
+<a href="#sect004">
+[to previous section]</a>&#160;
+<h2>5. Procedures</h2>
+The following procedures allow you to control your computer.
+<a name="login">&#160;</a>
+<h3>5.1. Login</h3>
+<table border=0><tr><td width=20>&#160;</td><td>Enter an account name at <i>Ident:</i> and
+password at <i>Confirm:</i>.
+<p>
+There are passwords for each of three accounts:
+<dl>
+<dt><b>root</b>
+<dd>
+system maintenance account
+<dt><b>pump</b>
+<dd>
+non-privileged access mainly to show on-screen video
+<dt><b>demo</b>
+<dd>
+generic login with standard Linux GUI interface
+</dl>
+<p>
+Get your passwords for each account via phone or email from Tableau.
+</td><td width=20>&#160;</td></tr></table>
+<a name="logout">&#160;</a>
+<h3>5.2. Logout</h3>
+<table border=0><tr><td width=20>&#160;</td><td>To return to the login screen from any account,
+click your mouse anywhere on the blue-green desktop.
+Then select "Exit" or "Exit Fvwm" from the popup menu.
+</td><td width=20>&#160;</td></tr></table>
+<a name="halt_the_system__prepare_for_power_down_">&#160;</a>
+<h3>5.3. Halt the system (prepare for power down)</h3>
+<table border=0><tr><td width=20>&#160;</td><td>as root, type
+<pre>
+  halt
+</pre>
+</td><td width=20>&#160;</td></tr></table>
+<a name="reboot_the_system">&#160;</a>
+<h3>5.4. Reboot the system</h3>
+<table border=0><tr><td width=20>&#160;</td><td>as root, type
+<pre>
+  reboot
+</pre>
+</td><td width=20>&#160;</td></tr></table>
+<a name="stop_all_tableau_programs">&#160;</a>
+<h3>5.5. Stop all Tableau programs</h3>
+<table border=0><tr><td width=20>&#160;</td><td>as root, type
+<pre>
+  tabstop
+</pre>
+</td><td width=20>&#160;</td></tr></table>
+<a name="restart_all_tableau_programs">&#160;</a>
+<h3>5.6. Restart all Tableau programs</h3>
+<table border=0><tr><td width=20>&#160;</td><td>as root, type
+<pre>
+  tabstart
+</pre>
+</td><td width=20>&#160;</td></tr></table>
+<a name="display_on_screen_video">&#160;</a>
+<h3>5.7. Display on-screen video</h3>
+<table border=0><tr><td width=20>&#160;</td><td>as root or pump, type:
+<pre>
+  tabshow
+</pre>
+</td><td width=20>&#160;</td></tr></table>
+<a name="configure_tableau_software">&#160;</a>
+<h3>5.8. Configure Tableau software</h3>
+<table border=0><tr><td width=20>&#160;</td><td>as root or pump, type:
+<pre>
+  cd /home/pump/tableau/config
+  vi xxxxxxx.arg         (replace xxxxxxx with the program name)
+</pre>
+<p>
+These programs each have an argument file:
+<dl>
+<dt>tabstart
+<dd>
+watchdog to start, monitor and restart other programs
+<dt>tabgrab
+<dd>
+grab raw image from frame grabber
+<dt>tabrocket
+<dd>
+compress raw image and send to rocket server
+<dt>tabserve
+<dd>
+rocket server to receive images from tabrocket
+<dt>tabshow
+<dd>
+display video on-screen
+</dl>
+</td><td width=20>&#160;</td></tr></table>
+<a name="check_tableau_logs">&#160;</a>
+<h3>5.9. Check Tableau logs</h3>
+<table border=0><tr><td width=20>&#160;</td><td>as root or pump, type:
+<pre>
+  cd /home/pump/tableau/logs
+  tail xxxxxxx.log         (replace xxxxxxx with the program name)
+</pre>
+<p>
+Each program in the list above has a log file.
+Normally only startup and error messages are written to the log files.
+However, when debug is enabled, more information is written there.
+<p>
+<img src="../gifs/tabunix-panel.gif" alt="control panel">
+</td><td width=20>&#160;</td></tr></table>
+<a name="change_dns_server">&#160;</a>
+<h3>5.10. Change DNS server</h3>
+<table border=0><tr><td width=20>&#160;</td><td>Login as root.
+In the <b>Control Panel</b> window,
+double-click on <b>Network Configuration</b>.
+Then click on the <b>Names</b> button at the top.
+Edit the <b>Nameservers</b> multiline text box
+After you are finished, click on the <b>Save</b> button.
+Rebooting may be necessary.
+<p>
+<img src="../gifs/tabunix-dns.gif" alt="dns dialog">
+</td><td width=20>&#160;</td></tr></table>
+<a name="change_ip_address">&#160;</a>
+<h3>5.11. Change IP address</h3>
+<table border=0><tr><td width=20>&#160;</td><td>Login as root.
+In the <b>Control Panel</b> window,
+double-click on <b>Network Configuration</b>.
+Then click on the <b>Interfaces</b> button at the top.
+Click on the <b>eth0</b> line then the <b>Edit</b> button near the bottom.
+After you are finished, click on the <b>Save</b> button.
+Rebooting may be necessary.
+<p>
+<img src="../gifs/tabunix-if.gif" alt="ifconfig dialog">
+</td><td width=20>&#160;</td></tr></table>
+<a name="change_default_gateway">&#160;</a>
+<h3>5.12. Change default gateway</h3>
+<table border=0><tr><td width=20>&#160;</td><td>Login as root.
+In the <b>Control Panel</b> window,
+double-click on <b>Network Configuration</b>.
+Then click on the <b>Routing</b> button at the top.
+Click on the line you want to edit or delete.
+To add new routing information, click on the <b>Add</b> button.
+Rebooting may be necessary.
+<p>
+<img src="../gifs/tabunix-route.gif" alt="routing dialog">
+</td><td width=20>&#160;</td></tr></table>
+</td></tr></table>
+<!-- dxhr.htm start -->
+<br><img src="../gifs/tabunix-hr.gif" alt="------------------------------"><br>
+<!-- dxhr.htm finish -->
+<table border=0 width=660><tr><td align=top>&#160;&#160;&#160;&#160;<br></td><td><!-- dxhtml1_head: level 2, string Security -->
+<a name="security">&#160;</a>
+<a name="sect006">&#160;</a>
+<a href="#sect000">
+[to contents]</a>&#160;
+<a href="#sect007">
+[to next section]</a>&#160;
+<a href="#sect005">
+[to previous section]</a>&#160;
+<h2>6. Security</h2>
+Standard Linux servers are active on this computer.
+This includes FTP, telnet, http, ident, nntp and others.
+You should create a security policy for this computer
+and implement it appropriately.
+</td></tr></table>
+<!-- dxhr.htm start -->
+<br><img src="../gifs/tabunix-hr.gif" alt="------------------------------"><br>
+<!-- dxhr.htm finish -->
+<table border=0 width=660><tr><td align=top>&#160;&#160;&#160;&#160;<br></td><td><!-- dxhtml1_head: level 2, string Troubleshooting -->
+<a name="troubleshooting">&#160;</a>
+<a name="sect007">&#160;</a>
+<a href="#sect000">
+[to contents]</a>&#160;
+<a href="#sect006">
+[to previous section]</a>&#160;
+<h2>7. Troubleshooting</h2>
+The most useful way to determine the origin of any problems
+is to look at the log files in <b>c:\tableau\logs</b> on both
+the capture and server computers.
+<p>
+<b>Good luck!</b>
+</td></tr></table>
+<!-- dxhr.htm start -->
+<br><img src="../gifs/tabunix-hr.gif" alt="------------------------------"><br>
+<!-- dxhr.htm finish -->
+<table border=0 width=660><tr><td align=top>&#160;&#160;&#160;&#160;<br></td><td><!-- dxhtml1_head: level 1 -->
+
+<p>
+<a href="#sect000">
+[to contents]</a>&#160;
+<a href="#sect007">
+[to previous section]</a>&#160;
+<p>
+We welcome your comments and suggestions.
+Please direct them to:
+<a href="mailto:webmaster@dtack.com">webmaster@dtack.com</a>.
+<p>
+Copyright (c) 1996 Tableau Web, All Rights Reserved<br>
+P.O. Box 45195<br>
+Madison, WI 53744-5195<br>
+voice/fax: +1.608.767.4000<br>
+toll free: 1.800.221.7583<br>
+
+</td></tr></table>
+</body>
+</html>

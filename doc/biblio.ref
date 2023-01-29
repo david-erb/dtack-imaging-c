@@ -1,0 +1,1685 @@
+
+%L che79
+%K che79
+%A P.C. Chen
+%A T. Pavlidis
+%T Segmentation by Texture Using a Concurrence Matrix and a Split-and-Merge Algorithm
+%J Computer Graphics and Image Processing
+%D 1979
+%V 10
+%P 172-182
+
+%L ros78
+%K ros78
+%A Azriel Rosenfeld
+%T Iterative Methods in Image Analysis
+%J Pattern Recognition
+%D 1978
+%V 10
+%P 181-187
+
+%L sil88
+%K sil88
+%A J.F. Silverman
+%A D.B. Cooper
+%T Bayesian Clustering for Unsupervised Estimation of Surface and Texture Models
+%J IEEE Transactions on Pattern Analysis and Machine Intelligence
+%D Jul 1988
+%V 10
+%P 482-495
+
+%L tax89
+%K tax89
+%A Torfinn Taxt
+%A Patrick J. Flynn
+%A Anil K. Jain
+%T Segmentation of Document Images
+%J IEEE Transactions on Pattern Analysis and Machine Intelligence
+%D Dec 1989
+%V 11
+%N 12
+%P 1322-1329
+
+%L ric81
+%K ric81
+%A J.A. Richards
+%A D.A. Landgrebe
+%A P.H. Swain
+%T On the Accuracy of Pixel Relaxation Labeling
+%J IEEE Transactions on Systems, Man, and Cybernetics
+%D Apr 1981
+%V 11
+%N 4
+%P 303-309
+
+%L gage94
+%K gage94
+%A Philip Gage
+%T A New Algorithm for Data Compression
+%J C Users Journal
+%D Feb 1994
+%V 12
+%N 2
+%P 23-38
+
+%L pav80
+%K pav80
+%A Theo Pavlidis
+%A Yuh-Tay Liow
+%T Integrating Region Growing and Edge Detection
+%J IEEE Transactions on Pattern Analysis and Machine Intelligence
+%D Mar 1990
+%V 12
+%N 3
+%P 225-233
+
+%L pav90
+%K pav90
+%A T. Pavlidis
+%A Y.-T. Liow
+%T Integrating Region Growing and Edge Detection
+%J IEEE Transactions on Pattern Analysis and Machine Intelligence
+%D Mar 1990
+%V 12
+%N 3
+%P 225-233
+
+%L tre94
+%K tre94
+%A Anton Treuenfels
+%T An Efficient Flood Visit Algorithm
+%J C Users Journal
+%D Aug 1994
+%V 12
+%N 8
+%P 
+
+%L che80
+%K che80
+%A P.C. Chen
+%A T. Pavlidis
+%T Image Segmentation As An Estimation Problem
+%J Computer Graphics and Image Processing
+%D 1980
+%V 12
+%P 153-172
+
+%L che80
+%K che80
+%A P.C. Chen
+%A T. Pavlidis
+%T Image Segmentation As An Estimation Problem
+%J Computer Graphics and Image Processing
+%D 1980
+%V 12
+%P 153-172
+
+%L phi95
+%K phi95
+%A Dwayne Phillips
+%T Image Processing in C, Part 15: Basic Texture Operations
+%J C Users Journal
+%D Nov 1995
+%V 13
+%N 11
+%P 55-68
+
+%L wil95
+%K wil95
+%A K.B. Williams
+%T Magic Matrix Multiply
+%J C Users Journal
+%D Jun 1995
+%V 13
+%N 6
+%P 
+
+%L kan80
+%K kan80
+%A Takeo Kanade
+%T Region Segmentation: Signal vs Semantics
+%J Computer Graphics and Image Processing
+%D 1980
+%V 13
+%P 279-297
+
+%L fu81
+%K fu81
+%A K.S. Fu
+%A J.K. Mui
+%T A Survey on Image Segmentation
+%J Pattern Recognition
+%D 1981
+%V 13
+%P 3-16
+
+%L yam80
+%K yam80
+%A Hiromichi Yamamoto
+%T Some Experiments on LANDSAT Pixel Classification Using Relaxation Operators
+%J Computer Graphics and Image Processing
+%D 1980
+%V 13
+%P 31-45
+
+%L kno92
+%K kno92
+%A Keith T. Knox
+%T Error Image in Error Diffusion
+%J SPIE Image Processing Algorithms and Techniques
+%D 1992
+%V 1657
+%N III
+%P 268-279
+
+%L zha92
+%K zha92
+%A Yu Jin Zhang
+%A Jan J. Gerbrands
+%T Segmentation Evaluation Using Ultimate Measurement Accuracy
+%J SPIE Image Processing Algorithms and Techniques
+%D 1992
+%V 1657
+%N III
+%P 449-460
+
+%L ada94
+%K ada94
+%A Rolf Adams
+%A Leanne Bischof
+%T Seeded Region Growing
+%J IEEE Transactions on Pattern Analysis and Machine Intelligence
+%D Jun 1994
+%V 16
+%N 6
+%P 641-647
+
+%L chr95
+%K chr95
+%A William J. Christmas
+%A Josef Kittler
+%A Maria Petrou
+%T Structural Matching in Computer Vision Using Probabilistic Relaxation
+%J IEEE Transactions on Pattern Analysis and Machine Intelligence
+%D Aug 1995
+%V 17
+%N 8
+%P 749-764
+
+%L dan81b
+%K dan81b
+%A Per-Erik Danielsson
+%T Getting the Median Faster
+%J Computer Graphics and Image Processing
+%D 1981
+%V 17
+%P 71-78
+
+%L spa85b
+%K spa85b
+%A M. Spann
+%A R. Wilson
+%T A Quad-Tree Approach to Image Segmentation Which Combines Statistical an Spatial Information
+%J Pattern Recognition
+%D 1985
+%V 18
+%N 3
+%P 257-269
+
+%L won89
+%K won89
+%A Andrew K.C. Wong
+%A P.K. Sahoo
+%T A Gray-Level Threshold Selection Method Based on Maximum Entropy Principle
+%J IEEE Transactions on Systems, Man, and Cybernetics
+%D Jul 1989
+%V 19
+%N 4
+%P 866-871
+
+%L diz83
+%K diz83
+%A Silvano Di Zenzo
+%T Advances in Image Segmentation
+%J Image and Vision Computing
+%D Nov 1983
+%V 1
+%N 4
+%P 196-210
+
+%L mey90
+%K mey90
+%A F. Meyer
+%A S. Beucher
+%T Morphological Segmentation
+%J Journal of Visual Communications and Image Representation
+%D 1990
+%V 1
+%P 21-46
+
+%L bha87
+%K bha87
+%A Bir Bhanu
+%A Bahram A. Parvin
+%T Segmentation of Natural Scenes
+%J Pattern Recognition
+%D 1987
+%V 20
+%N 5
+%P 487-496
+
+%L dob94
+%K dob94
+%A B.P. Dobrin
+%A T. Viero
+%A M. Gabbouj
+%T Fast Watershed Algorithms: Analysis and Extension
+%J SPIE Nonlinear Image Processing V
+%D 1994
+%V 2180
+%P 209-220
+
+%L che94
+%K che94
+%A W.P. Cheung
+%A C.K. Lee
+%A K.C. Li
+%T Multithresholding: a Neural Approach
+%J SPIE Nonlinear Image Processing V
+%D 1994
+%V 2180
+%P 322-331
+
+%L bha86
+%K bha86
+%A Bir Bhanu
+%T Automatic Target Recognition: State of the Art Survey
+%J IEEE Transactions on Aerospace and Electronic Systems
+%D Jul 1986
+%V 22
+%N 4
+%P 364-379
+
+%L har83
+%K har83
+%A Robert M. Haralick
+%T An Interpretation for Probabilistic Relaxation
+%J Computer Vision, Graphics, and Image Processing
+%D 1983
+%V 22
+%P 388-395
+
+%L lim90
+%K lim90
+%A Young Won Lim
+%A Sang Uk Lee
+%T On the Color Image Segmentation Algorithm Based on the Thresholding and the Fuzzy c-Means Techniques
+%J Pattern Recognition
+%D 1990
+%V 23
+%N 9
+%P 935-952
+
+%L wes74
+%K wes74
+%A Joan S. Weszka
+%A R.N. Nagel
+%A Azriel Rosenfeld
+%T A Threshold Selection Technique
+%J t-c 
+%D 1974
+%V 23
+%P 1322-1326
+
+%L sun83
+%K sun83
+%A Chengjun Sun
+%A WIlliam G. Wee
+%T Neighboring Gray Level Dependence Matrix for Texture Classification
+%J Computer Vision, Graphics, and Image Processing
+%D 1983
+%V 23
+%P 341-352
+
+%L hor76
+%K hor76
+%A S.L. Horowitz
+%A T. Pavlidis
+%T Picture Segmentation by a Tree Traversal Algorithm
+%J Journal of the Association for Computing Machines
+%D 1976
+%V 23
+%P 368-388
+
+%L goe80
+%K goe80
+%A George A. Goehrig II
+%A Lynda G. Ledford
+%T Analysis of Image Segmentation Approaches with Emphasis on Performance Evaluation Criteria
+%J SPIE Smart Sensors
+%D 1980
+%V 252
+%N II
+%P 124-129
+
+%L dav77
+%K dav77
+%A Davis
+%A Rosenfeld
+%T Curve Segmentation by Relaxation Labeling
+%J IEEE Transactions on Computers
+%D 1977 
+%V 26
+%N 10
+%P 1053-1057
+
+%L bon93
+%K bon93
+%A G. Bongiovannie
+%A L. Cinque
+%A S. Levialdi
+%A A. Rosenfeld
+%T Image Segmentation by a Multiresolution Approach
+%J Pattern Recognition
+%D 1993
+%V 26
+%N 12
+%P 1845-1854
+
+%L hua79
+%K hua79
+%A Thomas S. Huang
+%A George J. Yang
+%A Gregory Y. Tang
+%T A Fast Two-Dimensional Median Filtering Algorithm
+%J IEEE Transactions on Acoustics, Speech, and Signal Processing
+%D Feb 1979
+%V 27
+%N 1
+%P 13-18
+
+%L har85
+%K har85
+%A Robert M. Haralick
+%A Linda G. Shapiro
+%T Image Segmentation Techniques
+%J Computer Vision, Graphics, and Image Processing
+%D 1985
+%V 29
+%P 100-132
+
+%L pel80
+%K pel80
+%A Shmuel Peleg
+%T A New Probabilistic Relaxation Scheme
+%J IEEE Transactions on Pattern Analysis and Machine Intelligence
+%D 1980
+%V 2
+%P 362-369
+
+%L ahm87
+%K ahm87
+%A M. Omair Ahmad
+%A Duraisamy Sundararajan
+%T A Fast Algorithm for Two-Dimensional Median Filtering
+%J t-c s
+%D Nov 1987
+%V 34
+%N 11
+%P 1364-1374
+
+%L mar86
+%K mar86
+%A Petros A. Maragos
+%A Ronald W. Schafer
+%T Morphological Skeleton Representation and Coding of Binary Images
+%J IEEE Transactions on Acoustics, Speech, and Signal Processing
+%D Oct 1986
+%V 34
+%N 5
+%P 1228-1244
+
+%L kit86b
+%K kit86b
+%A J. Kittler
+%A J. Foeglein
+%T On Compatibility and Support Functions in Probabilistic Relaxation
+%J Computer Vision, Graphics, and Image Processing
+%D 1986
+%V 34
+%P 257-267
+
+%L che86
+%K che86
+%A Fusak Cheevasuvit
+%A Henri Maitre
+%A Daniel Vidal-Madjar
+%T A Robust Method for Picture Segmentation Based on Split-and-Merge Procedure
+%J Computer Vision, Graphics, and Image Processing
+%D 1986
+%V 34
+%P 268-281
+
+%L juh91
+%K juh91
+%A Martti Juhola
+%A Jyrki Katajainen
+%A Timo Raita
+%T Comparison of Algorithms for Standard Median Filtering
+%J IEEE Transactions on Signal Processing
+%D Jan 1991
+%V 39
+%N 1
+%P 204-208
+
+%L ran91
+%K ran91
+%A Sanja Ranka
+%A Sartaj Sahni
+%T Efficient Serial and Parallel Algorithms for Median Filtering
+%J IEEE Transactions on Signal Processing
+%D Jun 1991
+%V 39
+%N 6
+%P 1462-1466
+
+%L dan81a
+%K dan81a
+%A Alan J. Danker
+%A Azriel Rosenfeld
+%T Blob Detection by Relaxation
+%J IEEE Transactions on Pattern Analysis and Machine Intelligence
+%D Jan 1981
+%V 3
+%N 1
+%P 79-92
+
+%L sam81
+%K sam81
+%A Hanan Samet
+%T An Algorithm for Converting Rasters into Quadtrees
+%J IEEE Transactions on Pattern Analysis and Machine Intelligence
+%D Jan 1981
+%V 3
+%N 1
+%P 93-95
+
+%L lev81
+%K lev81
+%A Martin D. Levine
+%A Samir I. Shaheen
+%T A Modular Computer Vision System for Picture Segmentation and Interpretation
+%J IEEE Transactions on Pattern Analysis and Machine Intelligence
+%D Sep 1981
+%V 3
+%N 5
+%P 540-556
+
+%L cha94
+%K cha94
+%A Yian-Leng Chang
+%A Xiaobo Li
+%T Adaptive Image Region-Growing
+%J IEEE Transactions on Image Processing
+%D Nov 1994
+%V 3
+%N 6
+%P 868-872
+
+%L jon88
+%K jon88
+%A Kenneth De Jong
+%T Learning with Genetic Algorithms: An Overview
+%J Machine Learning
+%D 1988
+%V 3
+%P 121-138
+
+%L koo85
+%K koo85
+%A Ja Young Koo
+%A Kyu Ho Park
+%A Myunghwan Kim
+%T Improving the Labeling Accuracy by a New Probabilistic Relaxation Labeling
+%J Pattern Recognition Letters
+%D Dec 1985
+%V 3
+%P 399-402
+
+%L zuc81
+%K zuc81
+%A Steven W. Zucker
+%A Yvan G. Leclerc
+%A John L. Mohammed
+%T Continuous Relaxation and Local Maxima Selection: Conditions for Equivalence
+%J IEEE Transactions on Pattern Analysis and Machine Intelligence
+%D Mar 1981
+%V 3
+%P 117-128
+
+%L ban93
+%K ban93
+%A J. Andrew Bangham
+%T Properties of a Series of Nested Median Filters, Namely the Data Sieve
+%J IEEE Transactions on Signal Processing
+%D Jan 1993
+%V 41
+%N 1
+%P 31-42
+
+%L lee93
+%K lee93
+%A Charng Long Lee
+%A Chein-Wei Jen
+%T Binary Partition Algorithms and VLSI Architecture for Median and Rank Order Filtering
+%J IEEE Transactions on Signal Processing
+%D Sep 1993
+%V 41
+%N 9
+%P 2937-2941
+
+%L sah88
+%K sah88
+%A P.K. Sahoo
+%A S. Soltani
+%A A.K.C. Wong
+%A Y.C. Chen
+%T A Survey of Thresholding Techniques
+%J Computer Vision, Graphics, and Image Processing
+%D 1988
+%V 41
+%P 233-260
+
+%L bha83
+%K bha83
+%A Bir Bhanu
+%T Evaluation of Automatic Target Recognition Algorithms
+%J spie-proc
+%D Aug 1983
+%V 435
+%P 18-27
+
+%L don82
+%K don82
+%A Philip A. Dondes
+%A Azriel Rosenfeld
+%T Pixel Classification Based on Gray Level and Local Busyness
+%J IEEE Transactions on Pattern Analysis and Machine Intelligence
+%D Jan 1982
+%V 4
+%N 1
+%P 79-84
+
+%L nag82
+%K nag82
+%A Paul A. Nagin
+%A Allen R. Hanson
+%A Edward M. Riseman
+%T Studies in Global and Local Histogram-Guided Relaxation Algorithms
+%J IEEE Transactions on Pattern Analysis and Machine Intelligence
+%D May 1982
+%V 4
+%N 3
+%P 263-277
+
+%L bha82
+%K bha82
+%A Bir Bhanu
+%A Olivier D. Faugeras
+%T Segmentation of Images Having Unimodal Distributions
+%J IEEE Transactions on Pattern Analysis and Machine Intelligence
+%D Jul 1982
+%V 4
+%N 4
+%P 408-419
+
+%L iye95
+%K iye95
+%A S. Sitharama Iyengar
+%A Weian Deng
+%T An Efficient Edge Detection Algorithm Using Relaxation Labeling Technique
+%J Pattern Recognition
+%D 1995
+%V 4
+%P 519-536
+
+%L lee90
+%K lee90
+%A Sang Uk Lee
+%A Seok Yoon Chung
+%T A Comparative Performance Study of Several Global Thresholding Techniques for Segmentation
+%J Computer Vision, Graphics, and Image Processing
+%D 1990
+%V 52
+%P 171-190
+
+%L che91
+%K che91
+%A S.-Y. Chen
+%A W.-C. Lin
+%A C.-T. Chen
+%T Split-and-Merge Image Segmentation Based on Localized Feature Analysis and Statistical Tests
+%J Computer Vision, Graphics, and Image Processing
+%D Sep 1991
+%V 53
+%N 5
+%P 456-475
+
+%L wu93
+%K wu93
+%A Zhenyu Wu
+%T Homogeneity Testing for Unlabeled Data: a Performance Evaluation
+%J Graphical Models and Image Processing
+%D Sep 1993
+%V 55
+%N 5
+%P 370-380
+
+%L gla93
+%K gla93
+%A C.A. Glasbey
+%T An Analysis of Histogram-Based Thresholding Algorithms
+%J Graphical Models and Image Processing
+%D Nov 1993
+%V 55
+%N 6
+%P 532-537
+
+%L ree93
+%K ree93
+%A Todd R. Reed
+%A J.M. Hans du Buf
+%T A Review of Recent Texture Segmentation and Feature Extraction Techniques
+%J Image Understanding
+%D May 1993
+%V 57
+%N 3
+%P 359-372
+
+%L gro83
+%K gro83
+%A William I. Grosky
+%A Ramesh Jain
+%T Optimal Quadtrees for Image Segmentation
+%J IEEE Transactions on Pattern Analysis and Machine Intelligence
+%D Jan 1983
+%V 5
+%N 1
+%P 77-83
+
+%L hum83
+%K hum83
+%A Robert A. Hummel
+%A Stephen W. Zucker
+%T On the Foundations of Relaxation Labeling Processes
+%J IEEE Transactions on Pattern Analysis and Machine Intelligence
+%D May 1983
+%V 5
+%N 3
+%P 267-287
+
+%L zuc76
+%K zuc76
+%A Steven W. Zucker
+%T Region Growing: Childhood and Adolescence
+%J Computer Graphics and Image Processing
+%D 1976
+%V 5
+%P 382-399
+
+%L abd79
+%K abd79
+%A Ikram E. Abdou
+%A William K. Pratt
+%T Quantitative Design and Evaluation of Enhancement/Threshold Edge Detectors
+%J Proceedings of the IEEE
+%D May 1979
+%V 67
+%N 5
+%P 753-763
+
+%L col79
+%K col79
+%A Guy B. Colemand
+%A Harry C. Andrews
+%T Image Segmentation by Clustering
+%J Proceedings of the IEEE
+%D May 1979
+%V 67
+%N 5
+%P 773-785
+
+%L pri84
+%K pri84
+%A Keith Price
+%T Image Segmentation: a Comment on Studies in Global and Local Histogram Guided Relaxation Algorithms
+%J IEEE Transactions on Pattern Analysis and Machine Intelligence
+%D 1984
+%V 6
+%N 2
+%P 247-249
+
+%L fre87
+%K fre87
+%A F. Freidlander
+%A F. Meyer
+%T A Sequential Algorithm for Detecting Watersheds in a Gray Level Image
+%J Acta Stereologica
+%D 1987
+%V 6
+%N 3
+%P 663-668
+
+%L ogo11
+%K ogo11
+%A L. O'Gorman
+%A A.C. Sanderson
+%T The Converging Squares Algorithm: An Efficient Method for Locating Peaks in Multidimensions
+%J IEEE Transactions on Pattern Analysis and Machine Intelligence
+%D May 1984
+%V 6
+%N 3
+%P 280-288
+
+%L sch77
+%K sch77
+%A Schachter
+%A Lev
+%A Zucker
+%A Rosenfeld
+%T An Application of Relaxation Methods to Edge Reinforcement
+%J IEEE Transactions on Systems, Man, and Cybernetics
+%D Nov 1977
+%V 7
+%N 11
+%P 813-816
+
+%L rus88
+%K rus88
+%A Russ
+%A Russ
+%T Improved Implementation of a Convex Segmentation Algorithm
+%J Acta Stereologica
+%D 1988
+%V 7
+%N 1
+%P 33-40
+
+%L lev85
+%K lev85
+%A Martin D. Levine
+%A Ahmed M. Nazif
+%T Dynamic Measurement of Computer Generated Image Segmentations
+%J IEEE Transactions on Pattern Analysis and Machine Intelligence
+%D Mar 1985
+%V 7
+%N 2
+%P 155-164
+
+%L wes78b
+%K wes78b
+%A Joan S. Weszka
+%A Azriel Rosenfeld
+%T Threshold Evaluation Techniques
+%J IEEE Transactions on Systems, Man, and Cybernetics
+%D Aug 1978
+%V 8
+%N 8
+%P 622-629
+
+%L ohl78
+%K ohl78
+%A R. Ohlander
+%A K. Price
+%A D.R. Reddy
+%T Picture Segmentation Using a Recursive Region Splitting Method
+%J Computer Graphics and Image Processing
+%D 1978
+%V 8
+%P 313-333
+
+%L zuc78
+%K zuc78
+%A Steven W. Zucker
+%A E.V. Krishnamurthy
+%A Robert L. Haar
+%T Relaxation Processes for Scene Labeling: Convergence, Speed, and Stability
+%J IEEE Transactions on Systems, Man, and Cybernetics
+%D 1978
+%V 8
+%P 41-48
+
+%L pel78
+%K pel78
+%A Shmuel Peleg
+%A Azriel Rosenfeld
+%T Determining Compatibility Coefficients for Curve Enhancement Relaxation Processes
+%J IEEE Transactions on Systems, Man, and Cybernetics
+%D 1978
+%V 8
+%P 548-555
+
+%L per87
+%K per87
+%A Arnulfo Perez
+%A Rafael C. Gonzalez
+%T An Iterative Thresholding Algorithm for Image Segmentation
+%J IEEE Transactions on Pattern Analysis and Machine Intelligence
+%D Nov 1987
+%V 9
+%N 6
+%P 742-751
+
+%L yas77
+%K yas77
+%A William A. Yasnoff
+%A Jack K. Mui
+%A James W. Bacus
+%T Error Measures for Scene Segmentation
+%J Pattern Recognition
+%D 1977
+%V 9
+%P 217-231
+
+%L doh85
+%K doh85
+%A M.F. Doherty
+%A M.T. Nogu
+%A C.M. Bjorklund
+%T Use of Compound Predicates in Split-and-Merge Segmentation
+%J Proceedings Computer Vision and Pattern Recognition 85
+%D 1985
+%P 659-661
+
+%L cho95
+%K cho95
+%A Choy et.al.
+%T New Single-Pass Algorithm for Parallel Thinning
+%J Image Understanding
+%D 1995
+%P 
+
+%L nic95
+%K nic95
+%A C.J. Nicol
+%T A Systolic Approach for Real Time Connected Complement Labeling
+%J Image Understanding
+%D 1995
+%P 
+
+%L kim95
+%K kim95
+%A Jihong Kim
+%A Yongmin Kim
+%T Efficient 2-D Convolution Algorithm with the Single-Data Multiple Kernel Approach
+%J Graphical Models and Image Processing
+%D 1995
+%P 
+
+%L lam92
+%K lam92
+%A Lam
+%A others
+%T Thinning Methodologies - A Comprehensive Survey
+%J IEEE Transactions on Pattern Analysis and Machine Intelligence
+%D 1992
+%P 
+
+%L tsa95
+%K tsa95
+%A Du-Ming Tsai
+%T A Fast Thresholding Selection Procedure for Multimodal and Unimodal Histograms
+%J Pattern Recognition Letters
+%D 1995
+%P 
+
+%L new95
+%K new95
+%A Newman
+%A Jain
+%T A Survey of Automated Visual Inspection
+%J Image Understanding
+%D 1995
+%P 
+
+%L ros95
+%K ros95
+%A Azriel Rosenfeld
+%T Image Analysis and Computer Vision: 1994
+%J Image Understanding
+%D 1995
+%P 
+
+%L dwy95
+%K dwy95
+%A Jerry Dwyer
+%T Quick and Portable Random Number Generators
+%J C Users Journal
+%D 1995
+%P 
+
+%L hsi89a
+%K hsi89a
+%A Hsiao
+%T Unsupervised Textured Image Segmentation Using Feature Smoothing and Probabilitic Relaxation Techniques
+%J unknown
+%D unknown
+%P 
+
+%L hsi89b
+%K hsi89b
+%A Hsiao
+%A Sawchuk
+%T Supervised Textured Image Segmentation Using Feature Smoothing and Probabilitic Relaxation Techniques
+%J unknown
+%D unknown
+%P 
+
+%L pun80
+%K pun80
+%A Thierry Pun
+%T A New Method for Gray-Level Picture Thresholding Using the Entropy of the Histogram
+%J unknown
+%D unknown
+%P 
+
+%L har73
+%K har73
+%A Haralick
+%A Shanmugam
+%A Dinstein
+%T Textural Features for Image Classification
+%J unknown
+%D unknown
+%P 
+
+%L wu82
+%K wu82
+%A Angela Y. Wu
+%A Tsai-Hong Hong
+%A Azriel Rosenfeld
+%T Threshold Selection Using Quadtrees
+%J unknown
+%D unknown
+%P 
+
+%L ots79
+%K ots79
+%A Nobuyuki Otsu
+%T A Threshold Selection Method from Gray-Level Histograms
+%J unknown
+%D unknown
+%P 
+
+%L ros81
+%K ros81
+%A Azriel Rosenfeld
+%A Russell C. Smith
+%T Thresholding Using Relaxation
+%J unknown
+%D unknown
+%P 
+
+%L tsa85
+%K tsa85
+%A Wen-Hsiang Tsai
+%T Moment-Preserving Thresholding: a New Approach
+%J unknown
+%D unknown
+%P 
+
+%L lum83
+%K lum83
+%A Lumia
+%A Shapiro
+%A Zuniga
+%T A New Connected Components Algorithm for Virtual Memory Computers
+%J unknown
+%D unknown
+%P 
+
+%L kap85
+%K kap85
+%A Kapur
+%A Sahoo
+%A Wong
+%T A New Method for Gray-Level Picture Thresholding Using the Entropy of the Histogram
+%J unknown
+%D unknown
+%P 
+
+%L kon89
+%K kon89
+%A Kong
+%A Rosenfeld
+%T Digital Topology: Introduction and Survey
+%J unknown
+%D unknown
+%P 
+
+%L arc85
+%K arc85
+%A Arcelli
+%A Di Baja
+%T A Width-Independent Fast Thinning Algorithm
+%J unknown
+%D unknown
+%P 
+
+%L sag89
+%K sag89
+%A Saghri
+%A Cheatham
+%A Habibi
+%T Image Quality Measure Based on a Human Visual System Model
+%J unknown
+%D unknown
+%P 
+
+%L nil92
+%K nil92
+%A Nill
+%A Bouzas
+%T Objective Image Quality Measure Derived from Digital Image Power Spectra
+%J unknown
+%D unknown
+%P 
+
+%L sny??
+%K sny??
+%A Snyder
+%T Image Quality: Measures and Visual Performance
+%J unknown
+%D unknown
+%P 
+
+%L ros94
+%K ros94
+%A Rosenfeld
+%T Image Analysis and Computer Vision: 1993
+%J unknown
+%D unknown
+%P 
+
+%L mil79
+%K mil79
+%A Milgram
+%A Herman
+%T Clustering Edge Values for Threshold Selection Intentionally
+%J unknown
+%D unknown
+%P 
+
+%L sez90
+%K sez90
+%A M. Ibrahim Sezan
+%T A Peak Detection Algorithm and Its Application to Histogram-Based Image Data Reduction
+%J unknown
+%D unknown
+%P 
+
+%L esc90
+%K esc90
+%A Reiner Eschbach
+%T Pulse-Density Modulation on Rastered Media: Combining Pulse-Density Modulation and Error Diffusion
+%J unknown
+%D unknown
+%P 
+
+%L goe87
+%K goe87
+%A Goertzel
+%A Thompson
+%T Digital Halftoning on the IBM 4250 Printer
+%J unknown
+%D unknown
+%P 
+
+%L esc87
+%K esc87
+%A Reiner Eschbach
+%A R. Hauck
+%T Binarization Using a Two-Dimensional Pulse-Density Modulation
+%J unknown
+%D unknown
+%P 
+
+%L hol80
+%K hol80
+%A Thomas M. Holladay
+%T An Optimum Algorithm for Halftone Generation for Displays and Hard Copies
+%J unknown
+%D unknown
+%P 
+
+%L bil83
+%K bil83
+%A C. Billotet-Hoffmann
+%A O. Bryngdahl
+%T On the Error Diffusion Technique for Electronic Halftoning
+%J unknown
+%D unknown
+%P 
+
+%L car91
+%K car91
+%A Wayne E. Carlson
+%T A Survey of Computer Graphics Image Encoding and Storage Formats
+%J unknown
+%D unknown
+%P 
+
+%L kol92
+%K kol92
+%A Kolpatzi
+%A Bouman
+%T Optimized Error Diffusion for Image Display
+%J unknown
+%D unknown
+%P 
+
+%L kol91
+%K kol91
+%A Kollias
+%A Anastassiou
+%T A Unified Neural Network Approach to Digital Image Halftoning
+%J unknown
+%D unknown
+%P 
+
+%L knu87
+%K knu87
+%A Donald E. Knuth
+%T Digital Halftones by Dot Diffusion
+%J unknown
+%D unknown
+%P 
+
+%L kit86a
+%K kit86a
+%A Kittler
+%A Illingworth
+%T Minimum Error Thresholding
+%J unknown
+%D unknown
+%P 
+
+%L kit85
+%K kit85
+%A Kittler
+%A Illingworth
+%T On Threshold Selection Using Clustering Criteria
+%J unknown
+%D unknown
+%P 
+
+%L kit85b
+%K kit85b
+%A Kittler
+%A Illingworth
+%T Threshold Selection Based on a Simple Image Statistic
+%J unknown
+%D unknown
+%P 
+
+%L kar89
+%K kar89
+%A Karaman
+%A Onural
+%T New Radix-2-Based Algorithm for Fast Median Filtering
+%J unknown
+%D unknown
+%P 
+
+%L kir79
+%K kir79
+%A Kirby
+%A Rosenfeld
+%T A Note on the Use of (Gray Level, Local Average Gray Level) Space As An Aid in Threshold Selection
+%J unknown
+%D unknown
+%P 
+
+%L bes86
+%K bes86
+%A Best
+%A Jain
+%T Segmentation through Symbolic Surface Descriptions
+%J unknown
+%D unknown
+%P 
+
+%L bri89
+%K bri89
+%A Brink
+%T Gray-Level Thresholding of Images Using a Correlation Criterion
+%J unknown
+%D unknown
+%P 
+
+%L bou85
+%K bou85
+%A Boukharouba
+%T An Amplitude Segmentation Method Based on the Distribution Function of an Image
+%J unknown
+%D unknown
+%P 
+
+%L abu89
+%K abu89
+%A Abutaleb
+%T Automatic Thresholding of Gray-Level Pictures Using Two-Dimensional Entropy 
+%J unknown
+%D unknown
+%P 
+
+%L ahu78
+%K ahu78
+%A Ahuja
+%A Rosenfeld
+%T A Note on the Use of Second-Order Gray-Level Statistics for Threshold Selection
+%J unknown
+%D unknown
+%P 
+
+%L avi87
+%K avi87
+%A aviad
+%T Semantic Thresholding
+%J unknown
+%D unknown
+%P 
+
+%L Ana92
+%K Ana92
+%A Analoui
+%T Model Based Halftoning Using Direct Binary Search
+%J unknown
+%D unknown
+%P 
+
+%L lev84
+%K lev84
+%A Martin D. Levine
+%A Ahmed M. Nazif
+%T An Optimal Set of Image Segmentation Rules
+%J Pattern Recognition Letters
+%D 1984
+%P 
+
+%L pun81
+%K pun81
+%A Pun
+%T Entropic Thresholding, A New Approach
+%J unknown
+%D unknown
+%P 
+
+%L mit85
+%K mit85
+%A Amar Mitiche
+%A J.K. Aggarwal
+%T Image Segmentation by Conventional and Information-Integrating Techniques: a Synopsis
+%J unknown
+%D unknown
+%P 
+
+%L mar88
+%K mar88
+%A K.V. Mardia
+%A T.J. Hainsworth
+%T A Spatial Thresholding Method for Image Segmentation
+%J unknown
+%D unknown
+%P 
+
+%L lee89
+%K lee89
+%A Jong-Sen Lee
+%A Mark C.K. Yang
+%T Threshold Selection Using Estimates from Truncated Normal Distribution
+%J unknown
+%D unknown
+%P 
+
+%L dav74
+%K dav74
+%A Larry S. Davis
+%A Azriel Rosenfeld
+%A Joan S. Weszka
+%T Region Extraction by Averaging and Thresholding
+%J unknown
+%D unknown
+%P 
+
+%L dun84
+%K dun84
+%A Stanley M. Dunn
+%A David Harwood
+%A Larry S. Davis
+%T Local Estimation of the Uniform Error Threshold
+%J unknown
+%D unknown
+%P 
+
+%L ekl79
+%K ekl79
+%A Jan-Olaf Eklundh
+%A Azriel Rosenfeld
+%T Peak Detection Using Difference Operators
+%J unknown
+%D unknown
+%P 
+
+%L jol91
+%K jol91
+%A Jean-Michel Jolion
+%A Peter Meer
+%A Samira Bataouche
+%T Robus Clustering with Applications in Computer Vision
+%J unknown
+%D unknown
+%P 
+
+%L par91
+%K par91
+%A J.R. Parker
+%T Gray Level Thresholding in Badly Illuminated Images
+%J unknown
+%D unknown
+%P 
+
+%L skl78
+%K skl78
+%A Jack Sklansky
+%T Image Segmentation and Feature Extraction
+%J unknown
+%D unknown
+%P 
+
+%L sny90
+%K sny90
+%A Wesley Snyder
+%A Griff Bilbro
+%A Ambalavaner Logenthiran
+%A Sarah Rajala
+%T Optimal Thresholding--A New Approach
+%J unknown
+%D unknown
+%P 
+
+%L sez89
+%K sez89
+%A M. Ibrahim Sezan
+%A A. Murat Tekalp
+%A Ralph Schaetzing
+%T Automatic Anatomically Selective Image Enhancement in Digital Chest Radiography
+%J unknown
+%D unknown
+%P 
+
+%L wan84
+%K wan84
+%A Shyuan Wang
+%A Robert M. Haralick
+%T Automatic Multithreshold Selection
+%J unknown
+%D unknown
+%P 
+
+%L wes79
+%K wes79
+%A Joan S. Weszka
+%A Azriel Rosenfeld
+%T Histogram Modification for Threshold Selection
+%J unknown
+%D unknown
+%P 
+
+%L wes78
+%K wes78
+%A Joan S. Weszka
+%T A Survey of Threshold Selection Techniques
+%J unknown
+%D unknown
+%P 
+
+%L whi83
+%K whi83
+%A J.M. White
+%A G.D. Rohrer
+%T Image Thresholding for Optical Character Recognition and Other Applications Requiring Character Image Extraction
+%J unknown
+%D unknown
+%P 
+
+%L wha91
+%K wha91
+%A R.J. Whatmough
+%T Automatic Threshold Selection from a Histogram Using the Exponential Hull
+%J unknown
+%D 1991
+%P 
+
+%L eng93
+%K eng93
+%A Ludger Engbert
+%T On-The-Fly Huffman Coding
+%J C Users Journal
+%D Dec 1993
+%V 11
+%N 12
+%P 
+
+%L pri93
+%K pri93
+%A Tim Prince
+%T Performance Tuning a Complex FFT
+%J C Users Journal
+%D 1993
+%P 
+
+%L vin91
+%K vin91
+%A L. Vincent
+%A P. Soille
+%T Watersheds in Digital Spaces: An Efficient Algorithm Based on Immersion Simulations
+%J IEEE Transactions on Pattern Analysis and Machine Intelligence
+%D 1991
+%V 13
+%P 583-598
+
+%L hor74
+%K hor74
+%A S.L. Horowitz
+%A T. Pavlidis
+%T Picture Segmentation by a Directed Split and Merge Procedure
+%J Proceedings 2nd International Joint Conference on Pattern Recognition
+%D Aug 1974
+%P 424-433
+
+%L ros76
+%K ros76
+%A Azriel Rosenfeld
+%A Robert A. Hummel
+%A Steven W. Zucker
+%T Scene Labeling by Relaxation Operations
+%J IEEE Transactions on Systems, Man, and Cybernetics
+%D Jun 1976
+%V 6
+%N 6
+%P 420-433
+
+%L pal93
+%K pal93
+%A Nikhil R. Pal
+%A Sankar K. Pal
+%T A Review on Image Segmentation Techniques
+%J Pattern Recognition
+%D 1993
+%V 26
+%N 9
+%P 1277-1294
+
+%L dub90
+%K dub90
+%A J.M.H. du Buf
+%A M. Kardan
+%A M. Spann
+%T Texture Feature Performance for Image Segmentation
+%J Pattern Recognition
+%D 1990
+%V 23
+%N 3
+%P 291-309
+
+%L ros82a
+%K ros82a
+%A Azriel Rosenfeld and Avinash C. Kak
+%T Digital Picture Processing
+%I Academic Press
+%D 1982
+%V 1
+%N 2
+
+%L ros82b
+%K ros82b
+%A Azriel Rosenfeld and Avinash C. Kak
+%T Digital Picture Processing
+%I Academic Press
+%D 1982
+%V 2
+%N 2
+
+%L new79
+%K new79
+%A William M. Newman and Robert F. Sproull
+%T Principles of Interactive Computer Graphics
+%I McGraw-Hill
+%D 1979
+%N 2
+
+%L bra95
+%K bra95
+%A Brase and Brase
+%T Understandable Statistics
+%I D.C. Heath
+%D 1995
+%N 5
+
+%L cas79
+%K cas79
+%A Kenneth R. Castleman
+%T Digital Image Processing
+%I Prentice-Hall
+%D 1979
+
+%L rog85
+%K rog85
+%A David F. Rogers
+%T Procedural Elements for Computer Graphics
+%I McGraw-Hill
+%D 1985
+
+%L fol82
+%K fol82
+%A James D. Foley and Andries van Dam
+%T Fundamentals of Interactive Computer Graphics
+%I Addison-Wesley
+%D 1982
+
+%L pre88
+%K pre88
+%A William H. Press and Brian P. Flannery and Saul A Teukolsky and William T. Vetterling
+%T Numerical Recipes in C
+%I Cambridge University Press
+%D 1988
+
+%L pra95
+%K pra95
+%A William K. Pratt
+%T PIKS Foundation C Programmer's Guide
+%I Manning
+%D 1995
+
+%L pra78
+%K pra78
+%A William K. Pratt
+%T Digital Image Processing
+%I Wiley
+%D 1978
+
+%L wat93
+%K wat93
+%A Christopher D. Watkins and Alberto Sadun and Stephen Marenka
+%T Modern Image Processing: Warping, Morphing, and Classical Techniques
+%I Academic Press
+%D 1993
+
+%L gon92
+%K gon92
+%A Raphael C. Gonzalez and Richard E. Woods
+%T Digital Image Processing
+%I Addison-Wesley
+%D 1992
+
+%L jai89
+%K jai89
+%A Anil K. Jain
+%T Fundamentals of Digital Image Processing
+%I Prentice-Hall
+%D 1989
+
+%L spa85a
+%K spa85a
+%A M. Wilson and R. Spann
+%T Image Segmentation and Uncertainty
+%I unknown
+%D 1985
+
+%L bha94
+%K bha94
+%A Bir Bhanu and Sungkee Lee
+%T Genetic Learning for Adaptive Image Segmentation
+%I Kluwer Academic Publishers
+%D 1994
+
+%L har80
+%K har80
+%A R. Haralick
+%T Consistent Labeling Problems in Pattern Recognition
+%I Plenum
+%D 1980
+
+%L pav77
+%K pav77
+%A T. Pavlidis
+%T Structure Pattern Recognition
+%I Springer
+%D 1977
+
+%L han80
+%K han80
+%A A.R. Hanson and E.M. Riseman and F.C. Glazer
+%E R. Haralick
+%T Edge Relaxation and Boundary Continuity
+%B Consistent Labeling Problems in Pattern Recognition
+%I Plenum
+%D 1980
+
+%L har00
+%K har00
+%A R.M. Haralick
+%E Morio Ono and Kendall Preston, Jr. and Azriel Rosenfeld
+%T Some Neighborhood Operators
+%B Real-Time/Parallel Computing Image Analysis
+%I Plenum
+%D 1900
+
+%L dta95a
+%K dta95a
+%A Dtack Imaging Software
+%T General Purpose Library Guide
+%I 
+%D 1995
+

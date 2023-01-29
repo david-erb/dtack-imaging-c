@@ -1,0 +1,12 @@
+/*..........................................................................
+| TITLE dtlicens
+| dtdoclist(filebase, title)
+|
+|_link dthome,inline [Dtack Home Page]
+| 
+|!dtdoclist(filebase, title)
+dxinclude(doc/policy/license.doc)
+| 
+| END
+ *..........................................................................*/
+

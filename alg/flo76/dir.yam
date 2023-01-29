@@ -1,0 +1,33 @@
+define(TOP, PRJ_ALG_TOP)
+
+define(mylibs,
+  prj_alg_lib(flo76)+
+  prj_base_libs(dthigh+dtlow)`'PRJ_LIBS)
+
+__proto(prj_alg_proto(flo76), flo76+cmd+test)
+
+__man(flo76, flo76)
+__doc(flo76, flo76)
+
+pushdef(`CCSHARABLE', `CCSHARABLE_ON')
+
+pushdef(`CCOPTIMIZE', `CCOPTIMIZE_HIGH')
+pushdef(`CCDEBUGGER', `CCDEBUGGER_OFF')
+
+__src(flo76)
+
+popdef(`CCDEBUGGER')
+popdef(`CCOPTIMIZE')
+
+__shlib(prj_alg_lib(flo76), flo76+cmd+test)
+
+__shexe(prj_alg_exe(flo76), main, mylibs)
+
+dnl __shexe(prj_alg_samp(flo76, 1a), samp_1a, mylibs)
+
+popdef(`CCSHARABLE')
+
+__finish
+
+
+

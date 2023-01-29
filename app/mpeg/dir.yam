@@ -1,0 +1,71 @@
+)define(TOP, UP2)
+define(DIR, app/mpeg)
+
+__usage(umdemo, umdemo)
+
+__proto(umdemo,
+  arg+
+  command+
+  control+
+  feed+
+  feedfifo+
+  feedipc+
+  feedkey+
+  fifo+
+  file+
+  frame+
+  keybd+
+  server+
+  status+
+  stuff+
+  tell)
+
+pushdef(`CCSHARABLE', `CCSHARABLE_ON')
+
+define(`__common', 
+  prj_lib(umdec)+
+  prj_lib(dtxchg)+
+  prj_lib(dtwinc)+
+  prj_lib(dtxchgs)+
+  prj_lib(dthigh)+
+  prj_lib(dtcolor)+
+  prj_lib(dtscr)+
+  prj_lib(dtcan)+
+  prj_lib(dthws)+
+  PRJ_KEYBD_LIB+
+  PRJ_SCR_LIBS+
+  PRJ_LIBS+
+  prj_fourth_lib(xv310a)+
+  prj_fourth_lib(mpegssg))
+
+__shlib(prj_lib(umdemox),
+  arg+
+  command+
+  control+
+  feed+
+  feedfifo+
+  feedipc+
+  feedkey+
+  fifo+
+  file+
+  frame+
+  keybd+
+  server+
+  status+
+  stuff+
+  tell+
+  libmain, , ,
+  __common,
+  PRJ_LOADS PRJ_KEYBD_LOADS PRJ_SCR_LOADS PRJ_MPEG_VIDEOPLEX_LOAD)
+
+popdef(`CCSHARABLE')
+
+__shexe(prj_test_bin(umdemo),   
+  umdemo, ,
+  prj_lib(umdemox)+
+  __common, 
+  PRJ_LOADS PRJ_KEYBD_LOADS PRJ_SCR_LOADS PRJ_MPEG_VIDEOPLEX_LOAD)
+
+__finish
+
+

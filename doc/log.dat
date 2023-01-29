@@ -1,0 +1,51 @@
+Tue Nov 14 13:10:55 1995	
+Wed Nov  8 08:46:01 1995	doc/urls.docdoc/log.dattest/win/dir.yam
+Tue Nov  7 08:51:09 1995	doc/log.datdoc/urls.docsource/low/ipcqnx4.ctest/high/dir.yam
+Fri Nov  3 09:25:44 1995	doc/log.datconfig/qw1.yamconfig/prj.yamserver/dir.yamserver/view_cmd.cinclude/dtview.hinclude/dtview.pserver/view_ipc.cserver/view1.cserver/view2.cserver/view_rpc.csource/low/enter.cdoc/todo.dat
+Wed Nov  1 14:00:16 1995	doc/log.datdoc/biblio.datsh/dtbiblio.shsh/dtbibfix.shsh/dtbibref.shdoc/biblio.ms
+Tue Oct 31 09:15:46 1995	source/low/memxmsif.csource/low/memxmslb.csource/low/memtxms.ctest/low/dttbpe.cdoc/log.dat
+Wed Oct 25 10:26:06 1995	doc/log.datfourth/xmsif/xmsif.csource/low/memxmslb.c
+Tue Oct 24 09:27:57 1995	include/dt.hinclude/dir.yaminclude/dtheap.hinclude/dtheap.psource/low/heapmon.csource/low/heap.csource/low/os_mem.cinclude/dtos.hsource/low/dir.yamsource/low/assert.cinclude/dtconfig.htest/dttmem2.cdoc/log.datserver/view_cmd.ctest/dttconv.ctest/dttcast.ctest/dttmem.c
+Fri Oct 20 11:10:13 1995	doc/log.datalg/lev85/total.c long cast in percent calculationdata/runadj.dat new 8-connected testsource/low/memxmsif.c rename
+Thu Oct 19 09:54:03 1995	doc/log.datsource/low/os_mem.c cast info.pentry to void *doc/todo.datinclude/dt.h dtxy is now signedsource/high/run.c 8-connected fixinclude/dt1d.h dt1d_i_t is dtxy_tdata/runadj.dat
+Wed Oct 18 14:26:26 1995	doc/log.datdata/dtlev85t.out
+Tue Oct 17 14:11:44 1995	doc/log.datdoc/todo.datsource/screen/scr_dbg.c format statement line 91source/low/os_mem.c do heap check on qw0 and qw1include/dtconfig.h #include <malloc.h> for qnx watcomtest/dttstr.c allow 3.46+000 toosource/high/run_len.c constant is long errorsource/screen/scr_cur.c wrong allocation
+Wed Oct 11 15:30:05 1995	doc/log.datsource/low/str.c signed/unsignedconfig/qnx4wat.yam
+Wed Oct  4 15:39:18 1995	alg/esc94/cmd.cinclude/dtesc94.pdoc/log.dat
+Wed Sep 20 15:26:16 1995	doc/log.dattest/dtt.ptest/util1.cdata/runadj.ctest/dttadj.ctest/dttrun.c
+Thu Sep 14 06:04:53 1995	doc/log.datdoc/todo.datsource/high/resample.cdata/dtlev85t.outtest/dttlog.c don't set image values by handsource/high/runf.c check ntypestest/dttrun.c don't do paged images
+Wed Sep 13 14:59:42 1995	doc/log.datsh/dtbiblio.shtest/dttcast.csource/high/run.c use UNMAPROW2 with DT_I at bottom, use iy not ytest/dttadj.c check for page image before doing runf
+Tue Sep 12 09:23:14 1995	doc/log.datdoc/todo.dattest/dttipc.c call to dtxchg_which()tool/lut.ctool/winstop.calg/lev85/test.c return value from sort()sh/dtrun.sh new line after endalg/lev85/lev85t.sh separate bin argument to dtrunsh/dtrun.shdata/dtlev85t.outsource/low/ntype_da.c signed char
+Thu Sep  7 12:02:02 1995	alg/lev85/lev85t.shdoc/log.datdata/dtlev85t.outsh/dttest.shdtutil/dtutil.csh/dtcheck.shbat/dtcheck.batalg/lev85/cmd.calg/lev85/util.cdoc/todo.datsh/dtcmd.sh new
+Wed Sep  6 10:00:41 1995	doc/log.datalg/lev85/label.c example changealg/lev85/util.c fix contribute_hist, example changedoc/todo.datalg/lev85/lev85.calg/lev85/total.c
+Fri Sep  1 14:50:52 1995	source/high/adj_fill.c use int not unsigneddoc/log.dat
+Wed Aug 16 16:13:32 1995	source/low/qnx4.c stderr for dbg outputdoc/log.dattool/regray.c handle constant input imagetest/dttresam.c newtest/high2.csource/high/resample.c round offtest/dir.yam
+Tue Aug 15 16:20:46 1995	doc/log.datsource/high/adj_floo.ctest/dttadj.ctiming/dell66/q950815.tim
+Thu Aug 10 15:16:13 1995	test/dttadj.cdoc/log.datdoc/todo.datsource/high/adj_floo.c newconfig/watcom.yamsource/high/dir.yam adj_fill does not benefit from optimization
+Mon Aug  7 13:21:34 1995	new resample
+Fri Aug  4 10:58:39 1995	source/screen/canbgi.csvgacc23.zipdoc/log.datdoc/todo.datbat/dtinst.batsource/high/conv_s.c names too longP90c making dt0 started 13:27, made to strip by 14:06P90c XMM error 0xa3 in XMMcopyfrom, 0xa2 in XMM//15/check.outsource/low/ipcqnx4.c
+Wed Aug  2 12:53:06 1995	source/high/convolve.csource/high/convolve.itest/dttconv.csource/high/gen_kern.c extern the name listtool/convolve.cdoc/log.cat
+Tue Aug  1 14:16:38 1995	doc/log.datsource/low/cstack.c check for NULL in mark2data/dice128.bpe size 13039 under new compressionsource/high/export.c pgm same as pnmdoc/todo.datsource/low/str.c %lu for printing b32source/high/arith.ctool/regray.c newtool/dir.yamtool/main.csource/high/stats.c paged imagestool/stats.c
+Mon Jul 31 08:42:45 1995	include/dtbpe.h BUFSIZE 4090source/high/convolve.c lxe = xe - kxsize + 1source/low/os_mem.c heapchk, heapwalk for DV0 and DW0, memavail for allsource/low/1d_cast.c
+Mon Jul 31 08:41:24 1995	
+Fri Jul 28 14:13:26 1995	doc/log.datdoc/todo.datsource/low/prj_dat.c winalt in prj defaults tableinclude/dtprj.htest/dttipc.c use winalt
+Wed Jul 19 05:38:19 1995	source/win/win_is.c fix start and count
+Tue Jul 18 07:01:59 1995	alg/lev85/label.c param_max + 1source/low/bpe.c DT_OBJECT debugalg/esc94/cmd.c set op before returning from parsebat/dtinst.bat DT_OLDPATH
+Mon Jul 17 10:52:57 1995	fourth/emsif/emsif.c malloc.h and faster copyfourth/xmsif/xmsif.c faster copydoc/log.datdoc/todo.datsh/dtgplot1.shsh/dtgplots.shtiming/dell66/q950717.timtest/dttxchg.c use param->screen not dummysh/dttiming.sh add dttlow bpe
+Fri Jul 14 06:28:27 1995	source/high/gen.c use indexed colorssource/high/cmp.c print pixel values at differencedata/dttxchg1.ti- regeneratedsource/high/adj.c improved fill algorithm as filbtest/dttadj.c testing for filb
+Thu Jul 13 14:52:25 1995	doc/log.datdoc/todo.datsource/screen/hwsqw4.c  comment out YELLOWinclude/dtimage.h improper datasize calculation for segmented images
+Tue Jul 11 07:28:55 1995	include/dtmem.h:include/dtimage.h:source/high/image.c: got rid of old mapping functionsmany: must include dtmem.h when using image mapping functionsdoc/log.dattest/util1.c dtmem.htest/raw.c dtmem.htest/dttcooc.c dtmem.htest/dttjoint.c dtmem.htest/dttstat.c dtmem.halg/lev85/label.c dtmem.halg/esc94/esc94.c dtmem.htiming/dell66/q950711.tim
+Sun Jul  9 08:22:41 1995	source/high/thresh.c: need to set lut[maxval], rearranged
+Sat Jul  8 11:09:02 1995	source/low/err.c: give error even if ctl == NULL,  exit if ctl == NULLsource/low/ipcsock.c: fix_endian, default DT_PRJ_SOCKET_PORT, catch sigpipesource/low/prj_dat.c: DT_PRJ_SOCKET_PORTsource/low/mem_conf.c: check for 0-length name, not NULLserver/dtview.c: -win param->win for title of introduction windowinclude/dtipc.h: DTIPC_FIXsource/win/win_is.c: use DTIPC_FIX, save d.len before fixingalg/sez90/cmd.c: rearrange plot and output sections
+Fri Jul  7 10:29:49 1995	sh/dtdx.sh: newalg/lev85/total.c: broke out from lev85.calg/lev85/lev85.c: new example d
+Mon Jul  3 12:40:25 1995	source/low/mem.c: swap guts in reallocsource/low/ipcsock.c: initialized rc in register
+Wed Jun 28 09:34:06 1995	dtutil/dtutil.c: DTDEPEND, don't forget to make1  depssource/low/mem_std.c: separate mapped allocationneed to yam qw0 for dttool_lut
+Mon Jun 26 12:06:34 1995	config/qw1.yam: took out NONO totally
+Fri Jun 23 07:03:25 1995	source/low/hist.csource/high/img_hist.c
+Tue Jun 20 14:06:45 1995	source/low/mem.c: better realloc message, complain if form factor changessource/low/stack.c: unsigned int and long in DT_MIN's, new strategy for a_sizedoc/todo: absolute path
+Mon Jun 19 07:04:47 1995	fourth/emsif/emsif.c: hugefourth/xmsif/xmsif.c: huge
+Sat Jun 17 05:10:54 1995	dttlow:  malloc-able at program start: dt0 128K, dv0 48Kdttmem: standalonedttlow:  malloc-able at program start: dt0 258K, dv0 139Kdtthigh: malloc-able at program start: dt0 128K, dv0 4Kdttmem: standalone 
+Fri Jun 16 11:03:59 1995	config/prj.yam: dv0 targetconfig/microsoft.yam:  __objone in lib listconfig/dv0.yam: MAKE_dv0config/def.yam: add DOC for doc output
+Wed Jun 21 05:54:03 1995	
+Mon Jun 19 07:02:22 1995	Error [35]: General Protection Fault in DD30K.EXE at 0088:1f2ecode=0000 ss=0128 ds=03a0 es=03a0ax=00ab bx=e340 cx=0169 dx=001a sp=7e08 bp=7e1cc si=ae9c di=94b2
+Thu Jun 15 05:07:01 1995	int becomes long in dtrunf_reassigndttmem2: used DTMEMRAM_PAGESIZE_DEFAULTinterdia: wrong logic around debug/yielddttest.sh: dt_lev85 as name printed

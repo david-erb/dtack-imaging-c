@@ -1,0 +1,43 @@
+/*
+tabgrab @configfile.arg  (use -help for more info)
+Copyright (C) 2000 Dtack, Inc., All Rights Reserved
+
+SYNOPSIS
+  tabgrab @configfile  (use -help for more info)
+
+SUMMARY
+  Grab frames and stuff them into file or shared memory.  All 
+  args come from config file, please see the example.  
+*/
+static const char usage[291] = {
+'t', 'a', 'b', 'g', 'r', 'a', 'b', ' ', '@', 'c', 
+'o', 'n', 'f', 'i', 'g', 'f', 'i', 'l', 'e', '.', 
+'a', 'r', 'g', ' ', ' ', '(', 'u', 's', 'e', ' ', 
+'-', 'h', 'e', 'l', 'p', ' ', 'f', 'o', 'r', ' ', 
+'m', 'o', 'r', 'e', ' ', 'i', 'n', 'f', 'o', ')', 
+'\n','C', 'o', 'p', 'y', 'r', 'i', 'g', 'h', 't', 
+' ', '(', 'C', ')', ' ', '2', '0', '0', '0', ' ', 
+'D', 't', 'a', 'c', 'k', ',', ' ', 'I', 'n', 'c', 
+'.', ',', ' ', 'A', 'l', 'l', ' ', 'R', 'i', 'g', 
+'h', 't', 's', ' ', 'R', 'e', 's', 'e', 'r', 'v', 
+'e', 'd', '\n','\n','S', 'Y', 'N', 'O', 'P', 'S', 
+'I', 'S', '\n',' ', ' ', 't', 'a', 'b', 'g', 'r', 
+'a', 'b', ' ', '@', 'c', 'o', 'n', 'f', 'i', 'g', 
+'f', 'i', 'l', 'e', ' ', ' ', '(', 'u', 's', 'e', 
+' ', '-', 'h', 'e', 'l', 'p', ' ', 'f', 'o', 'r', 
+' ', 'm', 'o', 'r', 'e', ' ', 'i', 'n', 'f', 'o', 
+')', '\n','\n','S', 'U', 'M', 'M', 'A', 'R', 'Y', 
+'\n',' ', ' ', 'G', 'r', 'a', 'b', ' ', 'f', 'r', 
+'a', 'm', 'e', 's', ' ', 'a', 'n', 'd', ' ', 's', 
+'t', 'u', 'f', 'f', ' ', 't', 'h', 'e', 'm', ' ', 
+'i', 'n', 't', 'o', ' ', 'f', 'i', 'l', 'e', ' ', 
+'o', 'r', ' ', 's', 'h', 'a', 'r', 'e', 'd', ' ', 
+'m', 'e', 'm', 'o', 'r', 'y', '.', ' ', ' ', 'A', 
+'l', 'l', ' ', '\n',' ', ' ', 'a', 'r', 'g', 's', 
+' ', 'c', 'o', 'm', 'e', ' ', 'f', 'r', 'o', 'm', 
+' ', 'c', 'o', 'n', 'f', 'i', 'g', ' ', 'f', 'i', 
+'l', 'e', ',', ' ', 'p', 'l', 'e', 'a', 's', 'e', 
+' ', 's', 'e', 'e', ' ', 't', 'h', 'e', ' ', 'e', 
+'x', 'a', 'm', 'p', 'l', 'e', '.', ' ', ' ', '\n',
+'\0'
+};

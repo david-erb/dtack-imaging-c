@@ -1,0 +1,5 @@
+set +x
+touch /usr/erb/prj/dtqw1/tmp/xxx
+ls -lt /usr/erb/prj/dt/tmp/xxx /usr/erb/prj/dtqw1/tmp/xxx
+date
+echo $TZ

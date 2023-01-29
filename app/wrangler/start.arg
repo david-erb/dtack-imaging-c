@@ -1,0 +1,5 @@
+# these are for uclient
+
+-conn rocket,0:5770 
+-input "start?sessid=1&client=3.4.5.6&limit=500&streamid=room1"
+-D reply

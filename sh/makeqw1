@@ -1,0 +1,1 @@
+make -f qw1.mak SRC=/usr/erb/prj/dt OUT=/usr/erb/prj/dtqw1 $@

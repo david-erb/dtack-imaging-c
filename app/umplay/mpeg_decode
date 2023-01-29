@@ -1,0 +1,42 @@
+# 19970218 modified new arguments for umplay, David Erb
+# 19970203 modified to probe for videoplex, David Erb
+
+slay -fQ -sSIGKILL mpeg_decadmin
+slay -fQ -sSIGKILL mpeg_deccom
+slay -fQ -sSIGKILL mpeg_decdata
+slay -fQ -sSIGKILL umplay
+
+decname=MPEG$NODE
+if test $# -eq 1
+then
+    decname=$1
+fi
+
+# hint: for software decoding use -variant ssg,raw,[IPB]
+# hint: for more debug try: -D usr1+usr2+command+alimits 
+
+/user/local/umplay \
+  -op probe -variant vp                 # probe for videoplex
+rc=$?
+
+if [ $rc -eq 0 ]                        # videoplex hardware found?
+then
+  /user/local/umplay \
+    -op fifo \
+    -connect qnx,/nci/umplay$NODE \
+    -path /fifo/decfifo+/fifo/comfifo+/fifo/repfifo \
+    -variant vp \
+    -config /CONFIG/umplay.cfg \
+    -D usr1 &
+else                                    # videoplex hardware not found?
+  rdos "uplay e:decfifo" +k -V \
+    Dc=/home/univision/dos-c/mpegdec \
+    e=/fifo/ &
+fi
+
+sleep 2
+#mpeg_key 80 > /fifo/idlefifo &
+mpeg_decadmin $decname /fifo/decfifo /fifo/comfifo /fifo/repfifo 80  -c &
+slay -P20 rdos
+#slay -P20 mpeg_key
+slay -P20 mpeg_decadmin

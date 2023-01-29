@@ -1,0 +1,15 @@
+-config /f/1/usr/erb/prj/dt/app/tableau/config
+
+-input bt,/dev/bttv,320,240
+ 
+-path /video
+-screen roll,unit1
+-dz 100
+
+-D usr1+schedule+async
+
+-op "stamp,%d %b %y %H:%M:%S"
+
+-variant jpeg
+
+

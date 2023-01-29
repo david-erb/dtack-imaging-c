@@ -1,0 +1,1880 @@
+WATCOM Linker Version 9.5
+Copyright by WATCOM International Corp. 1985, 1993. All rights reserved.
+Created on:       96/08/20 09:14:01
+Executable Image: /usr/erb/prj/dtqw1/bin/udicom
+creating a QNX 386 executable
+
+
+                        +------------+
+                        |   Groups   |
+                        +------------+
+
+Group                           Address              Size
+=====                           =======              ====
+
+DGROUP                          00097000             00013070
+
+
+
+                        +--------------+
+                        |   Segments   |
+                        +--------------+
+
+Segment                Class          Group          Address         Size
+=======                =====          =====          =======         ====
+
+BEGTEXT                CODE                          00044000        00000006
+_TEXT                  CODE                          00044008        00052c45
+_NULL                  BEGDATA        DGROUP         00097000        00000020
+_AFTERNULL             BEGDATA        DGROUP         00097020        00000002
+CONST                  DATA           DGROUP         00097024        000079d4
+CONST2                 DATA           DGROUP         0009e9f8        00000c70
+_DATA                  DATA           DGROUP         0009f668        00008048
+XIB                    DATA           DGROUP         000a76b0        00000000
+XI                     DATA           DGROUP         000a76b0        00000042
+XIE                    DATA           DGROUP         000a76f2        00000000
+YIB                    DATA           DGROUP         000a76f2        00000000
+YI                     DATA           DGROUP         000a76f2        00000012
+YIE                    DATA           DGROUP         000a7704        00000000
+DATA                   DATA           DGROUP         000a7704        00000000
+_BSS                   BSS            DGROUP         000a7704        00001160
+STACK                  STACK          DGROUP         000a8870        00001800
+
+
+                        +----------------+
+                        |   Memory Map   |
+                        +----------------+
+
+* = unreferenced symbol
++ = symbol only referenced locally
+
+Address        Symbol
+=======        ======
+
+Module: /usr/erb/prj/dtqw1/app/dicom3/udicom.o(/d/2/prj/dt/app/dicom3/udicom.c)
+0004a8a8       streambuf near * near ios::rdbuf() const
+0004a860       int near ios::good() const
+0004a82c       int near ios::eof() const
+0004a7dc+      long near ios::setf( long, long )
+0004a7a4       ostream near & near ostream::operator <<( short )
+0004a768       ostream near & near ostream::operator <<( short unsigned )
+0004a720+      int near filebuf::is_open() const
+0004a6dc       filebuf near * near fstreambase::rdbuf() const
+0004a674       strstreambuf near * near strstreambase::rdbuf() const
+0004a63c       char near * near ostrstream::str()
+0004a5f4       int near DC3TransferSyntax::isValid()
+0004a5c4       void near DC3istream::SetTransferSyntax( DC3TransferSyntax near * )
+0004a584       near DC3istream::DC3istream()
+0004a528       near DC3istream::~DC3istream()
+0004a4f8       void near DC3ostream::SetTransferSyntax( DC3TransferSyntax near * )
+0004a4b8       near DC3ostream::DC3ostream()
+0004a45c       near DC3ostream::~DC3ostream()
+0004a41c       near DC3Tag::DC3Tag()
+0004a3d8       near DC3Tag::DC3Tag( short unsigned, short unsigned )
+0004a390       near DC3Tag::DC3Tag( DC3Tag const near & )
+0004a350       void near DC3Tag::operator =( DC3Tag const near & )
+0004a2e0       int near DC3Tag::operator ==( DC3Tag const near & )
+0004a258       int near DC3Tag::operator <=( DC3Tag const near & )
+0004a210+      DC3Tag near DC3TagFromConstants( short unsigned, short unsigned )
+0004a1b4       near DC3Attribute::~DC3Attribute()
+0004a180       DC3Tag near DC3Attribute::GetTag()
+0004a150       short unsigned near DC3Attribute::GetValueMultiplicity()
+0004a128       void near DC3Attribute::writedata( DC3ostream near &, int )
+0004a104       void near DC3Attribute::readdatastart()
+0004a0dc       void near DC3Attribute::readdatanext( long unsigned, char unsigned near * )
+0004a0ac       char const near * near DC3Attribute::ValueRepresentation()
+0004a088       void near DC3Attribute::first()
+0004a064       void near DC3Attribute::next()
+0004a034       int near DC3Attribute::ismore()
+0004a004       short unsigned near DC3Attribute::ValueUint16()
+00049fd4       int near DC3Attribute::IsNumeric()
+00049fa4       long unsigned near DC3Attribute::ValueXint()
+00049f7c       void near DC3Attribute::AddXint( long unsigned )
+00049f4c       int near DC3Attribute::IsString()
+00049f1c       int near DC3Attribute::IsNumericString()
+00049eec       char const near * near DC3Attribute::ValueString()
+00049ebc       char near * near DC3Attribute::ValueStringCopy()
+00049e8c       char near * near DC3Attribute::ValueNumericStringCopy()
+00049e64       void near DC3Attribute::AddStringCopy( char const near * )
+00049e20       near DC3ListofStrings::DC3ListofStrings()
+00049ddc       void near DC3ListofStrings::first()
+00049da0       void near DC3ListofStrings::next()
+00049d54       int near DC3ListofStrings::ismore()
+00049cec       char const near * near DC3ListofStrings::value()
+00049cb8       short unsigned near DC3ListofStrings::GetValueMultiplicity()
+00049c7c       .PREFIX_DATA.W?put$:DC3StringAttribute$n(rn$ostream$$)v
+00049c24       void near DC3StringAttribute::put( ostream near & )
+00049bf0       void near DC3StringAttribute::putvalue( ostream near & )
+00049bb0       void near DC3StringAttribute::write( DC3ostream near & )
+00049b80       void near DC3StringAttribute::first()
+00049b50       void near DC3StringAttribute::next()
+00049b18       int near DC3StringAttribute::ismore()
+00049ad0       void near DC3StringAttribute::add( char const near * )
+00049aa0       int near DC3StringAttribute::IsString()
+00049a68       char const near * near DC3StringAttribute::ValueString()
+00049a00       char near * near DC3StringAttribute::ValueStringCopy()
+000499c4       char near * near DC3StringAttribute::ValueNumericStringCopy()
+00049994       void near DC3StringAttribute::AddStringCopy( char const near * )
+00049918       long unsigned near DC3StringAttribute::ValueXint()
+000498e0       short unsigned near DC3StringAttribute::GetValueMultiplicity()
+000498a4       .PREFIX_DATA.W?ValueRepresentation$:DC3ApplicationEntity$n()pnxua
+00049874       char const near * near DC3ApplicationEntity::ValueRepresentation()
+00049838       .PREFIX_DATA.W?ValueRepresentation$:DC3AgeString$n()pnxua
+00049808       char const near * near DC3AgeString::ValueRepresentation()
+000497d8       int near DC3AgeString::IsNumericString()
+0004979c       .PREFIX_DATA.W?ValueRepresentation$:DC3CodeString$n()pnxua
+0004976c       char const near * near DC3CodeString::ValueRepresentation()
+00049730       .PREFIX_DATA.W?ValueRepresentation$:DC3DateString$n()pnxua
+00049700       char const near * near DC3DateString::ValueRepresentation()
+000496c4       .PREFIX_DATA.W?ValueRepresentation$:DC3DecimalString$n()pnxua
+00049694       char const near * near DC3DecimalString::ValueRepresentation()
+00049664       int near DC3DecimalString::IsNumericString()
+00049628       .PREFIX_DATA.W?ValueRepresentation$:DC3DateTimeString$n()pnxua
+000495f8       char const near * near DC3DateTimeString::ValueRepresentation()
+000495bc       .PREFIX_DATA.W?ValueRepresentation$:DC3IntegerString$n()pnxua
+0004958c       char const near * near DC3IntegerString::ValueRepresentation()
+0004955c       int near DC3IntegerString::IsNumericString()
+00049520       .PREFIX_DATA.W?ValueRepresentation$:DC3LongString$n()pnxua
+000494f0       char const near * near DC3LongString::ValueRepresentation()
+000494b4       .PREFIX_DATA.W?ValueRepresentation$:DC3LongText$n()pnxua
+00049484       char const near * near DC3LongText::ValueRepresentation()
+00049448       .PREFIX_DATA.W?ValueRepresentation$:DC3PersonName$n()pnxua
+00049418       char const near * near DC3PersonName::ValueRepresentation()
+000493dc       .PREFIX_DATA.W?ValueRepresentation$:DC3ShortString$n()pnxua
+000493ac       char const near * near DC3ShortString::ValueRepresentation()
+00049370       .PREFIX_DATA.W?ValueRepresentation$:DC3ShortText$n()pnxua
+00049340       char const near * near DC3ShortText::ValueRepresentation()
+00049304       .PREFIX_DATA.W?ValueRepresentation$:DC3TimeString$n()pnxua
+000492d4       char const near * near DC3TimeString::ValueRepresentation()
+00049260       void near DC3UIString::write( DC3ostream near & )
+0004925c       .PREFIX_DATA.W?ValueRepresentation$:DC3UIString$n()pnxua
+0004922c       char const near * near DC3UIString::ValueRepresentation()
+000491c4       near <DC3Tag near >::DC3ListofAThings::~DC3ListofAThings()
+00049190       short unsigned near <DC3Tag near >::DC3ListofAThings::GetValueMultiplicity()
+0004918c       .PREFIX_DATA.W?ValueRepresentation$:DC3AttributeTag$n()pnxua
+0004915c       char const near * near DC3AttributeTag::ValueRepresentation()
+00049124       short unsigned near DC3AttributeTag::GetValueMultiplicity()
+000490bc       near <long near >::DC3ListofNThings::~DC3ListofNThings()
+00049078       void near <long near >::DC3ListofNThings::first()
+0004903c       void near <long near >::DC3ListofNThings::next()
+00048ff0       int near <long near >::DC3ListofNThings::ismore()
+00048f98       long near <long near >::DC3ListofNThings::value()
+00048f68       int near <long near >::DC3ListofNThings::IsNumeric()
+00048f34       long unsigned near <long near >::DC3ListofNThings::ValueXint()
+00048e90       void near <long near >::DC3ListofNThings::AddXint( long unsigned )
+00048e0c       char near * near <long near >::DC3ListofNThings::ValueNumericStringCopy()
+00048dd8       short unsigned near <long near >::DC3ListofNThings::GetValueMultiplicity()
+00048dd4       .PREFIX_DATA.W?ValueRepresentation$:DC3SignedLong$n()pnxua
+00048da4       char const near * near DC3SignedLong::ValueRepresentation()
+00048d74       void near DC3SignedLong::first()
+00048d44       void near DC3SignedLong::next()
+00048d0c       int near DC3SignedLong::ismore()
+00048cd4       int near DC3SignedLong::IsNumeric()
+00048c9c       long unsigned near DC3SignedLong::ValueXint()
+00048c68       void near DC3SignedLong::AddXint( long unsigned )
+00048c30       char near * near DC3SignedLong::ValueNumericStringCopy()
+00048bf8       short unsigned near DC3SignedLong::GetValueMultiplicity()
+00048b90       near <short near >::DC3ListofNThings::~DC3ListofNThings()
+00048b4c       void near <short near >::DC3ListofNThings::first()
+00048b10       void near <short near >::DC3ListofNThings::next()
+00048ac4       int near <short near >::DC3ListofNThings::ismore()
+00048a6c       short near <short near >::DC3ListofNThings::value()
+00048a3c       int near <short near >::DC3ListofNThings::IsNumeric()
+00048a08       long unsigned near <short near >::DC3ListofNThings::ValueXint()
+00048964       void near <short near >::DC3ListofNThings::AddXint( long unsigned )
+000488e0       char near * near <short near >::DC3ListofNThings::ValueNumericStringCopy()
+000488ac       short unsigned near <short near >::DC3ListofNThings::GetValueMultiplicity()
+000488a8       .PREFIX_DATA.W?ValueRepresentation$:DC3SignedShort$n()pnxua
+00048878       char const near * near DC3SignedShort::ValueRepresentation()
+00048848       void near DC3SignedShort::first()
+00048818       void near DC3SignedShort::next()
+000487e0       int near DC3SignedShort::ismore()
+000487a8       int near DC3SignedShort::IsNumeric()
+00048770       long unsigned near DC3SignedShort::ValueXint()
+0004873c       void near DC3SignedShort::AddXint( long unsigned )
+00048704       char near * near DC3SignedShort::ValueNumericStringCopy()
+000486cc       short unsigned near DC3SignedShort::GetValueMultiplicity()
+00048664       near <long unsigned near >::DC3ListofNThings::~DC3ListofNThings()
+00048620       void near <long unsigned near >::DC3ListofNThings::first()
+000485e4       void near <long unsigned near >::DC3ListofNThings::next()
+00048598       int near <long unsigned near >::DC3ListofNThings::ismore()
+00048540       long unsigned near <long unsigned near >::DC3ListofNThings::value()
+00048510       int near <long unsigned near >::DC3ListofNThings::IsNumeric()
+000484dc       long unsigned near <long unsigned near >::DC3ListofNThings::ValueXint()
+00048438       void near <long unsigned near >::DC3ListofNThings::AddXint( long unsigned )
+000483b4       char near * near <long unsigned near >::DC3ListofNThings::ValueNumericStringCopy()
+00048380       short unsigned near <long unsigned near >::DC3ListofNThings::GetValueMultiplicity()
+0004837c       .PREFIX_DATA.W?ValueRepresentation$:DC3UnsignedLong$n()pnxua
+0004834c       char const near * near DC3UnsignedLong::ValueRepresentation()
+0004831c       void near DC3UnsignedLong::first()
+000482ec       void near DC3UnsignedLong::next()
+000482b4       int near DC3UnsignedLong::ismore()
+0004827c       int near DC3UnsignedLong::IsNumeric()
+00048244       long unsigned near DC3UnsignedLong::ValueXint()
+00048210       void near DC3UnsignedLong::AddXint( long unsigned )
+000481d8       char near * near DC3UnsignedLong::ValueNumericStringCopy()
+000481a0       short unsigned near DC3UnsignedLong::GetValueMultiplicity()
+00048138       near <short unsigned near >::DC3ListofNThings::~DC3ListofNThings()
+000480f4       void near <short unsigned near >::DC3ListofNThings::first()
+000480b8       void near <short unsigned near >::DC3ListofNThings::next()
+0004806c       int near <short unsigned near >::DC3ListofNThings::ismore()
+00048014       short unsigned near <short unsigned near >::DC3ListofNThings::value()
+00047fe4       int near <short unsigned near >::DC3ListofNThings::IsNumeric()
+00047fac       long unsigned near <short unsigned near >::DC3ListofNThings::ValueXint()
+00047f08       void near <short unsigned near >::DC3ListofNThings::AddXint( long unsigned )
+00047e80       char near * near <short unsigned near >::DC3ListofNThings::ValueNumericStringCopy()
+00047e4c       short unsigned near <short unsigned near >::DC3ListofNThings::GetValueMultiplicity()
+00047e48       .PREFIX_DATA.W?ValueRepresentation$:DC3UnsignedShort$n()pnxua
+00047e18       char const near * near DC3UnsignedShort::ValueRepresentation()
+00047de0       short unsigned near DC3UnsignedShort::ValueUint16()
+00047db0       void near DC3UnsignedShort::first()
+00047d80       void near DC3UnsignedShort::next()
+00047d48       int near DC3UnsignedShort::ismore()
+00047d10       int near DC3UnsignedShort::IsNumeric()
+00047cd8       long unsigned near DC3UnsignedShort::ValueXint()
+00047ca4       void near DC3UnsignedShort::AddXint( long unsigned )
+00047c6c       char near * near DC3UnsignedShort::ValueNumericStringCopy()
+00047c34       short unsigned near DC3UnsignedShort::GetValueMultiplicity()
+00047c30       .PREFIX_DATA.W?ValueRepresentation$:DC3UnspecifiedLong$n()pnxua
+00047c00       char const near * near DC3UnspecifiedLong::ValueRepresentation()
+00047bd0       void near DC3UnspecifiedLong::first()
+00047ba0       void near DC3UnspecifiedLong::next()
+00047b68       int near DC3UnspecifiedLong::ismore()
+00047b30       int near DC3UnspecifiedLong::IsNumeric()
+00047af8       long unsigned near DC3UnspecifiedLong::ValueXint()
+00047ac4       void near DC3UnspecifiedLong::AddXint( long unsigned )
+00047a8c       char near * near DC3UnspecifiedLong::ValueNumericStringCopy()
+00047a54       short unsigned near DC3UnspecifiedLong::GetValueMultiplicity()
+00047a50       .PREFIX_DATA.W?ValueRepresentation$:DC3UnspecifiedShort$n()pnxua
+00047a20       char const near * near DC3UnspecifiedShort::ValueRepresentation()
+000479f0       void near DC3UnspecifiedShort::first()
+000479c0       void near DC3UnspecifiedShort::next()
+00047988       int near DC3UnspecifiedShort::ismore()
+00047950       int near DC3UnspecifiedShort::IsNumeric()
+00047918       long unsigned near DC3UnspecifiedShort::ValueXint()
+000478e4       void near DC3UnspecifiedShort::AddXint( long unsigned )
+000478ac       char near * near DC3UnspecifiedShort::ValueNumericStringCopy()
+00047874       short unsigned near DC3UnspecifiedShort::GetValueMultiplicity()
+000477e4       near DC3LargeAttribute::~DC3LargeAttribute()
+000477bc       void near DC3LargeAttribute::putvalue( ostream near & )
+0004778c       short unsigned near DC3LargeAttribute::GetValueMultiplicity()
+00047788       .PREFIX_DATA.W?ValueRepresentation$:DC3OtherByteString$n()pnxua
+00047758       char const near * near DC3OtherByteString::ValueRepresentation()
+00047754       .PREFIX_DATA.W?ValueRepresentation$:DC3OtherWordString$n()pnxua
+00047724       char const near * near DC3OtherWordString::ValueRepresentation()
+000476ec       near DC3AttributePointer::DC3AttributePointer()
+000476b4       near DC3AttributePointer::DC3AttributePointer( DC3Attribute near * )
+0004767c       near DC3AttributePointer::DC3AttributePointer( DC3AttributePointer const near & )
+0004764c       void near DC3AttributePointer::operator =( DC3AttributePointer const near & )
+000475fc       int near DC3AttributePointer::operator <=( DC3AttributePointer const near & )
+000475cc       DC3Attribute near * near DC3AttributePointer::GetPointer()
+0004758c       near <DC3AttributePointer near >::GENSortedList::GENSortedList()
+000474f8       near <DC3AttributePointer near >::GENSortedList::~GENSortedList()
+000473d4       int near <DC3AttributePointer near >::GENSortedList::insert( DC3AttributePointer )
+000473a4       void near <DC3AttributePointer near >::GENSortedList::first()
+00047368       void near <DC3AttributePointer near >::GENSortedList::next()
+00047320       int near <DC3AttributePointer near >::GENSortedList::ismore()
+000472e8       DC3AttributePointer near <DC3AttributePointer near >::GENSortedList::value()
+0004729c       int near DC3ListofAttributes::insert( DC3Attribute near * )
+00047260       DC3Attribute near * near DC3ListofAttributes::value()
+000471e0       DC3Attribute near * near DC3ListofAttributes::find( DC3Tag )
+000470ac+      near DC3ifstream::DC3ifstream( char const near *, char const near *, ostream near * )
+00046f88       near DC3ifstream::~DC3ifstream()
+00046f40       int near DC3ifstream::HaveMetaHeaderSpecifiedTransferSyntax()
+00046f10       void near DC3ifstream::SetMetaHeaderSpecifiedTransferSyntax( DC3TransferSyntax near * )
+00046ed4       void near DC3ifstream::SwitchToMetaHeaderSpecifiedTransferSyntax()
+00046ea4       int near DC3ifstream::CanUseMetaHeaderSpecifiedTransferSyntax()
+00046e6c       void near DC3ifstream::close()
+00046e1c       void near DC3ifstream::clear()
+00046db4       int near DC3ifstream::good()
+00046d58+      int near DC3ifstream::is_open()
+00046cf0       int near DC3ifstream::eof()
+00046cc0       int near DC3ifstream::CanReposition()
+00046c6c       void near DC3ifstream::unread( long )
+00046c1c       filebuf near * near DC3ifstream::rdbuf()
+00046bd8       void near DC3ifstream::read( char near *, int unsigned )
+00046b98       void near DC3ifstream::read( char unsigned near *, int unsigned )
+00046a74       near DC3ofstream::~DC3ofstream()
+00046a40       void near DC3ofstream::UseNormalTransferSyntax()
+00046a34       .PREFIX_DATA.W?UseMetaHeaderTransferSyntax$:DC3ofstream$n()v
+00046984       void near DC3ofstream::UseMetaHeaderTransferSyntax()
+0004694c       void near DC3ofstream::close()
+000468fc       void near DC3ofstream::clear()
+00046894       int near DC3ofstream::good()
+0004682c       int near DC3ofstream::eof()
+000467e8       void near DC3ofstream::write( char const near *, int unsigned )
+000467a8       void near DC3ofstream::write( char unsigned const near *, int unsigned )
+0004674c+      near DC3ListofAttributes::DC3ListofAttributes()
+000466c8+      near DC3ListofAttributes::~DC3ListofAttributes()
+00046644       near DC3OtherWordString::~DC3OtherWordString()
+000465c0       near DC3OtherByteString::~DC3OtherByteString()
+00046528       near DC3UnspecifiedShort::~DC3UnspecifiedShort()
+00046490       near DC3UnspecifiedLong::~DC3UnspecifiedLong()
+000463f8       near DC3UnsignedShort::~DC3UnsignedShort()
+00046360       near DC3UnsignedLong::~DC3UnsignedLong()
+000462c8       near DC3SignedShort::~DC3SignedShort()
+00046230       near DC3SignedLong::~DC3SignedLong()
+00046198       near DC3AttributeTag::~DC3AttributeTag()
+00046108       near DC3UIString::~DC3UIString()
+00046078       near DC3TimeString::~DC3TimeString()
+00045fe8       near DC3ShortText::~DC3ShortText()
+00045f58       near DC3ShortString::~DC3ShortString()
+00045ec8       near DC3PersonName::~DC3PersonName()
+00045e38       near DC3LongText::~DC3LongText()
+00045da8       near DC3LongString::~DC3LongString()
+00045d18       near DC3IntegerString::~DC3IntegerString()
+00045c88       near DC3DateTimeString::~DC3DateTimeString()
+00045bf8       near DC3DecimalString::~DC3DecimalString()
+00045b68       near DC3DateString::~DC3DateString()
+00045ad8       near DC3CodeString::~DC3CodeString()
+00045a48       near DC3AgeString::~DC3AgeString()
+000459b8       near DC3ApplicationEntity::~DC3ApplicationEntity()
+00045914       near DC3StringAttribute::~DC3StringAttribute()
+000458c0       near DC3Tag::~DC3Tag()
+00045890       near GENSimpleListEntry::GENSimpleListEntry()
+0004496b       main_
+Module: /usr/lib/plbx3r.lib(ioinit)
+0004a9ea+      near standard_io_initfini::standard_io_initfini()
+000a7706       int near ios::__xalloc_index
+000a770a       __lock near * near ios::__x_lock
+0009f6a8       long near ios::__last_format_flag
+000a77e2+      istream near cin
+000a781b+      ostream near cout
+000a7850       ostream near cerr
+000a7885+      ostream near clog
+000a78ba+      standard_io_initfini near __standard_io_instance
+0004aa24+      near standard_io_initfini::~standard_io_initfini()
+Module: /usr/lib/clib3r.lib(stk)
+0004aaaa       __STKOVERFLOW_
+0004aa8a*      __GRO
+0004aa91       __CHK
+0004aa8d*      __STK
+Module: /usr/lib/plbx3r.lib(ostream)
+0004ab19       near ostream::ostream()
+0004ab7a       near ostream::ostream( streambuf near * )
+0004abdf       near ostream::ostream( ostream const near & )
+0004ac56*      ostream near & near ostream::operator =( streambuf near * )
+0004ac69*      ostream near & near ostream::operator =( ostream const near & )
+0004ac88       near ostream::~ostream()
+0004ad08       int near ostream::opfx()
+0004ad6f       void near ostream::osfx()
+0004ad96       ostream near & near ostream::operator <<( char )
+0004ae11       ostream near & near ostream::operator <<( long )
+0004aeac       ostream near & near ostream::operator <<( long unsigned )
+0004af69       ostream near & near ostream::operator <<( char const near * )
+0004afa5*      ostream near & near ostream::operator <<( void near * )
+0004b015*      ostream near & near ostream::operator <<( streambuf near * )
+0004b0c1       ostream near & near ostream::put( char )
+0004b123       ostream near & near ostream::write( char const near *, int )
+0004b1a6       ostream near & near ostream::flush()
+0004b1e9       ostream near & near ostream::operator <<( ostream near & (near *)( ))
+0004b1f1       ostream near & near ostream::operator <<( ios near & (near *)( ))
+0004b20b*      ostream near & near ostream::seekp( long )
+0004b254*      ostream near & near ostream::seekp( long, int )
+0004b299*      long near ostream::tellp()
+Module: /usr/lib/plbx3r.lib(filebuf)
+0004b2d6       near filebuf::filebuf()
+0004b318*      near filebuf::filebuf( int )
+0004b363*      near filebuf::filebuf( int, char near *, int )
+0004b3c2       near filebuf::~filebuf()
+0004b450       filebuf near * near filebuf::attach( int )
+0004b487       filebuf near * near filebuf::open( char const near *, int, int )
+0004b51b       filebuf near * near filebuf::close()
+0004b55d+      int near filebuf::pbackfail( int )
+0004b5a7+      int near filebuf::overflow( int )
+0004b702+      int near filebuf::underflow()
+0004b7eb+      streambuf near * near filebuf::setbuf( char near *, int )
+0004b839+      long near filebuf::seekoff( long, int, int )
+0009ee20       int const near filebuf::openprot
+0004b88a+      int near filebuf::sync()
+Module: /usr/lib/plbx3r.lib(strstrea)
+0004cd2c+      near strstreambuf::strstreambuf()
+0004b936*      near strstreambuf::strstreambuf( int )
+0004b980*      near strstreambuf::strstreambuf( void near * (near *)( ), void (near *)( ))
+0004b9cf+      void near strstreambuf::__strstreambuf( char near *, int, char near * )
+0004ba80       near strstreambuf::~strstreambuf()
+0004bb04       char near * near strstreambuf::str()
+0004bbe6       int near strstreambuf::overflow( int )
+0004bc3b       int near strstreambuf::underflow()
+0004bc8d       streambuf near * near strstreambuf::setbuf( char near *, int )
+0004bceb       long near strstreambuf::seekoff( long, int, int )
+0004bda9       int near strstreambuf::doallocate()
+0004bf2c       int near strstreambuf::sync()
+0004bf2f+      near strstreambase::strstreambase()
+0004bfdd+      near strstreambase::strstreambase( char near *, int, char near * )
+0004c093+      near strstreambase::~strstreambase()
+0004c122       near istrstream::istrstream( char near * )
+0004c1bd*      near istrstream::istrstream( char signed near * )
+0004c258*      near istrstream::istrstream( char unsigned near * )
+0004c2f3*      near istrstream::istrstream( char near *, int )
+0004c390*      near istrstream::istrstream( char signed near *, int )
+0004c42d*      near istrstream::istrstream( char unsigned near *, int )
+0004c4ca       near istrstream::~istrstream()
+0004c577       near ostrstream::ostrstream()
+0004c60a*      near ostrstream::ostrstream( char near *, int, int )
+0004c6d3*      near ostrstream::ostrstream( char signed near *, int, int )
+0004c79c*      near ostrstream::ostrstream( char unsigned near *, int, int )
+0004c865       near ostrstream::~ostrstream()
+0004c912+      near strstream::strstream()
+0004c9b3*      near strstream::strstream( char near *, int, int )
+0004ca8a*      near strstream::strstream( char signed near *, int, int )
+0004cb61*      near strstream::strstream( char unsigned near *, int, int )
+0004cc38+      near strstream::~strstream()
+Module: /usr/lib/plbx3r.lib(arrdelx)
+0004cd71       __wcpp_1_dtor_del_array_x__
+Module: /usr/lib/plbx3r.lib(opdel)
+0004cdd3       void near operator delete( void near * )
+Module: /usr/lib/plbx3r.lib(vfun_err)
+0004cddc       __wcpp_1_undef_vfun__
+Module: /usr/erb/prj/dtqw1/lib/dicom3.lib(/d/2/prj/dt/fourth/dicom3/tattr.c)
+00050448+      ostream near & near ostream::operator <<( int unsigned )
+000503fc       ostream near & near operator <<( ostream near &, SMANIPint const near & )
+000503b4       int near DC3TransferSyntax::isBigEndian()
+0005036c       int near DC3TransferSyntax::isBigBadEndian()
+00050324       int near DC3TransferSyntax::isExplicitVR()
+000502d0+      char unsigned near DC3istream::read8()
+00050234       short unsigned near DC3istream::read16()
+00050104       long unsigned near DC3istream::read32()
+000500d4+      DC3TransferSyntax near * near DC3ostream::GetTransferSyntax()
+00050088+      void near DC3ostream::write8( char unsigned )
+0004fff4       void near DC3ostream::write16( short unsigned )
+0004ff08+      void near DC3ostream::write32( long unsigned )
+0004fed4       short unsigned near DC3Tag::getElement()
+0004fea4       short unsigned near DC3Tag::getGroup()
+0004fe4c       near DC3Attribute::DC3Attribute( DC3Tag, long unsigned )
+0004fe1c       long unsigned near DC3Attribute::GetValueLength()
+0004fdd8+      void near <DC3Tag near >::DC3ListofAThings::first()
+0004fd9c+      void near <DC3Tag near >::DC3ListofAThings::next()
+0004fd50+      int near <DC3Tag near >::DC3ListofAThings::ismore()
+0004fcf4+      DC3Tag near <DC3Tag near >::DC3ListofAThings::value()
+0004fc90       near <short near >::DC3ListofNThings::DC3ListofNThings( int unsigned, short near * )
+0004fc04+      near DC3SignedShort::DC3SignedShort( DC3Tag, long unsigned, int unsigned, short near * )
+0004fba0       near <short unsigned near >::DC3ListofNThings::DC3ListofNThings( int unsigned, short unsigned near * )
+0004fb14+      near DC3UnsignedShort::DC3UnsignedShort( DC3Tag, long unsigned, int unsigned, short unsigned near * )
+0004fa10+      char near * near strdupUnpadded( char const near * )
+0004ce04       void near DC3AttributeSkip( DC3istream near &, long unsigned )
+0004ce52       void near DC3Attribute::put( ostream near & )
+0004cf48       void near DC3Attribute::write( DC3ostream near & )
+0004d0a6       int near DC3Attribute::SingleValueNumeric( long unsigned near & )
+0004d135       int near DC3Attribute::SingleValueStringCopy( char near * near & )
+0004d200+      near DC3ListofStrings::DC3ListofStrings( int unsigned, char const near * near * )
+0004d2ac       near DC3ListofStrings::DC3ListofStrings( char const near * )
+0004d301       near DC3ListofStrings::~DC3ListofStrings()
+0004d3e6       void near DC3ListofStrings::add( char const near * )
+0004d4d2+      void near DC3ListofStrings::get( char near * )
+0004d5fd       void near DC3ListofStrings::read( DC3istream near &, long unsigned )
+0004d67a       void near DC3ListofStrings::put( ostream near & )
+0004d6d2       void near DC3ListofStrings::putvalue( ostream near & )
+0004d751       void near DC3ListofStrings::write( DC3ostream near & )
+0004d820       long unsigned near DC3ListofStrings::GetValueLength()
+0004d8a0       void near DC3UIString::NullPaddedwrite( DC3ostream near & )
+0004d9a4       void near DC3AttributeTag::read( DC3istream near &, long unsigned )
+0004da53       void near DC3AttributeTag::put( ostream near & )
+0004daaf       void near DC3AttributeTag::putvalue( ostream near & )
+0004dbae       void near DC3AttributeTag::write( DC3ostream near & )
+0004dc45       void near DC3SignedLong::read( DC3istream near &, long unsigned )
+0004dce5       void near DC3SignedLong::put( ostream near & )
+0004dd48       void near DC3SignedLong::putvalue( ostream near & )
+0004ddde       void near DC3SignedLong::write( DC3ostream near & )
+0004de4a       void near DC3SignedShort::read( DC3istream near &, long unsigned )
+0004dee8       void near DC3SignedShort::put( ostream near & )
+0004df4b       void near DC3SignedShort::putvalue( ostream near & )
+0004dfe2       void near DC3SignedShort::write( DC3ostream near & )
+0004e051       void near DC3UnsignedLong::read( DC3istream near &, long unsigned )
+0004e0f1       void near DC3UnsignedLong::put( ostream near & )
+0004e154       void near DC3UnsignedLong::putvalue( ostream near & )
+0004e1ea       void near DC3UnsignedLong::write( DC3ostream near & )
+0004e256       void near DC3UnsignedShort::read( DC3istream near &, long unsigned )
+0004e2f4       void near DC3UnsignedShort::put( ostream near & )
+0004e357       void near DC3UnsignedShort::putvalue( ostream near & )
+0004e3f0       void near DC3UnsignedShort::write( DC3ostream near & )
+0004e45f       void near DC3UnspecifiedLong::read( DC3istream near &, long unsigned )
+0004e4ff       void near DC3UnspecifiedLong::put( ostream near & )
+0004e562       void near DC3UnspecifiedLong::putvalue( ostream near & )
+0004e649       void near DC3UnspecifiedLong::write( DC3ostream near & )
+0004e6bb       void near DC3UnspecifiedShort::read( DC3istream near &, long unsigned )
+0004e759       void near DC3UnspecifiedShort::put( ostream near & )
+0004e7bc       void near DC3UnspecifiedShort::putvalue( ostream near & )
+0004e8a7       void near DC3UnspecifiedShort::write( DC3ostream near & )
+0004e919       DC3UnsignedShort near * near DC3UnspecifiedShort::toUnsignedShort()
+0004e9c5       DC3SignedShort near * near DC3UnspecifiedShort::toSignedShort()
+0004ea73       void near DC3LargeAttribute::put( ostream near & )
+0004eabc       void near DC3LargeAttribute::read( DC3istream near &, long unsigned )
+0004eb64       void near DC3LargeAttribute::readdatastart()
+0004ebd9       void near DC3LargeAttribute::write( DC3ostream near & )
+0004ece9       void near DC3LargeAttribute::writedata( DC3ostream near &, int )
+0004ee9d       void near DC3OtherByteString::put( ostream near & )
+0004eefe       void near DC3OtherByteString::putvalue( ostream near & )
+0004f087       void near DC3OtherByteString::read( DC3istream near &, long unsigned )
+0004f1f1       void near DC3OtherByteString::readdatastart()
+0004f28e       void near DC3OtherByteString::readdatanext( long unsigned, char unsigned near * )
+0004f36d       void near DC3OtherByteString::write( DC3ostream near & )
+0004f3e9       void near DC3OtherByteString::writedata( DC3ostream near &, int )
+0004f495       void near DC3OtherWordString::readdatanext( long unsigned, char unsigned near * )
+0004f518       void near DC3OtherWordString::write( DC3ostream near & )
+0004f564       void near DC3OtherWordString::writedata( DC3ostream near &, int )
+0004f66c+      void near DC3OtherWordString::writedataexternal( DC3ostream near &, int )
+0004f845+      void near DC3OtherWordString::writedatainternal( DC3ostream near &, int )
+Module: /usr/lib/plbx3r.lib(iomanip)
+0005047e       ios near & near dec( ios near & )
+00050489       ios near & near hex( ios near & )
+00050494*      ios near & near oct( ios near & )
+0005049f       istream near & near ws( istream near & )
+000504dc*      ostream near & near endl( ostream near & )
+000504f6*      ostream near & near ends( ostream near & )
+00050506       ostream near & near flush( ostream near & )
+0005054c*      SMANIPlong near resetiosflags( long )
+0005055e*      SMANIPint near setbase( int )
+00050570       SMANIPint near setfill( int )
+00050582*      SMANIPlong near setiosflags( long )
+00050594*      SMANIPint near setprecision( int )
+000505a6       SMANIPint near setw( int )
+Module: /usr/lib/clib3r.lib(strlen)
+000505b8       strlen_
+Module: /usr/lib/plbx3r.lib(opnew)
+000505d1       void near * near operator new( int unsigned )
+Module: /usr/lib/clib3r.lib(strcpy)
+00050604       strcpy_
+Module: /usr/lib/plbx3r.lib(throwblk)
+00050634*      __wcpp_1_initvc_blk__
+000506b8       __wcpp_1_block_open__
+000a76b6*      rt_init __based("XI") __wcpp_1_data_init_blk_
+Module: /usr/lib/plbx3r.lib(istream)
+000506ef       near istream::istream()
+00050764       near istream::istream( streambuf near * )
+000507dd       near istream::istream( istream const near & )
+0005086d       near istream::~istream()
+000508f8*      istream near & near istream::operator =( streambuf near * )
+0005090d*      istream near & near istream::operator =( istream const near & )
+00050931+      int near istream::ipfx( int )
+000509c3*      istream near & near istream::operator >>( char near * )
+00050aeb*      istream near & near istream::operator >>( char near & )
+00050b5a*      istream near & near istream::operator >>( short near & )
+00050bba*      istream near & near istream::operator >>( short unsigned near & )
+00050c09*      istream near & near istream::operator >>( int near & )
+00050c0e*      istream near & near istream::operator >>( int unsigned near & )
+00050ee1+      istream near & near istream::operator >>( long near & )
+00051008       istream near & near istream::operator >>( long unsigned near & )
+00051111*      istream near & near istream::operator >>( streambuf near * )
+000511b5*      istream near & near istream::operator >>( ios near & (near *)( ))
+000511d2*      istream near & near istream::operator >>( istream near & (near *)( ))
+000511db       int near istream::get()
+00051251*      istream near & near istream::get( char near & )
+000513dc*      istream near & near istream::get( char near *, int, char )
+00051403*      istream near & near istream::getline( char near *, int, char )
+0005142a       istream near & near istream::read( char near *, int )
+000514c2*      istream near & near istream::get( streambuf near &, char )
+000515b4*      istream near & near istream::ignore( int, int )
+0005161c       int near istream::peek()
+0005167a*      istream near & near istream::putback( char )
+000516e3*      int near istream::sync()
+000516f9*      istream near & near istream::seekg( long )
+0005174b*      istream near & near istream::seekg( long, int )
+00051799*      long near istream::tellg()
+000517d1*      void near istream::eatwhite()
+Module: /usr/lib/plbx3r.lib(blkclose)
+000517f6       __wcpp_1_block_close__
+000517fb       __wcpp_1_block_pop__
+Module: /usr/lib/plbx3r.lib(throwobj)
+00051a60       __wcpp_1_dtor_obj__
+00051a68       __wcpp_1_ctor_obj__
+00051a7e       __wcpp_1_ctor_obj_virt__
+000a76bc*      rt_init __based("XI") __wcpp_1_data_init_obj_
+Module: /usr/lib/plbx3r.lib(blkignor)
+00051ab3       __wcpp_1_block_ignore__
+Module: /usr/lib/plbx3r.lib(fstream)
+00051acc+      near fstreambase::fstreambase()
+00051b4b+      near fstreambase::fstreambase( char const near *, int, int )
+00051bf6+      near fstreambase::fstreambase( int )
+00051c97+      near fstreambase::fstreambase( int, char near *, int )
+00051d49+      near fstreambase::~fstreambase()
+00051dd8*      void near fstreambase::attach( int )
+00051e29       void near fstreambase::close()
+00051e5a*      void near fstreambase::open( char const near *, int, int )
+00051ea7+      void near fstreambase::setbuf( char near *, int )
+00051ee6+      near ifstream::ifstream()
+00051f79       near ifstream::ifstream( char const near *, int, int )
+0005201d*      near ifstream::ifstream( int )
+000520b4*      near ifstream::ifstream( int, char near *, int )
+00052155+      near ifstream::~ifstream()
+00052202+      near ofstream::ofstream()
+00052295*      near ofstream::ofstream( char const near *, int, int )
+00052339*      near ofstream::ofstream( int )
+000523d0*      near ofstream::ofstream( int, char near *, int )
+00052471+      near ofstream::~ofstream()
+0005251e+      near fstream::fstream()
+000525bf*      near fstream::fstream( char const near *, int, int )
+00052678*      near fstream::fstream( int )
+0005271d*      near fstream::fstream( int, char near *, int )
+000527cc+      near fstream::~fstream()
+Module: /usr/erb/prj/dtqw1/lib/dicom3.lib(/d/2/prj/dt/fourth/dicom3/tsyn.c)
+000528c0       near DC3TransferSyntax::DC3TransferSyntax( char const near * )
+00052959       near DC3TransferSyntax::~DC3TransferSyntax()
+Module: /usr/erb/prj/dtqw1/lib/dicom3.lib(/d/2/prj/dt/fourth/dicom3/tfstream.c)
+00053740+      ostream near & near ostream::operator <<( int )
+0005370c+      .PREFIX_DATA.W?$ct:DC3TransferSyntax$n($DC3Endian$$$DC3VRType$$$DC3Encapsulated$$)_
+000536ac+      near DC3TransferSyntax::DC3TransferSyntax( DC3Endian, DC3VRType, DC3Encapsulated )
+00052fb1       DC3TransferSyntax near * near DC3ifstream::GuessTransferSyntax( ostream near * )
+Module: /usr/lib/plbx3r.lib(ios)
+00053776       near ios::failure::failure( int )
+0005377b*      int near ios::failure::cause() const
+00053780       void near ios::init( streambuf near * )
+000537d5       near ios::ios()
+000537ed       near ios::ios( streambuf near * )
+00053801       near ios::ios( ios const near & )
+0005385b       near ios::~ios()
+0005388e*      ios near & near ios::operator =( ios const near & )
+000538d1*      long near ios::bitalloc()
+000538ef*      int near ios::xalloc()
+00053902*      long near & near ios::iword( int )
+00053907*      void near * near & near ios::pword( int )
+0005390c       int near ios::clear( int )
+00053922*      int near ios::exceptions( int )
+Module: /usr/lib/plbx3r.lib(streambu)
+00053936*      void near streambuf::dbp()
+00053980       near streambuf::streambuf()
+000539d5*      near streambuf::streambuf( char near *, int )
+00053a3a       near streambuf::~streambuf()
+00053a78       void near streambuf::setb( char near *, char near *, int )
+00053ad5       int near streambuf::doallocate()
+00053b0d       int near streambuf::do_sgetn( char near *, int )
+00053ba7       int near streambuf::do_sputn( char const near *, int )
+00053c71       int near streambuf::pbackfail( int )
+00053c77       streambuf near * near streambuf::setbuf( char near *, int )
+00053cbc       long near streambuf::seekoff( long, int, int )
+00053cc2       long near streambuf::seekpos( long, int )
+00053cd3       int near streambuf::sync()
+Module: /usr/lib/plbx3r.lib(pure_err)
+00053d09       __wcpp_1_pure_error__
+Module: /usr/erb/prj/dtqw1/lib/dicom3.lib(/d/2/prj/dt/fourth/dicom3/tlist.c)
+0005640c       int near DC3TransferSyntax::isImplicitVR()
+00056384+      int near DC3Tag::operator >( DC3Tag const near & )
+00056304       int near DC3Tag::isPrivateGroup()
+0005627c       int near DC3Tag::isRepeatingGroup()
+000561d8+      near DC3StringAttribute::DC3StringAttribute( DC3Tag, long unsigned, char const near * )
+0005615c+      near DC3ApplicationEntity::DC3ApplicationEntity( DC3Tag, long unsigned, char const near * )
+000560e0+      near DC3ShortString::DC3ShortString( DC3Tag, long unsigned, char const near * )
+00056064+      near DC3UIString::DC3UIString( DC3Tag, long unsigned, char const near * )
+00055ffc       near <long unsigned near >::DC3ListofNThings::DC3ListofNThings( int unsigned, long unsigned near * )
+00055f70+      near DC3UnsignedLong::DC3UnsignedLong( DC3Tag, long unsigned, long unsigned near * )
+00055ec4       near DC3LargeAttribute::DC3LargeAttribute( DC3Tag, long unsigned )
+00055e10+      near DC3OtherByteString::DC3OtherByteString( DC3Tag, long unsigned, char unsigned near * )
+00055d5c       DC3DataDictionaryEntry const near * near DC3DataDictionary::FindEntry( DC3Tag )
+00055cf4+      DC3DataDictionaryEntry const near * near DC3DataDictionary::FindEntry( char near * )
+00055c9c+      char near * near DC3DataDictionary::GetKeyword( DC3Tag )
+00055c28+      int near DC3DataDictionary::GetTag( char near *, DC3Tag near & )
+00055bd8+      int near DC3AttributePointer::operator ==( DC3AttributePointer const near & )
+00055b24+      void near <DC3AttributePointer near >::GENSortedList::remove( DC3AttributePointer )
+00053e92+      void near DC3ListofAttributes::RemoveMetaHeaderGroup()
+000540d8+      void near DC3ListofAttributes::Fix( char near *, int )
+00054d71+      void near DC3ListofAttributes::FixCommand()
+00054e74+      void near DC3ListofAttributes::PrivateRemove()
+00054eed+      void near DC3ListofAttributes::Delete( DC3ListofAttributes near & )
+00054f79+      void near DC3ListofAttributes::Replace( DC3ListofAttributes near & )
+00055010+      void near DC3ListofAttributes::put( ostream near & )
+00055073+      void near DC3ListofAttributes::write( DC3ostream near & )
+0005517f+      DC3Attribute near * near DC3ListofAttributes::getSingleValuedAttribute( DC3Tag )
+000553a9+      DC3Attribute near * near DC3ListofAttributes::getSingleValuedAttribute( char near * )
+000554b6+      int near DC3ListofAttributes::getSingleValueXint( DC3Tag, long unsigned near &, int )
+00055647+      int near DC3ListofAttributes::getSingleValueXint( char near *, long unsigned near &, int )
+00055757       int near DC3ListofAttributes::getSingleValueUint16( DC3Tag, short unsigned near &, int )
+000557b4+      int near DC3ListofAttributes::getSingleValueUint16( char near *, short unsigned near &, int )
+0005585d       int near DC3ListofAttributes::getSingleValueStringCopy( DC3Tag, char near * near &, int )
+000559eb+      int near DC3ListofAttributes::getSingleValueStringCopy( char near *, char near * near &, int )
+Module: /usr/lib/clib3r.lib(strncmp)
+00056452       strncmp_
+Module: /usr/erb/prj/dtqw1/lib/dthigh.lib(/usr/erb/prj/dt/source/high/image.c)
+00056477*      dtimage_dup_
+000565a3       dtimage_free_
+000566bd*      dtimage_overlay_
+0005696e       dtimage_create3_
+00056d94*      dtimage_create2_
+00056e23       dtimage_create_
+Module: /usr/erb/prj/dtqw1/lib/dtlow.lib(/usr/erb/prj/dt/source/low/dbg2.c)
+00056eb2       dt_dbg_trace_
+00056ef9+      dt_dbg_trace_va_
+000570f9*      dt_dbg_parse_
+Module: /usr/erb/prj/dtqw1/lib/dthigh.lib(/usr/erb/prj/dt/source/high/cast.c)
+00057388+      dtimage_cast_row_
+00057a00       dtimage_cast_
+Module: /usr/erb/prj/dtqw1/lib/dtxchg.lib(/usr/erb/prj/dt/source/xchg/export.c)
+00057a97       dtimage_export_
+0005834d*      dtimage_export_patch_
+Module: /usr/erb/prj/dtqw1/lib/dicom3.lib(/d/2/prj/dt/fourth/dicom3/GetOpt.c)
+000583b8       near GetOpt::GetOpt( int, char near * near *, char const near * )
+00058491       int near GetOpt::operator ()()
+Module: /usr/erb/prj/dtqw1/lib/dicom3.lib(/d/2/prj/dt/fourth/dicom3/tattrrd.c)
+0005b934+      int near DC3TransferSyntax::isEncapsulated()
+0005b904+      DC3TransferSyntax near * near DC3istream::GetTransferSyntax()
+0005b8a0       int near DC3Tag::isPrivateOwner()
+0005b838       int near DC3Tag::isPrivateTag()
+0005b798+      near DC3StringAttribute::DC3StringAttribute( DC3Tag, long unsigned )
+0005b74c+      void near DC3StringAttribute::read( DC3istream near &, long unsigned )
+0005b6d4+      near DC3ApplicationEntity::DC3ApplicationEntity( DC3Tag, long unsigned )
+0005b65c+      near DC3AgeString::DC3AgeString( DC3Tag, long unsigned )
+0005b5e4+      near DC3CodeString::DC3CodeString( DC3Tag, long unsigned )
+0005b56c+      near DC3DateString::DC3DateString( DC3Tag, long unsigned )
+0005b4f4+      near DC3DecimalString::DC3DecimalString( DC3Tag, long unsigned )
+0005b47c+      near DC3DateTimeString::DC3DateTimeString( DC3Tag, long unsigned )
+0005b404+      near DC3IntegerString::DC3IntegerString( DC3Tag, long unsigned )
+0005b38c+      near DC3LongString::DC3LongString( DC3Tag, long unsigned )
+0005b314+      near DC3LongText::DC3LongText( DC3Tag, long unsigned )
+0005b29c+      near DC3PersonName::DC3PersonName( DC3Tag, long unsigned )
+0005b224+      near DC3ShortString::DC3ShortString( DC3Tag, long unsigned )
+0005b1ac+      near DC3ShortText::DC3ShortText( DC3Tag, long unsigned )
+0005b134+      near DC3TimeString::DC3TimeString( DC3Tag, long unsigned )
+0005b0bc+      near DC3UIString::DC3UIString( DC3Tag, long unsigned )
+0005b040+      near <DC3Tag near >::DC3ListofAThings::DC3ListofAThings( int unsigned, DC3Tag near * )
+0005afbc+      near DC3AttributeTag::DC3AttributeTag( DC3Tag, long unsigned )
+0005af54+      near <long near >::DC3ListofNThings::DC3ListofNThings( int unsigned, long near * )
+0005aed0+      near DC3SignedLong::DC3SignedLong( DC3Tag, long unsigned )
+0005ae4c+      near DC3SignedShort::DC3SignedShort( DC3Tag, long unsigned )
+0005adc8+      near DC3UnsignedLong::DC3UnsignedLong( DC3Tag, long unsigned )
+0005ad44+      near DC3UnsignedShort::DC3UnsignedShort( DC3Tag, long unsigned )
+0005acc0+      near DC3UnspecifiedLong::DC3UnspecifiedLong( DC3Tag, long unsigned )
+0005ac3c+      near DC3UnspecifiedShort::DC3UnspecifiedShort( DC3Tag, long unsigned )
+0005ab5c+      near DC3OtherByteString::DC3OtherByteString( DC3Tag, long unsigned )
+0005aae4+      near DC3OtherWordString::DC3OtherWordString( DC3Tag, long unsigned )
+0005aa8c       char near * near DC3DataDictionary::GetValueRepresentation( DC3Tag )
+0005aa28       DC3PrivateElementDictionaryEntry const near * near DC3PrivateElementDictionary::FindEntry( short unsigned )
+0005a9d4       char near * near DC3PrivateElementDictionary::GetValueRepresentation( short unsigned )
+0005a940       char near * near DC3PrivateDictionary::GetOwner( DC3Tag )
+0005a844       DC3PrivateDictionaryEntry const near * near DC3PrivateDictionary::FindEntry( DC3Tag, char near * )
+0005a7e8       DC3PrivateDictionaryEntry const near * near DC3PrivateDictionary::FindEntry( DC3Tag )
+0005a790       char near * near DC3PrivateDictionary::GetValueRepresentation( DC3Tag )
+0005a6dc+      void near DC3PrivateDictionary::AddOwner( DC3Tag, char const near * )
+0005a6ac+      near DC3PrivateOwnerEntry::DC3PrivateOwnerEntry()
+00058b35       void near DC3AttributeRead( DC3istream near &, int, DC3Tag near *, DC3Attribute near * near *, int near * )
+Module: /usr/lib/plbx3r.lib(undefed)
+0005b97a       __wcpp_1_undefed_cdtor__
+Module: /usr/lib/clib3r.lib(cstart)
+0005ba32       __exit_
+0005b98e       _cstart_
+0009fa2c       __slib_func
+00097000*      __nullarea
+Module: /usr/lib/clib3r.lib(cmain)
+0005ba63       __exit_with_msg_
+0005ba92*      _Not_Enough_Memory_
+0005baa5       __CMain
+000a78dc       __endheap
+000a78e0+      __argv
+000a78e4       __argc
+000a78e8*      ___env_mask
+000a78ec       _environ
+Module: /usr/lib/plbx3r.lib(stdiobuf)
+0005bb26+      near stdiobuf::stdiobuf()
+0005bb60       near stdiobuf::stdiobuf( __iobuf near * )
+0005bba0       near stdiobuf::~stdiobuf()
+0005bc00+      int near stdiobuf::overflow( int )
+0005bdb6+      int near stdiobuf::underflow()
+0005bea7+      int near stdiobuf::sync()
+Module: /usr/lib/plbx3r.lib(modinit)
+0005beda       __wcpp_1_mod_init_open__
+Module: /usr/lib/clib3r.lib(iobaddr)
+0005beea       __get_std_stream_
+Module: /usr/lib/plbx3r.lib(moddtorr)
+000a76f2       ___wcpp_1_data_module_dtor_ref_
+Module: /usr/lib/clib3r.lib(crwdata)
+0009fa60       ___FPE_handler
+0009fa60*      __FPE_handler
+0009fa58       __no87
+0009fa5e*      __Envseg
+0009fa5a*      __Envptr
+0009fa54*      __child
+0009fa50*      __cbyte2
+0009fa4c*      __cbyte
+0009fa48*      __ASTACKPTR
+0009fa44*      __ASTACKSIZ
+0009fa40       __STACKTOP
+0009fa3c       __STACKLOW
+0009fa38       __curbrk
+0009fa34*      __dynend
+Module: /usr/lib/clib3r.lib(flush)
+0005befc       __flush_
+Module: /usr/lib/plbx3r.lib(ioutil)
+0005bfa6       int near __FlagsToBase( long )
+0005bfca       void near * near __WATCOM_ios::find_user_word( ios near *, int )
+0005c061       void near __WATCOM_ios::free_xalloc_storage( ios near * )
+0005c076       void near __WATCOM_ios::setstate( ios near *, int )
+0005c09b       int near __WATCOM_ios::writeitem( ostream near &, char const near *, int, int )
+0005c434+      near ios::failure::failure( ios::failure const near & )
+0005c410+      near ios::failure::~failure()
+0005c3ec+      near __WATCOM_exception::~__WATCOM_exception()
+0005c3eb+      near __WATCOM_exception::__WATCOM_exception()
+0005c3ea+      near __WATCOM_exception::__WATCOM_exception( __WATCOM_exception const near & )
+Module: /usr/lib/clib3r.lib(ltoa)
+0005c460       ultoa_
+0005c4a6       ltoa_
+Module: /usr/lib/clib3r.lib(plusfsta)
+0005c4c1       __plusplus_fstat_
+Module: /usr/lib/clib3r.lib(plusopen)
+0005c4f9       __plusplus_open_
+Module: /usr/lib/clib3r.lib(close)
+0005c575       close_
+Module: /usr/lib/clib3r.lib(lseek)
+0005c58e       lseek_
+Module: /usr/lib/clib3r.lib(write)
+0005c5a7       write_
+Module: /usr/lib/clib3r.lib(memmove)
+0005c5c0       memmove_
+Module: /usr/lib/clib3r.lib(read)
+0005c60b       read_
+Module: /usr/lib/plbx3r.lib(iostream)
+0005c624       near iostream::iostream()
+0005c6cb*      near iostream::iostream( streambuf near * )
+0005c784*      near iostream::iostream( ios const near & )
+0005c832       near iostream::~iostream()
+0005c8f2*      iostream near & near iostream::operator =( streambuf near * )
+0005c907*      iostream near & near iostream::operator =( ios const near & )
+Module: /usr/lib/plbx3r.lib(throwcat)
+0005cbb0       __wcpp_1_catch_done__
+0005cbed       __wcpp_1_try_init__
+0005cc06*      __wcpp_1_try_done__
+000a76c2*      rt_init __based("XI") __wcpp_1_data_init_cat_
+Module: /usr/lib/clib3r.lib(setjmp)
+0005cc73       longjmp_
+0005cc44       _setjmp_
+Module: /usr/lib/plbx3r.lib(throwarr)
+0005cd3a       __wcpp_1_push_arr_blk__
+0005cd6b       __wcpp_1_dtor_array__
+000a76c8*      rt_init __based("XI") __wcpp_1_data_init_arr_
+Module: /usr/lib/plbx3r.lib(throw)
+0005cdc7       __wcpp_1_corrupted_stack__
+0005cfd8       __wcpp_1_rethrow__
+0005cfe3       __wcpp_1_throw__
+0005cfea*      __wcpp_1_throw_zero__
+Module: /usr/lib/clib3r.lib(nfree)
+0005cff4       _nfree_
+0005cff4       free_
+Module: /usr/lib/plbx3r.lib(prwdata)
+0009fab2       __wcpp_undef_vfun_flag
+0009fab0       __wcpp_pure_error_flag
+0009faac*      __wcpp_unexpected_handler
+0009faa8*      __wcpp_terminate_handler
+0009faa4*      __wcpp_new_handler
+0009faa0       __wcpp_modinits
+Module: /usr/lib/clib3r.lib(memcpy)
+0005d018       memcpy_
+Module: /usr/erb/prj/dtqw1/lib/dicom3.lib(/d/2/prj/dt/fourth/dicom3/ttag.c)
+0005d494+      char near * near DC3DataDictionary::GetDescription( DC3Tag )
+0005d440+      char near * near DC3PrivateElementDictionary::GetDescription( short unsigned )
+0005d3e8+      char near * near DC3PrivateDictionary::GetDescription( DC3Tag )
+0005d047+      void near DC3Tag::putNoDesc( ostream near & )
+0005d176       void near DC3Tag::put( ostream near & )
+0005d2e6       void near DC3Tag::read( DC3istream near & )
+0005d32c       void near DC3Tag::write( DC3ostream near & )
+0005d3a8       void near DC3Tag::unread( DC3istream near & )
+Module: /usr/lib/clib3r.lib(strncpy)
+0005d4ec       strncpy_
+Module: /usr/lib/plbx3r.lib(arrctor)
+0005d512       __wcpp_1_ctor_array__
+Module: /usr/lib/clib3r.lib(istable)
+0009f3e4       __IsTable
+Module: /usr/lib/clib3r.lib(nmalloc)
+0005d55e       _nmalloc_
+0005d55e       malloc_
+0009fab4       ___nheap
+0009fab8       ___nheapbeg
+0009fabc       ___nheapblk
+Module: /usr/lib/plbx3r.lib(cppdata)
+0009fae4*      ___wcpp_1_data_debug_only_
+000a78f4       __wcpp_thread_data
+000a7914       ___wcpp_1_data_vc_
+Module: /usr/lib/plbx3r.lib(blkpart)
+0005d5d6*      __wcpp_1_block_part_curr__
+0005d5e5       __wcpp_1_block_part__
+Module: /usr/lib/clib3r.lib(memset)
+0005d678       memset_
+Module: /usr/lib/plbx3r.lib(srchig)
+0005d690       __wcpp_1_search_ignore__
+Module: /usr/lib/clib3r.lib(tolower)
+0005d693       tolower_
+Module: /usr/lib/clib3r.lib(_strcmp)
+0005d6a8       strcmp_
+Module: /usr/lib/clib3r.lib(printf)
+0005d749       printf_
+Module: /usr/lib/clib3r.lib(liballoc)
+0005d76b       _plib_malloc_
+0005d770       _plib_free_
+Module: /usr/erb/prj/dtqw1/lib/dicom3.lib(/d/2/prj/dt/fourth/dicom3/tddict.c)
+000660c4+      near DC3DataDictionary::DC3DataDictionary( DC3DataDictionaryEntry near * )
+0006608c+      near DC3PrivateElementDictionary::DC3PrivateElementDictionary( DC3PrivateElementDictionaryEntry near * )
+0006604c+      near DC3PrivateDictionary::DC3PrivateDictionary( DC3PrivateDictionaryEntry near * )
+000a7942       DC3DataDictionary near GlobalDataDictionary
+000a7946       DC3PrivateDictionary near PrivateDictionary
+000a794e       DC3PrivateElementDictionary near PrivateElementDictionary
+Module: /usr/erb/prj/dtqw1/lib/dtbigmem.lib(/usr/erb/prj/dt/source/bigmem/memcopy.c)
+00066108       dtmem_copy_
+Module: /usr/erb/prj/dtqw1/lib/dtbigmem.lib(/usr/erb/prj/dt/source/bigmem/mem.c)
+000663ea       dtmem_alloc_
+00066857       dtmem_realloc_
+00066dda*      dtmem_prealloc_
+00066f15       dtmem_free_
+000670af*      dtmem_map_
+00067137       dtmem_get_
+000671bf       dtmem_unmap_
+0006723d       dtmem_put_
+Module: /usr/erb/prj/dtqw1/lib/dtlow.lib(/usr/erb/prj/dt/source/low/os_mem.c)
+000672bb       dtos_strdup_
+000673e7*      dtos_strdup3_
+00067543       dtos_malloc3_
+00067738       dtos_malloc2_
+0006799e*      dtos_malloc_
+00067c00       dtos_realloc3_
+00067e51       dtos_free_
+00067f60       dtos_free2_
+Module: /usr/erb/prj/dtqw1/lib/dthigh.lib(/usr/erb/prj/dt/source/high/check.c)
+00068070       dtimage_check_1f_
+00068152       dtimage_check_2f_
+0006826e+      dtimage_check_3f_
+00068459       dtimage_check_1_
+0006849f*      dtimage_check_2_
+000684f5*      dtimage_check_3_
+Module: /usr/erb/prj/dtqw1/lib/dtlow.lib(/usr/erb/prj/dt/source/low/err.c)
+0006861b+      dt_err_string_
+000686fc       dt_err_
+00068747+      dt_err_va_
+000a5710+      _dt_err_prefix
+Module: /usr/erb/prj/dtqw1/lib/dtlow.lib(/usr/erb/prj/dt/source/low/ntype_da.c)
+0009f4e8       _dt_ntype_count
+000a593a       _dt_ntype_list
+000a593e+      _dt_ntype_alias
+000a5942       _dt_ntype_sizeof
+000a5946       _dt_ntype_bits
+000a594a+      _dt_ntype_minval
+000a594e       _dt_ntype_maxval
+000a5952       _dt_ntype_maxval_ptr
+000a5956       _dt_ntype_string
+Module: /usr/lib/math387r.lib(fchop)
+000688cc       __CHP
+Module: /usr/erb/prj/dtqw1/lib/dthigh.lib(/usr/erb/prj/dt/source/high/dbg.c)
+000688eb       dtimage_dbg_op_
+00068978*      dtimage_dbg_values_
+Module: /usr/lib/emu387.lib(386inite)
+00068acb*      __fini_387_emulator
+00068aca       __init_387_emulator
+Module: /usr/lib/clib3r.lib(_8087)
+000a5995       __real87
+000a5994       __8087
+Module: /usr/lib/clib3r.lib(strchr)
+00068acc       strchr_
+Module: /usr/lib/clib3r.lib(strrchr)
+00068ae2       strrchr_
+Module: /usr/erb/prj/dtqw1/lib/dtlow.lib(/usr/erb/prj/dt/source/low/str.c)
+00068afb       dtstr_choice_
+00068c15*      dtstr_to_double_
+00068cb6       dtstr_to_double2_
+00068d37*      dtstr_to_long_
+00068ddb       dtstr_to_long2_
+00068e3d*      dtstr_tokenize_
+00068ebf+      dtstr_find_white_
+00068f22+      dtstr_find_nonwhite_
+00068f85+      dtstr_find_quote_
+00068fd4*      dtstr_argv_
+00069096       dtstr_printf_va_
+000694d1       dtstr_printf_
+00069520*      dtstr_parsechar_
+000696f5+      dtstr_printchar_
+0006986a*      dtstr_printable_
+000699bc       dtstr_print_ntype_
+Module: /usr/erb/prj/dtqw1/lib/dtlow.lib(/usr/erb/prj/dt/source/low/dbg.c)
+00069c92+      dt_dbg_string_
+00069d73       dt_dbg_
+00069db6       dt_dbg_va_
+Module: /usr/erb/prj/dtqw1/lib/dtlow.lib(/usr/erb/prj/dt/source/low/dbg_dat.c)
+000a5b24       _dt_dbg_mask_values
+000a5b28       _dt_dbg_mask_names
+000a5b2c+      _dt_dbg_mask_descs
+Module: /usr/erb/prj/dtqw1/lib/dthigh.lib(/usr/erb/prj/dt/source/high/err.c)
+00069f4a       dtimage_err_outside_
+00069fa6       dtimage_err_ntype_
+0006a06f       dtimage_err_ntype_2_
+Module: /usr/erb/prj/dtqw1/lib/dt1d.lib(/usr/erb/prj/dt/source/1d/1d_cast.c)
+0006b9b0       dt1d_cast_
+Module: /usr/erb/prj/dtqw1/lib/dtxchg.lib(/usr/erb/prj/dt/source/xchg/xchg_w.c)
+0006bb5f       dtxchg_which_
+Module: /usr/erb/prj/dtqw1/lib/dtlow.lib(/usr/erb/prj/dt/source/low/fd.c)
+0006bfa6       dtfd_open_
+0006c220       dtfd_fd_
+0006c2df       dtfd_close_
+0006c3cb       dtfd_delete_
+0006c51d       dtfd_seek_
+0006c686       dtfd_read_
+0006c7de       dtfd_read_all_
+0006c953*      dtfd_read_line_
+0006caa1+      dtfd_write_
+0006cc3a       dtfd_write_all_
+Module: /usr/erb/prj/dtqw1/lib/dtxchg.lib(/usr/erb/prj/dt/source/xchg/write.c)
+0006cdd0       dtimage_write_raw_fd_
+0006d48e       dtimage_write_ascii_fd_
+0006da9f+      dtimage_write_lj_fd_
+0006e373       dtimage_write_lj_file_
+0006e498+      dtimage_write_pgm_fd_
+0006e5bf*      dtimage_write_pgm_file_
+0006e6d6+      dtimage_write_pgm_ascii_fd_
+0006e7fb*      dtimage_write_pgm_ascii_file_
+0006e90e+      dtimage_write_pbm_fd_
+0006ea2f+      dtimage_write_pbm_ascii_fd_
+0006eb50*      dtimage_write_pbm_file_
+0006ec63*      dtimage_write_pbm_ascii_file_
+0006ed76+      dtimage_write_pnm_fd_
+0006ee49       dtimage_write_pnm_file_
+0006ef5c+      dtimage_write_pnm_ascii_fd_
+0006f02f       dtimage_write_pnm_ascii_file_
+Module: /usr/erb/prj/dtqw1/lib/dtxchg.lib(/usr/erb/prj/dt/source/xchg/writewmf.c)
+0006f1c3+      dtimage_write_wmf_fd_
+0006f2d0       dtimage_write_wmf_file_
+Module: /usr/erb/prj/dtqw1/lib/dtxchg.lib(/usr/erb/prj/dt/source/xchg/writebmp.c)
+0006f46d+      dtimage_write_bmp_fd_
+0006f4ea       dtimage_write_bmp_file_
+Module: /usr/erb/prj/dtqw1/lib/dtxchg.lib(/usr/erb/prj/dt/source/xchg/writebpe.c)
+0006f606+      dtimage_write_bpe_fd_
+0006f7fb       dtimage_write_bpe_file_
+Module: /usr/erb/prj/dtqw1/lib/dtxchg.lib(/usr/erb/prj/dt/source/xchg/xchg_win.c)
+000706d2       dtxchg_win_export_image_
+000710f0*      dtxchg_win_import_image_
+00071483*      dtxchg_win_export_lut8_
+000717cd*      dtxchg_win_import_lut8_
+00071b82*      dtxchg_win_stop_
+Module: /usr/erb/prj/dtqw1/lib/dtxchg.lib(/usr/erb/prj/dt/source/xchg/xchg_dtm.c)
+00071db3       dtxchg_dtm_export_image_
+Module: /usr/erb/prj/dtqw1/lib/dtxchg.lib(/usr/erb/prj/dt/source/xchg/xchg_wxx.c)
+00072447       dtxchg_wxx_export_image_
+0007298b*      dtxchg_wxx_import_image_
+Module: /usr/erb/prj/dtqw1/lib/dtxchg.lib(/usr/erb/prj/dt/source/xchg/xchg_dat.c)
+000a5f2d       _dtxchg_choices
+000a5f31       _dtxchg_suffixes
+000a5f35       _dtxchg_suffixes_which
+Module: /usr/lib/clib3r.lib(atoi)
+00072a4f       atoi_
+Module: /usr/lib/clib3r.lib(initrtns)
+00072ae3       __FiniRtns
+00072aa0       __InitRtns
+Module: /usr/lib/clib3r.lib(qseg386)
+00072b26       __QNXseg__
+Module: /usr/lib/clib3r.lib(__qnx_exit)
+00072b27       __qnx_exit_
+Module: /usr/lib/clib3r.lib(noefgfmt)
+000a5f3c       ___EFG_printf
+000a5f40       ___EFG_scanf
+Module: /usr/lib/clib3r.lib(__setmagicvar)
+00072b50       __setmagicvar_
+Module: /usr/lib/clib3r.lib(amblksiz)
+000a5f44       __amblksiz
+Module: /usr/lib/clib3r.lib(exit)
+00072b6a       exit_
+00072b79*      _exit_
+000a5f48       ___atexit
+Module: /usr/lib/clib3r.lib(fwrite)
+00072b7e       fwrite_
+Module: /usr/lib/clib3r.lib(fflush)
+00072c6a       fflush_
+Module: /usr/lib/clib3r.lib(isatty)
+00072c7a       isatty_
+Module: /usr/lib/clib3r.lib(fgetc)
+00072c93       fgetc_
+00072ccd+      __filbuf_
+00072cef       __fill_buffer_
+Module: /usr/lib/clib3r.lib(fread)
+00072d5b       fread_
+Module: /usr/lib/clib3r.lib(iob)
+000a5f4c       ___iob
+000a7954       ___ClosedStreams
+Module: /usr/lib/plbx3r.lib(moddtor)
+00072eee       __wcpp_1_module_dtor__
+Module: /usr/lib/clib3r.lib(qwrite)
+00072f1d       __qwrite_
+Module: /usr/lib/clib3r.lib(fstat)
+00072f6e       fstat_
+Module: /usr/lib/clib3r.lib(stat)
+00072f87       stat_
+Module: /usr/lib/clib3r.lib(open)
+00072fa0       open_
+Module: /usr/lib/plbx3r.lib(tsequiv)
+00072fc2       __wcpp_1_ts_equiv__
+Module: /usr/lib/plbx3r.lib(allocexc)
+0007303a       __wcpp_1_alloc_exc__
+000731ad       __wcpp_1_free_exc__
+Module: /usr/lib/plbx3r.lib(unwindig)
+000731d9       __wcpp_1_unwind_ignore__
+Module: /usr/lib/plbx3r.lib(callterm)
+000731e0       __wcpp_1_call_terminate__
+Module: /usr/lib/clib3r.lib(memalloc)
+00073298       __MemFree
+000731e8       __MemAllocator
+Module: /usr/lib/clib3r.lib(heapmod)
+000a7958       ___nheap_clean
+000a7959*      ___fheap_clean
+Module: /usr/lib/clib3r.lib(grownear)
+0007342a+      __LastFree_
+00073450       __ExpandDGROUP_
+Module: /usr/lib/clib3r.lib(nmemneed)
+00073544       __nmemneed_
+Module: /usr/lib/plbx3r.lib(rtdebug)
+00073b2d       __wcpp_1_DbgRtDumpAutoDtor__
+00073b4e       __wcpp_1_DbgRtDumpModuleDtor__
+Module: /usr/lib/clib3r.lib(__stos)
+00073b9f*      __STOSD
+00073b68       __STOSB
+Module: /usr/lib/clib3r.lib(fprtf)
+00073c1c       __fprtf_
+Module: /usr/erb/prj/dtqw1/lib/dtbigmem.lib(/usr/erb/prj/dt/source/bigmem/memconf.c)
+00073c7e       dtmem_configure_
+000742c2       dtmem_unconfigure_
+Module: /usr/erb/prj/dtqw1/lib/dtbigmem.lib(/usr/erb/prj/dt/source/bigmem/mem_ram.c)
+0007448f       dtmemram_alloc_
+00074a1e+      dtmemram_remalloc_
+0007509a       dtmemram_prealloc_
+000754fa       dtmemram_init_
+Module: /usr/lib/clib3r.lib(sprintf)
+000755fd       sprintf_
+Module: /usr/lib/clib3r.lib(strcat)
+00075632       strcat_
+Module: /usr/erb/prj/dtqw1/lib/dtlow.lib(/usr/erb/prj/dt/source/low/heap2.c)
+00075669       dtheap_check_
+000756e1*      dtheap_set_limit_
+00075786       dtheap_track_alloc_
+00075a93       dtheap_track_free_
+00075cc8       dtheap_init_
+00075dd6       dtheap_uninit_
+00075ed0       dtheap_outstanding_
+00075f1f       dtheap_report_
+00076281       dtheap_check_limit_
+0007635a*      dtheap_avail_
+000763da+      dtheap_avail_say_
+Module: /usr/erb/prj/dtqw1/lib/dtlow.lib(/d/2/prj/dt/source/low/heapmon.c)
+00076455*      dt_heapmon_init_
+00076678*      dt_heapmon_uninit_
+000767b4       dt_heapmon_report_
+00076841*      dt_heapmon_check_
+Module: /usr/lib/clib3r.lib(nrealloc)
+000768ce*      _nrealloc_
+000768ce       realloc_
+Module: /usr/erb/prj/dtqw1/lib/dtlow.lib(/usr/erb/prj/dt/source/low/qnx4.c)
+00076953+      dtqnx4_out_string_
+000769d9       dtqnx4_dbg_string_
+00076a56       dtqnx4_err_string_
+00076ad3       dtqnx4_say_string_
+Module: /usr/erb/prj/dtqw1/lib/dthigh.lib(/usr/erb/prj/dt/source/high/pixel.c)
+00076b50       dtimage_set_pixel_
+00077192+      dtimage_get_pixel_
+00077789       dtimage_sprintf_pixel_
+Module: /usr/lib/clib3r.lib(chk8087)
+000779da*      __init_8087_
+000779e6*      _fpreset_
+000779f0       __chk8087_
+Module: /usr/lib/math387r.lib(strtod)
+00077a0a       strtod_
+Module: /usr/lib/clib3r.lib(strtol)
+00077cf4*      strtoul_
+00077cfe       strtol_
+Module: /usr/lib/clib3r.lib(toupper)
+00077d53       toupper_
+Module: /usr/lib/clib3r.lib(fltused)
+00000000       _fltused_
+Module: /usr/erb/prj/dtqw1/lib/dtlow.lib(/usr/erb/prj/dt/source/low/cstack.c)
+00077d61*      dtcstack_init_
+00077da4*      dtcstack_mark_
+00077df8       dtcstack_mark2_
+00077e8a*      dtcstack_query_
+00077f38       dtcstack_dbg_
+00077fab       dtcstack_highwater_
+00078052*      dtcstack_say_
+Module: /usr/erb/prj/dtqw1/lib/dt1d.lib(/usr/erb/prj/dt/source/1d/1d_ntype.c)
+000a64f8+      _dt1d_ntype_list
+000a64fc       _dt1d_ntype_sizeof
+000a6500+      _dt1d_ntype_minval
+000a6504+      _dt1d_ntype_maxval
+Module: /usr/lib/clib3r.lib(fopen)
+000780a8       __open_flags_
+000781ce+      _fsopen_
+000781f4       fopen_
+00078263*      freopen_
+Module: /usr/lib/clib3r.lib(errno)
+00078292       __get_errno_ptr_
+Module: /usr/lib/clib3r.lib(fclose)
+000782ac       fclose_
+000782d6       __shutdown_stream_
+000782eb       __doclose_
+Module: /usr/erb/prj/dtqw1/lib/dtlow.lib(/usr/erb/prj/dt/source/low/os_futil.c)
+00078351*      dtos_tmpnam_
+00078403       dtos_unlink_
+00078489       dtos_isreadable_
+000784f9       dtos_isdir_
+00078568*      dtos_isatty_file_
+000785a7*      dtos_isatty_fd_
+Module: /usr/lib/clib3r.lib(fseek)
+000785e3       fseek_
+Module: /usr/lib/clib3r.lib(ftell)
+00078789       ftell_
+Module: /usr/erb/prj/dtqw1/lib/dtlow.lib(/usr/erb/prj/dt/source/low/pnm.c)
+000787b5+      dtpnm_read_byte_
+00078991       dtpnm_read_double_
+00078b75+      dtpnm_read_ulong_
+00078cec       dtpnm_read_header_
+000790a6       dtpnm_write_header_
+Module: /usr/erb/prj/dtqw1/lib/dtxchg.lib(/usr/erb/prj/dt/source/xchg/wmf.c)
+00079383       dtwmf_import_
+0007982b       dtwmf_placeable_init_
+00079a2c+      dtwmf_metahead_init_
+0007a5bb       dtwmf_export_
+0007b118+      dtwmf_metaname_
+Module: /usr/erb/prj/dtqw1/lib/dtxchg.lib(/usr/erb/prj/dt/source/xchg/bmp.c)
+0007b804       dtbmp_import_
+0007b990+      dtbmp_filehead_init_
+0007bb3c       dtbmp_export_
+Module: /usr/erb/prj/dtqw1/lib/dtbigmem.lib(/usr/erb/prj/dt/source/bigmem/bpe.c)
+0007c503       dtbpe_init_
+0007c63c       dtbpe_uninit_
+Module: /usr/erb/prj/dtqw1/lib/dtbigmem.lib(/usr/erb/prj/dt/source/bigmem/bpewrite.c)
+0007c7ab       dtbpe_write_
+Module: /usr/erb/prj/dtqw1/lib/dtwinc.lib(/usr/erb/prj/dt/source/win/winc.c)
+0007cabd       dtwinc_init_
+0007cd4e       dtwinc_uninit_
+Module: /usr/erb/prj/dtqw1/lib/dtlow.lib(/usr/erb/prj/dt/source/low/msw.c)
+0007cef8*      dtmsw_dbg_string_
+0007cf1e*      dtmsw_err_string_
+0007cf52*      dtmsw_say_string_
+0007cf86       dtmsw_pause_
+0007cfba+      dtmsw_yield_
+0007cffa       dtmsw_kick_
+0007d109*      dtmsw_status_
+0007d1a3       dtmsw_feedback_
+Module: /usr/erb/prj/dtqw1/lib/dtlow.lib(/usr/erb/prj/dt/source/low/os_env.c)
+0007d200       dtos_getpid_
+0007d238       dtos_getenv_
+Module: /usr/erb/prj/dtqw1/lib/dtxchg.lib(/usr/erb/prj/dt/source/xchg/read.c)
+0007d436+      dtimage_read_raw_fd_
+0007ddd7*      dtimage_read_pnm_file_
+0007df6e+      dtimage_read_wmf_fd_
+0007e092       dtimage_read_wmf_file_
+0007e1a5+      dtimage_read_bmp_fd_
+0007e222       dtimage_read_bmp_file_
+Module: /usr/lib/clib3r.lib(ioalloc)
+0007e335       __ioalloc_
+Module: /usr/lib/clib3r.lib(flushall)
+0007e3a0       flushall_
+0007e3a5       __flushall_
+Module: /usr/lib/clib3r.lib(qread)
+0007e3d4       __qread_
+Module: /usr/lib/clib3r.lib(stinit)
+000a797c       ___OpenStreams
+Module: /usr/lib/plbx3r.lib(areaexc)
+000a67a0       ___EXC_AREA
+Module: /usr/lib/plbx3r.lib(termnate)
+0007e425       void near terminate()
+Module: /usr/lib/clib3r.lib(heapen)
+0007e469*      _heapenable_
+000a6ba0       ___heap_enabled
+Module: /usr/lib/clib3r.lib(sbrk)
+0007e479       sbrk_
+0007e47f       __brk_
+0007e49e*      brk_
+0007e4e2*      __setcbrk_
+Module: /usr/lib/clib3r.lib(fputc)
+0007e4e8       fputc_
+Module: /usr/lib/clib3r.lib(__prtf)
+0007e556       __prtf_
+Module: /usr/erb/prj/dtqw1/lib/dtbigmem.lib(/usr/erb/prj/dt/source/bigmem/memparse.c)
+0007e56f       dtmem_parse_
+Module: /usr/erb/prj/dtqw1/lib/dtbigmem.lib(/usr/erb/prj/dt/source/bigmem/mem_disk.c)
+0007ee18       dtmemdisk_init_
+Module: /usr/erb/prj/dtqw1/lib/dtlow.lib(/d/2/prj/dt/source/low/prj_dat.c)
+0009f55c+      _dtprj_fastgraph
+0009f560+      _dtprj_fastvirt
+0009f564+      _dtprj_svgacc
+0009f568+      _dtprj_cortex
+0009f56c+      _dtprj_vmc
+0009f570+      _dtprj_x
+0009f574+      _dtprj_fgw
+0009f578+      _dtprj_ncsa_dtm
+0009f57c+      _dtprj_qnx4_ipc
+0009f580+      _dtprj_socket
+0009f584+      _dtprj_dde_ipc
+0009f588       _dtprj_emsif
+0009f58c       _dtprj_xmsif
+0009f590       _dtprj_xmslb
+0009f594       _dtprj_txms
+0009f598+      _dtprj_memdisk
+0009f59c+      _dtprj_qw4
+0009f5a0+      _dtprj_gws
+0009f5a4+      _dtprj_tiff
+0009f5a8+      _dtprj_curses
+0009f5ac+      _dtprj_termcap
+0009f5b0+      _dtprj_termios
+0009f5b4+      _dtprj_int10
+0009f5b8+      _dtprj_qnxterm
+0009f5bc+      _dtprj_noscreen
+0009f5c0+      _dtprj_nointer
+0009f5c4+      _dtprj_nowin
+0009f5c8+      _dtprj_stratos_memcheck
+000a6c34+      _dtprj_param_defaults
+Module: /usr/erb/prj/dtqw1/lib/dtbigmem.lib(/usr/erb/prj/dt/source/bigmem/mem_ems.c)
+0007ef17       dtmemems_init_
+Module: /usr/erb/prj/dtqw1/lib/dtbigmem.lib(/usr/erb/prj/dt/source/bigmem/memxmsif.c)
+0007ef59       dtmemxmsif_init_
+Module: /usr/erb/prj/dtqw1/lib/dtbigmem.lib(/usr/erb/prj/dt/source/bigmem/memxmslb.c)
+0007ef9b       dtmemxmslb_init_
+Module: /usr/erb/prj/dtqw1/lib/dtbigmem.lib(/usr/erb/prj/dt/source/bigmem/memtxms.c)
+0007efdd       dtmemtxms_init_
+Module: /usr/erb/prj/dtqw1/lib/dtbigmem.lib(/usr/erb/prj/dt/source/bigmem/memsourc.c)
+0007f01f       dtmemsource_init_
+0007f104       dtmemsource_uninit_
+0007f13f*      dtmemsource_report_
+0007f22c*      dtmemsource_dbg_
+0007f363*      dtmemsource_string_
+Module: /usr/erb/prj/dtqw1/lib/dtbigmem.lib(/usr/erb/prj/dt/source/bigmem/mem_std.c)
+0007f4bf       dtmemstd_page_compute_
+0007f6b0       dtmemstd_page_free_
+0007f856       dtmemstd_alloc_
+0007fd66+      dtmemstd_flush_
+0007fe8a+      dtmemstd_remalloc_
+00080351       dtmemstd_free_
+0008050f       dtmemstd_map_
+00080a7e       dtmemstd_unmap_
+00080c26       dtmemstd_get_
+00080eff       dtmemstd_put_
+Module: /usr/erb/prj/dtqw1/lib/dtlow.lib(/usr/erb/prj/dt/source/low/os_heap.c)
+000810ba       dtos_heap_integrity_
+00081162       dtos_heap_fill_
+000812e8       dtos_heap_fill_say_
+0008138b*      dtos_heap_option_
+0008147e       dtos_heap_table_init_
+0008151c       dtos_heap_table_reinit_
+Module: /usr/erb/prj/dtqw1/lib/dtlow.lib(/usr/erb/prj/dt/source/low/os_heap2.c)
+00081695       dtos_heap_table_dbg_
+00081892*      dtos_heap_walk_
+Module: /usr/erb/prj/dtqw1/lib/dtlow.lib(/usr/erb/prj/dt/source/low/os_delay.c)
+00081b8e       dtos_delay_
+Module: /usr/erb/prj/dtqw1/lib/dtlow.lib(/usr/erb/prj/dt/source/low/assert.c)
+00081c61*      dt_assert_defined_
+00081ce9       dt_assert_
+00081d38+      dt_assert_va_
+Module: /usr/lib/clib3r.lib(nmsize)
+00081e1a       _nmsize_
+00081e1a*      _msize_
+Module: /usr/lib/clib3r.lib(nexpand)
+00081e23       _nexpand_
+00081e23*      _expand_
+Module: /usr/lib/clib3r.lib(term_fn1)
+00081f38+      term_insert_line_
+00082504*      term_delete_line_
+00082524       term_scroll_up_
+0008254c*      term_scroll_down_
+0008255c*      term_delete_char_
+00082770*      term_insert_char_
+0008295c*      term_insert_on_
+00082998*      term_insert_off_
+Module: /usr/lib/clib3r.lib(term_typ)
+000829b8       term_type_
+Module: /usr/lib/clib3r.lib(8087cw)
+000a6ee8       __8087cw
+Module: /usr/lib/clib3r.lib(init8087)
+0008302e       __init_80x87
+Module: /usr/lib/clib3r.lib(osinf386)
+000a7987       __osminor
+000a7986       __osmajor
+000a7985       ___r87
+000a7984       ___87
+Module: /usr/lib/clib3r.lib(amodf)
+000830ec       __ZBuf2F
+0008305c*      __ModF
+Module: /usr/lib/clib3r.lib(seterrno)
+0008318a       __set_EDOM_
+00083191       __set_ERANGE_
+00083196*      __set_errno
+000831a2*      __FPE_exception_
+Module: /usr/lib/clib3r.lib(hugeval)
+0009f5cc       __HugeValue
+Module: /usr/lib/math387r.lib(scale)
+000831a9       _Scale_
+000831e6       _Scale10V_
+Module: /usr/lib/clib3r.lib(setefg)
+000832b9       __setEFGfmt_
+Module: /usr/lib/clib3r.lib(sopen)
+000832ce       sopen_
+Module: /usr/lib/clib3r.lib(allocfp)
+000832e7       __allocfp_
+0008337d       __freefp_
+000833ad       __purgefp_
+Module: /usr/lib/clib3r.lib(chktty)
+000833cd       __chktty_
+Module: /usr/lib/clib3r.lib(__getmagicvar)
+000833f2       __getmagicvar_
+Module: /usr/lib/clib3r.lib(tmpnam)
+00083481       tmpnam_
+Module: /usr/lib/clib3r.lib(unlink)
+000834ee       unlink_
+Module: /usr/lib/clib3r.lib(opendir)
+00083508       opendir_
+00083548       closedir_
+Module: /usr/lib/clib3r.lib(tell)
+00083560       tell_
+Module: /usr/erb/prj/dtqw1/lib/dtxchg.lib(/usr/erb/prj/dt/source/xchg/dib.c)
+00083571       dtdib_import_
+00083ef4       dtdib_init_
+00084110       dtdib_rgb_gray_
+000a6f1d       _dtdib_longword
+Module: /usr/erb/prj/dtqw1/lib/dtbigmem.lib(/usr/erb/prj/dt/source/bigmem/stack.c)
+00084192       dtstack_init2_
+000843e7*      dtstack_init_
+0008447e       dtstack_prealloc_
+000845b3       dtstack_push_
+0008496f*      dtstack_pop_
+00084b0f*      dtstack_peek_
+00084bf7*      dtstack_poke_
+00084cdf*      dtstack_peek1_
+00084dba*      dtstack_poke1_
+00084e95       dtstack_free_
+00084f36       dtstack_set_
+00085107*      dtstack_print_
+Module: /usr/erb/prj/dtqw1/lib/dtbigmem.lib(/usr/erb/prj/dt/source/bigmem/bpecompr.c)
+000857c8       dtbpe_compress_
+Module: /usr/erb/prj/dtqw1/lib/dtbigmem.lib(/usr/erb/prj/dt/source/bigmem/stack_io.c)
+00085c8f       dtstack_write_
+00085d3e       dtstack_read_
+Module: /usr/erb/prj/dtqw1/lib/dtwinc.lib(/usr/erb/prj/dt/source/win/winc_ipc.c)
+000871ba       dtwinc_ipc_init_
+Module: /usr/erb/prj/dtqw1/lib/dtwinc.lib(/usr/erb/prj/dt/source/win/winc_dsk.c)
+0008848e       dtwinc_dsk_init_
+Module: /usr/lib/clib3r.lib(getpid)
+00088553       getpid_
+Module: /usr/lib/clib3r.lib(getenv)
+00088578       getenv_
+00088588       _findenv_
+Module: /usr/erb/prj/dtqw1/lib/dtxchg.lib(/usr/erb/prj/dt/source/xchg/readbpe.c)
+000885ea       dtimage_read_bpe_fd_
+Module: /usr/lib/clib3r.lib(initfile)
+00088767       __InitFiles_
+Module: /usr/lib/clib3r.lib(ioexit)
+000887ae       __full_io_exit_
+000887ba*      fcloseall_
+Module: /usr/lib/clib3r.lib(_brk)
+00088806       _brk_
+Module: /usr/erb/prj/dtqw1/lib/dtlow.lib(/usr/erb/prj/dt/source/low/err2.c)
+0008881f       dt_err_notlinked_
+Module: /usr/lib/clib3r.lib(nheapchk)
+000888f3*      _nheapchk_
+000888f3       _heapchk_
+Module: /usr/erb/prj/dtqw1/lib/dtlow.lib(/usr/erb/prj/dt/source/low/say.c)
+00088a38+      dt_say_string_
+00088b19       dt_say_
+00088b58+      dt_say_va_
+Module: /usr/lib/clib3r.lib(memavl)
+00088d2c       _memavl_
+Module: /usr/lib/clib3r.lib(nheapmin)
+00088d4d*      _nheapshrink_
+00088d4d       _nheapmin_
+00088d4d*      _heapmin_
+00088d4d*      _heapshrink_
+Module: /usr/erb/prj/dtqw1/lib/dt1d.lib(/usr/erb/prj/dt/source/1d/1d_sort5.c)
+00088f9c       dt1d_sort_struct_
+Module: /usr/lib/clib3r.lib(nheapwal)
+00088fcb*      _nheapwalk_
+00088fcb       _heapwalk_
+00088fd9       __NHeapWalk_
+Module: /usr/lib/clib3r.lib(sleep)
+00089058       nanosleep_
+00089108*      _lsleep_
+00089108*      sleep_
+0008912c*      delay_
+000a7138+      ___sleep_tid
+Module: /usr/lib/clib3r.lib(termio)
+00089264       __setupterm_
+00089980*      __set_curterm_
+00089988*      __del_curterm_
+000899dc*      __restartterm_
+000899e0+      __tputs_
+00089a90       __putp_
+00089aa4       __savetty_
+00089ab8       __resetty_
+00089ad4       __has_colors_
+00089b18       __keypad_
+00089b7c*      __notimeout_
+000a7aa4       ___cur_term
+Module: /usr/lib/clib3r.lib(term_lod)
+00089bd8+      term_init_
+00089d64+      term_restore_
+00089e94*      term_setup_
+00089e94*      term_load_
+0008a640       __term_clear_buffer_
+0008a6d0       term_flush_
+0008a798       __memsetw_
+0008a864+      term_relearn_size_
+000a7ab4       _term_state
+Module: /usr/lib/clib3r.lib(term_col)
+0008aa58       term_color_
+0008ab18       term_fill_
+Module: /usr/lib/clib3r.lib(term_fun)
+0008abb8+      term_up_
+0008aca4+      term_down_
+0008ad94+      term_left_
+0008ae54+      term_right_
+0008af24       term_cur_
+0008b1ac*      term_home_
+0008b1b8*      term_clear_
+Module: /usr/lib/clib3r.lib(tparm)
+0008b610       __tparm_
+0008badc       __tgoto_
+Module: /usr/lib/clib3r.lib(detosinf)
+0008bb6d       __DetOSInfo_
+Module: /usr/lib/math387r.lib(i64tos)
+0008bca1       __Bin2String
+0008bc36       __Rnd2Int
+0008bbfc       __CmpBigInt
+Module: /usr/lib/math387r.lib(fpow10)
+0009f5f4       __BigPow10Table
+Module: /usr/lib/clib3r.lib(efgfmt)
+0008bdca       _EFG_Format_
+Module: /usr/lib/math387r.lib(cnvs2d)
+0008bee2       __cnvs2d_
+Module: /usr/lib/clib3r.lib(tmpdir)
+0008bf63       __tmpdir_
+Module: /usr/lib/clib3r.lib(getnid)
+0008bf91       getnid_
+Module: /usr/lib/clib3r.lib(access)
+0008bfaa       access_
+Module: /usr/lib/clib3r.lib(__opendir)
+0008bfc3       __opendir_
+Module: /usr/lib/clib3r.lib(__closedir)
+0008bfdc       __closedir_
+Module: /usr/erb/prj/dtqw1/lib/dtbigmem.lib(/usr/erb/prj/dt/source/bigmem/bpepush.c)
+0008bff8       dtbpe_getc_
+0008c07c       dtbpe_putc_
+Module: /usr/erb/prj/dtqw1/lib/dtbigmem.lib(/usr/erb/prj/dt/source/bigmem/memio.c)
+0008c16d       dtmem_write_
+0008c2fb       dtmem_read_
+Module: /usr/erb/prj/dtqw1/lib/dtlow.lib(/usr/erb/prj/dt/source/low/ipc.c)
+0008c6b6*      dtipc_register_
+0008c883*      dtipc_unregister_
+0008c8fa*      dtipc_wait_
+0008c971*      dtipc_isipc_
+0008c9f6       dtipc_find_
+0008cb9d       dtipc_unfind_
+0008cc14*      dtipc_done_
+0008cc8b       dtipc_send_
+0008cd0a       dtipc_recv_
+Module: /usr/erb/prj/dtqw1/lib/dtlow.lib(/usr/erb/prj/dt/source/low/dsk.c)
+0008cd89       dtdsk_makename_
+0008d052       dtdsk_getlist_
+0008d2ca       dtdsk_putlist_
+0008d3c1*      dtdsk_delete_
+Module: /usr/erb/prj/dtqw1/lib/dtlow.lib(/usr/erb/prj/dt/source/low/list.c)
+0008d8ea       dtlist_create_
+0008d992*      dtlist_count_
+0008da54       dtlist_delete_
+0008db4a       dtlist_after_
+0008dcf9*      dtlist_front_
+0008dddc*      dtlist_back_
+0008debf       dtlist_search_
+0008df4e       dtlist_find_
+0008e00e       dtlist_next_
+0008e10e*      dtlist_prev_
+0008e216       dtlist_free_
+0008e335       dtlist_destroy_
+Module: /usr/erb/prj/dtqw1/lib/dtbigmem.lib(/usr/erb/prj/dt/source/bigmem/bperead.c)
+0008e3c8       dtbpe_read_
+Module: /usr/lib/clib3r.lib(vsprintf)
+0008e68a       vsprintf_
+Module: /usr/lib/clib3r.lib(timer_create)
+0008e6a5       timer_create_
+Module: /usr/lib/clib3r.lib(timer_settime)
+0008e6be       timer_settime_
+Module: /usr/lib/clib3r.lib(fprintf)
+0008e6d7       fprintf_
+Module: /usr/lib/clib3r.lib(calloc)
+0008e6f7       calloc_
+Module: /usr/lib/clib3r.lib(fdopen)
+0008e70f       fdopen_
+Module: /usr/lib/clib3r.lib(dev_info)
+0008e7e5       dev_info_
+Module: /usr/lib/clib3r.lib(setvbuf)
+0008e7fe       setvbuf_
+Module: /usr/lib/clib3r.lib(_console)
+0008e858       console_open_
+0008e8b4       console_close_
+Module: /usr/lib/clib3r.lib(tcgetattr)
+0008e8cb       tcgetattr_
+Module: /usr/lib/clib3r.lib(tcsetattr)
+0008e8e4       tcsetattr_
+Module: /usr/lib/clib3r.lib(tcdrain)
+0008e8fd       tcdrain_
+Module: /usr/lib/clib3r.lib(dev_mode)
+0008e916       dev_mode_
+Module: /usr/lib/clib3r.lib(console_size)
+0008e92f       console_size_
+Module: /usr/lib/clib3r.lib(kernel)
+0008e948       __send_
+0008e99b       __sendfd_
+0008e9ea       __receive_
+0008ea1e       __reply_
+0008ea52*      __creceive_
+0008ea86*      __readmsg_
+0008eac0*      __writemsg_
+Module: /usr/lib/clib3r.lib(console_read)
+0008eafa       console_read_
+Module: /usr/lib/clib3r.lib(console_write)
+0008eb13       console_write_
+Module: /usr/lib/clib3r.lib(atexit)
+0008eb2c+      _Full_at_exit_rtn_
+0008eb58       atexit_
+000a7c44+      __ExitCount
+000a7c48+      __ExitList
+Module: /usr/lib/clib3r.lib(term_mo2)
+0008eb98       term_mouse_hide_
+0008ebe8       term_mouse_move_
+Module: /usr/lib/clib3r.lib(itoa)
+0008ed1f+      utoa_
+0008ed63       itoa_
+Module: /usr/lib/clib3r.lib(setenv)
+0008ed88       setenv_
+0008ef4c+      unsetenv_
+Module: /usr/lib/clib3r.lib(term_bxf)
+0008ef88*      term_box_fill_
+0008f20c       term_box_on_
+0008f240       term_box_off_
+Module: /usr/lib/clib3r.lib(qnx_osinfo)
+0008f274       qnx_osinfo_
+Module: /usr/lib/math387r.lib(ftos)
+0008f28d*      _SetMaxPrec_
+0008f401       _FtoS_
+Module: /usr/lib/clib3r.lib(umask)
+0008f600       umask_
+Module: /usr/erb/prj/dtqw1/lib/dtlow.lib(/usr/erb/prj/dt/source/low/ipcqnx4.c)
+000904ee       dtipc_qnx4_init_
+Module: /usr/erb/prj/dtqw1/lib/dtlow.lib(/d/2/prj/dt/source/low/ipcsock.c)
+0009232b       dtipc_socket_init_
+Module: /usr/erb/prj/dtqw1/lib/dtlow.lib(/usr/erb/prj/dt/source/low/ipcdde.c)
+000923ef       dtipc_dde_init_
+Module: /usr/erb/prj/dtqw1/lib/dtlow.lib(/usr/erb/prj/dt/source/low/list_io.c)
+0009242f       dtlist_fwrite_
+00092744       dtlist_fread_
+Module: /usr/erb/prj/dtqw1/lib/dtbigmem.lib(/usr/erb/prj/dt/source/bigmem/bpeexpan.c)
+00092c28       dtbpe_expand_
+Module: /usr/lib/clib3r.lib(fcntl)
+000932b4       fcntl_
+Module: /usr/lib/clib3r.lib(__console_open)
+000932cd       __console_open_
+Module: /usr/lib/clib3r.lib(__console_close)
+000932e6       __console_close_
+Module: /usr/lib/clib3r.lib(kererr)
+00093300       __kererr_
+Module: /usr/lib/clib3r.lib(stack386)
+0009330e       stackavail_
+Module: /usr/lib/math387r.lib(nan_inf)
+00093317       __Nan_Inf_
+Module: /usr/lib/math387r.lib(fabs387)
+00093399*      IF@ABS
+00093399*      IF@DABS
+0009338c       fabs_
+Module: /usr/lib/math387r.lib(log387)
+000933e3*      IF@DLOG10
+000933e3*      IF@LOG10
+000933df*      IF@DLOG2
+000933df*      IF@LOG2
+0009339c*      IF@DLOG
+0009339c*      IF@LOG
+000933f3       log10_
+000933ff*      log2_
+000933e7*      log_
+Module: /usr/lib/math387r.lib(floor)
+0009340b       floor_
+Module: /usr/lib/math387r.lib(cvt)
+0009343e       __cvt_
+Module: /usr/lib/clib3r.lib(fork)
+000935cc       fork_
+Module: /usr/lib/clib3r.lib(strerror)
+000935e8       strerror_
+000a7ce4+      _emsg
+Module: /usr/lib/clib3r.lib(qnx_name_attach)
+000936a9       qnx_name_attach_
+Module: /usr/lib/clib3r.lib(getppid)
+000936c2       getppid_
+Module: /usr/lib/clib3r.lib(qnx_name_detach)
+000936db       qnx_name_detach_
+Module: /usr/lib/clib3r.lib(qnx_vc_detach)
+000936f4       qnx_vc_detach_
+Module: /usr/lib/clib3r.lib(qnx_name_locate)
+0009370d       qnx_name_locate_
+Module: /usr/lib/socket3r.lib(/src/os/Sock/reno/libnet/getservbyname.c)
+00093726       getservbyname_
+Module: /usr/lib/socket3r.lib(/src/os/Sock/reno/libnet/inet_addr.c)
+00093798       inet_addr_
+000937cc+      inet_aton_
+Module: /usr/lib/socket3r.lib(/src/os/Sock/reno/libnet/gethostnamadr.c)
+00093c24       gethostbyname_
+00093d3e       gethostbyaddr_
+00093e1c+      _sethtent_
+00093e5c+      _endhtent_
+00093e8d+      _gethtent_
+00093fbb+      _gethtbyname_
+00094017+      _gethtbyaddr_
+Module: /usr/lib/socket3r.lib(/src/os/Sock/reno/libnet/inet_ntoa.c)
+0009407a       inet_ntoa_
+Module: /usr/lib/clib3r.lib(sigprocmask)
+000940c2       sigprocmask_
+Module: /usr/lib/clib3r.lib(sigset)
+000940e8       sigemptyset_
+000940f4*      sigfillset_
+00094100       sigaddset_
+00094128       sigdelset_
+00094154*      sigismember_
+Module: /usr/lib/clib3r.lib(sigact)
+00094188       sigaction_
+Module: /usr/lib/clib3r.lib(sigsuspend)
+000941a3       sigsuspend_
+Module: /usr/lib/socket3r.lib(/src/os/Sock/reno/libnet/socket.c)
+000941bc       socket_
+Module: /usr/lib/socket3r.lib(/src/os/Sock/reno/libnet/setsockopt.c)
+0009426d       setsockopt_
+Module: /usr/lib/socket3r.lib(/src/os/Sock/reno/libnet/byteorder.c)
+0009432d*      htonl_
+0009432d*      ntohl_
+00094335*      ntohs_
+00094338       htons_
+Module: /usr/lib/socket3r.lib(/src/os/Sock/reno/libnet/bind.c)
+0009433b       bind_
+Module: /usr/lib/socket3r.lib(/src/os/Sock/reno/libnet/listen.c)
+000943eb       listen_
+Module: /usr/lib/clib3r.lib(kill)
+0009443f       kill_
+Module: /usr/lib/clib3r.lib(wait)
+00094458       wait_
+Module: /usr/lib/clib3r.lib(select)
+00094478       select_
+Module: /usr/lib/socket3r.lib(/src/os/Sock/reno/libnet/accept.c)
+00094b62       accept_
+Module: /usr/lib/clib3r.lib(signal)
+00094c88       signal_
+Module: /usr/lib/socket3r.lib(/src/os/Sock/reno/libnet/connect.c)
+00094cce       connect_
+Module: /usr/lib/math387r.lib(log87e)
+00094d7e       __log87_err_
+Module: /usr/lib/math387r.lib(modf387)
+00094db4       modf_
+Module: /usr/lib/math387r.lib(frexp)
+00094dcd       frexp_
+Module: /usr/lib/clib3r.lib(__strnerr)
+00094e1c       __strnerr_
+Module: /usr/lib/socket3r.lib(/src/os/Sock/reno/libnet/getservent.c)
+000a82b4       __serv_stayopen
+00094e35       setservent_
+00094e6b       endservent_
+00094e93       getservent_
+Module: /usr/lib/socket3r.lib(/src/os/Sock/reno/libnet/res_comp.c)
+00094faa       dn_expand_
+000950a8       dn_comp_
+00095208       __dn_skipname_
+00095311       _getshort_
+0009532c*      _getlong_
+00095359       __putshort_
+0009536f       __putlong_
+Module: /usr/lib/socket3r.lib(/src/os/Sock/reno/libnet/herror.c)
+0009538e*      herror_
+000a74d4+      _h_errlist
+000a74e8+      _h_nerr
+000a8748       _h_errno
+Module: /usr/lib/socket3r.lib(/src/os/Sock/reno/libnet/res_query.c)
+00095446       res_query_
+00095540       res_search_
+000956ba+      res_querydomain_
+00095769+      __hostalias_
+Module: /usr/lib/clib3r.lib(rewind)
+00095864       rewind_
+Module: /usr/lib/clib3r.lib(fgets)
+00095876       fgets_
+Module: /usr/lib/clib3r.lib(strpbrk)
+000958d4       strpbrk_
+Module: /usr/lib/clib3r.lib(stricmp)
+00095916       stricmp_
+00095916*      strcmpi_
+Module: /usr/lib/clib3r.lib(sig386)
+0009594b       __sigstub_
+Module: /usr/lib/clib3r.lib(__sigaction)
+00095959       __sigaction_
+Module: /usr/lib/socket3r.lib(/src/os/Sock/reno/libnet/locator.c)
+00095972       __sock_locate_
+Module: /usr/lib/clib3r.lib(qnx_fd_attach)
+00095a32       qnx_fd_attach_
+Module: /usr/lib/clib3r.lib(qnx_fd_detach)
+00095a4b       qnx_fd_detach_
+Module: /usr/lib/clib3r.lib(qnx_proxy_attach)
+00095a64       qnx_proxy_attach_
+Module: /usr/lib/clib3r.lib(selrecv)
+00095a88       _select_receive_
+Module: /usr/lib/clib3r.lib(timer_delete)
+00095a9f       timer_delete_
+Module: /usr/lib/clib3r.lib(qnx_proxy_rem_detach)
+00095ab8       qnx_proxy_rem_detach_
+Module: /usr/lib/clib3r.lib(qnx_fd_query)
+00095ad1       qnx_fd_query_
+Module: /usr/lib/clib3r.lib(qnx_proxy_rem_attach)
+00095aea       qnx_proxy_rem_attach_
+Module: /usr/lib/math387r.lib(math2err)
+00095b03       __math1err_
+00095b0d+      __math2err_
+Module: /usr/lib/clib3r.lib(writev)
+00095be3       writev_
+Module: /usr/lib/socket3r.lib(/src/os/Sock/reno/libnet/res_init.c)
+00095bfc       res_init_
+000a7548       __res
+Module: /usr/lib/socket3r.lib(/src/os/Sock/reno/libnet/res_mkquery.c)
+00095fc3       res_mkquery_
+Module: /usr/lib/socket3r.lib(/src/os/Sock/reno/libnet/res_send.c)
+00096209       res_send_
+0009683b*      _res_close_
+Module: /usr/lib/clib3r.lib(bits)
+00096863       __setbits_
+0009f644       __Bits
+Module: /usr/lib/clib3r.lib(atol)
+00096898       atol_
+Module: /usr/lib/clib3r.lib(qnx_psinfo)
+000968e8       qnx_psinfo_
+Module: /usr/lib/clib3r.lib(qnx_vc_attach)
+00096901       qnx_vc_attach_
+Module: /usr/lib/math387r.lib(_matherr)
+0009691a*      _set_matherr_
+00096920       _matherr_
+000a76ac+      __RWD_matherr
+Module: /usr/lib/unix3r.lib(/src/lib/unix/gethostname.c)
+00096995       gethostname_
+Module: /usr/lib/socket3r.lib(/src/os/Sock/reno/libnet/send.c)
+000969f7       send_
+00096a01       sendto_
+Module: /usr/lib/socket3r.lib(/src/os/Sock/reno/libnet/recv.c)
+00096add       recv_
+00096ae7+      recvfrom_
+Module: /usr/lib/math387r.lib(__mtherr)
+00096bd0       __matherr
+Module: /usr/lib/clib3r.lib(fputs)
+00096bd5       fputs_
+Module: /usr/lib/math387r.lib(matherr)
+00096c4a+      matherr_
+
+
+                        +--------------------+
+                        |   Libraries Used   |
+                        +--------------------+
+
+/usr/erb/prj/dtqw1/lib/dtxchg.lib
+/usr/erb/prj/dtqw1/lib/dtwinc.lib
+/usr/erb/prj/dtqw1/lib/dthigh.lib
+/usr/erb/prj/dtqw1/lib/dtbigmem.lib
+/usr/erb/prj/dtqw1/lib/dtlow.lib
+/usr/erb/prj/dtqw1/lib/dt1d.lib
+/usr/erb/prj/dtqw1/lib/dicom3.lib
+/usr/lib/clib3r.lib
+/usr/lib/plbx3r.lib
+/usr/lib/math387r.lib
+/usr/lib/emu387.lib
+/usr/lib/unix3r.lib
+/usr/lib/socket3r.lib
+
+
+                        +-----------------------+
+                        |   Linker Statistics   |
+                        +-----------------------+
+
+Stack size:  1800 (6144.)
+Memory size:  00065cbd (416957.)
+Entry point address: 0005b98e

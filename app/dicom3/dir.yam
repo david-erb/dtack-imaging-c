@@ -1,0 +1,29 @@
+define(TOP, UP2)
+define(DIR, app/dicom3)
+
+pushdef(`CC', `CPP')
+pushdef(`LD', `LDPP')
+pushdef(`CCWARNINGS', `CCWARNINGS_LOW')
+
+define(`PRJ_INCLUDES', PRJ_INCLUDES+TOP/fourth/dicom3)
+
+pushdef(`CCOPTIMIZE', `CCOPTIMIZE_HIGH')
+pushdef(`CCDEBUGGER', `CCDEBUGGER_OFF')
+
+popdef(`CCDEBUGGER')
+popdef(`CCOPTIMIZE')
+
+__shexe(prj_app_bin(dc3dump),  dc3dump,  prj_fourth_lib(dicom3), , PRJ_LOADS)
+__shexe(prj_app_bin(dc3key),   dc3key,   prj_fourth_lib(dicom3), , PRJ_LOADS)
+__shexe(prj_app_bin(dc3topnm), dc3topnm, prj_fourth_lib(dicom3), , PRJ_LOADS)
+__shexe(prj_app_bin(udicom),   udicom, 
+  prj_lib(dtxchg)+
+  prj_lib(dtwinc)+
+  prj_lib(dthigh)+
+  PRJ_LIBS+
+  prj_fourth_lib(dicom3), ,
+  PRJ_LOADS)
+
+__finish
+
+

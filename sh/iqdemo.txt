@@ -1,0 +1,131 @@
+#! /bin/bash
+
+# Demo for GEMS 6/25/97
+
+# a. display raw iqphant.img 512x512 image (dim image)
+#    display histogram
+#    print statistics (size, min, max, mean)
+# pause
+# b. linear stretch contrast and show result (brighter)
+#    display histogram
+# pause
+# c. convolve bright image with 3x3 Laplace and display (black edges)
+# pause
+# d. bilevel threshold to black-and-white image (most outlines appear)
+# pause
+# e. do connected components analysis and draw outlines on image
+#    (green boxes around some stuff)
+# pause
+# f. convolve with 3x3 averaging filter and display (blurry)
+# pause
+# g. grayscale erode (very blurry)
+# pause
+# h. multithreshold to 4 levels (posterized)
+# pause
+# i. do connected components analysis and draw outlines and sizes on image
+#    (many interesting features identified by green boxes)
+# pause
+# j. draw red box around a particular ROI
+#    (red box around rivet plate)
+# pause
+# k. extract the ROI and draw boxes around blobs, print statistics on blobs
+#    (rivets identified by green boxes)
+# pause
+
+_server()
+{
+  myslaughter dtview
+  cd /
+  dtview &
+  sleep 3
+}
+
+_prep()					# prepare raw image and luts
+{
+  dttool gen -w 256 -h 3 vramp pga,/tmp/gray.lut
+  rawtopgm -h 512 512 512 /f/prj/iqsign/image2/iqphant.img > /tmp/raw.pgm
+}
+
+_a()					# display raw image
+{
+  dttool regray -x 0 -y 0 -min 8 /tmp/raw.pgm :a
+  dttool hist -x 516 -y 0 :a :ahist 
+}
+
+_b()					# linear stretch contrast
+{
+  dttool linear :a 1.8 8 :b
+  dttool hist :b :bhist 
+}
+
+_c()					# convolve Laplace
+{
+  dttool convolve -D img -precision s4 :b laplace /tmp/tmp.pgm
+  dttool regray -precision b08 -min 8 /tmp/tmp.pgm :c
+}
+
+_d()					# bilevel threshold
+{
+  dttool thresh :c 100 :d
+}
+
+_e()					# draw boxes around blobs
+{
+  dttool enclose -min 20 -max 10000 -op enc -conn 8 -D stats :d :d :e  
+}
+
+_f()					# average convolve
+{
+  dttool convolve -D img -precision s4 :b ave /tmp/tmp.pgm
+  dttool regray -precision b08 -min 8 /tmp/tmp.pgm :f
+}
+
+_g()					# erode
+{
+  dttool morph -op erode :f ave :g
+}
+
+_h()					# multithreshold
+{
+  dttool multithresh :g 50 100 150 200 :h
+}
+
+_i()					# draw boxes around blobs
+{
+  dttool enclose -min 150 -max 10000 -op num+enc -conn 8 -D stats :h :h :i
+}
+
+_j()					# draw red box around ROI
+{
+  dttool box -color 3 :h 110 172 175 315 :j
+  dttool box -color 3 :j 109 171 176 316 :j
+}
+
+_k()					# extract ROI and draw/print blobs
+{
+  dttool copy -dx 110 -dy 172 -w65 -h 142 :h :k
+  dttool enclose -min 10 -max 1000 -op enc -conn 8 -D stats :k :k :k
+}
+
+_all()
+{
+  _server
+  _prep
+  _a
+  _b
+  _c
+  _d
+  _e
+  _f
+  _g
+  _h
+  _i
+  _j
+  _k
+}
+# --------------------------------------------------------------------------------
+
+export DISPLAY=localhost:0.0
+
+eval _$1
+

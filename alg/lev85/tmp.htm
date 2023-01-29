@@ -1,0 +1,2426 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html>
+<head>
+<title>
+dtlev85: Segmentation Performance
+</title>
+<link rev="made" href="MAILTO:webmaster@dtack.com">
+</head>
+<body>
+<a name="sect000"></a>
+<h1>dtlev85: Segmentation Performance</h1>
+Copyright (c) 1996  company, All Rights Reserved<br>
+<a name="sect000"></a>
+Please review our
+<a href="#License Summary"> License Summary</a>
+and our
+<a href="#Disclaimer"> Disclaimer</a>
+below.
+<p>
+<a href="../..">
+[Dtack Home Page]
+</a>
+|
+<a href="sect000.htm">
+[Split Web Pages]</a>
+|
+<a href="=dxfilebase=.ps3">
+[PostScript 300dpi]</a>
+|
+<a href="=dxfilebase=.ps6">
+[PostScript 600dpi]</a>
+<hr> <!-- dxhtml_toc -->
+This document contains the following major sections:
+<ol>
+<li><a href="#sect001">Abstract</a></li>
+<li><a href="#sect002">Overview</a></li>
+<li><a href="#sect003">About the Algorithm</a></li>
+<li><a href="#sect004">Implementation Interface</a></li>
+<li><a href="#sect005">Implementation Notes</a></li>
+<li><a href="#sect006">Application Examples</a></li>
+<li><a href="#sect007">EXAMPLE lev85d.c - Direct Blob Uniformity</a></li>
+<li><a href="#sect008">EXAMPLE lev85e.c - Blob Histogram Uniformity</a></li>
+<li><a href="#sect009">License Summary</a></li>
+<li><a href="#sect010">Disclaimer</a></li>
+<li><a href="#sect011">dtlev85 - algorithm executive</a></li>
+<li><a href="#sect012"><code>dtlev85_blob()</code> - contribute blob to uniformity</a></li>
+<li><a href="#sect013"><code>dtlev85_combine()</code> - combine uniformity of two areas</a></li>
+<li><a href="#sect014"><code>dtlev85_compute()</code> - compute final uniformity of area</a></li>
+<li><a href="#sect015"><code>dtlev85_hist()</code> - contribute region to uniformity</a></li>
+<li><a href="#sect016"><code>dtlev85_init()</code> - initialize structure</a></li>
+<li><a href="#sect017"><code>dtlev85_label()</code> - uniformity for each label</a></li>
+<li><a href="#sect018"><code>dtlev85_total()</code> - compute total uniformity</a></li>
+<li><a href="#sect019">References</a></li>
+</ol>
+<hr> <!-- dxhtml1_head level 2, string Abstract -->
+<a name="sect001"></a>
+<a href="#sect000">
+<a href="#sect002">
+<h2>1. Abstract</h2>
+This is an implementation of a segmentation performance measuring algorithm.
+The algorithm is due to Levine and Nazif.
+It is described completely in [lev85].
+Input consists of two images.
+The first image is the original gray level image.
+The second image is a segmented image.
+It contains pixels whose values are labels which
+indicate membership in a connected region.
+One or more regions may be considered together as an area.
+For each area, the algorithm produces a single numeric uniformity measure.
+Uniformity values near 1.0 signify that the pixels within the regions of the area
+are similar in gray level.
+The algorithm is implemented as a C-callable library of routines.
+A simple main program provides command-line execution of the routines.
+The main program has an option for verifying the correctness
+of the implementation.
+The source code is modular and platform- and hardware-independent.
+Compilation instructions in the form of makefiles are provided for
+several platforms including Unix, DOS, Microsoft Windows and others.
+<hr> <!-- dxhtml1_head level 2, string Overview -->
+<a name="sect002"></a>
+<a href="#sect000">
+<a href="#sect003">
+<a href="#sect001">
+<h2>2. Overview</h2>
+<!-- Xdxdefine(`figgray5', 1)`'-->
+<p>
+<img align=top src="gray5.pgm.gz">
+Figure figgray5: Billiard Balls Gray Level
+<br>
+<p>
+<!-- Xdxdefine(`figseg5b', 2)`'-->
+<p>
+<img align=top src="seg5b.pgm.gz">
+Figure figseg5b: Billiard Balls Naive Segmentation, Uniformity xxxx
+<br>
+<!-- Xdxdefine(`figseg5a', 3)`'-->
+<p>
+<img align=top src="seg5a.pgm.gz">
+Figure figseg5a: Billiard Balls Better Segmentation, Uniformity xxxx
+<br>
+<p>
+<h3>2.1. <i>What are the goals of the algorithm?</i></h3>
+Given a gray level image and its segmentation,
+the algorithm attempts to provide a single number called the uniformity.
+The uniformity may be considered a measure
+of the goodness of the segmentation.
+<p>
+<h3>2.2. <i>How would you use the algorithm?</i></h3>
+First you produce a segmented image by any desired means.
+Binary thresholding is one of the many possibilities.
+Then you simply feed the original gray level image along with
+the segmented image into the algorithm.
+You may use the resulting uniformity as input to a decision process.
+For example, if the uniformity is not high enough,
+you may want to rerun the segmentation with modified parameters.
+<p>
+<h3>2.3. <i>What does the output look like?</i></h3>
+The output is normally just a single number between 0.0 and 1.0
+for each designated area.
+However, printed numbers can be fairly boring.
+Therefore, the sample program can optionally use the numbers
+as color indices in an output image.
+The visual feedback obtained in this way may actually be useful.
+<p>
+<h3>2.4. <i>What should you be aware of?</i></h3>
+This algorithm does not perform segmentation.
+Rather, it requires a segmented image as input.
+<p>
+The measure is variance based.
+For high uniformity, the segmented objects must have similar gray levels.
+<p>
+Careful blob conditioning may be required.
+For example, the uniformity measure is normalized, in part,
+by the range of pixel values.
+A single pixel with an extreme gray value may artificially skew
+the uniformity toward higher a value.
+<p>
+The uniformity measure was designed by its creators in conjunction
+with several other measures.
+There is no discussion of its suitability when used by itself.
+You must take care to clearly understand the algorithm before
+placing any importance on its outcome.
+<p>
+<h3>2.5. <i>What is the interface to the implementation?</i></h3>
+The implementation has both a run-ready main program
+and a C-callable library.
+The main program uses the library to do all its tasks.
+It has a number of command-line options.
+It will read a pair input images and print out the uniformity numbers.
+Optionally, it will make an output image where each blob is
+colored according to the uniformity value of its region.
+<p>
+<h3>2.6. <i>What inputs do the C-callable routines require?</i></h3>
+You must provide a pair of data structures describing two input images.
+For more control over the algorithm,
+you may want to provide callback routines to handle
+the uniformity numbers on a label-by label or blob-by-blob basis.
+<p>
+<h3>2.7. <i>What do the library routines output?</i></h3>
+The easiest routine returns a single uniformity number.
+However, if you provide a callback routine, you will have complete
+control over what is output.
+<p>
+<h3>2.8. <i>Does the implementation test itself?</i></h3>
+Yes, the implementation contains an extensive self-test suite.
+Successful execution of the test suite indicates the correctness
+of the implementation to a high degree of confidence.
+The main program has options for invoking the test suite.
+Or you may integrate it
+it into your application's testing methodology
+using the C-callable interface.
+<p>
+<h3>2.9. <i>Can you modify it?</i></h3>
+The distribution comes with complete, well-commented source code.
+You are free to modify the code to suit your application.
+(Please be aware that Dtack's code, modified by you or not, is subject
+to the redistribution restrictions of the License Agreement.
+You are basically prohibited from distributing any of the source code,
+even if you modify it.)
+<p>
+<h3>2.10. <i>What documentation exists for it?</i></h3>
+<ul>
+<li>Abstract
+<li>Overview which you are reading
+<li>Guide with Algorithm Review, Implementation Notes, and Application Examples
+<li>Program and Function "man" Pages
+</ul>
+<p>
+The documentation is produced in the following on-line digital formats:
+<ul>
+<li>PostScript
+<li>Unix man pages
+<li>GNU info files
+<li>Texinfo
+<li>nroff/troff with .ms macros
+<li>html suitable for WWW browsers
+<li>Microsoft Windows help
+<li>ASCII text
+</ul>
+<p>
+<h3>2.11. <i>How do you install it?</i></h3>
+Installation of this algorithm requires the prior installation of the
+Dtack Imaging Software Base Libraries.
+All installation may be done in a single directory by a simple script.
+An accompanying document entitled <i>Algorithm dtlev85: Installation</i>
+gives detailed instructions for each major operating system.
+<p>
+To use the software after installation, only the following are required:
+<dl>
+<dt><code>dtlev85.h</code>
+<dd>
+algorithm header file
+<dt><code>dt.h</code>
+<dd>
+Dtack Base Image Processing Library header file
+<dt><code>dtlev85.lib</code> 
+<dd>
+algorithm library
+<dt><code>dthigh.lib</code>
+<dd>
+high level Base Library
+<dt><code>dtlow.lib</code>
+<dd>
+low level Base Library
+<dt><code>dtlev85</code>
+<dd>
+main program executable
+(not required if you write your own program)
+</dl>
+<hr> <!-- dxhtml1_head level 2, string About the Algorithm -->
+<a name="sect003"></a>
+<a href="#sect000">
+<a href="#sect004">
+<a href="#sect002">
+<h2>3. About the Algorithm</h2>
+This section provides a brief background which helps put
+this algorithm into context of the science of image processing.
+It outlines the purpose of the algorithm itself.
+It then defines some terms from the source article which carry over into
+the implementation.
+Finally, this section highlights some major concepts
+not in the original algorithm formulation,
+but introduced by the implementation.
+<p>
+<h3>3.1. Background</h3>
+Segmentation in image processing is the process
+by which objects in a source image are distinguished from
+each other and from their background.
+The science of segmentation has no single basis in theory,
+but depends highly on the application ([har85], [fu81], [kan80]).
+From this it follows that there is little theoretical treament
+of procedures for evaluating
+the performance of one segmentation algorithm
+with respect to another ([ree93], [zha92]).
+<p>
+It is perhaps indicative of this difficulty in producing
+an analytical solution to the performance comparison problem
+that most scientific papers simply present their
+segmentation results in printed form ([per87], [tax89], [pal93]).
+They rely on the reader to make a visual comparative judgment
+of the goodness of the segmentation.
+<p>
+Further reliance on the human visual judgment
+often shows up even when quantification
+of segmentation performance is attempted.
+Manual segmentation done by a human is often required
+to establish a ground truth ([yas77], [yam80], [lee90], [bha86]).
+Departure of the computer generated segmentation from the
+"true" human generated segmentation is considered erroneous
+and reduces the overall goodness score of the performance.
+<p>
+Although most performance assessment in the literature involves
+guidance or interpretation by a human,
+some work has been done in the area of
+producing a quantitative segmentation performance measure which
+can be applied automatically.
+Having automated techniques is critical in many situations
+in which measurements must be made very often or vary quickly.
+The [lev85] algorithm implemented by this software is such an
+automated technique.
+A brief review of some other automated techniques follows.
+<p>
+[wes78b] proposes two methods for automatically measuring the goodness
+of a thresholded image.
+One is based on the busyness and is computed using a co-occurrence matrix
+technique.
+The other is called a discrepancy measure and reflects the
+degree of classification error probably assuming a gray level distribution.
+<p>
+[abd79] uses an automatic quantitative
+figure of merit measure from [pra78] for
+evaluation of edge detectors.
+However, the figure of merit requires the original ideal image,
+which in the article are synthetic images.
+<p>
+[dub90] also uses synthetic images in the formulation of
+an automatic texture segmentation measure called
+the mean boundary error.
+The synthetic pictures are created by mosaicing several
+known textures together with simple or random boundaries between them.
+<p>
+In their survey paper,
+[sah88] introduce an automatic performance measure based on region shape
+to compare performance of some global thresholding methods.
+<p>
+[bha94] use five different measures to evaluate the relative
+performance of a segmentation algorithm while varying its input parameters.
+The performance measurement is integral to the total process
+whose aim is to find the optimum parameters.
+<p>
+Some segmentation processes have built-in measurement
+([ots79], [ros81], [tsa85]).
+The measures under consideration become the decision points
+on which iterative processes guide themselves and ultimately terminate.
+<p>
+In general, segmentation may be evaluated by observing
+the behavior of features extracted as a result of the segmentation
+([bha86], [zha92]).
+To this end,
+the [lev85] uniformity may be thought of as a feature-space measurement.
+The features in this case are the gray level values.
+<p>
+The following articles make use of [lev85] algorithm
+in quantitative segmentation performance analysis:
+[sah88], [lee90], [won89], [zha92].
+<p>
+<h3>3.2. Purpose of the Algorithm</h3>
+This algorithm provides a numeric measure
+of the goodness of a segmentation.
+The algorithm produces the measure in an automatic way,
+not requiring human intervention at any point.
+However, the algorithm produces results which would be
+similar to a human's.
+<p>
+Computing this measure on multiple segmentations
+will provide a means of comparison of their performances.
+<p>
+This measure of performance
+may be used as feedback in an iterative process.
+After completing one segmentation pass,
+the process would compute the uniformity of the result.
+Based on the level of the uniformity,
+the process may elect to re-execute the segmentation using
+different input parameters.
+<p>
+[lev85] discusses four automatic segmentation measures
+which attempt to meet both criteria:
+they are automatic yet they simulate a human's judgment.
+They were developed to serve as the feedback mechanisms
+to guide improvement in a
+complex rule based low level image segmentation system.
+The measures are:
+<ol>
+<li> region uniformity
+<li> region contrast
+<li> line contrast
+<li> texture measures
+</ol>
+<p>
+This implementation covers the region uniformity measure only.
+<p>
+The uniformity measure returns high values
+when the regions in the area are similar in gray level.
+That is, the uniformity of a region varies inversely with the variance
+of the gray levels in the region.
+This means that if a region contains only pixels whose values
+are close to the average value, it will have a uniformity close to 1.0.
+In the limit, a region of constant value will have a uniformity of
+exactly 1.0.
+<p>
+The uniformity measure takes into account the relative size of the regions.
+The size of a region linearly affects how much that region's
+uniformity contributes to the uniformity of the area.
+The justification is that uniformity can be thought of as
+being more noticeable in large regions.
+<p>
+The uniformity measure is weighted such that its range is between 0.0 and 1.0.
+<p>
+The uniformity measure is designed to be efficiently computable
+in a dynamic situation where regions are frequently being split and merged.
+<p>
+<h3>3.3. Terminology</h3>
+<dl>
+<dt>area
+<dd>
+Any group of pixels on which uniformity is to be computed.
+Typically an area consists of multiple regions.
+<dt>blob
+<dd>
+The term blob is used interchangeably with region in this
+documentation.
+<dt>gray level
+<dd>
+Value of pixels in the original image.
+The gray level is commonly a response of a camera to the
+brightness in a scene, but it may just as easily be
+any other numeric quantity
+associated with a point position in the 2D plane.
+<dt>label
+<dd>
+The value of a pixel in the segmented image.
+This is not normally a brightness value, but rather
+a value which indicates the pixel's membership in a region.
+<dt>region
+<dd>
+Any group of connected pixels.  Connectivity is defined by the
+4- or 8-connectedness of the pixels having the same label value
+in the segmented image.
+The term region is used interchangeably with blob in this
+documentation.
+<dt>uniformity
+<dd>
+Number between 0.0 and 1.0 given by equation 7 of [lev85].
+</dl>
+<p>
+<h3>3.4. Combining Regions into Areas</h3>
+Figure figdraw6 illustrates the concept of regions and areas.
+<!-- Xdxdefine(`figdraw6', 4)`'-->
+<p>
+<img align=top src="draw6.pgm.gz">
+Figure figdraw6: Six simple regions
+<br>
+Counting the background and based strictly on pixel connectivity,
+there are seven regions in the picture.
+Three of the internal regions are rectangular and three are circular.
+<p>
+Remember that a uniformity number can only be computed on an area,
+and that an area is made up of regions.
+Some of the many ways in which regions may be combined into areas are:
+<ol>
+<li> all regions in one monolithic area
+<li> each region as its own area
+<li> all square regions in one area and all circular in another
+<li> all small regions in one area and all large in another
+<li> all dark regions in one area and all light in another
+<li> all regions near the top in one area and all near the bottom in another
+</ol>
+There are many other possiblies.
+Each application will have its own requirements for
+associating regions with areas.
+The flexibility to combine multiple, possibly dispersed,
+regions into a single
+uniformity measure is one of the features of this implementation.
+<p>
+One function, <code>dtlev85_total()</code>,
+treats the entire image as a single region,
+excluding pixels with a single background value.
+<p>
+Another function, <code>dtlev85_label()</code>,
+treats all regions with the same label as belonging to a single area.
+This function returns as many uniformity numbers as
+there are different labels found in the segmented image.
+<p>
+If neither of these functions meet your requirements,
+you may choose which regions contribute to which areas
+on a region-by-region (blob-by-blob) basis.
+Once the blob is extracted, and the decision to use it in an area is made,
+<code>dtlev85_blob()</code> does the uniformity contribution.
+<p>
+Finally, if you have your own method of computing the histogram of each region,
+<code>dtlev85_hist()</code> will contribute the histogram to the uniformity.
+<p>
+Used together or separately, this group of functions should
+meet almost all applications' requirements.
+<hr> <!-- dxhtml1_head level 2, string Implementation Interface -->
+<a name="sect004"></a>
+<a href="#sect000">
+<a href="#sect005">
+<a href="#sect003">
+<h2>4. Implementation Interface</h2>
+The  programs and subroutines in this implementation
+work together to produce
+uniformity measures for selectable image areas.
+<p>
+<dl>
+<dt><code>dtlev85</code>
+<dd>
+main program parses command line
+and calls the functions
+<dt><code>dtlev85a</code>
+<dd>
+sample program showing total uniformity
+<dt><code>dtlev85b</code>
+<dd>
+sample program showing label-by-label uniformity
+<dt><code>dtlev85c</code>
+<dd>
+sample program showing basic uniformity procedure
+<dt><code>dtlev85d</code>
+<dd>
+sample program showing direct blob-by-blob uniformity
+<dt><code>dtlev85e</code>
+<dd>
+sample program showing histogram uniformity
+<dt><code>dtlev85_total()</code>
+<dd>
+produces total uniformity for an area which consists
+of all non-background pixels
+<dt><code>dtlev85_label()</code>
+<dd>
+produces a separate uniformity for each area
+distinguished by a unique label in the segmented
+image
+<dt><code>dtlev85_init()</code>
+<dd>
+initializes an array of dtlev85 structures
+<dt><code>dtlev85_blob()</code>
+<dd>
+adds a region's gray levels to the uniformity
+being accumulated for an area
+<dt><code>dtlev85_hist()</code>
+<dd>
+adds a region's histogram to the uniformity
+being accumulated for an area
+<dt><code>dtlev85_compute()</code>
+<dd>
+computes the uniformity measure for an area
+<dt><code>dtlev85_combine()</code>
+<dd>
+combine two areas
+</dl>
+<p>
+The data structure used to describe the images
+includes the following members.
+Please refer to [dta95a] for a complete discussion of
+this structure and the possible image data types.
+<p>
+<pre>
+typedef struct {
+  dtxy_t xe;                          // image width (x extent)
+  dtxy_t ye;                          // image height (y extent)
+  unsigned int rowsize;               // storage bytes needed by one row
+  dt_ntype_e ntype;                   // image data type
+  dtimage_dataptr_t *row;             // pointers to start of each row
+} dtimage_t;
+</pre>
+<p>
+The principal data structure used in computing and returning
+the uniformity includes the following members:
+<p>
+<pre>
+typedef struct {
+  double u;                           // computed uniformity
+  long n;                             // number of regions
+  double fmax, fmin;                  // max data range found
+  long Aa;                            // total area accumulator
+} dtlev85_t;
+</pre>
+<hr> <!-- dxhtml1_head level 2, string Implementation Notes -->
+<a name="sect005"></a>
+<a href="#sect000">
+<a href="#sect006">
+<a href="#sect004">
+<h2>5. Implementation Notes</h2>
+This section describes assumptions made by the implementation,
+and deviations by the implementation from the original
+algorithm as described in [lev85].
+<p>
+This implementation follows the article's Section III very closely.
+The main contribution made by the implementation are the various
+ways of grouping regions into areas.
+The ordering of computation is changed to support this.
+In particular, the division by the total area
+in equation (x) is deferred
+until final uniformity computation by <code>dtlev85_compute()</code>.
+<p>
+The source article does not specify how regions should be
+grouped into areas.
+Each application will have different criteria for selecting
+regions which contribute to be area whose uniformity is of interest.
+To maximize flexibility,
+this implementation provides several procedures to
+group and select regions for inclusion into areas.
+These are:
+<dl>
+<dt>total image excluding background
+<dd>
+<code>dtlev85_total()</code>
+<dt>each label defines unique area
+<dd>
+<code>dtlev85_label()</code>
+<dt>each blob handled separately
+<dd>
+<code>dtlev85_blob()</code>
+<dt>region histogram computed externally
+<dd>
+<code>dtlev85_hist()</code>
+</dl>
+These procedures and the basic sequence of steps they all use
+are described below in more detail in the next section.
+<p>
+Gray level images may be any data type
+from single bit to double precision.
+In the <code>total</code>, <code>label</code> and <code>blob</code> methods,
+the pixel values are obtained directly with no loss of precision.
+In the <code>hist</code> method, as described below,
+the accuracy of the resultant uniformity is limited by the
+precision of the histogram.
+The original article did not have any mention of histograms
+as representations of regions.
+<p>
+The segmented images may be any data type
+from single byte to double precision.
+It is especially important to handle data values which can hold more than
+256 labels since many segmentation processes produce
+many more blobs than this.
+The ability to handle any data type is provided by the
+underlying connected components engine in the
+Dtack Imaging Software Base Library.
+<p>
+<h3>5.1. Basic Sequence of Steps</h3>
+All four procedures for selecting and grouping regions
+have in common that they use the same basic sequence of steps:
+<p>
+<dl>
+<dt>1.
+<dd>
+initialize housekeeping structure: <code>dtlev85_init()</code>
+<dt>2.
+<dd>
+one or more calls to one or more of:
+<dt>2a.
+<dd>
+add blob to area: <code>dtlev85_blob()</code>
+<dt>2b.
+<dd>
+add histogram to area: <code>dtlev85_hist()</code>
+<dt>2c.
+<dd>
+combine area to area: <code>dtlev85_combine()</code>
+<dt>3.
+<dd>
+compute final uniformity: <code>dtlev85_compute()</code>
+</dl>
+<p>
+The <code>dtlev85_total()</code> and <code>dtlev85_label()</code> functions
+use the above steps internally.
+This makes them easy to use.
+However, to handle regions on a blob-by-blob basis,
+your program will make use of the above steps explicitly.
+<p>
+The two steps 2a and 2b above may be freely intermixed.
+Both can achieve the same results, but using different means of input.
+Step 2c is for combining areas to make bigger areas.
+This is useful in a dynamic environment where regions are constantly
+being combined in different ways.
+Each area to be combined must have originated by a contribution of
+one of the other steps 2a (blob) or 2b (histogram).
+<p>
+<h3>5.2. Total Uniformity</h3>
+Total uniformity is computed by a single function call to <code>dtlev85_total()</code>.
+This is the simplest and fastest function of the implementation.
+<p>
+Total uniformity is a concept whereby the segmented image
+is considered as only two areas:
+the foreground and the background.
+The background is not necessarily 0,
+but may be any selected value.
+All pixels with the background label value are ignored.
+Regions with all other pixel labels are grouped into a single area.
+<p>
+If you wish to compute the uniformity of all pixels in an image,
+simply select a background label which does not occur in the
+segmented image.
+<p>
+The concept of a background label value has been introduced by
+this implementation.
+It is not part of the original article.
+<p>
+<h3>5.3. Label Uniformity</h3>
+This method is good when label values in segmented image already specify areas.
+<p>
+One use for this method is in a multi-threshold situation.
+The labels in this situation are the assigned threshold values.
+<p>
+In this type of calculation, there is no concept of background.
+All blobs are treated equally.
+<p>
+<h3>5.4. Direct-blob Uniformity</h3>
+This method is useful when neither the total nor the label methods
+are suitable.
+For example, you may want to exclude blobs which are too large or too small.
+In the direct-blob method,
+your program has complete control over which blobs
+are added to which areas.
+<p>
+With this method,
+your can provide a callback function
+which is called once for each 4- or 8-connected blob.
+Your callback function will normally examine the blob
+and/or compute some statistics for it.
+Based on the examination and statistics,
+the callback function decides which area, if any,
+the blob belongs to.
+<p>
+As with the label method,
+this method has no concept of background pixels.
+No pixels in the segmented image are ignored.
+<p>
+This method may be used for any segmented image data type.
+The segmented image pixels are not binned as they are with the
+histogram method.
+<p>
+<h3>5.5. Histogram Uniformity</h3>
+However, the histogram approach has a serious drawback
+for higher precision gray level images.
+Namely, accuracy of the uniformity is reduced
+when a range of gray level values must be lumped together
+into the same histogram bin.
+The blob approach does not suffer from this precision loss since
+gray level pixel values are used directly in the computation.
+So unless you have a fast histogram generator and you have 8-bit data,
+the blob approach is probably the best.
+<p>
+The histogram approach may be slightly faster especially when large blobs
+are involved or if you have a hardware histogram generator.
+It may also be more convenient to use
+in cases when histograms of your regions are readily available.
+Used when convenient means for histogram computation is already available.
+Perhaps hardware.
+Cannot be used with perfect accuracy for binned histograms.
+Care must be taken so that precision lost
+due to the intrinsic binning associated
+with the histogram creation is not significant.
+<p>
+The implementation uses the concept of using a histogram
+of a region to represent the region
+in the uniformity computation.
+This concept was not part of the original article.
+It has been introduced by the implementation as a convenient
+means of summarizing the gray levels of a section of image.
+<hr> <!-- dxhtml1_head level 2, string Application Examples -->
+<a name="sect006"></a>
+<a href="#sect000">
+<a href="#sect007">
+<a href="#sect005">
+<h2>6. Application Examples</h2>
+This section gives practical examples of the use of this algorithm.
+<p>
+<h3>6.1. Total Uniformity</h3>
+In some applications the segmented image will naturally consist
+of only two distinguishable areas.
+Such an image is often represented as
+a bivalued image where one value represents the object
+and the other the background.
+A binary threshold operation produces this kind of image.
+Similarly for a multi-valued image, one value (perhaps zero)
+represents the background,
+and all other values represent the object or objects.
+<p>
+For such applications the simplest solution is to use
+the convenience function <code>dtlev85_total()</code>.
+This function does not select specific regions.
+In other words, all non-background regions are considered
+part of a single area on which a single uniformity is calculated.
+<p>
+For example, consider Figure figgray5x2.
+Using the binary segmentation illustrated by Figure figseg5bx2,
+the total uniformity for all the balls is xxxx.
+You get this by specifying <i>background</i>=200
+which causes all light gray areas to be ignored.
+<p>
+<!-- Xdxdefine(`figgray5x2', 5)`'-->
+<p>
+<img align=top src="gray5x2.pgm.gz">
+Figure figgray5x2: Billiard Balls Gray Level
+<br>
+<p>
+<!-- Xdxdefine(`figseg5bx2', 6)`'-->
+<p>
+<img align=top src="seg5bx2.pgm.gz">
+Figure figseg5bx2: Billiard Balls Naive Binary Segmentation
+<br>
+<!-- Xdxdefine(`figseg5ax2', 7)`'-->
+<p>
+<img align=top src="seg5ax2.pgm.gz">
+Figure figseg5ax2: Billiard Balls Better Binary Segmentation
+<br>
+<p>
+If, however, you were interested in the uniformity of
+all parts of the picture <b>except</b> the balls,
+you would specify <i>background</i>=0.
+This would cause the black blobs to be ignored,
+getting a uniformity of xxxx.
+<p>
+It is also possible to compute the uniformity of the entire picture,
+including both balls and non-ball area.
+Simply specify <i>background</i>=1.
+Since the label value 1 does not occur in the segmented image,
+no parts of the image are ignored,
+and you get a uniformity of xxxx.
+<p>
+To summarize, the three uniformity numbers using the square-shaped blobs are:
+<dl>
+<dt>background 255
+<dd>
+uniformity of balls xxxx
+<dt>background 0
+<dd>
+uniformity of non-ball parts of the image xxxx
+<dt>background 1
+<dd>
+uniformity of entire picture xxxx
+</dl>
+<p>
+Using the same background values as above,
+except this time with the binary Figure figseg5ax2,
+(circularly-shaped blobs) as the segmentation, you get:
+<dl>
+<dt>background 255
+<dd>
+uniformity of balls xxxx
+<dt>background 0
+<dd>
+uniformity of non-ball parts of the image xxxx
+<dt>background 1
+<dd>
+uniformity of entire picture xxxx
+</dl>
+<p>
+As expected from the better segmentation in Figure figseg5ax2,
+the uniformity numbers are higher
+than those for Figure figseg5bx2.
+<p>
+Note that <code>dtlev85_total()</code> cannot give the uniformity for just
+one of the balls using the segmentation in either Figure figseg5bx2
+or Figure figseg5ax2.
+For that, you could use <code>dtlev85_label()</code>.
+<p>
+<h3>6.2. Uniformity Based on Labels</h3>
+Suppose you have an application where your segmented
+image has more than two regions in it.
+Consider Figure figgray5x3 and its corresponding segmentation
+Figure figseg5d.
+The segmentation is not a bivalued image.
+It has four different pixel values (i.e. labels):
+the background plus
+the three blobs marked by the numerals.
+<!-- Xdxdefine(`figgray5x3', 8)`'-->
+<p>
+<img align=top src="gray5x3.pgm.gz">
+Figure figgray5x3: Billiard Balls Gray Level
+<br>
+<p>
+<!-- Xdxdefine(`figseg5d', 9)`'-->
+<p>
+<img align=top src="seg5d.pgm.gz">
+Figure figseg5d: Billiard Balls Naive Multi-labeled Segmentation
+<br>
+<!-- Xdxdefine(`figseg5c', 10)`'-->
+<p>
+<img align=top src="seg5c.pgm.gz">
+Figure figseg5c: Billiard Balls Better Multi-labeled Segmentation
+<br>
+To compute a uniformity for each labeled region separately,
+a suitable function is <code>dtlev85_label()</code>.
+For Figure figseg5d, the regions produce uniformity numbers:
+<dl>
+<dt>label 1
+<dd>
+uniformity xxxx
+<dt>label 2
+<dd>
+uniformity xxxx
+<dt>label 3
+<dd>
+uniformity xxxx
+<dt>label 4
+<dd>
+uniformity xxxx
+</dl>
+<p>
+Contrast the uniformity numbers produced from the better segmentation
+in Figure figseg5c:
+<dl>
+<dt>label 1
+<dd>
+uniformity xxxx
+<dt>label 2
+<dd>
+uniformity xxxx
+<dt>label 3
+<dd>
+uniformity xxxx
+<dt>label 4
+<dd>
+uniformity xxxx
+</dl>
+<p>
+It is interesting to note that the squarish
+segmentation (first table)
+actually produces a higher uniformity number for ball 3
+than the roundish segmentation (second table).
+This is probably due to the blurry nature of this ball.
+<p>
+The function <code>dtlev85_label()</code> can group several regions
+in the same area for uniformity purposes.
+This is illustrated by the segmentation Figure figseg5c.
+Although all three balls are separate regions,
+the two lighter balls have been given the same label, label 1.
+Here are the uniformity numbers:
+<dl>
+<dt>label 1
+<dd>
+uniformity xxxx, nregions 2
+<dt>label 3
+<dd>
+uniformity xxxx, nregions 1
+<dt>label 4
+<dd>
+uniformity xxxx, nregions 1
+</dl>
+<p>
+Note that label 2 does not exist.
+Labels 3 and 4 under this segmentation corresponds exactly
+to labels 3 and 4 of Figure figseg5c
+and therefore has exactly the same uniformity.
+<p>
+<h3>6.3. Application: Dominoes image</h3>
+This example tries to show various ways of getting
+uniformity numbers for different parts of the image.
+Figure figgray2 has been segmented into the 3-valued image Figure figseg2b.
+<!-- Xdxdefine(`figgray2', 11)`'-->
+<p>
+<img align=top src="gray2.pgm.gz">
+Figure figgray2: Dominoes Gray Level
+<br>
+<!-- Xdxdefine(`figseg2b', 12)`'-->
+<p>
+<img align=top src="seg2b.pgm.gz">
+Figure figseg2b: Dominoes 3-Valued Segmentation
+<br>
+<p>
+The labels given to the segmented image correspond roughly to:
+<dl>
+<dt>xxx
+<dd>
+dark parts of domino bodies
+<dt>xxx
+<dd>
+shadow areas around domino bodies and rimming dots
+<dt>xxx
+<dd>
+white background and dots
+</dl>
+<p>
+Here are some uniformity numbers:
+<dl>
+<dt>whole image
+<dd>
+xxxx <code>dtlev85_total()</code> with <i>background</i>=0
+<dt>domino bodies
+<dd>
+xxxx <code>dtlev85_label()</code>
+<dt>shadows
+<dd>
+xxxx <code>dtlev85_label()</code>
+<dt>background and dots
+<dd>
+xxxx <code>dtlev85_label()</code>
+<dt>bodies and shadows
+<dd>
+xxxx custom callback selecting only labels xxx and xxx
+<dt>just dots
+<dd>
+xxxx custom callback selecting only small bright blobs
+</dl>
+<p>
+<h3>6.4. Application: Letters image</h3>
+This example attempts to give a feel for
+the visual correlation between the original gray level image
+Figure figgray3
+and total uniformity under various segmentations.
+<p>
+<!-- Xdxdefine(`figgray3', 13)`'-->
+<p>
+<img align=top src="gray3.pgm.gz">
+Figure figgray3: Hazy Letters Gray Level
+<br>
+<p>
+<!-- Xdxdefine(`figseg3a', 14)`'-->
+<p>
+<img align=top src="seg3a.pgm.gz">
+Figure figseg3a: Hazy Letters Binary Threshold 150
+<br>
+<!-- Xdxdefine(`figseg3b', 15)`'-->
+<p>
+<img align=top src="seg3b.pgm.gz">
+Figure figseg3b: Hazy Letters Binary Threshold 180
+<br>
+<p>
+The total uniformity as been calculated using <i>background</i>=1.
+Since the value 1 does not occur in any of these segmentations,
+we have effectively computed the uniformity
+of the entire image in each case.
+<dl>
+<dt>Figure figseg3a
+<dd>
+uniformity xxxx, nregions xxxx
+<dt>Figure figseg3b
+<dd>
+uniformity xxxx, nregions xxxx
+</dl>
+<p>
+<h3>6.5. Application: Synthetic image</h3>
+This example shows the effects of quantitative contamination
+when a segmentation does not perfectly match the original image.
+<p>
+Figure figgray4a is a synthetic gray level image.
+The vertical line represents the border between
+the two halves of the arbitrary segmentation in Figure figseg4a.
+<p>
+<!-- Xdxdefine(`figgray4a', 16)`'-->
+<p>
+<img align=top src="gray4a.pgm.gz">
+Figure figgray4a: Synthetic Gray Level Image
+<br>
+<!-- Xdxdefine(`figseg4a', 17)`'-->
+<p>
+<img align=top src="seg4a.pgm.gz">
+Figure figseg4a: Synthetic Gray Level Aribrary Segmentation
+<br>
+<p>
+The uniformity numbers are:
+<dl>
+<dt>total
+<dd>
+uniformity xxxx
+<dt>area1
+<dd>
+uniformity xxxx
+<dt>area2
+<dd>
+uniformity xxxx
+</dl>
+<p>
+Due contamination of each gray level into the other's segment,
+neither has a perfect uniformity.
+Since the intrusion of the area1 side into the area2 side
+is of greater geometric extent,
+the area2 side as a lower uniformity.
+<p>
+Figure figgray4b is the same synthetic gray level image,
+however the vertical line represents a slightly different
+segmentation border.
+The segmentation is shown in Figure figseg4b.
+<p>
+<!-- Xdxdefine(`figgray4b', 18)`'-->
+<p>
+<img align=top src="gray4b.pgm.gz">
+Figure figgray4b: Synthetic Gray Level Image Again
+<br>
+<!-- Xdxdefine(`figseg4b', 19)`'-->
+<p>
+<img align=top src="seg4b.pgm.gz">
+Figure figseg4b: Alternate Synthetic Gray Level Aribrary Segmentation
+<br>
+<p>
+The uniformity numbers are:
+total uniformity xxxx
+<dl>
+<dt>area1
+<dd>
+uniformity 1.0
+<dt>area2
+<dd>
+uniformity xxxx
+</dl>
+<p>
+This time the area1 side of the gray level image
+has a perfect uniformity because no area2 pixels
+creep into it under the segmentation.
+However, many area1 pixels contaminate the area2 side,
+giving it an even worse segmentation than for Figure figgray4a.
+<hr> <!-- dxhtml1_head level 2, string EXAMPLE lev85d.c - Direct Blob Uniformity -->
+<a name="sect007"></a>
+<a href="#sect000">
+<a href="#sect008">
+<a href="#sect006">
+<h2>7. EXAMPLE lev85d.c - Direct Blob Uniformity</h2>
+The <code>dtlev85_label()</code> function discussed above computes uniformity
+numbers based on distinct labels found in the segmented image.
+But what if you need the uniformity of each blob in your image,
+yet your segmented image does not assign a different label to
+each one?
+Or what if you need to select only certain blobs
+at run time,
+say based on blob size?
+You can program a solution to these applications by writing
+one of two different types of
+simple callback routines.
+<p>
+In this approach, the callback
+receives a linked list containing the geometric locations of
+all the pixels in the blob.
+The callback routine should make use of <code>dtlev85_init()</code>,
+<code>dtlev85_contribute()</code>, and <code>dtlev85_compute()</code> to produce uniformity
+measures on each blob as desired.
+<p>
+<pre>
+// Example Program dtlev85d
+// Illustrates blob-by-blob direct-pixel uniformity computation.
+// The two arguments are: 1) gray level image filename, and
+// 2) segmented image filename, for example:
+//     dtlev85d  data/dice64.pgm  data/dice64s.pgm
+// Uniformity of each blob is computed and printed.
+// Bounding box size of each blob is also printed just for fun.
+// Segmented image should not be larger than gray image.
+// All error checking left out for clarity.
+
+#include &lt;dt.h&gt;
+#include &lt;dtlev85.h&gt;
+
+static dtimage_t gray;                // global also seen by callback
+
+//..........................................................................
+dt_rc_e
+mydeliver(
+  dt_ctl_t *ctl,
+  dtrun_t *run,                       // connected components housekeeping
+  dtrun_blob_t *blob,
+  void *arg)
+{
+  dtlev85_t lev85;
+  dt_stats_t stats = {                // specify stats we want on blob
+    DT_STATS_WIDTH |
+    DT_STATS_HEIGHT};
+  dtimage_blob_stats(NULL, &amp;gray,     // compute stats on blob
+     run, blob, &amp;stats);
+
+  dtlev85_init(NULL, &amp;lev85);         // init lev85 structure
+  dtlev85_blob(NULL,                  // simply add blob to it
+    &amp;lev85, &amp;gray, run, blob,
+    &amp;stats);
+  dtlev85_compute(NULL, &amp;lev85);      // compute blob's uniformity
+  printf("dtlev85d:  blob"            // print out interesting stuff
+    " label %6g, "
+    " area %6ld, "
+    " width %3u height %3u,"
+    " uniformity %0.5f\n",
+    blob-&gt;label, lev85.Aa,
+    stats.width, stats.height,
+    lev85.u);
+  return DT_RC_GOOD;                  // keep doing blobs
+}
+//..........................................................................
+void main(int argc, char *argv[])
+{
+  dtimage_t segmented;
+
+  dtimage_import(NULL,                // read and allocate gray image
+    &amp;gray, argv[1]);
+  dtimage_import(NULL,                // read and allocate segmented image
+    &amp;segmented, argv[2]);
+
+  dtimage_adj_blob(NULL,              // do connected components
+    &amp;segmented,                       // on segmented image
+    0, 0, gray.xe, gray.ye,           // use whole input image
+    0.0, 0,                           // ignoring no pixels, 4-connected
+    mydeliver, NULL);                 // deliver blobs into our function
+  printf("dtlev85d: normal exit\n");
+}
+</pre>
+<hr> <!-- dxhtml1_head level 2, string EXAMPLE lev85e.c - Blob Histogram Uniformity -->
+<a name="sect008"></a>
+<a href="#sect000">
+<a href="#sect009">
+<a href="#sect007">
+<h2>8. EXAMPLE lev85e.c - Blob Histogram Uniformity</h2>
+In this approach, the callback
+receives only a few pixels at a time, but
+all pixels for one blob are received before any pixel of the next blob.
+This approach is a single-pass approach.
+In the one and only pass over the pixels,
+you compute the histogram which summarizes the gray levels.
+This approach is not suitable if the gray level image contains
+pixel values which do not lend themselves to histogramming.
+For example, floating point values cannot usually be histogrammed
+without some kind of binning.
+Binning normally involves loss of precision.
+<p>
+The callback routine should make use of <code>dtlev85_init()</code>,
+<code>dtlev85_contribute()</code>, and <code>dtlev85_compute()</code> to produce uniformity
+measures on each blob as desired.
+<p>
+<pre>
+// Example Program dtlev85e
+// Illustrates blob-by-blob histogram-based uniformity computation.
+// The three arguments are: 1) gray level image filename,
+// 2) segmented image filename, and 3) background value, for example:
+//     dtlev85e  data/dice64.pgm  data/dice64s.pgm  0
+// Uniformity of each non-background blob is computed and printed.
+// Centroid of each blob is also printed just for fun.
+// Segmented image should not be larger than gray image.
+// All error checking left out for clarity.
+
+#include &lt;dt.h&gt;
+#include &lt;dtlev85.h&gt;
+
+static int n = 0;                     // global also seen by callback
+static unsigned long xsum, ysum;
+static dtlev85_t lev85;
+static dtimage_t gray;
+static dthist_t hist;
+
+//..........................................................................
+dt_rc_e
+mycallback(                           // called by connected components
+  dt_ctl_t *ctl,
+  dtimage_adj_callback_arg_t *arg,
+  dtxy_t x1,
+  dtxy_t y1,
+  dtxy_t x2,
+  dtxy_t y2)
+{
+  int flag = arg-&gt;flag;
+  int x, y;
+
+  arg-&gt;flag = 0;                      // clear flag for next blob
+
+  if (flag &amp; DTIMAGE_ADJ_FLAG_END)    // finishing an old blob?
+  {
+    dtlev85_hist(NULL,                // contribute blob's histogram
+      &amp;lev85, &amp;hist);
+    dtlev85_compute(NULL, &amp;lev85);    // compute blob's uniformity
+    printf("dtlev85e:  blob %4d: "    // print out blob's uniformity
+      " label %6g, "
+      " area %6ld, "
+      " centroid (%lu,%lu),"
+      " uniformity %0.5f\n",
+      n++, lev85.label, lev85.Aa,
+      xsum / lev85.Aa,
+      ysum / lev85.Aa,
+      lev85.u);
+
+    if (!(flag &amp;                      // not also starting a new blob?
+          DTIMAGE_ADJ_FLAG_BEG))
+      return DT_RC_GOOD;
+  }
+
+  if (flag &amp; DTIMAGE_ADJ_FLAG_BEG)    // starting a new blob?
+  {
+    dtlev85_init(NULL, &amp;lev85);       // reinit lev85 structure
+    lev85.label = arg-&gt;label;         // remember the label
+    dthist_clear(ctl, &amp;hist);         // clear histogram
+    xsum = 0;                         // clear centroid accumulators
+    ysum = 0;
+  }
+
+  for (y=y1; y&lt;=y2; y++)
+  {
+    dthist_add_values(ctl,
+      &amp;hist, gray.row[y].dvoid,
+      x1, x2+1, gray.ntype);
+    for (x=x1; x&lt;=x2; x++)
+    {
+      xsum += x;                      // continue to accumulate centroid
+      ysum += y;
+    }
+  }
+
+  return DT_RC_GOOD;                  // keep doing blobs
+}
+//..........................................................................
+void main(int argc, char *argv[])
+{
+  dtimage_t segmented;
+  double background;
+
+  dtimage_import(NULL,                // read and allocate gray image
+    &amp;gray, argv[1]);
+  dtimage_import(NULL,                // read and allocate segmented image
+    &amp;segmented, argv[2]);
+  background = atol(argv[3]);         // get background from command line
+
+  dtimage_hist_alloc(NULL,            // space for histogram
+    &amp;gray, &amp;hist);
+  dtimage_adj_run(NULL,               // compute uniformity by blobs
+    &amp;segmented,
+    0, 0, gray.xe, gray.ye,           // use whole input image
+    background, 0,
+    mycallback,                       // call mycallback() for each blob
+    NULL);                            // mycallback() needs no arg
+  printf("dtlev85e: normal exit\n");
+}
+</pre>
+<hr> <!-- dxhtml1_head level 2, string License Summary -->
+<a name="sect009"></a>
+<a href="#sect000">
+<a href="#sect010">
+<a href="#sect008">
+<h2>9. License Summary</h2>
+When using this publication and the software associated with it,
+you are legally bound by the
+<a href="../dtlicens.htm">
+<b>Dtack Standard End User License Agreement</b>.
+</a>
+A summary of this agreement follows:
+<ol>
+<li> The software and documentation may be used by up to 20 people
+on multiple computers within the same workgroup of the
+same company at the same physical site.
+<li> Without written consent, you may not redistribute the
+documentation, source code, modifications to the source code,
+object code, libraries, or any programs which allow direct
+access to the Dtack Imaging Software modules.
+<li> You may distribute, without restriction, programs created using
+this software which DO NOT permit direct access to this
+software's features.
+</ol>
+<hr> <!-- dxhtml1_head level 2, string Disclaimer -->
+<a name="sect010"></a>
+<a href="#sect000">
+<a href="#sect011">
+<a href="#sect009">
+<h2>10. Disclaimer</h2>
+This publication and its associated software are
+distributed without warranties,
+either expressed or implied,
+regarding their merchantability or fitness for any particular application
+or purpose.
+The information in this publication is subject to change without notice
+and does not represent a commitment on the part of
+Dtack Imaging Software Company.
+In no event shall Dtack Imaging Software Company be liable for any loss
+of profit or any other commercial damage, including but not limited to
+special, incidental, consequential, or other damages resulting from the use
+of or inability to use this product,
+even if Dtack Imaging Software Company
+has been notified of the possibility of such damages.
+<hr> <!-- dxhtml1_head level 2, string dtlev85 - algorithm executive -->
+<a name="sect011"></a>
+<a href="#sect000">
+<a href="#sect012">
+<a href="#sect010">
+<h2>11. dtlev85 - algorithm executive</h2>
+<p><b>SYNOPSIS</b><p><pre>
+dtlev85 [parameters] gray segmented [output]
+</pre>
+<p><b>SUMMARY</b><p>Characterize the goodness of a segmentation.
+A uniformity number for each area is printed to the console.
+Can be used to produce an output image where each pixel value is
+proportional to the uniformity of the pixel's blob.
+Algorithm due to Levine and Nazif, 1985.
+<p><b>ARGUMENTS</b><p><dl>
+<dt><code>gray</code>
+<dd>
+name of the original gray-level image (required)
+<dt><code>segmented</code>
+<dd>
+name of the image which has been segmented (required)
+<dt><code>output</code>
+<dd>
+name of output image (optional, ignored if not <code>-op blob</code>)
+</dl>
+<p><b>PARAMETERS</b><p><dl>
+<dt><code>-op total</code>
+<dd>
+all non-background pixels are one area
+(this is the default if <code>-op</code> is omitted)
+<dt><code>-op label</code>
+<dd>
+each label is a separate area
+<dt><code>-op blob</code>
+<dd>
+each blob is a separate area
+<dt><code>-op test</code>
+<dd>
+self-tests, prints nothing if all pass
+<dt><code>-op time</code>
+<dd>
+benchmark and display execution times
+<dt><code>-background</code> <i>bv</i>
+<dd>
+segmented pixels to be considered background
+(default 0, ignored if not <code>-op total</code>)
+<dt><code>-min</code> <i>min</i>
+<dd>
+minimum area for blob to be considered
+(default 0, ignored if not <code>-op blob</code>)
+<dt><code>-max</code> <i>max</i>
+<dd>
+maximum area for blob to be considered
+(default unlimited, ignored if not <code>-op blob</code>)
+<dt><code>-precision</code> <i>type</i>
+<dd>
+precision of <code>output</code> image
+(default <code>float</code>, ignored if not <code>-op blob</code>)
+<dt><code>-connect</code> <i>4 or 8</i>
+<dd>
+4-connectivity or 8-connectivity (default 4)
+<dt><code>-help</code>
+<dd>
+say short help and quit
+<dt><code>-HELP</code>
+<dd>
+say long help and quit
+<dt><code>-D</code> <i>masks</i>
+<dd>
+debug options separated by plus (+) signs (default none)
+<dt><code>-mem</code> <i>memspec</i>
+<dd>
+big memory sources (default depends on system)
+<dt><code>-win</code> <i>winspec</i>
+<dd>
+display server (default none)
+<dt><code>-dbgto</code> <i>file</i>
+<dd>
+output file for debug messages (default stderr)
+<dt><code>-errto</code> <i>file</i>
+<dd>
+output file for error messages (default stderr)
+<dt><code>-sayto</code> <i>file</i>
+<dd>
+output file for information messages (default console)
+<dt><code>-yield</code> <i>hints</i>
+<dd>
+yield mode (default normal)
+</dl>
+<p>
+The program searches for an environment variable
+for each omitted parameter.
+For example, <code>-mem</code> could be specified alternatively by the
+environment variable <code>DT_MEM</code>.
+<p><b>DESCRIPTION</b><p>Presumes that <i>gray</i> image has been segmented in some way to produce
+the corresponding <i>segmented</i> image in which
+the value of each pixel is a region label.
+All 4- or 8-connected pixels in with the same label are considered
+to be part of the same region.
+Regions are grouped into areas according to the <code>-op</code> parameter.
+A uniformity number is printed for each area.
+<p>
+The uniformity numbers printed by this program go through the <code>dt_say()</code>
+interface.
+This interface normally forces the output text to go straight to the console.
+Since stdout is bypassed, redirecting it will not capture the text output.
+To capture the text in a file, use the <code>-sayto</code> <i>filename</i> parameter.
+<p>
+For the operations <code>total</code>, <code>label</code>, and <code>blob</code>,
+regions are formed by connected components analysis.
+All pixels which are 4- or 8-connected
+and have identical values in the <i>segmented</i> image
+are considered part of the same region.
+The value of the <code>-connect</code> parameter decides the connectivity.
+<p>
+For <code>-op total</code>,
+all non-background pixels are assumed part of a single area.
+Only one uniformity number is printed.
+Background pixels are those whose value in the <i>segmented</i> image are <i>bv</i>.
+The parameters <code>-min</code>, <code>-max</code>, and <code>-precision</code> are ignored for this operation.
+<i>output</i> is ignored and no output image is produced.
+<p>
+For <code>-op label</code>,
+regions are grouped into areas according to their label values.
+The label for each pixel is its value in the <i>segmented</i> image.
+All regions consisting of pixels having the same label are considered
+part of the same area.
+One uniformity is printed for each unique label.
+The parameters <code>-background</code>, <code>-min</code>, <code>-max</code>, and <code>-precision</code>
+are ignored for this operation.
+<i>output</i> is ignored and no output image is produced.
+<p>
+For <code>-op blob</code>,
+each region is considered an area of its own.
+That is, each area has only one region in it.
+One uniformity number is printed for each blob, except
+any blob whose size is less than <i>min</i> or greater than or
+equal <i>max</i> is silently omitted.
+The parameter <code>-background</code> is ignored for this operation.
+<p>
+If <i>output</i> is given,
+then an output image is produced.
+This output image will have a size according to the smallest
+dimensions of <i>gray</i> and <i>segmented</i>.
+<p>
+The data type of the output image will be set according to <i>type</i>.
+The values of the pixels in the output image
+are set according to the uniformity of the blob
+in which the pixel resides.
+If the data <i>type</i> is <code>float</code> or <code>double</code>,
+then the uniformity values are stored directly into the pixels.
+Otherwise the uniformity values are scaled
+to use the full dynamic range of the data type.
+For example, a uniformity of 1.0 is given a value of 255
+give the <i>type</i> is <code>uchar</code>.
+<p>
+The <code>blob</code> operation interprets the value of the <code>-background</code>
+as the uniformity value to use for pixels in blobs which
+are too small or too large, according to <i>min</i> and <i>max</i>.
+The value is clipped to the range 0.0 to 1.0.
+If not given, 1.0 is assumed.
+<p>
+On unix-like systems, the name for <i>output</i>
+may be a filename or a window name.
+If the name is the special value "stdout",
+then the image may be piped into another program.
+<p>
+For <code>-op test</code>,
+the program runs its self-test diagnostics.
+It normally prints nothing if all tests are successful.
+To have it print even successful test results, use <code>-D assert</code>.
+The parameters <code>-background</code>, <code>-min</code>, <code>-max</code>, and <code>-precision</code>
+are ignored for this operation.
+<i>output</i> is ignored and no output image is produced.
+<p>
+For <code>-op time</code>,
+the program runs its benchmark timing tests.
+The resulting execution times are printed as debug.
+The parameters <code>-background</code>, <code>-min</code>, <code>-max</code>, and <code>-precision</code>
+are ignored for this operation.
+<i>output</i> is ignored and no output image is produced.
+<p>
+This program normally exits with a value of 0.
+However, if an error was found during execution,
+or one of the test or timing operations had failed assertions,
+then the program returns a value of 1.
+<p><b>DEBUGGING PARAMETER</b><p>The <code>-D</code> parameter must be followed by one or more suboptions
+separated by plus signs (+), for example <code>-D img+complex</code>.
+Any suboption may be abbreviated to the shortest form
+which is not ambiguous with other suboptions.
+All possible suboptions are listed in two columns below:
+<p>
+<pre>
+alimits - system limits            memstats - memory summary at end
+all     - all debug masks          memtrace - memory allocation
+alt     - program alternatives     memx     - big memory interface
+arg     - command line args        object   - object values
+assert  - program assertions       page     - memory paging
+async   - asynchronous events      pixel    - pixel values
+bigio   - big blocks of I/O        stats    - statistics
+complex - execution complexity     time     - execution times
+img     - image operations         trace    - execution trace
+intermd - intermediate values      usr1     - user's use
+io      - all file I/O             usr2     - user's use
+ipc     - interprocess comm        win      - client/server window
+</pre>
+<hr> <!-- dxhtml1_head level 2, string dtlev85_blob() - contribute blob to uniformity -->
+<a name="sect012"></a>
+<a href="#sect000">
+<a href="#sect013">
+<a href="#sect011">
+<h2>12. <code>dtlev85_blob()</code> - contribute blob to uniformity</h2>
+<p><b>SYNOPSIS</b><p><pre>
+dt_rc_e
+dtlev85_blob(
+  dtparam_t *param,
+  dtlev85_t *lev85,
+  dtimage_t *gray,
+  dtrun_t *run,
+  dtrun_blob_t *blob,
+  dt_stats_t *stats)
+</pre>
+<p><b>DESCRIPTION</b><p><code>dtlev85_blob()</code> accumulates one region's contribution into
+the uniformity structure.
+The geometric locations of the region's pixels
+are given by a linked list of runs.
+<p>
+The <i>lev85</i> structure is updated to include the variance
+of the region described by the runs
+stored in <i>run</i> and linked by <i>blob</i>.
+<i>gray</i> is the original gray level image
+The uniformity itself is not computed by this function.
+Instead it is deferred until <code>dtlev85_compute()</code> is called.
+Any previously known statistics about <i>blob</i> are stored in <i>stats</i>,
+and any statistics computed by this function are returned
+in the same structure.
+<p>
+The <i>run</i> and <i>blob</i> structures are normally provided
+by the Dtack Base Library connected components mechanism.
+The starting point for this mechanism is usually <code>dtimage_adj()</code>.
+It takes a labeled image and extracts
+regions whose pixels have the same value and are
+maximally 4- or 8-connected.
+For each such region, a callback is made giving both <i>run</i> and <i>blob</i>.
+<code>dtlev85_blob()</code> could be called from such a callback.
+<p>
+The <i>blob</i> structure provides pixel location information only.
+This function accesses the pixels in the <i>gray</i> image at these locations
+during uniformity computation.
+<p>
+The <i>stats</i> structure may be used to promote program efficiency.
+It is often the case that an application
+must make several different computations on the same blob.
+If more than one computation requires a same statistic about the blob,
+it makes sense to compute that statistic only once.
+For example, the area of the blob is a statistic
+needed by the uniformity computation.
+But it may also be needed by some application-dependent computation
+such as a shape factor.
+If the uniformity is computed first,
+then the area is already known and stored in <i>stats</i>.
+The shape factor algorithm need only access the number <i>stats-&gt;area</i>
+instead of recomputing it.
+If they have not already been computed,
+the following members of <i>stats</i> are computed by this function:
+<p>
+<dl>
+<dt><b>stats-&gt;have / stats-&gt;want</b>
+<dd>
+<b>stats structure member</b>
+<dt><code>DT_STATS_MINVAL</code>
+<dd>
+<i>stats-&gt;minval</i>
+<dt><code>DT_STATS_MAXVAL</code>
+<dd>
+<i>stats-&gt;maxval</i>
+<dt><code>DT_STATS_AREA</code>
+<dd>
+<i>stats-&gt;area</i>
+<dt><code>DT_STATS_MEAN</code>
+<dd>
+<i>stats-&gt;mean</i>
+<dt><code>DT_STATS_VARIANCE</code>
+<dd>
+<i>stats-&gt;variance</i>
+</dl>
+<p>
+This function is designed to be called once for each region in an area
+before the actual uniformity of the area is computed.
+The steps to computing the uniformity of a multiple-region area are:
+<ol>
+<li> initialize structure (<code>dtlev85_init()</code>)
+<li> using connectivity analysis, create the first blob structure
+<li> accumulate blob's contribution (<code>dtlev85_blob()</code>)
+<li> create next blob structure
+<li> accumulate region's contribution (<code>dtlev85_blob()</code> again)
+<li> repeat steps 4 and 5 for each remaining region
+<li> compute final uniformity (<code>dtlev85_compute()</code>)
+</ol>
+<p>
+Being able to accumulate several regions before
+computing the final uniformity is important
+in many dynamic applications.
+Often the region set remains the same,
+but they are combined and re-combined
+in different ways as the search for the optimum areas progresses.
+<p>
+An alternative means of contributing to the uniformity of an area
+is through the use of the function <code>dtlev85_hist()</code>.
+Its advantages are that it may be somewhat simpler and faster
+if you have an easy means of calculating histograms for your regions.
+You do not have to deal with a blob structure.
+However, if your gray level image is of a data type
+which does not lend itself to binning the precision loss,
+then the blob approach may be the only acceptable approach.
+<p>
+The two uniformity contribution functions, <code>dtlev85_hist()</code>
+and <code>dtlev85_blob()</code>,
+each contribute exactly one region each time they are called.
+Since both functions use the <i>lev85</i> structure in the same way,
+calls to the functions may be intermixed.
+A call to <code>dtlev85_compute()</code> after all contributions have been made
+will compute the correct answer.
+<p>
+Although you can compute the <i>blob</i> structure of your regions in any
+convenient way,
+the Dtack Imaging Software Base Library
+provides a convenient means to do it within the framework
+of connected components analysis.
+To use this mechanism, you write a callback routine which gets
+invoked with the blob structure defining one region.
+Within your callback routine, you may perform any computation you desire.
+This includes passing the blob structure to <code>dtlev85_blob()</code>.
+For a working illustration of this exact mechanism,
+please refer to
+<a href="#section"> Example lev85d.c</a>
+<p><b>RETURN VALUES</b><p>The contents of the dtlev85 structure are updated to include
+the contribution of the region.
+The value of the function is either <code>DT_RC_GOOD</code> or <code>DT_RC_BAD</code>.
+Before returning <code>DT_RC_BAD</code>, <code>dt_err()</code> will have been called at least once.
+<p><b>ERRORS</b><p>Unsuccessful completion may be due to:
+<ul>
+<li>error computing blob statistics
+</ul>
+<p><b>CAVEATS</b><p>Attempting to use a dtlev85 structure without first initializing it
+may result in incorrect results.
+<p>
+This function does not recompute <i>stats</i> members
+which are already marked in <i>stats-&gt;have</i>.
+If the contents of <i>stats</i> are undefined,
+be sure to set <i>stats-&gt;have</i> to 0.
+<p><b>SEE ALSO</b><p><dl>
+<dt><code>dtlev85_init()</code>
+<dd>
+initializes lev85 structure
+<dt><code>dtlev85_hist()</code>
+<dd>
+contribute to uniformity via histogram
+<dt><code>dtlev85_compute()</code>
+<dd>
+computes uniformity for the area
+<dt><code>dtlev85_combine()</code>
+<dd>
+combines two areas into a single area
+</dl>
+<p><b>EXAMPLE</b><p>For a complete and working example program, please see the
+<a href="#section"> Example lev85d.c</a>
+<p>
+The following code illustrates a simple function designed
+to be the callback for <code>dtimage_adj_blob()</code>.
+<p>
+<pre>
+dt_rc_e
+mydeliver(
+  dt_ctl_t *ctl,
+  dtrun_t *run,                       // connected components housekeeping
+  dtrun_blob_t *blob,
+  void *arg)
+{
+  dtlev85_t lev85;
+  dt_stats_t stats;
+
+  dtlev85_init(NULL, &amp;lev85);         // init lev85 structure
+  stats.have = 0;                     // we know no stats yet
+  dtlev85_blob(NULL,                  // simply add blob to it
+    &amp;lev85, &amp;gray, run, blob,
+    &amp;stats);
+  dtlev85_compute(NULL, &amp;lev85);      // compute blob's uniformity
+  printf("dtlev85d:  blob"            // print out interesting stuff
+    " label %6g, "
+    " area %6ld, "
+    " uniformity %0.5f\n",
+    blob-&gt;label, lev85.Aa,
+    lev85.u);
+  return DT_RC_GOOD;                  // keep doing blobs
+}
+</pre>
+<p><b>ALGORITHM DETAILS</b><p>Mark the stats we want to be
+able to compute uniformity.
+Compute those stats.
+<p>
+If this is the first region in
+this area,
+start keeping absolute gray
+level min and max.
+If not the first region,
+compare this region's gray level
+min and max to the absolute
+and keep the extremes.
+<p>
+In the lev85 structure,
+keep count of regions,
+sum of total area, and
+region contribution to
+uniformity.
+<hr> <!-- dxhtml1_head level 2, string dtlev85_combine() - combine uniformity of two areas -->
+<a name="sect013"></a>
+<a href="#sect000">
+<a href="#sect014">
+<a href="#sect012">
+<h2>13. <code>dtlev85_combine()</code> - combine uniformity of two areas</h2>
+<p><b>SYNOPSIS</b><p><pre>
+dt_rc_e
+dtlev85_combine(                        // combine uniformity of two areas
+  dtparam_t *param,                     // control parameter structure
+  dtlev85_t *lev85_in1,                 // first area
+  dtlev85_t *lev85_in2,                 // second area
+  dtlev85_t *lev85_out)                 // output combined area
+</pre>
+<p><b>DESCRIPTION</b><p><code>dtlev85_combine()</code> combines the structures describing the uniformity
+of two areas into a single area.
+<p>
+The <i>a2</i> structure is changed such that it represents
+the accumulation of all regions which have contributed to
+both <i>a0</i> and <i>a1</i>.
+<p>
+<i>a2</i> may point to the same structure as either <i>a1</i> or <i>a0</i>.
+This function does not require that the <i>a2</i> structure has been
+initialized by <code>dtlev85_init()</code>.
+However, if it is subsequently to be used in a call to
+<code>dtlev85_contribute()</code>, then pre-initialization is necessary.
+<p>
+This function is very cheap compared to a full connectivity
+analysis on a segmented image.
+<p>
+In a dynamic environment, the set of regions composing an area
+will be continually changing.
+The well-known split/merge technique is such an environment.
+This function is designed to be used in such a dynamic environment.
+Consider the naive case in which each area consists of a single region.
+As part of the region-finding process, the intrinsic uniformity
+of each region is accumulated.
+This expensive process need not be repeated, even as the regions
+are merged in various ways in the search for the "best" segmentation.
+Instead, the much cheaper <code>dtlev85_combine()</code> is used.
+<p>
+The following steps illustrate one approach:
+<ol>
+<li> initialize a set of lev85 structures,
+one for each region (<code>dtlev85_init()</code>)
+<li> for each region, do connected components analysis
+and call <code>dtlev85_blob()</code>,
+(or, alternatively, compute the region's histogram and call
+<code>dtlev85_hist()</code>)
+giving the lev85 structure associated with that region
+<li> merge regions into areas as desired,
+calling <code>dtlev85_combine()</code> for each region in the area
+<li> call <code>dtlev85_compute()</code> to compute the uniformity of the areas
+<li> repeat steps 3 and 4 until the desired segmentation goodness
+criteria have been reached
+</ol>
+<p>
+After step 2, there is no need for further expensive connectivity analysis
+unless the regions themselves change.
+<p><b>PARAMETERS</b><p>The only member of the <i>param</i> structure used by this function
+is <i>param-&gt;ctl</i>.
+The <i>param</i> argument may be NULL.
+In this case, default values are used for the members of <i>param-&gt;ctl</i>.
+<p><b>RETURN VALUES</b><p>The contents of <i>a2</i> structure are set to reflect
+the combined contribution of the other two areas.
+The value of the function is either <code>DT_RC_GOOD</code> or <code>DT_RC_BAD</code>.
+Before returning <code>DT_RC_BAD</code>, <code>dt_err()</code> will have been called at least once.
+<p><b>ERRORS</b><p>The current implementation of this function does not
+have error conditions.
+However, future releases may contain them.
+<p><b>CAVEATS</b><p>Attempting to use a <i>lev85</i> structure without first initializing it
+may result in incorrect results.
+<p><b>SEE ALSO</b><p><dl>
+<dt><code>dtlev85_init()</code>
+<dd>
+initializes lev85 structure
+<dt><code>dtlev85_hist()</code>
+<dd>
+contributes a region's histogram to the area
+<dt><code>dtlev85_blob()</code>
+<dd>
+contributes a region's pixels directly to the area
+<dt><code>dtlev85_compute()</code>
+<dd>
+computes uniformity for the area
+</dl>
+<p><b>EXAMPLE</b><p>This example code fragment illustrates <code>dtlev85_combine()</code>
+used in conjunction with <code>dtlev85_hist()</code>.
+It may also be used with <code>dtlev85_blob()</code>.
+<p>
+<pre>
+  dtlev85_t lev[4];
+  ...
+  dtlev85_init(NULL, lev, 4,          // initialize four lev85 structures
+    &amp;gray);
+
+  [compute first region's histogram]
+  dtlev85_contribute(NULL, &amp;lev[1]);  // contribute first region
+
+  [compute second region's histogram]
+  dtlev85_contribute(NULL,  &amp;lev[2]); // contribute second region
+
+  [compute third region's histogram]
+  dtlev85_contribute(NULL, &amp;lev[3]);  // contribute third region
+
+  dtlev85_combine(&amp;lev[1], &amp;lev[2],   // combine first two regions
+    &amp;lev[0]);
+  dtlev85_combine(&amp;lev[0], &amp;lev[3],   // combine third region with first two
+    &amp;lev[0]);
+  dtlev85_compute(NULL, &amp;lev[0]);     // compute final uniformity
+  printf("uniformity %e\n",           // print the uniformity
+    lev[0].u);
+</pre>
+<hr> <!-- dxhtml1_head level 2, string dtlev85_compute() - compute final uniformity of area -->
+<a name="sect014"></a>
+<a href="#sect000">
+<a href="#sect015">
+<a href="#sect013">
+<h2>14. <code>dtlev85_compute()</code> - compute final uniformity of area</h2>
+<p><b>SYNOPSIS</b><p><pre>
+dt_rc_e
+dtlev85_compute(                        // compute uniformity of area
+  dtparam_t *param,                     // control parameter structure
+  dtlev85_t *lev85)                     // algorithm housekeeping
+</pre>
+<p><b>DESCRIPTION</b><p><code>dtlev85_compute()</code> computes the final uniformity of the area
+after region contributions.
+<p>
+The computed uniformity is placed in the structure member <i>lev85-&gt;u</i>.
+If no regions have contributed to the structure,
+then the uniformity <i>lev85-&gt;u</i> is set to 0.0.
+<p>
+The given <i>lev85</i> structure must have been initialized by <code>dtlev85_init()</code>.
+It will normally have had one or more region contributions
+accumulated into it by <code>dtlev85_blob()</code>
+or <code>dtlev85_hist()</code>.
+<p>
+This function effectively finishes the implementation of
+equations (7) and (8) of [lev85].
+The summation term in equation (8)
+has already been done as part of the accumulation.
+<p><b>PARAMETERS</b><p>The only member of the <i>param</i> structure used by this function
+is <i>param-&gt;ctl</i>.
+The <i>param</i> argument may be NULL.
+In this case, default values are used for the members of <i>param-&gt;ctl</i>.
+<p><b>RETURN VALUES</b><p>The <i>lev85-&gt;u</i> structure member is assigned the area's uniformity.
+The value of the function is either <code>DT_RC_GOOD</code> or <code>DT_RC_BAD</code>.
+Before returning <code>DT_RC_BAD</code>, <code>dt_err()</code> will have been called at least once.
+<p><b>ERRORS</b><p>The current implementation of this function does not
+have error conditions.
+However, future releases may contain them.
+<p><b>CAVEATS</b><p>Attempting to use the <i>lev85</i> structure without first initializing it
+may result in incorrect results.
+<p>
+Computing the uniformity of an area with no contributed regions will
+result in a value of 0.0.
+<p><b>SEE ALSO</b><p><dl>
+<dt><code>dtlev85_init()</code>
+<dd>
+initializes lev85 structure prior to use
+<dt><code>dtlev85_hist()</code>
+<dd>
+contributes a region's histogram to the area
+<dt><code>dtlev85_blob()</code>
+<dd>
+contributes a blob directly to the area
+<dt><code>dtlev85_combine()</code>
+<dd>
+combines two areas into a single area
+</dl>
+<p><b>EXAMPLE</b><p>Example <code>lev85c.c</code>, immediately below, illustrates
+<code>dtlev85_compute()</code> used in a simple-minded program.
+For two other examples using <code>dtlev85_compute()</code>, please refer to the
+<a href="#Example lev85d.c"> "Example lev85d.c"</a>
+and
+<a href="#sections"> Example lev85e.c</a>
+<p><b>EXAMPLE</b><p><pre>
+// Example Program dtlev85c
+// Illustrates dtlev85_init(), dtlev85_hist(), and
+// dtlev85_compute().
+// Single argument is the gray level image filename, such as:
+//     dtlev85c  data/dice64.pgm
+// Uniformity of image taken as monolithic region is computed and printed.
+// All error checking left out for clarity.
+
+#include &lt;dt.h&gt;
+#include &lt;dtlev85.h&gt;
+
+void main(int argc, char *argv[])
+{
+  dtimage_t seg;
+  dtimage_t gray;
+  dthist_t hist;
+  dtlev85_t lev85;
+
+  dtimage_import(NULL,                // read and allocate gray image
+    &amp;gray, argc&gt;1? argv[1]: "");
+  dtimage_create(NULL, &amp;seg,          // create space for segmented image
+    gray.xe, gray.ye, DT_NTYPE_B08);  // same size as gray image
+  dtimage_constant(NULL, &amp;seg, 1);    // make one giant blob of 1's
+  dtimage_hist_alloc(NULL, &amp;gray,     // space for histogram
+    &amp;hist);
+  dtimage_hist(NULL, &amp;gray, &amp;hist);   // get histogram of gray image
+
+  dtlev85_init(NULL, &amp;lev85);         // initialize lev85 structure
+  dtlev85_hist(NULL,                  // contribute giant blob
+    &amp;lev85, &amp;hist);
+  dtlev85_compute(NULL, &amp;lev85);      // compute final uniformity
+
+  printf("dtlev85c:"                  // print the uniformity
+    " uniformity %7.5f\n",
+    lev85.u);
+  printf("dtlev85c: normal exit\n");
+}
+</pre>
+<hr> <!-- dxhtml1_head level 2, string dtlev85_hist() - contribute region to uniformity -->
+<a name="sect015"></a>
+<a href="#sect000">
+<a href="#sect016">
+<a href="#sect014">
+<h2>15. <code>dtlev85_hist()</code> - contribute region to uniformity</h2>
+<p><b>SYNOPSIS</b><p><pre>
+dt_rc_e
+dtlev85_hist(                           // contribute region to uniformity
+  dtparam_t *param,                     // control parameter structure
+  dtlev85_t *lev85,                     // algorithm housekeeping
+  dthist_t *hist)                       // pre-computed histogram
+</pre>
+<p><b>DESCRIPTION</b><p><code>dtlev85_hist()</code> accumulates one region's contribution into
+the uniformity structure.
+The region is completely characterized by its histogram.
+<p>
+The <i>lev85</i> structure is updated to include the variance
+of the region described by the histogram <i>hist</i>.
+The uniformity itself is not computed by this function.
+Instead it is deferred until <code>dtlev85_compute()</code> is called.
+<p>
+For the purposes of this function, the region to be contributed
+is completely described by its histogram <i>hist</i>.
+This histogram may have been computed in any manner desired.
+<p>
+This function is designed to be called once for each region in an area
+before the actual uniformity of the area is computed.
+The steps to computing the uniformity of a multiple-region area are:
+<ol>
+<li> initialize structure (<code>dtlev85_init()</code>)
+<li> compute histogram of first region
+<li> accumulate region's contribution (<code>dtlev85_hist()</code>)
+<li> compute histogram of next region
+<li> accumulate region's contribution (<code>dtlev85_hist()</code> again)
+<li> repeat steps 4 and 5 for each remaining region
+<li> compute final uniformity (<code>dtlev85_compute()</code>)
+</ol>
+<p>
+Being able to accumulate several regions before
+computing the final uniformity is important
+in many dynamic applications.
+Often the region set remains the same,
+but they are combined and re-combined
+in different ways as the search for the optimum areas progresses.
+<p>
+If the histogramming operation has involved binning,
+the subsequent loss of precision may affect the accuracy
+of the uniformity.
+As a result, <code>dtlev85_hist()</code> is normally only used
+when the gray level image type is of low enough precision
+that the histogram bins correspond one-to-one with the
+data values.
+For example, an 8-bit image can be represented by a histogram bin
+array of only 256 values without loss of precision.
+However, a 32-bit image would require too much memory
+to give every possible pixel value its own histogram bin.
+Pixels from such an image would normally be linearly down-scaled
+to reduce the number of bins required.
+This down-scaling process is referred to as binning.
+It reduces the precision of the input image
+thereby possibly adversely affecting the accuracy of the uniformity.
+<p>
+The gray level used in uniformity computation is the floor (lowest value)
+of the histogram bin.
+For histograms whose scale value is 1.0
+(i.e. no precision loss during binning)
+this is the exact value of the original gray level pixels.
+However, the value is slightly lower than the correct value
+when the binning scale value is not 1.0.
+For example, consider gray level pixels ranging from 0 up to 1000
+which have been binned into 100 bins.
+Then pixels in the range from 50.0 to but not including 60.0
+will have been binned into bin 5.
+This range of values has the theoretical average value of 55.0.
+However, in the uniformity computation the frequency count in the bin
+will be used as though all pixels had the value of exactly 50.0.
+<p>
+An alternative means of contributing to the uniformity of an area
+is through the use of the function <code>dtlev85_blob()</code>.
+This function does not suffer from the binning problem just described.
+Results are accurate for all data types.
+You make use use the connected components mechanism
+to construct a linked list of runs as the required input data structure.
+The linked list is passed to <code>dtlev85_blob()</code>.
+<p>
+The two uniformity contribution functions, <code>dtlev85_hist()</code>
+and <code>dtlev85_blob()</code>,
+each contribute exactly one region each time they are called.
+Since both functions use the <i>lev85</i> structure in the same way,
+calls to the functions may be intermixed.
+A call to <code>dtlev85_compute()</code> after all contributions have been made
+will compute the correct answer.
+<p>
+Although you can compute the histogram of your regions in any
+convenient way,
+the Dtack Imaging Software Base Library
+provides a convenient means to do it within the framework
+of connected components analysis.
+To use this mechanism, you write a callback routine which gets
+invoked with the coordinates of a group of pixels residing
+within one region.
+Your callback routine may be invoked several times before one region
+is complete, however all pixels of one region will be passed
+through your callback routine before any new region is begun.
+Within your callback routine, you may perform any computation you desire.
+This includes constructing a histogram which you can pass to
+<code>dtlev85_hist()</code>.
+For a working illustration of this exact mechanism,
+please refer to
+<a href="#section"> Example lev85e.c</a>
+<p><b>RETURN VALUES</b><p>The contents of the dtlev85 structure are updated to include
+the contribution of the region.
+The value of the function is either <code>DT_RC_GOOD</code> or <code>DT_RC_BAD</code>.
+Before returning <code>DT_RC_BAD</code>, <code>dt_err()</code> will have been called at least once.
+<p><b>ERRORS</b><p>Unsuccessful completion may be due to:
+<ul>
+<li><i>hist</i> structure is corrupt
+</ul>
+<p><b>CAVEATS</b><p>Attempting to use a dtlev85 structure without first initializing it
+may result in incorrect results.
+<p>
+If <i>hist</i> has been allocated such that its number of bins
+is less than the integral value of its data range,
+then loss of precision in the resulting uniformity will occur.
+<p><b>SEE ALSO</b><p><dl>
+<dt><code>dtlev85_init()</code>
+<dd>
+initializes lev85 structure
+<dt><code>dtlev85_blob()</code>
+<dd>
+contribute to uniformity via direct blobs
+<dt><code>dtlev85_compute()</code>
+<dd>
+computes uniformity for the area
+<dt><code>dtlev85_combine()</code>
+<dd>
+combines two areas into a single area
+</dl>
+<p><b>EXAMPLE</b><p>For two examples using <code>dtlev85_hist()</code>, please refer to the
+<a href="#dtlev85_compute()"> <code>dtlev85_compute()</code></a>
+and
+<a href="#sections"> Example lev85e.c</a>
+<p><b>ALGORITHM DETAILS</b><p>Get area and
+sum of gray levels in histogram.
+<p>
+Scan for histogram minimum
+and maximum gray level.
+Get mean gray level.
+<p>
+Sum variance numerator.
+<p>
+Do some debug for this
+contribution.
+<p>
+Accumulate count of regions,
+sum of total area, and
+sum of variance numerators.
+Aj in variance denominator of
+eqn (2) p.158 is cancelled by
+Aj weight in eqn (9).
+<hr> <!-- dxhtml1_head level 2, string dtlev85_init() - initialize structure -->
+<a name="sect016"></a>
+<a href="#sect000">
+<a href="#sect017">
+<a href="#sect015">
+<h2>16. <code>dtlev85_init()</code> - initialize structure</h2>
+<p><b>SYNOPSIS</b><p><pre>
+dt_rc_e
+dtlev85_init(                           // init structure
+  dtparam_t *param,                     // control parameter structure
+  dtlev85_t *lev85)                     // array of structures to init
+</pre>
+<p><b>DESCRIPTION</b><p><code>dtlev85_init()</code> initializes a dtlev85 structure
+in preparation for accumulating regions into it.
+<p>
+The <i>lev85</i> structure is initialized.
+In particular the <i>lev85-&gt;param</i> member is set to the value
+of the <i>param</i> argument.
+This is the structure which will be used in later callback routines.
+<p>
+Initializing a dtlev85 structure means that the next call to
+<code>dtlev85_blob()</code> or <code>dtlev85_hist()</code>
+will be adding the first region to it.
+<p>
+This function allocates no resources.
+There is no corresponding <code>dtlev85_uninit()</code> function.
+<p><b>PARAMETERS</b><p>The only member of the <i>param</i> structure used by this function
+is <i>param-&gt;ctl</i>.
+The <i>param</i> argument may be NULL.
+In this case, default values are used for the members of <i>param-&gt;ctl</i>.
+<p><b>RETURN VALUES</b><p>The contents of the dtlev85 structure is cleared and
+certain members are also given initial values.
+The value of the function is either <code>DT_RC_GOOD</code> or <code>DT_RC_BAD</code>.
+Before returning <code>DT_RC_BAD</code>, <code>dt_err()</code> will have been called at least once.
+<p><b>ERRORS</b><p>The current implementation of this function does not
+have error conditions.
+However, future releases may contain them.
+<p><b>CAVEATS</b><p>Attempting to use a <i>lev85</i> structure
+in subsequent routines without first initializing it with <code>dtlev85_init()</code>
+may result in incorrect results.
+<p><b>SEE ALSO</b><p><dl>
+<dt><code>dtlev85_contribute()</code>
+<dd>
+contributes a region to the area
+<dt><code>dtlev85_compute()</code>
+<dd>
+computes uniformity for the area
+<dt><code>dtlev85_combine()</code>
+<dd>
+combines two areas into a single area
+</dl>
+<p><b>EXAMPLE</b><p>For two examples using <code>dtlev85_init()</code>, please refer to the
+<a href="#dtlev85_compute()"> <code>dtlev85_compute()</code></a>
+and
+<a href="#sections"> Example lev85e.c</a>
+<p><b>ALGORITHM DETAILS</b><p>Clear structure to zeros.
+Assign param member.
+<hr> <!-- dxhtml1_head level 2, string dtlev85_label() - uniformity for each label -->
+<a name="sect017"></a>
+<a href="#sect000">
+<a href="#sect018">
+<a href="#sect016">
+<h2>17. <code>dtlev85_label()</code> - uniformity for each label</h2>
+<p><b>SYNOPSIS</b><p><pre>
+dt_rc_e
+dtlev85_label(                          // compute by-label uniformity
+  dtparam_t *param,                     // control parameter structure
+  dtimage_t *gray,                      // input gray-level image
+  dtimage_t *segmented,                 // input segmented image
+  dtlev85_label_callback_f callback,    // function called for each label
+  void *callback_arg)                   // arg passed through to callback
+</pre>
+<p><b>DESCRIPTION</b><p><code>dtlev85_label()</code> computes a uniformity number for each unique
+label found in a segmented image.
+<p>
+Uniformity values are computed using <i>gray</i> image pixels from
+regions defined by 4- or 8-connected pixels in the <i>segmented</i> image.
+The caller-supplied <i>callback</i> routine is called
+once for each different label found in the <i>segmented</i> image.
+The value of <i>callback_arg</i> is passed unchanged to <i>callback</i>.
+<p>
+You should write a callback function with a prototype like:
+<p>
+<pre>
+  dt_rc_e
+  dtlev85_label_callback(             // caller-provided prototype
+    dt_ctl_t *ctl,                    // environment control structure
+    void *callback_arg,               // passed through from application
+    dtlev85_t *lev85)                 // input computed uniformity
+</pre>
+<p>
+The <i>lev85</i> structure passed to the callback routine represents
+the uniformity of an area comprised of all regions whose pixel
+value in the <i>segmented</i> image was <i>label</i>.
+<p>
+The uniformity measure is passed to <i>callback</i> in <i>lev85-&gt;u</i>.
+The number of regions contributing to the uniformity is passed in
+<i>lev85-&gt;n</i>.
+The total number of pixels in all regions in the area is passed in
+<i>lev85-&gt;Aa</i>.
+The segmented label of the area is passed in <i>lev85-&gt;label</i>.
+<p>
+Consider the small images below in which a value of '<code>..</code>'
+indicates some don't-care pixel value.
+Three calls would be made to the <i>callback</i> routine.
+<dl>
+<dt>label '<code>..</code>':
+<dd>
+one region, gray values of '<code>..</code>'
+<dt>label 11:
+<dd>
+two regions, gray values in the 20's and 30's
+<dt>label 22:
+<dd>
+one region, gray values in the 40's
+<dt>label 66:
+<dd>
+one region, gray values in the 70's
+</dl>
+<p>
+<pre>
+    segmented image (labels)                 gray level image
+  .. .. .. .. .. .. .. .. .. ..       .. .. .. .. .. .. .. .. .. ..
+  .. 11 11 11 .. .. 22 22 22 ..       .. 23 24 23 .. .. 45 47 43 ..
+  .. 11 11 11 .. .. 22 22 22 ..       .. 25 25 24 .. .. 45 46 44 ..
+  .. 11 11 11 .. .. 22 22 22 ..       .. 23 26 24 .. .. 46 44 45 ..
+  .. .. .. .. .. .. .. .. .. ..       .. .. .. .. .. .. .. .. .. ..
+  .. 66 66 66 .. .. 11 11 11 ..       .. 73 74 73 .. .. 35 37 33 ..
+  .. 66 66 66 .. .. 11 11 11 ..       .. 75 75 74 .. .. 35 36 34 ..
+  .. 66 66 66 .. .. 11 11 11 ..       .. 73 76 74 .. .. 36 34 35 ..
+  .. .. .. .. .. .. .. .. .. ..       .. .. .. .. .. .. .. .. .. ..
+</pre>
+<p>
+If <i>gray</i> and <i>segmented</i> are not the same size,
+then the minimum dimensions are used.
+Pixels in the larger image are ignored.
+Pixel 0,0 in <i>gray</i> is aligned with pixel 0,0 in <i>segmented</i>.
+<p>
+This routine is most useful when the labels in the segmented
+image truly represent distinct regions for which a uniformity
+measure is meaningful.
+These regions need not be geometrically proximate:
+multiple disconnected regions, if given the same label,
+will all contribute to one uniformity.
+<p>
+Since this routine passes no geometric location information to the
+<i>callback</i> routine, it is not suitable for applications
+which must access the region's pixels on which the uniformity
+is being calculated.
+<p><b>PARAMETERS</b><p>Besides <i>param-&gt;ctl</i>,
+the following member of the <i>param</i> structure is the only one used
+by this function:
+<dl>
+<dt><i>param-&gt;connect</i>
+<dd>
+component connectivity.
+If specified, must be either "4" or "8".
+Default if unspecified is "4".
+</dl>
+The <i>param</i> argument may be NULL.
+In this case, default values are used for all the members.
+<p><b>RETURN VALUES</b><p>There are no return values.
+If desired, the callback routine may values in the <i>callback_arg</i>
+structure for passing back to the calling routine.
+The value of the function is either <code>DT_RC_GOOD</code> or <code>DT_RC_BAD</code>.
+Before returning <code>DT_RC_BAD</code>, <code>dt_err()</code> will have been called at least once.
+<p><b>ERRORS</b><p>Unsuccessful completion may be due to:
+<ul>
+<li><i>gray</i> image does not have a valid data type
+<li><i>segmented</i> image does not have a valid data type
+<li>unable to allocate space for the temporary lev85 structures
+<li>invalid <i>param-&gt;connect</i>
+<li>error during connected components analysis
+</ul>
+<p><b>CAVEATS</b><p>No geometric information about the regions is made available
+to the <i>callback</i> routine.
+<p>
+Don't confuse the callback used by this function with the
+callback used by the connected components processing.
+The callback used by this function is done on a per-label basis,
+whereas the connected components callback is done
+on a connected-pixel basis.
+<p><b>EXAMPLE</b><p><pre>
+// Example Program dtlev85b
+// Illustrates dtlev85_label().
+// Two arguments are: 1) the gray level image filename, and
+// 2) the segmented image filename, for example:
+//     dtlev85b  data/dice64.pgm  data/dice64s.pgm
+// Uniformity of each label is computed and printed.
+// All error checking left out for clarity.
+
+#include &lt;dt.h&gt;
+#include &lt;dtlev85.h&gt;
+
+dt_rc_e mycallback(                   // callback routine just prints
+  dt_ctl_t *ctl,
+  void *callback_arg,
+  dtlev85_t *lev85)
+{
+  printf(
+    "dtlev85b: label %g: uniformity %0.5f"
+    " over %ld regions"
+    " of total area %ld\n",
+    lev85-&gt;label,
+    lev85-&gt;u, lev85-&gt;n, lev85-&gt;Aa);
+  return DT_RC_GOOD;
+}
+
+void main(int argc, char *argv[])
+{
+  dtimage_t gray;
+  dtimage_t segmented;
+  dtimage_import(NULL,                // read and allocate gray image
+    &amp;gray, argv[1]);
+  dtimage_import(NULL,                // read and allocate segmented image
+    &amp;segmented, argv[2]);
+
+  dtlev85_label(NULL, &amp;gray,          // compute uniformity by labels
+    &amp;segmented, mycallback, NULL);    // call mycallback for each label
+  printf("dtlev85b: normal exit\n");
+}
+</pre>
+<p><b>SEE ALSO</b><p><dl>
+<dt><code>dtlev85_total()</code>
+<dd>
+calculate single uniformity for all regions
+<dt><code>dtlev85_blob()</code>
+<dd>
+blob-by-blob uniformity
+</dl>
+<p><b>ALGORITHM DETAILS</b><p>Check <i>param-&gt;connect</i>.
+Check input image validity.
+Gray ntypes are constrained.
+Segmented ntype can be any.
+<p>
+Prepare structure for private
+communication with blob
+callback.
+<p>
+Do connected components
+analysis.
+Only use parts of images not
+outside the smaller of the two
+input images.
+Ignore no pixel values.
+Call our function for each blob.
+<p>
+After all blobs are examined,
+go through list of lev85's.
+Compute uniformity for label,
+and give uniformity to caller's
+callback.
+Stop scanning if callback
+returns DT_RC_STOP.
+Free each lev85 structure from
+list as it is processed.
+<p>
+After processing list,
+go through any remaining list,
+freeing lev85 structures.
+<hr> <!-- dxhtml1_head level 2, string dtlev85_total() - compute total uniformity -->
+<a name="sect018"></a>
+<a href="#sect000">
+<a href="#sect019">
+<a href="#sect017">
+<h2>18. <code>dtlev85_total()</code> - compute total uniformity</h2>
+<p><b>SYNOPSIS</b><p><pre>
+dt_rc_e
+dtlev85_total(                          // total non-background uniformity
+  dtparam_t *param,                     // control parameter structure
+  dtimage_t *gray,                      // input gray gray-level image
+  dtimage_t *segmented,                 // input segmented image
+  double background,                    // background in segmented image
+  dtlev85_t *lev85)                     // returned structure
+</pre>
+<p><b>DESCRIPTION</b><p><code>dtlev85_total()</code> computes a single uniformity number characterizing
+all non-background pixels in an image.
+<p>
+The regions defined by 4- or 8-connected pixels in the <i>segmented</i> image
+are extracted by connected components analysis.
+Using the corresponding locations in the <i>gray</i> image,
+total uniformity <i>lev85-&gt;u</i> is computed.
+The number of regions is returned in <i>lev85-&gt;n</i>.
+Regions in <i>segmented</i> whose values are <i>background</i> are ignored.
+<p>
+The total uniformity represents the uniformity of an area
+which is composed of all non-background regions in the image.
+<p>
+If no pixel in the <i>segmented</i> image has the value <i>background</i>,
+then all pixels in the image contribute to the uniformity.
+This is desirable in some applications.
+<p><b>PARAMETERS</b><p>Besides <i>param-&gt;ctl</i>,
+the following member of the <i>param</i> structure is the only one used
+by this function:
+<dl>
+<dt><i>param-&gt;connect</i>
+<dd>
+component connectivity.
+If specified, must be either "4" or "8".
+Default if unspecified is "4".
+</dl>
+The <i>param</i> argument may be NULL.
+In this case, default values are used for all the members.
+<p><b>RETURN VALUES</b><p>The total uniformity is returned in <i>lev85-&gt;u</i>.
+The number of regions contributing to the uniformity is ret

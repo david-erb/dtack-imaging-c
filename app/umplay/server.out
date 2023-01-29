@@ -1,0 +1,93 @@
+umplay: dt_enter_standard_param: malloc(24) = 0x000e44c4-0x000e44db for default windowing server
+umplay: dt_enter_standard_param: malloc(4) = 0x000e44e0-0x000e44e3 for big memory source specs
+umplay: 19970217.0256.13 [ 2186] umplay_setup: malloc(2364) = 0x000e44ec-0x000e4e27 for umplay
+umplay: 19970217.0256.13 [ 2186] dtos_strdup: malloc(42) = 0x000e4e2c-0x000e4e55 for /fifo/decfifo+/fifo/cmdfifo+...
+umplay: 19970217.0256.13 [ 2186] dtlist_create: malloc(1600) = 0x000e4e5c-0x000e549b for config list
+umplay: 19970217.0256.13 [ 2186] umplay_setup: free(0x000e4e2c) for path
+umplay: 19970217.0256.13 [ 2186] dtipc_register: called with name "rocket,0:7081"
+umplay: 19970217.0256.13 [ 2186] dtipc_rocket_register: called with name "0:7081"
+umplay: 19970217.0256.13 [ 2186] dtipc_rocket_register: network address of "0" is 0.0.0.0 (0x00000000)
+umplay: 19970217.0256.13 [ 2186] dtipc_rocket_register: 0:7081 sockhandle 4 bound to listen on host 0.0.0.0 port 7081
+umplay: 19970217.0256.13 [ 2186] dtos_strdup: malloc(10) = 0x000e4e2c-0x000e4e35 for ssg,raw,I
+umplay: 19970217.0256.13 [ 2186] umdec_ssg_init: malloc(1394) = 0x000e54a0-0x000e5a11 for priv
+umplay: 19970217.0256.13 [ 2186] dtos_strdup: malloc(6) = 0x000e4e3c-0x000e4e41 for raw,I
+umplay: 19970217.0256.13 [ 2186] umdec_scr_create: malloc(297) = 0x000e5a18-0x000e5b40 for scr structure
+umplay: 19970217.0256.13 [ 2186] dtos_strdup: malloc(8) = 0x000e4e48-0x000e4e4f for hws,qw4
+umplay: 19970217.0256.13 [ 2186] dtscr_hws_create: malloc(92) = 0x000e5b48-0x000e5ba3 for priv
+umplay: 19970217.0256.13 [ 2186] dthws_qw4_connect: malloc(48) = 0x000e5ba8-0x000e5bd7 for priv
+umplay: 19970217.0256.13 [ 2186] dthws_qw4_connect: stack deferred base 0x00043e08 use 1512 old highwater 1304
+umplay: 19970217.0256.13 [ 2186] dtos_strdup: malloc(1) = 0x000e5bdc-0x000e5bdc for 
+umplay: 19970217.0256.13 [ 2186] dthws_qw4_connect: QNX4 Windows version 4.2.11
+umplay: 19970217.0256.13 [ 2186] dthws_qw4_connect: screen server name "", n_colors 256
+umplay: 19970217.0256.13 [ 2186] dthws_qw4_connect: screen size 800x600
+umplay: 19970217.0256.13 [ 2186] dtlist_create: malloc(1600) = 0x000f59fc-0x000f603b for window list
+umplay: 19970217.0256.13 [ 2186] dtos_free: free(0x000e4e48)
+umplay: 19970217.0256.13 [ 2186] dtscr_create: malloc(1024) = 0x000f6040-0x000f643f for display lut
+umplay: 19970217.0256.13 [ 2186] dthws_qw4_export_color: NULL" start=0, count=256
+umplay: 19970217.0256.13 [ 2186] dthws_qw4_export_color: done setting colors
+umplay: 19970217.0256.13 [ 2186] dtscr_create: malloc(177) = 0x000f6444-0x000f64f4 for scr->tmp_win
+umplay: 19970217.0256.13 [ 2186] dtscr_create: malloc(256) = 0x000f64fc-0x000f65fb for scr->cursorbuf
+umplay: 19970217.0256.13 [ 2186] dtscr_state_make_dontcare: malloc(97) = 0x000f6600-0x000f6660 for state structure
+umplay: 19970217.0256.13 [ 2186] dtscr_state_make_dontcare: malloc(97) = 0x000f6668-0x000f66c8 for state structure
+umplay: 19970217.0256.13 [ 2186] dtscr_state_make_dontcare: malloc(97) = 0x000f66d0-0x000f6730 for state structure
+umplay: 19970217.0256.13 [ 2186] dtscr_state_make_dontcare: malloc(97) = 0x000f6738-0x000f6798 for state structure
+umplay: 19970217.0256.13 [ 2186] dtscr_state_make_dontcare: malloc(97) = 0x000f67a0-0x000f6800 for state structure
+umplay: 19970217.0256.13 [ 2186] dtscr_state_make_dontcare: malloc(97) = 0x000f6808-0x000f6868 for state structure
+umplay: 19970217.0256.13 [ 2186] dtscr_state_make_dontcare: malloc(97) = 0x000f6870-0x000f68d0 for state structure
+umplay: 19970217.0256.13 [ 2186] dtscr_state_make_dontcare: malloc(97) = 0x000f68d8-0x000f6938 for state structure
+umplay: 19970217.0256.13 [ 2186] dtscr_state_make_dontcare: malloc(97) = 0x000f6940-0x000f69a0 for state structure
+umplay: 19970217.0256.13 [ 2186] dtscr_state_make_dontcare: malloc(97) = 0x000f69a8-0x000f6a08 for state structure
+umplay: 19970217.0256.13 [ 2186] dtscr_state_make_dontcare: malloc(97) = 0x000f6a10-0x000f6a70 for state structure
+umplay: 19970217.0256.13 [ 2186] dtscr_state_make_dontcare: malloc(97) = 0x000f6a78-0x000f6ad8 for state structure
+umplay: 19970217.0256.13 [ 2186] dtscr_state_make_dontcare: malloc(97) = 0x000f6ae0-0x000f6b40 for state structure
+umplay: 19970217.0256.13 [ 2186] dtscr_state_make_dontcare: malloc(97) = 0x000f6b48-0x000f6ba8 for state structure
+umplay: 19970217.0256.13 [ 2186] dtscr_state_make_dontcare: malloc(97) = 0x000f6bb0-0x000f6c10 for state structure
+umplay: 19970217.0256.13 [ 2186] dtscr_state_make_dontcare: malloc(97) = 0x000f6c18-0x000f6c78 for state structure
+umplay: 19970217.0256.13 [ 2186] dtscr_state_make_dontcare: malloc(97) = 0x000f6c80-0x000f6ce0 for state structure
+umplay: 19970217.0256.13 [ 2186] dtscr_state_make_dontcare: malloc(97) = 0x000f6ce8-0x000f6d48 for state structure
+umplay: 19970217.0256.13 [ 2186] dtscr_state_make_dontcare: malloc(97) = 0x000f6d50-0x000f6db0 for state structure
+umplay: 19970217.0256.13 [ 2186] dtscr_state_make_dontcare: malloc(97) = 0x000f6db8-0x000f6e18 for state structure
+umplay: 19970217.0256.13 [ 2186] dtscr_state_make_dontcare: malloc(97) = 0x000f6e20-0x000f6e80 for state structure
+umplay: 19970217.0256.13 [ 2186] dtlist_create: malloc(1600) = 0x000f6e88-0x000f74c7 for window list
+umplay: 19970217.0256.13 [ 2186] dt_color_ycbcr_to_rgb_init: malloc(4608) = 0x000f74cc-0x000f86cb for conversion tables
+umplay: 19970217.0256.13 [ 2186] dt_color_y_cb_cr_to_map_init: malloc(768) = 0x000f86d0-0x000f89cf for component luts
+umplay: 19970217.0256.13 [ 2186] umdec_init: free(0x000e4e2c) for type
+umplay: 19970217.0256.13 [ 2186] umplay_op_fifo: waiting for client to open data fifo /fifo/decfifo
+umplay: dt_enter_standard_param: malloc(24) = 0x000e44c4-0x000e44db for default windowing server
+umplay: dt_enter_standard_param: malloc(4) = 0x000e44e0-0x000e44e3 for big memory source specs
+umplay: 19970217.0256.35 [ 2667] umplay_setup: malloc(2364) = 0x000e44ec-0x000e4e27 for umplay
+umplay: 19970217.0256.35 [ 2667] dtos_strdup: malloc(42) = 0x000e4e2c-0x000e4e55 for /fifo/decfifo+/fifo/cmdfifo+...
+umplay: 19970217.0256.35 [ 2667] dtlist_create: malloc(1600) = 0x000e4e5c-0x000e549b for config list
+umplay: 19970217.0256.35 [ 2667] umplay_setup: free(0x000e4e2c) for path
+umplay: 19970217.0256.35 [ 2667] dtipc_register: called with name "rocket,0:7081"
+umplay: 19970217.0256.35 [ 2667] dtipc_rocket_register: called with name "0:7081"
+umplay: 19970217.0256.35 [ 2667] dtipc_rocket_register: network address of "0" is 0.0.0.0 (0x00000000)
+umplay: 19970217.0256.35 [ 2667] dtipc_rocket_register: error: bind(4, 0x00043c44, 16) host 0x00000000 port 0xa91b gave errno 248
+umplay: 19970217.0256.35 [ 2667] dtipc_register: at source/low/ipc.c@133 (ipc->rregister) returned rc -1
+umplay: 19970217.0256.35 [ 2667] umplay_op_fifo: at app/umplay/fifo.c@42 dtipc_register returned rc -1
+umplay: 19970217.0256.35 [ 2667] dtipc_rocket_unregister: 0:7081 server sockhandle 0 closed
+umplay: 19970217.0256.35 [ 2667] dtlist_destroy: free(0x000e4e5c) for config list
+umplay: 19970217.0256.35 [ 2667] umplay_uninit: free(0x000e44ec) for umplay
+umplay: 19970217.0256.35 [ 2667] umplay: at umplay/app/umplay.c@561 (*op_func[umplay_app.op]) returned rc -1
+umplay: 19970217.0256.35 [ 2667] dt_leave: free(0x000e44e0) for big memory source specs
+umplay: 19970217.0256.35 [ 2667] dt_leave: free(0x000e44c4) for default windowing server name
+umplay: 19970217.0256.35 [ 2667] dtparam_free: free(0x000e4488) for -D
+umplay: 19970217.0256.35 [ 2667] dtparam_free: free(0x000e4434) for -connect
+umplay: 19970217.0256.35 [ 2667] dtparam_free: free(0x000e44b4) for -dbgto
+umplay: 19970217.0256.35 [ 2667] dtparam_free: free(0x000e44a4) for -errto
+umplay: 19970217.0256.35 [ 2667] dtparam_free: free(0x000e4428) for -op
+umplay: 19970217.0256.35 [ 2667] dtparam_free: free(0x000e4448) for -path
+umplay: 19970217.0256.35 [ 2667] dtparam_free: free(0x000e4478) for -variant
+umplay: dt_heapmon_uninit:                          -----bytes------  ------blocks------
+umplay: dt_heapmon_uninit: up to       now  at most allocated  freed  allocated    freed
+umplay: dt_heapmon_uninit: total         0     4149      4149   4149         12       12
+umplay: dt_heapmon_uninit: tiny          0        9         9      9          2        2
+umplay: dt_heapmon_uninit: small         0      176       176    176          8        8
+umplay: dt_heapmon_uninit: medium        0        0         0      0          0        0
+umplay: dt_heapmon_uninit: large         0     3964      3964   3964          2        2
+umplay: dt_heapmon_uninit: giant         0        0         0      0          0        0
+umplay: dt_heapmon_uninit: no outstanding mallocs
+umplay: dt_heapmon_uninit: stack usage base 0x00043e08 use 308 old highwater 1304
+umplay:   all memory freed
+umplay: dtheap_uninit: free(0x000e24e4) for heap table
+umplay: dtheap_uninit: free(0x000e2440) for heap structure

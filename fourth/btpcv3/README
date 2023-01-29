@@ -1,0 +1,453 @@
+Binary Tree Predictive Coding (BTPC), Version 3
+===============================================
+
+Contents
+========
+
+	What is BTPC?			Overview
+	What's new in Version 3
+	Where to find it		Net addresses for code and docs
+	Programs			Details of available code
+	Comparisons between BTPC,	Representative results
+	 JPEG and the state of the art
+	Comments on the results		Why and when to use BTPC
+	Patents and copyright		No patents, free use.
+
+What is BTPC?
+=============
+
+BTPC is a general-purpose image coding method for lossless or lossy 
+compression of photographs and graphics. It is well suited for coding 
+multimedia images which combine text, graphics and photographs, and 
+is also appropriate as a general-purpose method when the image type
+is not known in advance. 
+
+As a lossy compressor, BTPC is slightly superior to JPEG for photographic 
+images and much superior for graphics.  Visually-transparent coding of 
+color graphics is usually possible at the rate used by GIF. Against a 
+state-of-the-art lossy scheme (Said and Pearlman's modified zerotree 
+coder), it is inferior for photographs but superior for graphics, mixed 
+and multimedia images.  Moreover (see below), BTPC is much faster.
+
+When applied losslessly, BTPC has good performance on both natural images
+and graphics.  Against a state-of-the-art lossless scheme (Wu's CALIC), it 
+is usually inferior for photographs and about the same for graphics. Again,
+BTPC is much faster.
+
+BTPC uses a binary pyramid, predictive coding and Huffman coding. No part of
+it is covered by patents.  C++ source code is available and may be freely used. 
+BTPC is inherently progressive, and a straightforward modification of the 
+decoder to write directly to an on-screen picture buffer allows simple, 
+progressive, image recovery.
+
+What's new in Version 3 - Fast decoding
+=======================================
+
+In version 3, BTPC decode times have been halved over the previous version 
+(2c).  Version 3 also improves encoding speed and gives slightly better 
+compression. 
+
+BTPC decoding speed is now equal to that of the Independent JPEG group (IJG)
+JPEG decoder, and more than three times faster than its other rivals. Of 
+course, in the words of the IJG, it is "still not as fast as we'd like".
+
+Where to find it
+================
+
+Documentation of Binary Tree Predictive Coding is at:
+
+http://monet.uwaterloo.ca/~john/btpc.html
+
+Source code is at:
+
+ftp://monet.uwaterloo.ca/pub/john/btpcv3.tar.Z
+
+Programs
+========
+
+When uncompressed and untarred the btpcv3.tar.Z file yields sources for 
+two programs:
+
+cbtpc	- Convert PGM or PPM file to compressed BTPC
+dbtpc	- Convert compressed BTPC to PGM or PPM
+
+To make
+-------
+
+1.      Edit the first line of the makefile if your c++ compiler is not
+	called c++.
+2.      rename cbtpc.C to cbtpc.cpp etc. if your compiler demands it.
+3.      make btpc
+	(This will make the cbtpc and dbtpc programs. Also included in
+	the archive are the programs psnr and bpp which I use in testing.
+	If these are useful to you, just do make all.)
+4.	Some compilers (not g++) gripe that the function btpc_dec_level in 
+	declevel.C is too big to optimize. This can be fixed by compiling 
+	declevel.C with appropriate flags. For example, in the makefile
+		$(C++) $(COPTS) -c declevel.C
+	may be replaced by
+		$(C++) -Olimit 1200 $(COPTS) -c declevel.C
+	on Decstations and SGIs (for which the compiler is called CC), or by
+		$(C++) +Onolimit $(COPTS) -c declevel.C
+	on a HP/UX machine. Check your compiler documentation.
+
+To run
+-------
+
+	cbtpc input_pic output_file [quality]
+	dbtpc input_file output_pic
+
+The optional quality parameter is a number between 0 and 100. Default is 75.
+Quality values roughly approximate JPEG quality values, but 100 is lossless.
+
+This version only reads and writes PGM and PPM raw format files (magic number
+"P5" or "P6").
+
+
+Comparisons between BTPC, JPEG and the State of the Art
+=======================================================
+
+I have compared BTPC with the current standard, JPEG, and what I consider
+to be the state of the art in still-image compression. For lossless coding
+I have compared against Wu's CALIC system, which has been proposed for the
+lossless mode of JPEG, and has done well in the first round of tests for
+that standard. For lossy coding I have compared against Said and Pearlman's
+wavelet-based embedded coder (based on Shapiro's zerotree approach). Both
+CALIC and the Said and Pearlman (henceforth S&P) coder exist in slow and
+fast versions. In each case the slow version uses an arithmetic coder to
+improve compression. BTPC and JPEG can compress color pictures, but S&P and
+CALIC can not, so the results here refer only to grayscale images.
+
+I have used an extensive set of test images, most of which are available
+at links.uwaterloo.ca. Here I give representative results from that testing.
+The programs were run on a SparcStation; times are in seconds. I have
+included only decoding time - for all methods encoding time is longer. Indeed,
+for BTPC, I have not tried to optimize the encoder at all, so it currently
+takes between two and three times as long as the decoder to run. The reason 
+for my neglect of encoding speed is that fast decoding is more important 
+in the applications I am interested in (e.g. image databases). Nonetheless,
+BTPC version 3 encoding is substantially faster than CALIC and S&P.
+
+Some caveats
+------------
+
+I have chosen CALIC and S&P because I believe them to be the best that is
+currently being achieved. Possibly some commercial products do better. I
+would like to hear about any that are available for evaluation.
+
+Having said this, please bear in mind that BTPC is not intended to beat
+state of the art systems like CALIC and S&P in their areas of strength.
+Rather, it is supposed to be "general purpose", which means it should
+do reasonably well over a wide range of possible inputs, and should
+run fast. Testing against the state of the art is a kind of "worst case"
+comparison, so be warned!
+
+One of BTPC's design criteria was decoding speed. I am not sure that this
+was the case for CALIC and S&P. However, both Wu, and Said and Pearlman
+have argued that their fast versions are fast (!) so I've considered
+it fair game to make them compete in a timing comparison.
+
+A consequence of designing BTPC as a "general-purpose" coder
+is that the only difference between lossless and lossy coding is the 
+quantizer step size. For better or for worse, I have resisted the idea
+of a separate lossless "mode", and I am still not sure of the wisdom of this.
+
+1.	Typical figures for photographic images
+-----------------------------------------------
+
+Here are two sets of typical results for coding photographic images.
+These show the general trend for photos with BTPC falling between JPEG
+and S&P/CALIC for compression efficiency, and BTPC and JPEG being much 
+faster than the fast versions of S&P and CALIC.
+
+512 x 512 Lenna:
+
+Lossy coding at PSNR 36.9 dB (= JPEG coded with Q of 75):
+
+Scheme				bpp		Decode time
+------				---		-----------
+
+JPEG				1.05		1.4
+(IJG v 6)
+
+BTPC3				0.93		1.4
+
+S&P fast			0.66		5.2		
+
+S&P slow			0.60		8.9
+
+
+Lossless coding:
+
+Scheme				bpp		Decode time
+------				---		-----------
+
+BTPC3				4.66		2.9
+
+CALIC fast			4.40		10.0
+
+CALIC slow			4.33		24.7
+
+
+256 x 256 Cameraman:
+
+Lossy coding at PSNR 34.7 dB (= JPEG coded with Q of 75):
+
+Scheme				bpp		Decode time
+------				---		-----------
+
+JPEG				1.34		0.4
+(IJG v 6)
+
+BTPC3				0.95		0.4
+
+S&P fast			0.91		1.3
+
+S&P slow			0.82		2.5
+
+
+Lossless coding:
+
+Scheme				bpp		Decode time
+------				---		-----------
+
+BTPC3				5.02		0.7
+
+CALIC fast			4.34		2.4
+
+CALIC slow			4.31		6.2
+
+2.	BTPC's worst case
+-------------------------
+
+In my test suite, BTPC's worst case was "achieved" on the 512 x 512 photographic
+image "Barbara" which includes large areas of stripes. This is the only picture 
+for which BTPC performed worse than JPEG (and then only marginally). The 
+reason is that JPEG's DCT is able to exploit the regular spatial frequency 
+structure of the stripes. BTPC cannot do this. (On the other hand, BTPC 
+clearly outperforms JPEG on textured pictures with less regular spatial 
+structure - e.g. Gold Hill.)
+
+512 x 512 Barbara:
+
+Lossy coding at PSNR 36.2 dB (= JPEG coded with Q of 75):
+
+Scheme				bpp		Decode time
+------				---		-----------
+
+JPEG				1.33		1.6
+(IJG v 6)
+
+BTPC3				1.36		1.7
+
+S&P fast			0.93		5.4
+
+S&P slow			0.87		10.1
+
+
+Lossless coding:
+
+Scheme				bpp		Decode time
+------				---		-----------
+
+BTPC3				5.31		3.0
+
+CALIC fast			4.59		10.5
+
+CALIC slow			4.48		26.5
+
+
+
+3.	Typical figures for graphical images
+--------------------------------------------
+
+With purely graphical images, BTPC's performance improves relative to the
+other schemes. It consistently compresses more than JPEG, S&P and the fast 
+version of CALIC. It compresses about the same as the slow version of 
+CALIC, at about nine times the speed.  Here are figures for coding two 
+typical presentation graphics.
+
+496 x 672 France:
+
+Lossy coding at PSNR 34.6 dB (= JPEG coded with Q of 75):
+
+Scheme				bpp		Decode time
+------				---		-----------
+
+JPEG				1.43		1.7
+(IJG v 6)
+
+BTPC3				0.53		1.7
+
+S&P fast			1.09		7.1
+
+S&P slow			0.87		14.4
+
+
+Lossless coding:
+
+Scheme				bpp		Decode time
+------				---		-----------
+
+BTPC3				0.89		2.2
+
+CALIC fast			1.40		7.4
+
+CALIC slow			0.82		21.2
+
+The difference between the two CALIC results is correct, and illustrates
+a problem with the use of Huffman coding in the CALIC algorithm on highly
+redundant images. 
+
+372 x 619 World Map:
+
+Lossy coding at PSNR 34.4 dB (= JPEG coded with Q of 75):
+
+Scheme				bpp		Decode time
+------				---		-----------
+
+JPEG				1.83		1.2
+(IJG v 6)
+
+BTPC3				0.63		1.2
+
+S&P fast			1.52		5.7     [S&P coded a cropped
+							version of the image]
+S&P slow			1.27		12.1
+
+
+Lossless coding:
+
+Scheme				bpp		Decode time
+------				---		-----------
+
+BTPC3				0.63		1.2
+
+CALIC fast			1.06		3.2
+
+CALIC slow			0.61		12.0
+
+
+4.	Typical figures for multimedia images
+---------------------------------------------
+
+Because the relative performance of BTPC and the other schemes is different
+on photographs and graphics, mixed or multimedia images can give different
+results. Here is an example where photographs are embedded within two-level
+graphics (UW Library montage). This favors CALIC which has a special mode 
+for two-level regions.
+
+352 x 464 Library:
+
+Lossy coding at PSNR 30.6 dB (= JPEG coded with Q of 75):
+
+Scheme				bpp		Decode time
+------				---		-----------
+
+JPEG				2.36		1.1
+(IJG v 6)
+
+BTPC3				1.58		1.1
+
+S&P fast			1.87		5.8
+
+S&P slow			1.61		10.6
+
+
+Lossless coding:
+
+Scheme				bpp		Decode time
+------				---		-----------
+
+BTPC3				5.42		1.8
+
+CALIC fast			5.20		6.6
+
+CALIC slow			5.01		16.4
+
+
+Summary of the Results
+======================
+
+Further results are given at http://monet.uwaterloo.ca/~john/btpc.html. The 
+ones given above are supposed to be representative of the general trends which 
+I summarize as:
+
+1.	Lossless coding. BTPC compression is usually between 5 and 10% less
+	efficient than the state of the art, CALIC, for photographs, and 
+	about the same efficiency as the slow version of CALIC for graphics. 
+	It is substantially more efficient than the fast version of CALIC for
+	graphics. It is about 3.5 times faster than the fast version and
+	about 9 times faster than the slow version on average.  BTPC requires 
+	more memory than CALIC, in that the entire picture is held in store.
+	On the other hand, it allow progressive decoding.
+
+2.	Lossy coding vs JPEG. BTPC is almost always superior to JPEG. On
+	average it is about 20% more efficient than JPEG for photographs
+	at least twice as efficient for graphics. Decoding is as fast as the
+	IJG decoding and uses slightly more memory. Encoding currently takes 
+	between two and three times as long as IJG JPEG.
+
+3.	Lossy coding vs the state of the art. Embedded coders like S&P and
+	Shapiro's seem to be the future of lossy coding for natural images. BTPC
+	is competitive on simple pictures (like cameraman, mentioned above),
+	but on more textured images can require 50% more bits than S&P for a 
+	photograph. However, BTPC codes graphics and multimedia images more 
+	efficiently, and its decoding time is always less than a third that
+	of fast S&P, and usually less than a quarter.
+
+Patents and Copyright
+=====================
+
+The BTPC method is patent-free. In particular, no use is made of arithmetic
+coding. The source code is copyright (c) 1994, 1995, John A. Robinson, except 
+for portions of the file colmap.C which are the work of the Independent JPEG 
+group and therefore copyright (C) 1991, 1992, 1993, 1994, 1995 Thomas G. Lane. 
+(Previous versions of BTPC contained code from Unix compact: this has now
+been replaced.)
+
+You may freely use all the BTPC code on exactly the same terms as the 
+Independent JPEG group allows use of their code. Following their pattern, and
+adapting their README file (see READMEJ for the original), here is how it works:
+
+I welcome the use of this software as a component of commercial products.
+No royalty is required, but I do ask for an acknowledgement in product
+documentation, as described below.
+
+In plain English:
+
+1. I don't promise that this software works.  (But if you find any bugs,
+   please let me know!)
+2. You can use this software for whatever you want.  You don't have to pay me.
+3. You may not pretend that you wrote this software.  If you use it in a
+   program, you must acknowledge somewhere in your documentation that
+   you've used the BTPC Version 3 code.
+
+In legalese:
+
+The author makes NO WARRANTY or representation, either express or implied,
+with respect to this software, its quality, accuracy, merchantability, or
+fitness for a particular purpose.  This software is provided "AS IS", and you,
+its user, assume the entire risk as to its quality and accuracy.
+
+This software, excluding the file colmap.C, is 
+copyright (C) 1994, 1995, John A. Robinson,
+All Rights Reserved except as specified below.
+
+Permission is hereby granted to use, copy, modify, and distribute this
+software (or portions thereof) for any purpose, without fee, subject to these
+conditions:
+(1) If any part of the source code for this software is distributed, then this
+"Patents and Copyright" section of the README file must be included, with 
+this copyright and no-warranty notice unaltered; and any additions, deletions, 
+or changes to the original files must be clearly indicated in accompanying 
+documentation.
+(2) If only executable code is distributed, then the accompanying
+documentation must state that "this software is based in part on Binary Tree
+Predictive Coding Version 3, implemented by J. A. Robinson".
+(3) Permission for use of this software is granted only if the user accepts
+full responsibility for any undesirable consequences; the author accepts
+NO LIABILITY for damages of any kind.
+
+NOTE THAT IF YOU USE THE FILE COLMAP.C YOU MUST COMPLY WITH THE IJG'S
+TERMS TOO - SEE THE FILE READMEJ.

@@ -1,0 +1,17 @@
+/*..........................................................................
+| TITLE dtintro
+| Software Overview
+|
+|.Big Memory
+| Big memory blocks can be larger than the RAM memory in your computer.
+| External sources, such as XMS (real-mode DOS only)
+| or disk may be used.
+| Available memory sources are described by a string given to
+| dtmem_configure().
+| When a new big memory block is needed,
+| dtmem_alloc() finds the first memory source in the list which
+| has enough space to honor the request.
+| 
+| END
+ *..........................................................................*/
+

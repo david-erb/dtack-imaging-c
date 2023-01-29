@@ -1,0 +1,156 @@
+	  $(SRC)/doc/doclist.m4 \
+	  $(SRC)/app/tableau/tableau.doc > $(DOC)/app/tableau/dtcaesar.dx
+	sh $(SRC)/sh/dtpics.sh $(SRC)/app/tableau $(DOC)/app/tableau/dtcaesar.dx $(DOC)/app/tableau
+
+
+
+
+$(DOC)/doc/lj4/dtturnon.lj4: $(DOC)/doc/ps6/dtturnon.ps6
+	sh $(SRC)/sh/dtps2lj4.sh $(DOC)/doc/ps6/dtturnon.ps6 $(DOC)/doc/lj4/dtturnon.lj4
+
+$(DOC)/doc/lj3/dtturnon.lj3: $(DOC)/doc/ps3/dtturnon.ps3
+	sh $(SRC)/sh/dtps2lj3.sh $(DOC)/doc/ps3/dtturnon.ps3 $(DOC)/doc/lj3/dtturnon.lj3
+
+$(DOC)/doc/ps6/dtturnon.ps6: $(DOC)/doc/dvi/dtturnon.dvl
+	sh $(SRC)/sh/dtdvl2ps.sh $(DOC)/app/tableau $(DOC)/doc/dvi/dtturnon.dvl $(DOC)/doc/ps6/dtturnon.ps6 1200
+
+$(DOC)/doc/ps3/dtturnon.ps3: $(DOC)/doc/dvi/dtturnon.dvl
+	sh $(SRC)/sh/dtdvl2ps.sh $(DOC)/app/tableau $(DOC)/doc/dvi/dtturnon.dvl $(DOC)/doc/ps3/dtturnon.ps3 300
+
+$(DOC)/doc/dvi/dtturnon.dvl: $(DOC)/app/tableau/dtturnon.ltx $(SRC)/doc/data/utopia.ltx
+	cd $(DOC)/app/tableau; \
+	sh $(SRC)/sh/dtlatex.sh $(SRC) $(DOC)/app/tableau/dtturnon.ltx \
+	   $(DOC)/doc/dvi/dtturnon.dvl:utopia.ltx \
+	   $(DOC)/doc/dvi/dtturnon.dvi:plain.ltx
+
+$(DOC)/doc/dvi/dtturnon.dvi: $(DOC)/app/tableau/dtturnon.ltx
+	cd $(DOC)/app/tableau; \
+	sh $(SRC)/sh/dtlatex.sh $(SRC) $(DOC)/app/tableau/dtturnon.ltx \
+	   $(DOC)/doc/dvi/dtturnon.dvi:plain.ltx
+
+$(DOC)/app/tableau/dtturnon.ltx: $(DOC)/app/tableau/dtturnon.dx
+	sh $(SRC)/sh/dtdx2ltx.sh guide \
+	  $(SRC) \
+	  $(DOC)/app/tableau/dtturnon.dx \
+	  $(DOC)/app/tableau/dtturnon.ltx \
+	  "turnon" \
+	  "Tableau Web"
+
+$(DOC)/doc/html/dtturnon/all.htm: $(DOC)/app/tableau/dtturnon.dx
+	sh $(SRC)/sh/dtdx2htm.sh  guide \
+	  $(SRC) \
+	  $(DOC)/app/tableau/dtturnon.dx \
+	  $(DOC)/doc/html/dtturnon/all.htm \
+	  "dtturnon" "Tableau Web"
+
+$(DOC)/doc/html/dtturnon/sect000.htm: $(DOC)/app/tableau/dtturnon.dx
+	sh $(SRC)/sh/dtdx2ht2.sh guide \
+	  $(SRC) \
+	  $(DOC)/app/tableau/dtturnon.dx \
+	  $(DOC)/doc/html/dtturnon \
+	  "dtturnon" "Tableau Web"
+
+$(DOC)/doc/text/dtturnon.txt: $(DOC)/app/tableau/dtturnon.dx
+	sh $(SRC)/sh/dtdx2txt.sh guide \
+	  $(SRC) \
+	  $(DOC)/app/tableau/dtturnon.dx \
+	  $(DOC)/doc/text/dtturnon.txt \
+	  "dtturnon" "Tableau Web"
+
+
+$(DOC)/app/tableau/dtturnon.dx: $(SRC)/doc/doclist.m4 \
+	  $(SRC)/app/tableau/turnon.doc
+	sh $(SRC)/sh/dtinclude.sh \
+	  -I$(SRC)/doc/include \
+	  -I$(DOC)/app/tableau \
+	  -Dfilebase=dtturnon \
+	  $(SRC)/doc/doclist.m4 \
+	  $(SRC)/app/tableau/turnon.doc > $(DOC)/app/tableau/dtturnon.dx
+	sh $(SRC)/sh/dtpics.sh $(SRC)/app/tableau $(DOC)/app/tableau/dtturnon.dx $(DOC)/app/tableau
+
+
+
+$(SRC)/app/tableau/tableau.use: \
+	  $(SRC)/app/tableau/tableau.c
+	sh $(SRC)/sh/dtinclude.sh -I$(SRC)/doc/include \
+	  $(SRC)/app/tableau/tableau.c | \
+	sh $(SRC)/sh/dtdx.sh $(SRC) -fuse -o/tmp/tableau \
+	  "\"-aDavid Erb\"" \
+	  "\"-cDtack Imaging Software\"" -
+	(echo "/*"; cat /tmp/tableau.use; echo "*/") > $(SRC)/app/tableau/tableau.use
+	dtutil cstring usage < /tmp/tableau.use >> $(SRC)/app/tableau/tableau.use
+	rm -f /tmp/tableau.use
+
+
+
+
+
+#----------------------------------------------------------------------------
+
+helps: 
+
+
+examples: 
+
+
+usages: \
+	  $(SRC)/app/tableau/tableau.use
+
+
+#-------------------------------------------------------------------------
+cis:
+	find . -type d ! -name . -prune -o \
+	  \( -name "*.[chx]" -o -name "dir.yam" \) \
+	  -exec ci -l {} </dev/null \;
+
+#-------------------------------------------------------------------------
+maks: \
+	qw0.maks \
+	qw1.maks \
+	qw6.maks \
+	dw0.maks \
+	ww0.maks \
+	dw1.maks \
+	dt0.maks \
+	db0.maks \
+	wb0.maks \
+	wb3.maks \
+	wv4.maks \
+	dv0.maks \
+	bsd1.maks
+
+#-------------------------------------------------------------------------
+
+makefile: dir.yam \
+         $(SRC)/config/def.yam \
+         $(SRC)/config/prj.yam \
+         $(SRC)/config/default.yam
+	sh $(SRC)/sh/dtm4.sh " -DTARGET_default \
+	  -I$(SRC)/config prj.yam dir.yam \
+	  > $(OUT)/app/tableau/makefile"
+makefiles: makefile
+
+qw0.mak: dir.yam \
+         $(SRC)/config/def.yam \
+         $(SRC)/config/prj.yam \
+         $(SRC)/config/qw0.yam
+	sh $(SRC)/sh/dtm4.sh " -DTARGET_qw0 \
+	  -I$(SRC)/config prj.yam dir.yam \
+	  | sh $(SRC)/sh/dtyamf.sh qw0 > $(OUT)/app/tableau/qw0.mak"
+qw0.maks: qw0.mak
+	
+qw1.mak: dir.yam \
+         $(SRC)/config/def.yam \
+         $(SRC)/config/prj.yam \
+         $(SRC)/config/qw1.yam
+	sh $(SRC)/sh/dtm4.sh " -DTARGET_qw1 \
+	  -I$(SRC)/config prj.yam dir.yam \
+	  | sh $(SRC)/sh/dtyamf.sh qw1 > $(OUT)/app/tableau/qw1.mak"
+qw1.maks: qw1.mak
+	
+qw6.mak: dir.yam \
+         $(SRC)/config/def.yam \
+         $(SRC)/config/prj.yam \
+         $(SRC)/config/qw6.yam
+	sh $(SRC)/sh/dtm4.sh " -DTARGET_qw6 \
+	  -I$(SRC)/config prj.yam dir.yam \

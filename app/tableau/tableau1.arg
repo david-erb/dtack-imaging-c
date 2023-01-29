@@ -1,0 +1,22 @@
+# FTP: 
+#   -screen ftp,/remotedir/%s.%08ld.jpg  
+#                         |  |
+#                         |  /--- this will get the frame number
+#                         |
+#                         /---- this will get the camera name, e.g. "inside"
+#
+
+-config /tableau/config
+-input dir,/img/tableau/gary2.raw/%03d,256,256,0
+# -screen ftp,/img/tableau/tmp.x/%s.%08ld.jpg
+
+-screen socket,192.9.200.4:5711+tmp.x
+
+-variant jpeg
+-color rgb888
+-D usr1
+-op "stamp,%d %b %y %H:%M:%S"
+-dz 5.0
+-n 10
+-t 25
+

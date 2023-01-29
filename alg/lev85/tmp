@@ -1,0 +1,46 @@
+\documentclass[titlepage]{article}
+\usepackage{dtackdx}
+\usepackage{epsf}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{verbatim}
+\input style.ltx
+\newdimen\dtwidone
+\newdimen\dtwidtwo
+\newbox\dtbox
+\begin{document}
+\raggedright
+\raggedbottom
+\marginparsep=-0.1in
+\reversemarginpar
+\marginparwidth=1.0in
+\epsfverbosetrue
+This document is titled {\em dtdoclist(filebase, title)}.
+It is part of the {\em =dxseries=} series.
+Its Dtack Part Number is dtdoclist(filebase, partno).
+\par
+\vspace{9pt}
+Other documents of interest:
+\par
+{\em dtdoclist(dt, title)}\\
+\vspace{-9pt}\begin{list}{}{\leftmargin=0pt}\item
+Top of documentation hierarchy.
+\end{list}
+\par
+{\em dtdoclist(dtalg, title)}\\
+\vspace{-9pt}\begin{list}{}{\leftmargin=0pt}\item
+Overview of all algorithms.
+\end{list}
+\par
+\vspace{9pt}
+{\bf LICENSE SUMMARY}
+\par
+\vspace{9pt}
+tinclude(license1.dx)
+\par
+\vspace{9pt}
+{\bf DISCLAIMER}
+\par
+\vspace{9pt}
+tinclude(disclaim.dx)
+\end{document}

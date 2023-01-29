@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html>
+<head>
+<title>
+Video Caesar Server-side Setup Instructions for Win32
+</title>
+<link rev="made" href="MAILTO:webmaster@dtack.com">
+</head>
+<body bgcolor=e5e5d0>
+<table border=0 width=660><tr><td align=top>&#160;&#160;&#160;&#160;<br></td><td><!-- dxhead1.htm start -->
+<a href="/">
+<img align=top src="tableau1.gif" 
+alt="to home">
+</a>
+<img align=top src="space4.gif" alt=""> 
+<a name="sect000">
+<img align=top src="tabhead.gif" 
+alt="Tableau Web">
+</a>
+<p>
+<!-- dxhead1.htm finish -->
+<h1>Video Caesar Server-side Setup Instructions for Win32</h1>
+<!-- Copyright (c) 1997  , All Rights Reserved -->
+<a name="video_caesar_server_side_setup_instructions_for_win32">&#160;</a>
+</td></tr></table>
+<!-- dxhr.htm start -->
+<br><img src="hr.gif" alt="------------------------------"><br>
+<!-- dxhr.htm finish -->
+<table border=0 width=660><tr><td align=top>&#160;&#160;&#160;&#160;<br></td><td><!-- dxhtml_docsect -->
+Thanks for buying from Tableau!
+<p>
+These instructions will tell you how to install the Tableau Server-side.
+The Server-side receives images from Tableau on the capture computer and stores
+them to hard disk.
+Its function is very much like an FTP server.
+However, the Tableau Server-side is much faster than FTP.
+<p>
+The Tableau Server-side is the same program as the Tableau
+Video Caesar capture program.
+What makes it different is its configuration file.
+<p>
+It is our sincere wish that your experience with the Video Caesar
+web cam system is pleasant and rewarding.
+<p>
+Please call us at 1.800.221.7583 with any questions.
+<a name="install_software">&#160;</a>
+<h3>1. Install software</h3>
+<table border=0><tr><td width=20>&#160;</td><td>Follow these instructions to install Tableau
+on both the capture and server computers.
+<p>
+<b>Note you must have version 01-01 or later of the Tableau Software.</b>
+Versions 00-YY will not work as the Server-side.
+<p>
+<ol>
+<li> Download the distribution file <b>tabXX-YY.exe</b> from Tableau's web site.
+It can be found at <b>http://www.tableau.com/download.html</b>.
+Place the file in <b>C:&#92;WINDOWS&#92;TEMP</b>
+or some other suitable directory.
+<li> Open a DOS Box by clicking <i>Start-&gt;Programs-&gt;MS-DOS Prompt</i>.
+<li> Type <b>CD &#92;WINDOWS&#92;TEMP</b> to change to the temporary directory
+from step1.
+<li> Type <b>TABXX-YY.EXE</b> to run the self-extracting install program.
+When asked, you MUST accept the default destination directory
+<b>C:&#92;TABLEAU</b>.
+</ol>
+The installation program unpacks some temporary files in the current
+directory which it removes when finished.
+All files are installed into the destination directory tree <b>C:&#92;TABLEAU</b>.
+No files are installed in any Windows system directories.
+</td><td width=20>&#160;</td></tr></table>
+<a name="customizing__capture_side_">&#160;</a>
+<h3>2. Customizing (Capture side)</h3>
+<table border=0><tr><td width=20>&#160;</td><td>Follow the Customization instructions given in the document entitled
+<i>Video Caesar Documentation</i>
+to set up the capture computer.
+<p>
+In the file <b>c:\tableau\config\tableau.arg</b> on the capture computer
+use a -screen line like:
+<p>
+<pre>
+   -screen rocket,192.9.200.4:5710
+</pre>
+<p>
+Use the IP address of your server computer instead of <code>192.9.200.4</code>.
+</td><td width=20>&#160;</td></tr></table>
+<a name="customizing__server_side_">&#160;</a>
+<h3>3. Customizing (Server side)</h3>
+<table border=0><tr><td width=20>&#160;</td><td>Follow the Customization instructions given in the document entitled
+<i>Video Caesar Documentation</i>
+to set up the server computer.
+<p>
+Replace the entire contents of the file <b>c:\tableau\config\tableau.arg</b>
+with the following:
+<p>
+<pre>
+   -connect rocket,0:5710!
+   -path \webcam
+   -screen roll,unit1
+   -variant passthrough
+   -errto c:\tableau\logs\tabserve.log
+   -dbgto c:\tableau\logs\tabserve.log
+   -sayto c:\tableau\logs\tabserve.log
+</pre>
+<p>
+Substitute the following:
+<dl>
+<dt><code>\webcam</code>
+<dd>
+a directory on your system
+<dt><code>unit</code>
+<dd>
+a subdirectory of <code>\webcam</code>
+</dl>
+<p>
+Files stored into the directory <code>\webcam\unit1</code>
+will have names of the form <code>cam0.00000001.rgb888.enc</code>.
+These names are not changeable at the current time.
+<p>
+The CGI program <code>dtspush.exe</code> conveniently understands these filenames.
+From these files, <code>dtspush.exe</code> puts out standard multi-part mime
+which Netscape interprets as smooth continuous video.
+Java applets are available from Tableau which
+decode the multi-part mime for Microsoft Internet Explorer.
+<p>
+Both <code>dtspush.exe</code> and the Java applets are available in
+source code and compiled form from Tableau.
+</td><td width=20>&#160;</td></tr></table>
+<a name="starting">&#160;</a>
+<h3>4. Starting</h3>
+<table border=0><tr><td width=20>&#160;</td><td>To start Tableau, choose <b>Start-&gt;Programs-&gt;Tableau XX-YY-&gt;Tabstart</b>.
+This will start both Tabchief and Tableau on both computers.
+It will also cause a restart either of these programs should they
+terminate for any reason.
+<p>
+To have Tableau start at Windows boot-time,
+place the Tabstart shortcut into your Startup folder
+on both the capture and server computers.
+</td><td width=20>&#160;</td></tr></table>
+<a name="troubleshooting">&#160;</a>
+<h3>5. Troubleshooting</h3>
+<table border=0><tr><td width=20>&#160;</td><td>The most useful way to determine the origin of any problems
+is to look at the log files in <b>c:\tableau\logs</b> on both
+the capture and server computers.
+<p>
+<b>Good luck!</b>
+</td><td width=20>&#160;</td></tr></table>
+</td></tr></table>
+<!-- dxhr.htm start -->
+<br><img src="hr.gif" alt="------------------------------"><br>
+<!-- dxhr.htm finish -->
+<table border=0 width=660><tr><td align=top>&#160;&#160;&#160;&#160;<br></td><td><!-- dxhtml1_head: level 1 -->
+<p>
+We welcome your comments and suggestions.
+Please direct them to:
+<a href="mailto:webmaster@dtack.com">webmaster@dtack.com</a>.
+<p>
+Copyright (c) 1996 Tableau Web, All Rights Reserved<br>
+P.O. Box 45195<br>
+Madison, WI 53744-5195<br>
+voice/fax: +1.608.767.4000<br>
+toll free: 1.800.221.7583<br>
+
+</td></tr></table>
+</body>
+</html>

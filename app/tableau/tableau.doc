@@ -1,0 +1,679 @@
+/*..........................................................................
+| TITLE tableau
+| Video Caesar Documentation
+|_if =dxhyper= == 0
+| #LICENSE SUMMARY#
+| 
+|dtinclude(license2.dx)
+| 
+| #DISCLAIMER#
+| 
+|dtinclude(disclaim.dx)
+|_endif
+| 
+|!Overview
+| The Video Caesar software grabs live video and uploads frames
+| as individual JPEG files.
+| 
+| The software consists of three cooperating programs.
+| These are:
+|
+|_aside Three programs.
+|_index tabstart,, description
+|_index tabchief,, description
+|_index tableau,, description
+| tabstart	The watchdog program.  Initially starts the the other two programs.
+| 			Restarts them if they terminate for any reason.
+| tabchief	The remote control server.  Talks to browsers and executes
+| 			commands on their behalf.  Used to set the camera schedules.
+| tableau	The video pump.  Opens the video window, captures frames,
+| 			and uploads them to the server.
+|_index browser
+|
+|_aside Functional diagram.
+|_figure picture, overview, Overview
+|
+|.Hardware requirements
+| -	IBM PC compatible Intel 486/66 or or better
+| -	8 or more megabytes of RAM
+| -	2 or more megabytes of disk
+| -	Windows 95 (NT ~might~ work)
+| -	modem and PPP, Ethernet or other TCP/IP connection
+| -	Video for Windows compatible framegrabber such as those below
+|
+| Some framegrabbers which are Video for Windows compatible are:
+| -	Connectix QuickCam
+| -	Video Labs Stinger
+| -	Creative Labs Video Blaster
+| -	Fast Movie Machine
+| -	ComputerEyes
+| -	Reveal TV
+| -	Winnov Videum
+| -	MultiMediaMagic (DOOIN) Mediacamp
+|
+|!Installation and customizing
+|_index installation
+|_Aside Get it from the Internet.
+| 1.	Download the distribution file #tabXX-YY.exe# from Tableau's web site.
+| 		It can be found at #http://www.tableau.com/download.html#.
+|		Place the file in #C:\\WINDOWS\\TEMP# 
+| 		or some other suitable directory.
+| 2.	Open a DOS Box by clicking ~Start->Programs->MS-DOS Prompt~.
+| 3.	Type #CD \\WINDOWS\\TEMP# to change to the temporary directory
+| 		from step1.
+| 4.	Type #TABXX-YY.EXE# to run the self-extracting install program.
+|		When asked, you MUST accept the default destination directory 
+|		#C:\\TABLEAU#.
+| The installation program unpacks some temporary files in the current
+| directory which it removes when finished.
+| All files are installed into the destination directory tree #C:\\TABLEAU#.
+| No files are installed in any Windows system directories.
+| 
+|.Customizing
+|_index customization
+| If this is a first-time installation, copy the following five files
+|_aside Customize during first install.
+| from #c:\\tableau\\sample# to #c:\\tableau\\config#:
+| #tabchief.arg#	parameters for tabchief remote control program
+| #tableau.arg#		parameters for tableau video pump program
+| #cam.lst#			list of cameras
+| #cam0.sch#		schedule for camera named "cam0"
+| #ftp.cfg#			FTP host and login information
+|
+| Edit each of these files to configure your particular installation.
+| There are comments in each file to help guide you.
+| 
+| If you wish to call your camera something other than "cam0",
+|_aside Rename or add cameras.
+| such as "mycam", then rename #cam0.sch# to #mycam.sch#.
+| Also note this in #cam.lst#.
+| If you have multiple cameras, make multiple copies of the file,
+| each with a different name.
+|
+|.Setting Video Size
+| To change the video size, you must use the #vc# program.
+|_aside Point and click procedure.
+|_index video size,, setting
+| This Video for Windows program is supplied with the Video Caesar software.
+|_index Video for Windows
+| (The #vc# program is courtesy of the #vic# videoconferencing system
+| http://www-nrg.ee.lbl.gov/vic/.)
+| You will have to run vc from a DOS box.
+| Run it first with "-d -1" to see the indexes assigned to each grabber.
+| Then run it with the -d parameter to set up the one you want.
+| For example:
+|
+|:   c:
+|_Aside Do this in a DOS box.
+|:   cd \tableau\XX-YY
+|:   vc -d -1
+|:   . Invalid device id -1. (ignore this!)
+|:   . Possible values for dev_index:
+|:   . 0 - Creative Video Blaster SE-100
+|:   . 1 - Videomail VMC2
+|:   vc -d 1
+|
+| shows two possible framegrabbers.
+|_index framegrabber
+| The second second frame grabber (0 is the first) is selected for configuring.
+| 
+| You will be presented with several dialog boxes.
+| Choose the input source, image dimension, and contrast as appropriate.
+|_aside Always use RGB 24.
+| For image format, always choose 24 bit RGB.
+|
+| Using #vc# is currently the only way to set the video size.
+| This may not be done remotely.
+| 
+|.Network security
+|_index security
+| The tabchief program running on your computer listens for commands
+|_aside Security risk.
+| from remote hosts on the Internet.
+| It will execute those commands no matter who on the Internet sends them.
+| Some commands are potentially destructive when issued maliciously.
+| You should be aware that your computer is exposed to tampering
+| any time it is connected to the Internet and tabchief is running.
+| 
+| #The most secure means of preventing tampering is not to run tabchief.#
+|_aside Security by abstinence.
+| To exclude tabchief, but still run tabstart and tableau,
+| simply remove tabchief from tabstart's command line.
+| If you are running tabstart from a shortcut, perhaps in your StartUp folder,
+| then do the following:
+| 
+| 1.	right-click on the #Tabstart# shortcut icon
+| 2.	choose "Properties"
+| 3.	choose the "Shortcut" tab
+| 4.	remove "tabchief" from the line in the "Target" text box
+| 
+| If you require remote control of your computer, then you must run tabchief
+| and accept the security risks involved.
+| 
+| Even though tabchief allows a large security hole,
+| you can easily add a very thin layer of protection.
+|_aside Security by obscurity.
+| You do this by periodically changing the port which tabchief listens on.
+| If you use an un-guessable port, then it becomes like a password.
+| However, this form of security will not lock out a determined hacker
+| with a simple tool.
+| More effective security measures may be added to this software if required.
+| 
+| To change tabchief's listen port, edit the :-connect: line in
+|_aside Port becomes a password.
+| #c:\\tableau\\config\\tabchief.arg#.
+| This is described more fully in the @Tabchief parameters@ section.
+| 
+| Alternatively, use your browser to contact the running tabchief.
+|_index browser
+| Choose the "Edit tabchief parameters" link on the main page.
+| 
+| In any case, tabchief must be restarted in order for its new parameters
+|_aside Don't forget to restart.
+| to take effect.
+| 
+|!Startup and termination
+| To start the video, simply double-click on the ~Tabstart~ icon in
+|_aside Tabstart is the launcher.
+|_index launching
+|_index boot-up
+|_index starting video
+| the #TABLEAU XX-YY# Program Group Window.
+| Alternatively, click on ~Start->Programs->Tableau XX-YY->tabstart~.
+| 
+| A black-and-white DOS box will appear when you run tabstart.
+| You may minimize this window if you wish.
+|
+| To have video start each time Windows 95 starts, simply copy
+|_Aside Start video at boot-up.
+| ~c:\\Windows\\Start Menu\\Programs\\Tableau XX-YY\\Tabstart~
+| into ~c:\\Windows\\Start Menu\\Programs\\StartUp~.
+|
+| The tabstart program logs all its activities to the file
+|_aside Activity logging.
+|_index log file,, tabstart
+| ~c:\\tableau\\logs\\tabstart.log~ as well as displaying them on its window.
+|
+|.Contacting the tabchief server
+|_index server,, tabchief
+| To contact tabchief, use your favorite local or remote browser.
+| From a local browser, that is, one running on the Video Caesar computer itself,
+|_index browser,, local
+| use a URL like:
+|_aside Local browser.
+| 
+|:   http://localhost:5780
+|
+| Note that tabchief's port number is not fixed at 
+| the number 5780 as shown in this example.
+| It can be changed in the tabchief parameter file
+| #c:\\tableau\\config\\tabchief.arg#.
+|_index browser,, remote
+| 
+| To contact tabchief remotely when you know the Video Caesar's IP address:
+|_aside Remote browser.
+| 
+|:   http://111.222.333.444:5780
+|_index IP address, tabchief
+| 
+| Finally, to contact tabchief using Dtack's free reverb server:
+|_aside Using reverb service.
+| 
+|:   http://dtack.com:5753/your.name.here?:5780
+|_index IP address, reverb server
+|_index server,, reverb
+| 
+| where ~your.name.here~ is the name used in the
+| @Tabchief ident parameter@.
+|_index parameter,, ident
+|_index ident parameter
+|_index reverb server
+|_index server,, reverb
+| For this final method to work,
+| tabchief's parameter file must have the :-ident: parameter
+| specifying a valid @reverb server@.
+| 
+|.Termination
+| To stop all three programs, do the following steps in order:
+|_index shutdown
+|_index termination
+|
+|_aside Shutdown procedure.
+| 1.	If you minimized the #TABSTART# DOS box window, then open it
+|		by clicking on its Task Bar button.
+| 2.	Type Control-C in this window.  It should disappear.
+| 3.	Using a local browser, contact Tabchief at URL #http://localhost:5780#.
+| 4.	Click on #Stop tableau# in the browser window.
+| 5.	Click on #Stop tabchief#.
+|_index browser
+|_index server,, tabchief
+|
+| If you do not terminate Tableau gracefully as just described,
+|_aside Be polite!
+| it will not run again properly until you have restarted Windows 95.
+| 
+|!Tabchief parameters
+| Tabchief is the remote control server program.
+|_aside Remote control server.
+| It is the one you talk to with your browser.
+|_index browser
+| This program is normally started by tabstart.
+| 
+| Tabstart's parameters are in the file #c:\\tableau\\config\\tabchief.arg#.
+|_aside Parameter file.
+|_index config file,, tabchief
+|_index parameters,, tabchief
+|_index tabchief,, parameters
+| You may edit this file by hand using Notepad or
+| edit it from a link on Tabchief's own Main Page.
+|
+| Each parameter should be on a line by itself.
+| Blank lines and those beginning with #, *, or ; are ignored.
+| Here are the principal arguments for Tabchief:
+|
+|_aside The important parameters.
+| -config c:/tableau/config		The config directory.
+| 								This should not be changed.
+| -ident HOST:PORT+NAME			@Reverb server@ to notify.
+| -connect 0:5780				The host name and port to listen on.
+| -errto c:\\tableau\\logs\\tabchief.log	Where error messages are logged.
+| -dbgto c:\\tableau\\logs\\tabchief.log	Where debug messages are logged.
+| -sayto c:\\tableau\\logs\\tabchief.log	Where informational messages are logged.
+|_index log file,, tabchief
+|_index parameter,, ident
+|_index ident parameter
+| 
+|.Tabchief connect parameter
+|_index IP address,, tabchief
+|_index tabchief,, IP address
+|_aside Server listens on TCP/IP.
+| The :-connect: parameter tells tabchief what IP address and port to listen on.
+| You will need to know these to contact tabchief from a remote host.
+|
+| Using 0 as the IP address will choose a default.
+|_aside Default IP address.
+| Normally this default is the dynamic address assigned by your
+| Internet Service Provider when you make a dial-up connection.
+| However, under certain circumstances, 
+| you may need to enter the IP address explicitly.
+|
+| The port value can provide a thin layer of security.
+|_index security
+|_aside Meager security.
+| If you change the port value frequently, it becomes somewhat like a password.
+| Some percentage of casual hackers will be thrown off by this.
+| However, a determined hacker with a simple tool can easily find the new port.
+| A further discussion of security issues is given in the @Security@
+| section of this document.
+| 
+| #The highest security is achieved by not running tabchief at all.#
+| 
+|.Tabchief ident parameter
+| The :-ident: parameter is optional.
+|_aside Register your name.
+|_index parameter,, ident
+|_index ident parameter
+|_index reverb server
+|_index server,, reverb
+| Using it will cause tabchief to register your computer with
+| a reverb server on another host.
+| The @Reverb server@ section below provides more information.
+| As an example, to use the free Internet reverb server maintained by Dtack:
+| 
+|:   -ident dtack.com:5301+your.name.here
+| 
+|!Tableau parameters
+| Tableau is the video pump software.
+|_aside The video process.
+|_index video capture
+| It captures images, compresses them, and uploads them as individual JPEG files.
+| This program is normally started by tabstart.
+| 
+| Tableau's parameters are in the file #c:\\tableau\\config\\tableau.arg#.
+|_index config file,, tableau
+|_index parameters,, tableau
+|_index tableau,, parameters
+| You may edit this file by hand using Notepad or
+| edit it from Tabchief's Main Page.
+|
+| Each parameter should be on a line by itself.
+| Blank lines and those beginning with #, *, or ; are ignored.
+| Here are the principal arguments for Tableau:
+|
+|_aside The important parameters.
+| -config c:/tableau/config			The config directory.
+| 									This should not be changed.
+| -input vfw,GRABBER,WIDTH,HEIGHT	Input framegrabber source.
+| -screen rocket,HOST:PORT+NAME		Tableau server to upload to. #OR#
+| -screen ftp,DIRECTORY/FORMAT		FTP directory and file to upload to.
+| -op "stamp,TEXT"					Time stamp text (quotes important!)
+| -dz 100							Number of old frames to keep (FTP only).
+| -t 25								Compression quality. 0=lowest=smallest.
+| 									100=highest=largest.
+| -errto c:\\tableau\\logs\\tabchief.log	Where error messages are logged.
+| -dbgto c:\\tableau\\logs\\tabchief.log	Where debug messages are logged.
+| -sayto c:\\tableau\\logs\\tabchief.log	Where informational messages are logged.
+|_index log file,, tableau
+|_index image quality
+|_index JPEG,, quality
+|_index IP address,, tableau server
+| 
+|.Tableau input parameter
+| This parameter describes the input framegrabber.
+|_aside The capture hardware.
+|_index framegrabber
+|_index Video for Windows
+| The format of the parameter is:
+| 
+|:   -input vfw,GRABBER,WIDTH,HEIGHT
+| 
+| The :GRABBER: part must name an installed Video for Windows framegrabber.
+| Alphabetic case is significant here.
+| You may use the shortest leading unambiguous part of the name.
+| To see a list of names, run the #vc# program from a DOS box:
+|
+|:   vc -d -1
+|
+| The size you give with :WIDTH: and :HEIGHT: must agree with
+| the size you set in the @Setting Video Size@ step of the installation.
+|_index video size,, setting
+| 
+| For a Creative Labs Video Blaster SE100, you might use:
+| 
+|:   vfw,Creative,320,240
+| 
+|.Tableau upload parameter
+| The destination for the captured and compressed images is given
+|_aside Destination for JPEGs.
+| by the :-screen: parameter.
+| This parameter may take either of two forms.
+| The first form uses the Tableau Web Server:
+| 
+|:   -screen rocket,HOST:PORT+NAME
+| 
+| Uploading to a Tableau Web Server is two to four times faster than FTP.
+|_aside Fast custom server.
+| You must obtain the Tableau Web Server software
+| and be running it on the remote host.
+| :HOST: and :PORT: identify this host and the port the server listens on.
+| The :NAME: field identifies the subdirectory to which images are stored.
+| 
+| Instead of the Tableau Web Server, you may use FTP.
+| Here is the form for FTP:
+| 
+|:   -screen ftp,DIRECTORY/FORMAT
+| 
+| While slower, FTP servers are ubiquitous.
+|_aside FTP slow but everywhere.
+| The :DIRECTORY: field specifies the directory on the remote host.
+| The :FORMAT: field becomes the filename.
+| The :FORMAT: field must have one optional :%s: subfield 
+| followed by one optional :%ld: subfield.
+| These subfields are replaced by the camera name and frame number, respectively.
+| For example, camera "mycam" at frame 4858:
+| 
+| :my/image/dir/%s.%08ld.jpg:		my/image/dir/mycam.00004858.jpg
+| :my/image/dir/%s.jpg:				my/image/dir/mycam.jpg
+| :my/image/dir/somename.jpg:		my/image/dir/somename.jpg
+|_index JPEG,, file names
+|
+|_aside Separate FTP config file.
+| The FTP host's name and login information are given in the file
+| #c:\\tableau\\config\\ftp.cfg#.
+| Only the first line of this file is read.
+| This line must contain exactly five space-separated tokens.
+| The first four are:
+| 
+| HOST:PORT		host name or IP address and port (usually port is 21)
+| DATAPORT		a number above 1024
+| USER			user login name
+| PASSWORD		user login password
+|_index IP address, FTP server
+|_index FTP server
+|_index config file,, FTP
+| 
+| The last token must be a single semicolon (;).
+|
+| Here is an example of #c:\\tableau\\config\\ftp.cfg#:
+| 
+|:  remote.host.com:21 5700 user password ;
+| 
+|.Tableau op parameter
+|_index time stamp
+| This parameter gives the timestamp for your images.
+|_aside You design time stamp.
+| The time-stamp is always placed in a 16-pixel high black bar
+| across the bottom of the image.
+| 
+| For :-op: to be interpreted as a time stamp,
+| the first characters must be #stamp,# (note the comma).
+| All characters after that are placed into the time stamp.
+| In addition, certain strings beginning with a percent-sign (%)
+| are substituted with parts of the current date and time.
+|
+| For a complete list of substitution strings, please see
+| @Appendix A: Time stamp substitution strings@.
+|
+| Each character in the time stamp is 8 pixels wide.
+| You must ensure that the length of the time stamp string does not
+| exceed the width of your image.
+| 
+|!Camera Scheduling
+| The Video Caesar software allows you to remote control the schedule
+|_index scheduling,, camera
+|_index camera,, scheduling
+| of camera operations.
+| 
+| Each camera is scheduled independently.
+|_aside Separate scheduling.
+| The schedule for each camera is kept in a file with the camera name.
+| For example, the schedule for the camera called "cam0" is kept in
+| #c:\\tableau\\config\\cam0.sch#.
+|_index config file,, camera schedule
+| While this file is readable ASCII, you should not modify it with an editor.
+| Instead, you should use your web browser to contact the tabchief program.
+|_index browser
+|_index server,, tabchief
+| Tabchief has a fill-out form for changing the schedule.
+|
+|.Multiple Cameras
+| When more than one camera is scheduled,
+|_aside Round robin.
+| the tableau program grabs from each one in a round-robin fashion.
+| For example, let's say multiple cameras are scheduled to run continuously.
+| The program will grab one image from each camera before coming back
+| to the first one.
+| 
+|.Scheduling terms and examples
+| A camera's schedule consists of a 7-day cycle.
+|_aside Scheduling by the week.
+| Each day is scheduled separately.
+| 
+| When scheduling a camera, you must enter four pieces of information:
+| 
+|:   start       starting time (00:00.00 through 23:59.58)
+|:   end         ending time of day (00:00.01 through 23:59.59)
+|:   period      how often to start grabbing
+|:   duration    how long to grab for
+| 
+| All times are given in #hours:minutes.seconds#.
+| If no : and no . is given, then minutes are assumed.
+| 
+| ~Start~ and ~end~ must be in 24-hour notation. For example:
+|_aside Clock times.
+| 
+|:   0           midnight
+|:   1           one minute after midnight
+|:   0.1         one second after midnight
+|:   11:00       11 o'clock, one hour before noon
+|:   12:00.01    1 second after noon
+|:   13:00       1 o'clock, one hour after noon
+|:   23:00       11 o'clock, one hour before midnight
+|
+| ~Period~ and ~duration~ use the same form.
+|_aside Time lengths.
+| For example:
+| 
+|:   0           continuous 
+|:   10          ten minutes
+|:   0.1         one second
+|:   0.10        10 seconds
+|:   1:00.10     one hour and 10 seconds
+|:   11:00       11 hours exactly
+|:   12:00.01    12 hours and one second
+|
+| The ~period~ says how often the camera will start grabbing.
+|_aside How often, how long.
+| ~Duration~ says how long the camera will grab once it starts.
+| For example:
+| 
+|:   start   end    period duration
+|:   00:00 23:59.59     0     0   continuously all day
+|:   00:00 23:59.59  1:00     0   single frame once an hour all day
+|:   09:00 17:00.00  0:10     0   single frame every 10 minutes from 9 AM to 5 PM
+|:   00:00 23:59.59  0:10  0.10   ten second's worth, every 10 minutes, all day
+|
+| Note that a ~period~ of 0 indicates continuous operation.
+| Any value for ~duration~ is ignored in this case.
+| 
+|.Using tabchief's fill-out form
+|_aside Server creates schedules.
+| The tabchief program must be used to change a camera's schedule.
+| Please see the @Contacting the Tabchief Server@ section of this document.
+|
+| The Tabchief program's main display page has a link on it for each camera.
+| Following the link for a camera displays a fill-out form.
+|_aside Familiar browser interface.
+|_index browser
+| The fill-out form has a text-entry field for the camera name.
+| In addition, it has a text-entry field for each of the four pieces
+| of information discussed above.
+| 
+|_figure picture, fillout, Scheduler Form
+| 
+| On the fill-out form, you may click the "continuously" checkbox.
+|_aside Convenient checkbox.
+| This essentially means that the ~period~ should have a value of 0.
+| Any value for period and duration are ignored if this checkbox is pressed.
+| 
+| When you click the "single frame" checkbox,
+| this is the same as setting duration to 0 seconds.
+| The software will grab only one frame in this case.
+| 
+| Once you have entered the times you wish, click on the #ADD# button.
+|_aside Don't forget to add!
+| This will place the schedule you just entered into the list at the bottom
+| of the page.
+| To remove a particular schedule, click on the #DEL# button next to the entry.
+|
+| The schedule database in the camera file is updated every time you change it.
+|_aside Implicit save.
+| There is no need to explicitly save a schedule.
+| 
+|!Reverb server
+|_index reverb server
+|_index server,, reverb
+| A reverb server is a separate program running on another host computer.
+|_aside Optional convenience service.
+| It allows your computer to register its name and current IP address.
+| It provides a convenient means for you to browse your computer in cases
+| when its IP address changes between dial-ups.
+| 
+| Using the @tabchief ident parameter@ will automatically cause it to contact 
+| a reverb server of your choice
+|_aside Built-in call to reverb.
+|_index IP address,, reverb
+|_index reverb server,, IP address
+|_index parameter,, ident
+|_index ident parameter
+| You should give the HOST and PORT corresponding to the running reverb server.
+| For example, Dtack maintains a free reverb server at dtack.com port 5301.
+| For NAME, you may give any name to identify your computer.
+| 
+| For example, to tell Tabchief to register with the free server use:
+| 
+|:   -ident dtack.com:5301+your.name.here
+|
+| Then to access Tabchief from a remote location using the reverb service,
+|_aside How a browser does it.
+| simply give a URL such as:
+|
+|:   http://www.dtack.com:5301/your.name.here?:5780/whatever
+|_index IP address,, reverb server
+|_index browser
+| 
+| The reverb server redirects the path ~whatever~ to the computer
+|_aside HTTP redirect.
+| which has registered ~your.name.here~ on the reverb server.
+| Specifically, port 5780 is Tabchief's normal listening port.
+|
+| You may obtain the reverb server from Dtack Imaging Software
+| and run it on the host of your choice.
+| 
+| The reverb server running on dtack.com is a free service.  
+| You will be sharing the server with other persons.  
+| Please choose names which are unlikely to conflict with others.
+| Dtack reserves the sole right to arbitrate disputes and complaints.
+|      
+|!Appendix A: Time stamp substitution strings
+|_index time stamp
+| The time stamp substitution strings used in the
+| @Tableau op parameter@ are given in the list below.
+| This list is courtesy of the FreeBSD operating system.
+| 
+| %A	is replaced by national representation of the full weekday name.
+| %a	is replaced by national representation of the abbreviated weekday
+| 		name, where the abbreviation is the first three characters.
+| %B	is replaced by national representation of the full month name.
+| %b	is replaced by national representation of the abbreviated month
+| 		name, where the abbreviation is the first three characters.
+| %c	is replaced by national representation of time and date (the format
+| 		is similar with produced by asctime(3)).
+| %d	is replaced by the day of the month as a decimal number (01-31).
+| %H	is replaced by the hour (24-hour clock) as a decimal number 00-23).
+| %I	is replaced by the hour (12-hour clock) as a decimal number (01-12).
+| %j	is replaced by the day of the year as a decimal number (001-366).
+| %M	is replaced by the minute as a decimal number (00-59).
+| %p	is replaced by national representation of either "ante meridiem" or
+| 		post meridiem" as appropriate.
+| %S	is replaced by the second as a decimal number (00-60).
+| %U	is replaced by the week number of the year (Sunday as the first day
+| 		of the week) as a decimal number (00-53).
+| %W	is replaced by the week number of the year (Monday as the first day
+| 		of the week) as a decimal number (00-53).
+| %w	is replaced by the weekday (Sunday as the first day of the week) as
+| 		a decimal number (0-6).
+| %X	is replaced by national representation of the time.
+| %x	is replaced by national representation of the date.
+| %Y	is replaced by the year with century as a decimal number.
+| %y	is replaced by the year without century as a decimal number (00-99).
+| %Z	is replaced by the time zone name.
+| %%	is replaced by `%'.
+| 
+|!Appendix B: What's new and still to come
+| This is the first public release of the Video Caesar software.
+| Everything is new!
+|
+| Here is our to-do list, in no particular order.
+|
+| -	test tabchief with a wide variety of browsers
+| -	get tabstart out of a DOS box
+| -	provide security based on IP address of requester
+| -	provide security using Basic Authentication
+| -	tabchief to respond correctly to header-only HTTP request
+| -	auto-refresh (continuous tail) of log files
+| -	automatic cleanup of old log files
+| -	behave more tolerantly to invalid .arg files
+| -	single-frame capture not to grab two frames when sub-second
+| -	more runtime health checking of a tabchief server
+| -	put comments in schedule files
+| -	decorate tabchief's main page with program icons
+| -	bind icons into .exe files
+| -	provide proper uninstall program
+| -	prevent multiple tabchief or tableau processes
+| -	break help into multiple pages
+| 
+| Feel free to write us with additions to this list!  Thanks.
+| 
+| END
+ *..........................................................................*/

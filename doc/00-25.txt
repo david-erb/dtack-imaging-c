@@ -1,0 +1,177 @@
+  DTACK BASE LIBRARY
+! Rev 00-25
+! 28 March 1998
+
+  Note a (!) in the left column indicates documentation changed.
+  
+  The Dtack Base Library is a C library of image processing support routines.
+  
+  These brief instructions will help you download and install it
+  on a Solaris system.
+  
+  For any questions or comments, please call Dtack at 1.608.767.4000.
+  Thanks!
+  
+  
+  CHANGE HISTORY
+  --------------
+! base.00-25 28 March 1998
+! - bug if null ctl in low/msw.c
+! - data type in dtimage.h GETROW and MAPROW
+  base.00-24 6 March 1998 
+  - changed some functions to dtntype in low/ntype.c
+  - fixed bug in 1d_arith mult for b==0
+  - added source/high/assign.c
+  - some dt.h changes for imagedt cleanup
+  - added dtos_time_delay to os_time.c
+  - dtportio support for Linux
+  - support for bttv framegrabber on Linux
+  - change DT_DBG macro in dt.c
+  base.00-23 10 January 1998 
+  - support for SI2 (Silicon Graphics)
+  - fixed sigpipe weirdness in ipcrock
+  - fixed bug in dt_say, lengthened buffer in err and dbg
+  - added screen print for Fastgraph
+  base.00-22 9 January 1998 
+  - socket and dg improvements
+  base.00-21 4 January 1998 
+  - added mkdir function to ftp.c, also better timeout control
+  - fixed "waiting for" message in ipcrock.c
+  - added XIO error checking in hwsx.c
+  base.00-20 30 December 1997
+  - fixed bug in dtos_isdir() for Unix
+  base.00-16 6 November 1997
+  - added ftp test
+  - removed wv4 and added wv5
+  base.00-15 9 October 1997
+  - bug in sum_cols for ntypes f1 and f2
+  - new event types
+  - screen window destruction and event handling changes
+  - fastgraph event handling fixes
+  base.00-14 29 September 1997
+  - extended data type support for sum_rows and sum_cols
+  - list supports NULL name and user, new function dtlist_append
+  - added image rotation and general column operations
+  base.00-11 12 September 1997
+  - sunpro1.set and DTCONFIG_SP1 added
+  - minor change to source/hwsx.c to support old openwin
+  - changes to dtutil/dtutil.c to remove warnings
+  - added strerror function for SUNOS
+  base.00-10 9 September 1997
+  - Sunos (GE version) supported
+  - minor maintenance changes and bug fixes
+  base.00-09 13 August 1997
+  - Sunos supported
+  - no longer use shared XImage interface by default
+  - bug in horizontally assymetric convolution kernels
+  - dtview usage modified
+  - make clean no longer tries to remove 'tmp'
+  base.00-08 4 August 1997
+  - ability to compile into different tree than source
+  - make procedure supports GNU make
+  base.00-07 31 July 1997
+  - new directory structure and makefiles
+  - all install instructions
+  base.00-06 28 July 1997
+  - added transpose function
+  - added new option to X support to enable color remapping which may
+    decrease color lut flashing in some workstations
+    run: dtview -output /tmp -screen hws,x,,RD &
+
+  
+  FETCH SOURCE AND UNPACK
+  -----------------------
+  If you wish to do an incremental build, then rename your existing
+  Dtack Base Library tree to be the one you are about to unpack.
+  For example:
+    mv /usr/local/dtack/base/00-06 /usr/local/dtack/base/00-16
+  
+  - obtain the secret code from Dtack, use in place of AAAA1111 below
+  - fetch Dtack Base Library source and/or pre-compiled binaries from:
+  
+    http://www.dtack.com/secure/AAAA1111/dtack.base.00-16.tgz
+
+  - cd to some permanent directory, for example /usr/local
+  
+    /usr/local/bin/gzip -dc </tmp/dtack.base.00-16.tgz | tar xf -
+
+
+  ONLINE DOCUMENTATION
+  --------------------
+! - not available at this time
+
+
+  INCREMENTAL BUILD
+  -----------------
+  An incremental build is not appropriate for this release.
+
+  
+  AUTOMATED BUILDING, TESTING AND TIMING OF THE DTACK BASE LIBRARY
+  ----------------------------------------------------------------
+  cd /usr/local/dtack/base/00-16
+  sh/mkdirs.sh $PWD.solaris		# create tree for compiled binaries
+  sh/dtinst.sh solaris
+
+  Note you can use "sunos" and "sunpro1" in place of "solaris" here.
+
+  A succesful build and test output will look something like:
+      gcc -c -o /usr/local/bin/dtack/base/00-16/dtutil/dtutil.o  -ggdb3 ...
+      ld: Software Generation Utilities (SGU) SunOS/ELF (LK-1.4 (S/I))
+      dtinst.sh: 10 Jul 97 08:36 solaris making... 
+      dtinst.sh: 10 Jul 97 09:55 solaris stripping... 
+      dtinst.sh: 10 Jul 97 09:56 solaris testing... 
+      dtt1d: being started by dttest.sh 10 Jul 97 09:56 
+      [more like the above]
+      dtinst.sh: 10 Jul 97 09:58 solaris timing... 
+      dttmem: being started by dttiming.sh 10 Jul 97 09:58 
+      [more like the above]
+      dtcheck.sh: scanning ./make.out ...................
+      dtcheck.sh: scanning ./test.out ...................
+      dtcheck.sh: scanning ./timing.out .................
+      dtcheck.sh: scanning ./make.out ...................
+
+  sh/dtmake.sh solaris . static		# optionally create static executables
+
+      
+  DISPLAYING AN IMAGE
+  -------------------
+  Use Dtack's all-in-one environment script dtenv.sh (documented separately),
+  or set up your PATH and LD_LIBRARY_PATH manually:
+
+  export PATH
+  PATH=$PATH:/usr/local/bin/dtack/base/00-16/bin
+  export LD_LIBRARY_PATH
+  LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/bin/dtack/base/00-16/libso
+
+  Run the image display server:
+
+  dtview &
+
+  Generate a color image and display it:
+
+  dttool gen color256 :a
+  
+
+  
+  DIRECTORY STRUCTURE
+  -------------------
+  dtack/
+    base/
+      00-16/
+        sh/         utility shell scripts for compiling, testing, and checking
+        dtutil/     standalone utility program for testing and installation
+        config/     configuration files for building the source
+        include/    all include files
+        source/     all source files
+        test/       test programs
+        server/     interactive image viewer
+        tool/       command line tool
+        lib/        where the static library files go
+        libso/      where the shared-object library files go
+        bin/        where the executable files go
+        tmp/        files created during automated testing
+        data/       data files used during testing
+  
+  
+  
+  

@@ -1,0 +1,88 @@
+define(TOP, UP2)
+define(DIR, source/xchg)
+__prolog
+
+__summary(prj_lib_summary(eximq),
+  exim.doc+
+  export.c+
+  import.c, PRJ_LIB_SERIES_SHORT)
+
+__example(dtexim1, exim.doc)
+
+__shexe(prj_lib_samp(exim, 1), 
+  dtexim1, , PRJ_APP2_LIBS+PRJ_SUPPORT_LIBS, PRJ_APP2_LOADS)
+
+pushdef(`CCSHARABLE', `CCSHARABLE_ON')
+
+pushdef(`CCOPTIMIZE', `CCOPTIMIZE_HIGH')
+pushdef(`CCDEBUGGER', `CCDEBUGGER_OFF')
+
+popdef(`CCDEBUGGER')
+popdef(`CCOPTIMIZE')
+
+__src(readtif,
+  PRJ_INCLUDES+PRJ_TIFF_INCLUDE,
+  PRJ_DEFINES+PRJ_TIFF_DEFINE)
+
+__src(xchg_jpg,
+  PRJ_INCLUDES+PRJ_IJG_INCLUDE,
+  PRJ_DEFINES+PRJ_IJG_DEFINE)
+
+__src(xchg_dtm,
+  PRJ_INCLUDES+PRJ_NCSA_DTM_INCLUDE,
+  PRJ_DEFINES+PRJ_NCSA_DTM_DEFINE)
+
+__src(xchg_scr,
+  PRJ_INCLUDES,
+  PRJ_DEFINES+PRJ_NOSCREEN_DEFINE)
+
+__src(xchg_can,
+  PRJ_INCLUDES,
+  PRJ_DEFINES+PRJ_NOSCREEN_DEFINE)
+
+__shlib(prj_lib(dtxchg), 
+  dib+
+  export+
+  import+
+  read+readtif+
+  bmp+
+  lut8xchg+
+  wmf+
+  write+
+  writebmp+
+  writewmf+
+  parse+
+  xchg_dtm+
+  xchg_win+
+  xchg_jpg+
+  xchg_wxx+
+  xchg_dat+
+  libmain, , xchg_dat, 
+  prj_lib(dtcolor)+
+  prj_lib(dtwinc)+
+  prj_lib(dthigh)+
+  prj_lib(dtbigmem)+
+  prj_lib(dtlow)+
+  prj_lib(dt1d))
+
+ifelse(len(PRJ_NOSCREEN_DEFINE), 0, `
+__shlib(prj_lib(dtxchgs), 
+  xchg_scr+
+  libmain, , ,
+  prj_lib(dthigh)+
+  prj_lib(dtscr)+
+  prj_lib(dtcan)+
+  prj_lib(dtlow)+
+  prj_lib(dt1d))
+')
+
+popdef(`CCSHARABLE')
+
+__finish
+
+
+
+
+
+
+

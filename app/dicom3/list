@@ -1,0 +1,12 @@
+dc3cp.c
+dc3create.c
+dc3desc.c
+dc3dump.c
+dc3iod.c
+dc3key.c
+dc3topnm.c
+dc3toraw.c
+dc3value.c
+dc3xdisp.c
+list
+rawtodc.c

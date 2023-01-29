@@ -1,0 +1,82 @@
+btpc_decode_..........decode            btpc_decode_header_...decode
+btpc_decode_issig_....decode            btpc_dec_plane_.....declevel
+btpc_encode_..........encode            btpc_enc_plane_.....enclevel
+deletescratch_......enclevel            initclip_...........declevel
+makescratch_........enclevel            rgb_ycc_..............colmap
+near cfpio::cfpio( __iobuf near * )..........................cfileio
+near cfpio::cfpio( char unsigned near *, int )...............cfileio
+near Compactr::Compactr()....................................compact
+near cfpio::~cfpio().cfileio            
+near Compactr::~Compactr()...................................compact
+char unsigned const near __typesig[].........................cfileio
+void near Compactr::attach( cfpio near * )...................compact
+void near btpc_enc_level( char unsigned near * near *, char unsigned near * near *, char unsigned near * near *, int const near..enclevel
+void near Compactr::buildtree()..............................compact
+void near Compactr::dec( int )...............................compact
+void near dtlibmain()........................................libmain
+int near cfpio::fillbuf()....................................cfileio
+void near cfpio::flush().....................................cfileio
+int near cfpio::get( char unsigned near *, char unsigned near *, int, int const )..cfileio
+int near Compactr::get().....................................compact
+int near cfpio::getbit().....................................cfileio
+int near Compactr::getbit()..................................compact
+void near Compactr::inc( int )...............................compact
+void near cfpio::loadforlook()...............................cfileio
+int near cfpio::lookbits( int const near &, int const near & )..cfileio
+void near Compactr::maketable_decode().......................compact
+void near Compactr::maketable_encode().......................compact
+void near Compactr::put( int )...............................compact
+void near cfpio::putbit( int )...............................cfileio
+void near Compactr::putbit( int )............................compact
+void near cfpio::putbits( int, int ).........................cfileio
+void near cfpio::putbyte( char unsigned )....................cfileio
+void near Compactr::readtree()...............................compact
+void near Compactr::reset()..................................compact
+void near cfpio::skipbits( int const ).......................cfileio
+void near Compactr::writetree()..............................compact
+ycc_rgb_..............colmap            
+
+libmain       Offset=00000010H
+  void near dtlibmain()             
+
+enclevel      Offset=00000740H
+  btpc_enc_plane_   deletescratch_    makescratch_      void near btpc_enc_level( char unsigned near * near *, char unsigned near * near *, char unsigned near * near *, int const near 
+
+encode        Offset=00004900H
+  btpc_encode_    
+
+decode        Offset=000054d0H
+  btpc_decode_      btpc_decode_header_               
+  btpc_decode_issig_                
+
+compact       Offset=00005f30H
+  near Compactr::Compactr()           near Compactr::~Compactr()        
+  void near Compactr::attach( cfpio near * )          
+  void near Compactr::buildtree()     void near Compactr::dec( int )    
+  int near Compactr::get()            int near Compactr::getbit()       
+  void near Compactr::inc( int )    
+  void near Compactr::maketable_decode()              
+  void near Compactr::maketable_encode()              
+  void near Compactr::put( int )      void near Compactr::putbit( int ) 
+  void near Compactr::readtree()      void near Compactr::reset()       
+  void near Compactr::writetree()   
+
+colmap        Offset=00007370H
+  rgb_ycc_          ycc_rgb_        
+
+cfileio       Offset=00007ba0H
+  near cfpio::cfpio( __iobuf near * )                 
+  near cfpio::cfpio( char unsigned near *, int )      
+  near cfpio::~cfpio()              
+  char unsigned const near __typesig[]                
+  int near cfpio::fillbuf()           void near cfpio::flush()          
+  int near cfpio::get( char unsigned near *, char unsigned near *, int, int const )       
+  int near cfpio::getbit()            void near cfpio::loadforlook()    
+  int near cfpio::lookbits( int const near &, int const near & )        
+  void near cfpio::putbit( int )    
+  void near cfpio::putbits( int, int )                
+  void near cfpio::putbyte( char unsigned )           
+  void near cfpio::skipbits( int const )              
+
+declevel      Offset=000087b0H
+  btpc_dec_plane_   initclip_       

@@ -1,0 +1,75 @@
+;; forms-demo -- demo forms-mode 	-*- forms -*- emacs-lisp 
+
+;; Set the name of the data file.
+(setq forms-file "itemlist.dat")
+(setq forms-rw-face 'default)
+
+;; Use 'forms-enumerate' to set field names and number thereof.
+(setq forms-number-of-fields
+      (forms-enumerate
+       '(
+itemlist-partno
+itemlist-title
+itemlist-deliverable
+itemlist-price
+itemlist-sales-lit
+itemlist-tech-reference
+itemlist-tech-summary
+itemlist-down-load
+itemlist-id
+itemlist-reserved2
+itemlist-reserved3
+itemlist-reserved4
+itemlist-reserved5
+itemlist-reserved6
+       )))
+
+;; The following functions are used by this form for layout purposes.
+;;
+(defun itemlist-tocol (target &optional fill)
+  "Produces a string to skip to column TARGET. Prepends newline if needed.
+The optional FILL should be a character, used to fill to the column."
+  (if (null fill)
+      (setq fill ? ))
+  (if (< target (current-column))
+      (concat "\n" (make-string target fill))
+    (make-string (- target (current-column)) fill)))
+;;
+(defun itemlist-rj (target field &optional fill) 
+  "Produces a string to skip to column TARGET minus the width of field FIELD.
+Prepends newline if needed. The optional FILL should be a character,
+used to fill to the column."
+  (itemlist-tocol (- target (length (nth field forms-fields))) fill))
+
+(defun biblio-new-record-filter (the-record)
+  "Form a new record with some defaults."
+  (let ((i 1)) 
+    (while (< i forms-number-of-fields) ;; (length forms--markers))  
+      (aset the-record i "_")
+      (setq i (1+ i))
+    )
+  )
+  the-record				; return it
+)
+(setq forms-new-record-filter 'biblio-new-record-filter)
+
+;; The format list.
+(setq forms-format-list
+     '(
+        "====== itemlist ======\n\n"
+        "id: " itemlist-id            "\n"
+                                                    "\n"
+        "partno:       " itemlist-partno            "\n"
+        "title:        " itemlist-title             "\n"
+        "deliverable:  " itemlist-deliverable       "\n"
+        "price:        " itemlist-price             "\n"
+                                                    "\n"
+        "sales lit link:      " itemlist-sales-lit       "\n"
+        "tech reference link: " itemlist-tech-reference  "\n"
+        "tech summary link:   " itemlist-tech-summary    "\n"
+        "download link:       " itemlist-down-load       "\n"
+
+        "END"
+     ))
+
+;; That's all, folks!

@@ -1,0 +1,75 @@
+/*..........................................................................
+| TITLE op
+| Image operations
+| 
+|!Image operations
+| Tableau can perform a limited number of operations on the raw
+| image after it has been input from the frame source.
+|
+| The operation is specified with the -op keyword.
+| The format of the keyword is:
+| 
+|:   -op op,extra
+| 
+| Where op is a choice from the table below.
+| Extra is different depending on the operation.
+|
+| The possible operations are:
+| raw		do nothing
+| stamp		add timestamp to bottom
+| trim		clip edges of image, shrink it and add timestamp
+|
+|.Raw
+| This type of operation simply does not change the image.
+| This is the default for the -op keyword.
+| 
+| Keyword format:
+|:   -op raw
+| 
+|.Stamp
+| Use this type of operation to add text to the bottom of the image.
+| 
+| Keyword format:
+|:   -op "stamp,text"
+|
+| Where text is a mixture of literal text and substitution fields.
+| The text may contain spaces but may not contain the '"' character.
+| Each substitution string begins with a '%' character.
+| For a complete list of substitution strings, please see
+| "Appendix A: Time stamp substitution strings".
+|
+| Each character in the time stamp is 8 pixels wide.
+| You must ensure that the length of the time stamp string does not
+| exceed the width of your image.
+| 
+| This type of operation adds a timestamp to the bottom of the image.
+| The time stamp is centered horizontally.
+| The character font is a fixed-width font.
+| Each character is 8 pixels wide.
+| The time stamp is 16 rows high.
+| The background is black and the characters white.
+| 
+|.Trim
+| Use this type of operation to chop off part of the image.
+| Any number of rows and/or columns can be chopped off any edge.
+| Optionally, a time stamp can be added.
+| 
+| Keyword format:
+|:  -op "trim/x0/y0/x1/y1/stride,text"
+| 
+| Where:
+| x0		number of columns to chop of the left
+| y0		number of rows to chop off the top
+| x1		number of columns to chop off the right
+| y1		number of rows to chop off the bottom
+| stride	stride from current row/column to next (minimum 1)
+| text		timestamp text as in the previous section
+| 
+| This type of operation is useful in removing an unwanted
+| part of the image.
+| It can also shrink the image by skipping rows and columns.
+| 
+| END
+ *..........................................................................*/
+
+

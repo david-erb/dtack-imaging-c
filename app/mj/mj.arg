@@ -1,0 +1,6 @@
+-input cgiout.grf
+-op play,textpush
+-D usr1+trace+async
+-errto c:\temp\mj.log
+-dbgto c:\temp\mj.log
+-sayto c:\temp\mj.log

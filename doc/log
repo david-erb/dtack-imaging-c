@@ -1,0 +1,49 @@
+;; forms-demo -- demo forms-mode	-*- forms -*-  emacs-lisp
+
+;; Set the name of the data file.
+(setq forms-file "log.dat")
+
+;; Use 'forms-enumerate' to set field names and number thereof.
+(setq forms-number-of-fields
+      (forms-enumerate
+       '(log-date
+	 log-desc)))
+
+;; The following functions are used by this form for layout purposes.
+;;
+(defun log-tocol (target &optional fill)
+  "Produces a string to skip to column TARGET. Prepends newline if needed.
+The optional FILL should be a character, used to fill to the column."
+  (if (null fill)
+      (setq fill ? ))
+  (if (< target (current-column))
+      (concat "\n" (make-string target fill))
+    (make-string (- target (current-column)) fill)))
+;;
+(defun log-rj (target field &optional fill) 
+  "Produces a string to skip to column TARGET minus the width of field FIELD.
+Prepends newline if needed. The optional FILL should be a character,
+used to fill to the column."
+  (log-tocol (- target (length (nth field forms-fields))) fill))
+
+;; Record filters.
+;;
+(defun log-new-record-filter (the-record)
+  "Form a new record with some defaults."
+  (aset the-record log-date (current-time-string))
+  the-record				; return it
+)
+(setq forms-new-record-filter 'log-new-record-filter)
+
+;; The format list.
+(setq forms-format-list
+     '(
+       "====== LOG list ======\n\n"
+       "desc: \n"
+       log-desc
+       "\n\n"
+       "\n-------------------------------------------\n"
+       "date: " log-date
+     ))
+
+;; That's all, folks!

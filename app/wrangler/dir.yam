@@ -1,0 +1,41 @@
+define(TOP, UP2)
+define(DIR, app/wrangler)
+
+__usage(wrangler, wrangler)
+
+__guide(wrangler, 
+  wrangler.c,
+  Dtack)
+
+__proto(dtprocs,
+  procsw)
+
+__proto(wrangler,
+  rev+
+  verify+
+  init+
+  server)
+
+pushdef(`CCSHARABLE', `CCSHARABLE_ON')
+
+__shlib(prj_lib(wranglerx),
+  init+
+  verify+
+  rev+
+  procsu+procsw+
+  server+
+  libmain, , ,
+  PRJ_LIBS)
+
+popdef(`CCSHARABLE')
+
+__shexe(prj_test_bin(wrangler),   
+  wrangler, ,
+  prj_lib(wranglerx)+
+  prj_lib(dtdg)+
+  PRJ_LIBS,
+  PRJ_LOADS)
+
+__finish
+
+

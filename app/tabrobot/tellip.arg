@@ -1,0 +1,19 @@
+# notify a running Tabrobot Queue Server of our IP address 
+# this should be run each time a dial-up connection is made
+
+# edit the hostname/port after "rocket" to point to the host
+# where the Tabrobot Queue Server is running
+
+-connect rocket,tabrobot.queue.server:5790
+
+# edit the port number if Tabptz is not running on 5791 for this host
+
+-op reopen,ipc,rocket,5791
+
+-D reply
+
+-errto logs/tellip.log
+-dbgto logs/tellip.log
+-sayto logs/tellip.log
+
+

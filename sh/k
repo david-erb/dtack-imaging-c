@@ -1,0 +1,54 @@
+set -x
+
+_compile()
+{
+  cd /usr/erb/prj/dt
+  cd $1
+  shift
+  /usr/erb/prj/dt/sh/makeqw1 $@
+  rc=$?
+  cd /usr/erb/prj/dt
+  if [ $rc -ne 0 ]
+  then
+    exit $rc
+  fi
+}
+
+rm -f /usr/erb/prj/dtqw1/bin/tabrobot
+_compile app/tabrobot
+exit
+_compile source/low libs
+
+_compile fourth/mpegssg libs
+_compile source
+_compile tool
+_compile app/mpeg
+_compile app/reverb
+_compile app/tabchief
+_compile app/tableau
+_compile test
+
+_compile source/screen
+_compile source/color
+_compile source/xchg
+_compile fourth/btpcv3 
+_compile fourth/jpeg6a
+_compile source/xchg
+
+_compile test/fb -k
+_compile tool -k
+_compile source/color
+_compile app/tableau -k 
+_compile fourth/zlib -k libs
+_compile source/xchg -k libs
+
+_compile fourth/btpcv3
+_compile server -k 
+
+_compile fourth/xv310a
+_compile source/fb
+_compile source/screen
+_compile app/tableau
+exit
+
+

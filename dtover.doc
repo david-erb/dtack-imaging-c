@@ -1,0 +1,71 @@
+/*..........................................................................
+| TITLE dtintro
+| Software Overview
+|
+|!Function Group Summary
+|!Major Concepts
+| This section discusses concepts without specifically
+| bringing in any particular Function Group.
+| Major concepts covered here are:
+| debug output		how debug messages are handled
+| runtime environment	how runtime environment is set up and stored
+| big memory		how very large memory allocations are done
+| 
+|.Runtime Environment
+| All dtack imaging software functions take a ~*ctl~ structure pointer
+| as their first argument.
+| This structure contains a description of the program's
+| runtime environment.
+| This environment encompasses such things as
+| debug output, error messages, timeslice yielding,
+| big memory sources, and default windowing server name.
+|
+| All functions operate correctly with a ~*ctl~ pointer value of NULL.
+| In this case, there will be no debug output,
+| error messages are simply printed,
+| there is no timeslice yielding,
+| only malloc() memory is available for big objects,
+| and there is no default windowing server name.
+| 
+| All runtime environment features can be set up by the caller's program.
+| However, for convenience, there are several functions which parse
+| command-line options and set up the features automatically.
+|
+| As part of the runtime environment support,
+| there are several functions for monitoring heap memory usage.
+| Heap memory is the memory allocated by malloc().
+| 
+|.Debug Output
+| Strewn throughout the Dtack Imaging Software libraries are hundreds
+| of calls to a debug output function.
+| Each call is given a specific message class identifier.
+| The standard debug output function compares the message class identifier
+| with a debug mask stored in the ~*ctl~ runtime environment structure.
+| If the message's class has been enabled in the debug mask,
+| then the message is formatted and printed.
+| 
+| Printing is either done to stdout or to a file
+| if one is specified in the run-time environment.
+| The standard command-line parsing sets up an output file
+| for debug messages when it sees the :-dbgto: parameter.
+| 
+| Two mechanisms exist for modifying the standard debug handling
+| at run-time.
+| First, you can provide a function pointer which takes over all debug
+| message filtering, formatting, and output.
+| Second, you can let the standard formatting happen,
+| but provide a function to take over the actual string output.
+| 
+|.Big Memory
+| Big memory blocks can be larger than the RAM memory in your computer.
+| External sources, such as XMS (real-mode DOS only)
+| or disk may be used.
+| Available memory sources are described by a string given to
+| dtmem_configure().
+| When a new big memory block is needed,
+| dtmem_alloc() finds the first memory source in the list which
+| has enough space to honor the request.
+| 
+| END
+ *..........................................................................*/
+

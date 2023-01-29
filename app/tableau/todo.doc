@@ -1,0 +1,17 @@
+-------------------
+-------------------
+switching pages during push
+Uncaught error fetching image:
+java.lang.NullPointerException
+  at dtack.app.tableau.tableau02_a.imageUpdate(tableau02_a.java:226)
+  at sun.awt.image.ImageWatched.newInfo(ImageWatched.java:67)
+  at sun.awt.image.ImageRepresentation.imageComplete(ImageRepresentation.java:259)
+  at sun.awt.image.InputStreamImageSource.imageComplete(InputStreamImageSource.java:483)
+  at sun.awt.image.JPEGImageDecoder.produceImage(JPEGImageDecoder.java:141)
+  at sun.awt.image.InputStreamImageSource.doFetch(InputStreamImageSource.java:212)
+  at sun.awt.image.ImageFetcher.run(ImageFetcher.java:116)
+-------------------
+gray button when it is not pushable
+-------------------
+report bytes shoveled even in case of error, only not if zero bytes
+-------------------

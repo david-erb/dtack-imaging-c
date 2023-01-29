@@ -1,0 +1,40 @@
+define(TOP, UP2)
+define(DIR, app/tabgrab)
+
+__usage(tabgrab, tabgrab)
+
+__proto(tabgrab,
+  client+
+  grab+
+  init+
+  server)
+
+pushdef(`CCSHARABLE', `CCSHARABLE_ON')
+
+__shlib(prj_lib(tabgrabx),
+  client+
+  grab+
+  init+
+  server+
+  libmain, , ,
+  prj_lib(dtfb)+
+  prj_lib(dthigh)+
+  prj_lib(dtcolor)+
+  PRJ_LIBS)
+
+popdef(`CCSHARABLE')
+
+__shexe(prj_test_bin(tabgrab),   
+  tabgrab, ,
+  prj_lib(tabgrabx)+
+  prj_lib(dtfb)+
+  prj_lib(dtxchg)+
+  prj_lib(dthigh)+
+  prj_lib(dtcolor)+
+  PRJ_LIBS,
+  PRJ_LOADS 
+  PRJ_WINNOV_LOAD)
+
+__finish
+
+

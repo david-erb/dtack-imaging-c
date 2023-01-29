@@ -1,0 +1,33 @@
+define(TOP, UP1)
+define(DIR, dtutil)
+__prolog
+
+ifelse(len(PRJ_UTILWIN_DEFINE), 0, `
+
+dnl define(`CCWARNINGS', CCWARNINGS_NONE)
+define(`PRJ_LOADS', `')
+__shexe($(OUT)/bin/dtutil, dtutil)
+
+')
+
+ifelse(len(PRJ_UTILWIN_DEFINE), 0, , `
+
+pushdef(`CCSHARABLE', `CCSHARABLE_ON')
+__shlib(prj_lib(dtutil),
+  utilwin+
+  libmain)
+popdef(`CCSHARABLE')
+
+')
+
+__finish
+
+divert(0)`'dnl
+
+# -------------------------------
+# to make this a console mode program
+# 1. remove /Gz from compile line
+# 2. change subsystem:windows to subsystem:console in link block
+# -------------------------------
+
+subdir_dtutil: default
